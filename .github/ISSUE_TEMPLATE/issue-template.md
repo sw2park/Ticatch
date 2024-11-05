@@ -1,5 +1,5 @@
 ---
-name: 이슈 템플릿
+name: Issue Template
 about: 버그 리포트 생성 시 사용하시면 됩니다.
 title: "[BUG] 제목 수정하시면 됩니다."
 labels: ''
