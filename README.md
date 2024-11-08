@@ -22,7 +22,7 @@
 ### Back-End
 - Java 17?
 - IDE : STS ?.?
-- Framewordk : Springboot(3.3.5)
+- Framework : Springboot(3.3.5)
 - Database : Oracle DB(??)
 - ORM : Hibernate(JPA) << 검수 필요
 
