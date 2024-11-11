@@ -11,7 +11,7 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  return <div>받아온 값임 : {data}</div>;
+  return <div>받아온 값 : {data}</div>;
 }
 
 export default App;
