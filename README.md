@@ -13,7 +13,7 @@
 (관리자 페이지가 따로 있으며 여기서는 모든 회원들의 정보 및 예매한 티켓의 로그(누가 무엇을 언제 예매하였고 그 티캣의 날짜 장소 등) 를 조회 할 수 있다)
 
 ## 타켓사이트 
-인터파크, 티켓링크, 서울문화포털(api)
+인터파크, 티켓링크, 서울문화포털 (api)
 
 ## 개발 기간
 - 24.11.04 ~ 24.12.26
@@ -28,7 +28,7 @@
 - 약 2달
 
 ## 맴버 구성
-- 조장 : 김민성 - 예매 / 플로우 차트 / Git 부담당 / 스프링 & 리액트 통합
+- 조장 : 김민성 - 예매 / 플로우 차트 / Git 부담당 / 스프링 & 리액트 통합 / 시퀀스 다이어그램
 - 팀원 : 박성우 - 마이페이지 / API / DB / ERD / Git 설정 및 담당 / 스프링 & 리액트 통합
 - 팀원 : 이혜원 - 상세페이지 / 플로우 차트
 - 팀원 : 손홍석 - 메인페이지 / 로그인 및 회원 가입 / 헤더 및 푸터 / 와이어프레임
@@ -36,16 +36,19 @@
 
 (나중에 문서 작업 및 발표 적기)
 
+## 플로우 차트 
+[플로우 차트](https://drive.google.com/file/d/1rJ98jUYeRiusLpkJjoduckJKTypFYKiF/view?usp=sharing)
+
 ## 개발 환경
 ### Front-End
-- React(18.3.1) << 검수 필요
+- React (18.3.1) << 검수 필요
 - node.js (22.11.0) 
 ### Back-End
 - Java 17
 - IDE : Spring Tools 4.25.0 (VSC 용)
-- Framewordk : Springboot(3.3.5)
-- Database : Oracle DB(11.2.0.2.0) (DBeaber 24.1.3)
-- ORM : Hibernate(JPA) << 검수 필요
+- Framewordk : Springboot (3.3.5)
+- Database : Oracle DB (11.2.0.2.0) (DBeaber 24.1.3)
+- ORM : Hibernate (JPA) << 검수 필요
 
 ## 주요 기능
 ### API 사용
