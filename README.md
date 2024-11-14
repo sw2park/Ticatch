@@ -30,16 +30,16 @@
 - 약 2달
 
 ## 맴버 구성
-- 조장 : 김민성 - 예매 / 플로우 차트 / Git 부담당 / 스프링 & 리액트 통합 / 시퀀스 다이어그램
-- 팀원 : 박성우 - 마이페이지 / API / DB / ERD / Git 설정 및 담당 / 스프링 & 리액트 통합
-- 팀원 : 이혜원 - 상세페이지 / 플로우 차트
+- 조장 : 김민성 - 예매 / 플로우 차트 / 시퀀스 다이어그램 / API / Git 부담당 / 스프링 & 리액트 통합
+- 팀원 : 박성우 - 마이페이지 / DB / ERD / API / Git 설정 및 담당 / 스프링 & 리액트 통합
+- 팀원 : 이혜원 - 상세페이지 / 플로우 차트 / API
 - 팀원 : 손홍석 - 메인페이지 / 로그인 및 회원 가입 / 헤더 및 푸터 / 와이어프레임
 - 팀원 : 신윤창 - 메인페이지 / 로그인 및 회원 가입 / 헤더 및 푸터
 
 (나중에 문서 작업 및 발표 적기)
 
-## 플로우 차트 
-[플로우 차트](https://drive.google.com/file/d/1rJ98jUYeRiusLpkJjoduckJKTypFYKiF/view?usp=sharing)
+## 설계도
+[플로우 차트 및 ERD 등](https://drive.google.com/file/d/1rJ98jUYeRiusLpkJjoduckJKTypFYKiF/view?usp=sharing)
 
 ## 개발 환경
 ### Front-End
