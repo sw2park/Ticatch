@@ -54,6 +54,7 @@
 ## 주요 기능
 ### API 사용
 - 공공데이터 포탈 등등~
+  [상세 페이지 API](https://www.kopis.or.kr/por/cs/openapi/openApiInfo.do?menuId=MNU_00074)
 - 상세페이지 데이터
 - 로그인 (카카오, 네이버 등)
 ### DB
