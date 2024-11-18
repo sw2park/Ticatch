@@ -38,12 +38,8 @@
 
 (나중에 문서 작업 및 발표 적기)
 
-## 와이어프레임
-![image](https://github.com/user-attachments/assets/219eadea-e99e-4432-b407-e3399a24ff4b)
-
-
 ## 설계도
-[플로우 차트 및 ERD 등](https://drive.google.com/file/d/1rJ98jUYeRiusLpkJjoduckJKTypFYKiF/view?usp=sharing)
+[플로우 차트 / ERD / 와이어프레임 등](https://drive.google.com/file/d/1rJ98jUYeRiusLpkJjoduckJKTypFYKiF/view?usp=sharing)
 
 ## 개발 환경
 ### Front-End
