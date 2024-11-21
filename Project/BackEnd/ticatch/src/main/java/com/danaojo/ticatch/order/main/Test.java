@@ -17,11 +17,12 @@ public class Test implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // 데이터 저장
     	PerformanceEntity performance = new PerformanceEntity();
-//    	performance.setPerformanceId("PERF001");
+//    	performance.setPerformanceId("PERF002");
 //    	performance.setPrice(50000);
-
-     
-    	// 값 저장
+//    	performance.setPlace("서울");
+//    	performance.setRemainSeat(50);
+//     
+//    	// 값 저장
 //        performanceService.savePerformance(performance);
 
     }

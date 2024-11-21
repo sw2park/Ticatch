@@ -1,14 +1,8 @@
 body {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   height: 100vh;
   margin: 0 auto; /* 좌우 자동 정렬 */
-  background-color: #f0f0f0;
-  padding: 0 20px; /* 양옆 여백 추가 */
-  max-width: 1400px; /* 최대 너비 설정 */
-  box-sizing: border-box; /* 패딩 포함 너비 계산 */
+  max-width: 1400px; /*최대 너비 설정*/
 }
 
 .info {
@@ -26,7 +20,7 @@ body {
 
 .seat-container {
   display: grid;
-  grid-template-columns: repeat(10, 30px); /* 10개씩 줄바꿈 */
+  grid-template-columns: repeat(7, 30px); /* 10개씩 줄바꿈 */
   grid-gap: 5px;
 }
 

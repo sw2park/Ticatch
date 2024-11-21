@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./Performance.css";
 
 function Performance() {
   const [performance, setPerformance] = useState(null);
@@ -28,11 +29,9 @@ function Performance() {
   }
 
   return (
-    <div>
+    <div className="right-section">
       <h1>Performance Details</h1>
-      <p>ID: {performance.performanceId || "N/A"}</p>
       <p>Price: {performance.price || "N/A"}</p>
-      <p>Total Tickets: {performance.totalTicket || "N/A"}</p>
       <p>Remaining Seats: {performance.remainSeat || "N/A"}</p>
       <p>Place: {performance.place || "N/A"}</p>
       <p>
@@ -42,18 +41,6 @@ function Performance() {
           : "N/A"}
       </p>
       <p>View Time: {performance.viewTime || "N/A"}</p>
-      <p>
-        Start Date:{" "}
-        {performance.startDate
-          ? new Date(performance.startDate).toLocaleDateString()
-          : "N/A"}
-      </p>
-      <p>
-        End Date:{" "}
-        {performance.endDate
-          ? new Date(performance.endDate).toLocaleDateString()
-          : "N/A"}
-      </p>
     </div>
   );
 }

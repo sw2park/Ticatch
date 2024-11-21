@@ -5,18 +5,8 @@ import SeatBooking from "./Seats/SeatBooking";
 import Performance from "./Detail/Performance";
 
 function App() {
-  const [data, setData] = useState("");
-
-  useEffect(() => {
-    axios
-      .get("/api/hello")
-      .then((res) => setData(res.data))
-      .catch((err) => console.log(err));
-  }, []);
-
   return (
-    <div>
-      <h1>받아온 값 : {data}</h1>
+    <div className="app-container">
       <SeatBooking />
       <Performance />
     </div>

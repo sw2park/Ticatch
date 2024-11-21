@@ -1,42 +1,24 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* 전체 페이지 컨테이너 */
+.app-container {
+  display: flex; /* 좌우 정렬 */
+  justify-content: space-between; /* 컴포넌트 간 간격 분배 */
+  width: 1400px; /* 고정 너비 */
+  margin: 0 auto; /* 중앙 정렬 */
+  height: 100vh; /* 화면 높이 */
+  background-color: #f0f0f0; /* 배경색 */
+  padding: 20px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* SeatBooking 컴포넌트 (왼쪽) */
+.seat-booking {
+  flex: 3; /* 왼쪽이 더 큰 비율 */
+  border-right: 2px solid #ccc; /* 구분선 */
+  padding: 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+/* Performance 컴포넌트 (오른쪽) */
+.performance {
+  flex: 1; /* 오른쪽이 더 작은 비율 */
+  padding: 20px;
+  margin-left: auto; /* 오른쪽 끝으로 정렬 */
 }
