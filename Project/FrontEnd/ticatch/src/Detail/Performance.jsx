@@ -34,13 +34,6 @@ function Performance() {
       <p>Price: {performance.price || "N/A"}</p>
       <p>Remaining Seats: {performance.remainSeat || "N/A"}</p>
       <p>Place: {performance.place || "N/A"}</p>
-      <p>
-        View Date:{" "}
-        {performance.viewDate
-          ? new Date(performance.viewDate).toLocaleDateString()
-          : "N/A"}
-      </p>
-      <p>View Time: {performance.viewTime || "N/A"}</p>
     </div>
   );
 }
