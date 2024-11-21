@@ -1,23 +1,11 @@
-import {useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import axios from 'axios';
+import Header from "./components/Header.jsx";
 
 function App() {
-  const [data, setData] = useState('')
-
-   useEffect(() => {
-       axios.get("/api/hello")
-       .then(res => setData(res.data))
-       .catch(err => console.log(err))
-   }, []);
-
-   return (
-       <div>
-           받아온 값 : {data}
-       </div>
-   );
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 }
 
 export default App;
