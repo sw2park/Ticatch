@@ -14,7 +14,8 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 public class Kopis extends KopisApiController {
 	public List<ConcertListDTO> apiConcertList() throws JsonMappingException, JsonProcessingException {
 		String concertStr = callConcertList();
-		System.out.println(concertStr);
+		// 테스트 출력
+//		System.out.println(concertStr);
 		XmlMapper xmlMapper = new XmlMapper();
 		// xmlMapper 설정, 불필요한거 스킵
 		xmlMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -25,23 +26,22 @@ public class Kopis extends KopisApiController {
 
 		// 테스트 출력
 		for (ConcertListDTO cDto : concertList) {
-			System.out.println("공연ID : " + cDto.getId());
-			System.out.println("공연명 : " + cDto.getName());
-			System.out.println("공연시작일 : " + cDto.getStartDate());
-			System.out.println("공연종료일 : " + cDto.getEndDate());
-			System.out.println("공연시설명 : " + cDto.getPlaceName());
-			System.out.println("포스터이미지 : " + cDto.getPoster());
-			System.out.println("공연지역 : " + cDto.getArea());
-			System.out.println("공연장르 : " + cDto.getGenre());
+			System.out.println("공연ID : " + cDto.getPl_id());
+			System.out.println("공연명 : " + cDto.getPl_hall_name());
+			System.out.println("공연시작일 : " + cDto.getPl_start_date());
+			System.out.println("공연종료일 : " + cDto.getPl_end_date());
+			System.out.println("공연시설명 : " + cDto.getPl_hall_name());
+			System.out.println("포스터이미지 : " + cDto.getPl_poster());
+			System.out.println("공연지역 : " + cDto.getPl_location());
+			System.out.println("공연장르 : " + cDto.getPl_genre());
 			System.out.println("--------------------------------");
 			System.out.println();
 		}
 		return concertList;
 	}
 
-	public void concertDetail() throws JsonMappingException, JsonProcessingException {
-		String detailList = callConcertDetail("PF178134");
-//		ConcertDetailDTO detailDTO = new ConcertDetailDTO();
+	public List<ConcertDetailDTO> concertDetail(String concertId) throws JsonMappingException, JsonProcessingException {
+		String detailList = callConcertDetail(concertId);
 		
 		List<ConcertDetailDTO> detailDTO = new ArrayList<>();
 		
@@ -50,7 +50,6 @@ public class Kopis extends KopisApiController {
 		// xmlMapper 설정, 불필요한거 스킵
 		xmlMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-//		detailDTO = xmlMapper.readValue(detailList, ConcertDetailDTO.class);
 		detailDTO = xmlMapper.readValue(detailList, new TypeReference<List<ConcertDetailDTO>>() {
 		});
 		
@@ -69,7 +68,9 @@ public class Kopis extends KopisApiController {
 			System.out.println("오픈런 : " + c.getOpenRun());
 			System.out.println("현장구매 : " + c.getBuyVisit());
 			System.out.println("어린아이 허용 : " + c.getChild());
-			System.out.println("공연 시간 : " + c.getPerformTime());			
+			System.out.println("공연 시간 : " + c.getPerformTime());
+			System.out.println("-----------------------------------");
+			System.out.println();
 		}
 		
 //		List<String> test1 = detailDTO.getPoster();
@@ -78,6 +79,6 @@ public class Kopis extends KopisApiController {
 //		}
 //			
 //		System.out.println("상세정보 이미지 : " + detailDTO.getId());
-		
+		return detailDTO;
 	}
 }
