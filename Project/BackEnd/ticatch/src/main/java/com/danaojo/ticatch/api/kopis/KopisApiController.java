@@ -12,7 +12,7 @@ public class KopisApiController {
 		try {
 			// URL API 설정
 			URL url = new URL("http://kopis.or.kr/openApi/restful/pblprfr?service=" + KopisConst.KOPIS_API_KEY
-					+ "&stdate=20240101&eddate=20241231&cpage=1&rows=10");
+					+ "&stdate=20240101&eddate=20241231&cpage=1&rows=500");
 			HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 			httpURLConnection.setRequestMethod("GET");
 

@@ -55,20 +55,20 @@ public class Kopis extends KopisApiController {
 		
 		// 테스트 출력
 		for(ConcertDetailDTO c : detailDTO) {
-			System.out.println("공연명 : " + c.getId());
-			System.out.println("제목 : " + c.getTitle());
-			System.out.println("시작일 : " + c.getStartDate());
-			System.out.println("종료일 : " + c.getEndDate());
-			System.out.println("위치 : " + c.getPlace());
-			System.out.println("출연진 : " + c.getCast());
-			System.out.println("감독 및 연출 : " + c.getDirector());
-			System.out.println("상영 시간 : " + c.getRunTime());
-			System.out.println("좌석가격 : " + c.getPrice());
-			System.out.println("장르 : " + c.getGenre());
-			System.out.println("오픈런 : " + c.getOpenRun());
-			System.out.println("현장구매 : " + c.getBuyVisit());
-			System.out.println("어린아이 허용 : " + c.getChild());
-			System.out.println("공연 시간 : " + c.getPerformTime());
+			System.out.println("공연명 : " + c.getPd_id());
+			System.out.println("제목 : " + c.getPd_title());
+			System.out.println("시작일 : " + c.getPd_start());
+			System.out.println("종료일 : " + c.getPd_end());
+			System.out.println("위치 : " + c.getPd_location());
+			System.out.println("출연진 : " + c.getPd_cast());
+			System.out.println("감독 및 연출 : " + c.getPd_crew());
+			System.out.println("상영 시간 : " + c.getPd_runtime());
+			System.out.println("좌석가격 : " + c.getPd_seatprice());
+			System.out.println("장르 : " + c.getPd_genre());
+			System.out.println("오픈런 : " + c.getPd_openturn());
+			System.out.println("현장구매 : " + c.getPd_visit());
+			System.out.println("어린아이 허용 : " + c.getPd_child());
+			System.out.println("공연 시간 : " + c.getPd_runtime());
 			System.out.println("-----------------------------------");
 			System.out.println();
 		}

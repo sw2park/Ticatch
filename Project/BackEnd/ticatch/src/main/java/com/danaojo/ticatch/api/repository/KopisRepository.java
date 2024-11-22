@@ -18,4 +18,9 @@ public class KopisRepository {
 		em.persist(performList);
 		
 	}
+	
+	// API 공연 상세 내용 저장
+	public void savePerformDetail(PerformDetail performDetail) {
+		em.persist(performDetail);
+	}
 }
