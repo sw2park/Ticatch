@@ -2,8 +2,8 @@ package com.danaojo.ticatch.order.service;
 
 import org.springframework.stereotype.Service;
 
-import com.danaojo.ticatch.order.DTO.PerformanceEntity;
-import com.danaojo.ticatch.order.DTO.PerformanceRepository;
+import com.danaojo.ticatch.order.repository.PerformanceEntity;
+import com.danaojo.ticatch.order.repository.PerformanceRepository;
 
 @Service
 public class PerformanceService {

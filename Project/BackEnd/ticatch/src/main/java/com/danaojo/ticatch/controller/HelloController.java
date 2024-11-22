@@ -12,10 +12,7 @@ public class HelloController {
     	Kopis kopis = new Kopis();
     	String data = kopis.callConcertList();
     	System.out.println("응답");
-<<<<<<< HEAD
-        return "srping hello!!";
-=======
+
         return data;
->>>>>>> bb328dfee110a9a892d373f719a023ded2c2a8c0
     }
 }

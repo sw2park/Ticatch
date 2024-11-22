@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.danaojo.ticatch.order.DTO.PerformanceEntity;
-import com.danaojo.ticatch.order.DTO.PerformanceRepository;
+import com.danaojo.ticatch.order.repository.PerformanceEntity;
+import com.danaojo.ticatch.order.repository.PerformanceRepository;
 
 @RestController
 @RequestMapping("/api/order")

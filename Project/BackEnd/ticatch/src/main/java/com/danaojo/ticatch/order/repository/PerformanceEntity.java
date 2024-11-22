@@ -1,4 +1,4 @@
-package com.danaojo.ticatch.order.DTO;
+package com.danaojo.ticatch.order.repository;
 
 import java.time.LocalDate;
 
