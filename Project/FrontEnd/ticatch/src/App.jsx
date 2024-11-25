@@ -1,8 +1,7 @@
 import {useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import axios from 'axios';
+import Main from './detail/component/Main.jsx';
 
 function App() {
   const [data, setData] = useState('')
@@ -14,10 +13,14 @@ function App() {
    }, []);
 
    return (
-       <div>
-           받아온 값 : {data}!!!
-       </div>
+    //    <div>
+    //        받아온 값 : {data}!!!
+    //    </div>
+       <>
+        <Main />
+       </>
    );
 }
+
 
 export default App;
