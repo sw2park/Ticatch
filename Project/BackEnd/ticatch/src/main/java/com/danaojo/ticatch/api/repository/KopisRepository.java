@@ -13,14 +13,9 @@ public class KopisRepository {
 	@PersistenceContext
 	private final EntityManager em;
 	
-	// API 공연 목록 저장
-	public void saveConcertList(PerformList performList) {
-		em.persist(performList);
-		
+	// PFJoinDB 저장
+	public void savePFJoinList(PFJoin pfjoin) {
+		em.persist(pfjoin);
 	}
 	
-	// API 공연 상세 내용 저장
-	public void savePerformDetail(PerformDetail performDetail) {
-		em.persist(performDetail);
-	}
 }
