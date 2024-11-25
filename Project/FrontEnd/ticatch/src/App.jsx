@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import SeatBooking from "./Seats/SeatBooking.jsx";
 import Performance from "./Detail/Performance.jsx";
+import Performance2 from "./Detail/Performance2.jsx";
+
+function order() {
+  alert("예매 성공!");
+}
 
 const App = () => {
   return (
@@ -14,8 +19,11 @@ const App = () => {
           <Performance />
         </div>
         <div className="r r2">
-          <button className="reserve-button">예매하기</button>
+          <Performance2 />
         </div>
+        <button className="reserve-button" onClick={order}>
+          예매하기
+        </button>
       </div>
     </div>
   );

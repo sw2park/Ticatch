@@ -18,7 +18,9 @@ const SeatBooking = () => {
 
   return (
     <div>
-      <div className="info">좌석을 선택하세요</div>
+      <div className="stage-container">
+        <div className="stage-box">STAGE</div>
+      </div>
       <div id="seat-groups">
         {rows.map((row) => (
           <div key={row} className="seat-container">
