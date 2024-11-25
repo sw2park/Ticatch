@@ -6,11 +6,11 @@ spring:
   datasource:
     url: jdbc:oracle:thin:@localhost:1521:xe
     driver-class-name: oracle.jdbc.OracleDriver	
-    username: spring
-    password: spring
+    username: danaojo
+    password: danaojo
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate:
         format-sql: true
