@@ -1,0 +1,47 @@
+.con {
+    width: 1400px;
+    background-color: #0D3853;
+    color: white;
+    margin: 0 auto;
+  }
+  
+  ul, ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .bottom-bar .menu-2 > ul {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .bottom-bar .menu-2 > ul > li {
+    padding: 10px 50px;
+  }
+  
+  .middle {
+    text-align: left;
+    display: flex;
+    margin-top: 20px;
+    padding: 0 50px;
+    gap : 50px;
+  }
+  
+  .menu-3 > h2 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;   
+    margin: 0;
+    
+  }
+  
+  .menu-4 {
+    padding: 10px; /* 박스 내부 여백 */
+    text-align: justify; /* 텍스트 양쪽 정렬 */
+    line-height: 1.5; /* 줄 간격 설정 */
+    font-family: Arial, sans-serif; /* 글꼴 */
+    font-size: 15px; /* 글자 크기 */
+    margin-top: 20px;
+  }
+  
