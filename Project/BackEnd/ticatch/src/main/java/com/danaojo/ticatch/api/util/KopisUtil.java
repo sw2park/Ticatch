@@ -8,7 +8,6 @@ import com.danaojo.ticatch.api.repository.PFJoin;
 
 public class KopisUtil {
 	// PFJOIN DB 저장용 변환 메소드
-	
 	public List<PFJoin> returnPFJoinList(List<PFJoinDTO> list){
 		List<PFJoin> result = new ArrayList<>();
 		
