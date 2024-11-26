@@ -2,6 +2,7 @@
 .react-datepicker {
   background-color: #ffffff;
   border: none;
+  box-shadow: 0 0 38px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* 달력 헤더 스타일 변경 */
@@ -135,11 +136,10 @@
   padding: 5px;
 }
 
-/* 날짜 영역 배경색 
 .react-datepicker__month {
-    background-color: black;
+  /* background-color: black; */
+  /* box-shadow: 0 10px 35px rgba(200, 200, 200, 1) !important; */
 }
-*/
 
 /* 날짜 셀 배경색 
 .react-datepicker__day {
