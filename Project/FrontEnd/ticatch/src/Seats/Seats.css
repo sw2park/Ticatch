@@ -73,3 +73,25 @@ body {
 .seat.selected {
   background-color: #6c48c5;
 }
+
+/* 줄 이름(알파벳) 스타일 */
+.row-label {
+  width: 30px; /* 알파벳의 고정 너비 */
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px; /* 좌석 번호와 간격 */
+}
+
+.seat-row {
+  display: flex; /* 줄(row)을 좌측 레이블과 좌석으로 정렬 */
+  align-items: center;
+  margin-bottom: 10px; /* 줄 간 간격 */
+}
+
+.seat-container {
+  display: flex; /* 좌석을 가로로 나열 */
+  gap: 5px;
+}

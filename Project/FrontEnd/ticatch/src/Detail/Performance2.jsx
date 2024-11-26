@@ -1,6 +1,10 @@
 import React from "react";
 
-const Performance = (selectedSeats) => {
+const price = 10000;
+
+const Performance2 = ({ selectedSeats, selectedDate }) => {
+  const finalPrice = price * selectedSeats.length;
+
   return (
     <div>
       <p>VIP : 10 / 10</p>
@@ -9,10 +13,16 @@ const Performance = (selectedSeats) => {
       <p>S : 150 / 150</p>
       <p>대학로 자유극장</p>
       <p>2024년 11월 26일 (화) 20:00</p>
-      <h3>어쩐 좌석을 예매 했는지의 위치</h3>
-      <h2>선택 좌석의 총가격</h2>
+
+      <h3>
+        선택된 날짜:{" "}
+        {selectedDate.toLocaleDateString("ko-KR", { dateStyle: "full" })}
+      </h3>
+      <h3>선택된 좌석: {selectedSeats.join(", ")}</h3>
+      {selectedSeats.length > 0 && <h4>총 {selectedSeats.length}명</h4>}
+      <h2>총 가격: {finalPrice.toLocaleString()}원</h2>
     </div>
   );
 };
 
-export default Performance;
+export default Performance2;
