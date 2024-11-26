@@ -8,7 +8,6 @@ import com.danaojo.ticatch.api.repository.PFJoin;
 
 public class KopisUtil {
 	// PFJOIN DB 저장용 변환 메소드
-	
 	public List<PFJoin> returnPFJoinList(List<PFJoinDTO> list){
 		List<PFJoin> result = new ArrayList<>();
 		
@@ -42,6 +41,20 @@ public class KopisUtil {
 			pf.setPd_time(list.get(i).getPf_time());
 			
 			result.add(pf);
+		}
+		return result;
+	}
+	
+	// PFJoinDB 상세이미지 저장용
+	public String concatDetailImage(List<String> list) {
+		String result = "";
+		
+		for(String str : list) {
+			if(str.equals(" ")) {
+				continue;
+			} else {
+				result += str + "|";
+			}
 		}
 		return result;
 	}
