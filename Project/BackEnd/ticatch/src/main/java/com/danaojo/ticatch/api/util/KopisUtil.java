@@ -44,4 +44,18 @@ public class KopisUtil {
 		}
 		return result;
 	}
+	
+	// PFJoinDB 상세이미지 저장용
+	public String concatDetailImage(List<String> list) {
+		String result = "";
+		
+		for(String str : list) {
+			if(str.equals(" ")) {
+				continue;
+			} else {
+				result += str + "|";
+			}
+		}
+		return result;
+	}
 }
