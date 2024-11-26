@@ -60,11 +60,11 @@ public class Kopis extends KopisApiController {
 	                        	resultStr.setPf_end_date(perform.getPl_end_date());
 	                        	resultStr.setPf_location(perform.getPl_location());
 	                        	resultStr.setPf_hall_name(pfDetail.getPd_location());
-	                        	resultStr.setPf_crew(pfDetail.getPd_crew());
+	                        	resultStr.setPf_cast(pfDetail.getPd_cast());
 	                        	resultStr.setPf_runtime(pfDetail.getPd_runtime());
 	                        	resultStr.setPf_seatprice(pfDetail.getPd_seatprice());
+	                        	resultStr.setPf_time(pfDetail.getPd_time());
 	                        	resultStr.setPf_genre(pfDetail.getPd_genre());
-	                        	resultStr.setPf_visit(pfDetail.getPd_visit());
 	                        	resultStr.setPf_child(pfDetail.getPd_child());
 	                        	// 임시로 null처리
 	                        	resultStr.setPf_img(null);
@@ -75,9 +75,6 @@ public class Kopis extends KopisApiController {
 	                        	resultStr.setPf_addr(fcDetail.getFd_addr());
 	                        	resultStr.setPf_la(fcDetail.getFd_la());
 	                        	resultStr.setPf_lo(fcDetail.getFd_lo());
-	                        	// 임시로 null처리
-	                        	resultStr.setPf_facility(null);
-	                        	resultStr.setPf_seatscale(null);
 	                        	
 	                        	resultList.add(resultStr);
 	                        }
@@ -193,38 +190,38 @@ public class Kopis extends KopisApiController {
 		});
 
 		// 테스트 출력
-//		for (PerformDetailDTO c : pList) {
-//			System.out.println("공연 ID : " + c.getPd_id());
-//			System.out.println("공연시설 ID : " + c.getPd_facility_id());
-//			System.out.println("공연명 : " + c.getPd_title());
-//			System.out.println("공연시작일 : " + c.getPd_start());
-//			System.out.println("공연종료일 : " + c.getPd_end());
-//			System.out.println("공연시설명 : " + c.getPd_location());
-//			System.out.println("출연진 : " + c.getPd_cast());
-//			System.out.println("감독 및 연출 : " + c.getPd_crew());
-//			System.out.println("상영 시간 : " + c.getPd_runtime());
-//			System.out.println("공연 관람 연령 : " + c.getPd_age());
-//			System.out.println("제작사 : " + c.getPd_production());
-//			System.out.println("기획사 : " + c.getPd_agency());
-//			System.out.println("주최 : " + c.getPd_host());
-//			System.out.println("주관 : " + c.getPd_subject());
-//			System.out.println("좌석가격 : " + c.getPd_seatprice());
-//			System.out.println("포스터 이미지 경로 : " + c.getPd_poster());
-//			System.out.println("줄거리 : " + c.getPd_story());
-//			System.out.println("장르 : " + c.getPd_genre());
-//			System.out.println("공연 상태 : " + c.getPd_state());
-//			System.out.println("오픈런 : " + c.getPd_openturn());
-//			System.out.println("현장구매 : " + c.getPd_visit());
-//			System.out.println("어린아이 허용 : " + c.getPd_child());
-//			System.out.println("대학로 : " + c.getPd_daehakro());
-//			System.out.println("축제 : " + c.getPd_festival());
-//			System.out.println("뮤지컬 라이센스 : " + c.getPd_musicallicense());
-//			System.out.println("뮤지컬 창작 : " + c.getPd_musicalcreate());
-//			System.out.println("최종 수정일 : " + c.getPd_updatedate());
-//			System.out.println("공연 시간 : " + c.getPd_runtime());
-//			System.out.println("-----------------------------------");
-//			System.out.println();
-//		}
+		for (PerformDetailDTO c : pList) {
+			System.out.println("공연 ID : " + c.getPd_id());
+			System.out.println("공연시설 ID : " + c.getPd_facility_id());
+			System.out.println("공연명 : " + c.getPd_title());
+			System.out.println("공연시작일 : " + c.getPd_start());
+			System.out.println("공연종료일 : " + c.getPd_end());
+			System.out.println("공연시설명 : " + c.getPd_location());
+			System.out.println("출연진 : " + c.getPd_cast());
+			System.out.println("감독 및 연출 : " + c.getPd_crew());
+			System.out.println("상영 시간 : " + c.getPd_runtime());
+			System.out.println("공연 관람 연령 : " + c.getPd_age());
+			System.out.println("제작사 : " + c.getPd_production());
+			System.out.println("기획사 : " + c.getPd_agency());
+			System.out.println("주최 : " + c.getPd_host());
+			System.out.println("주관 : " + c.getPd_subject());
+			System.out.println("좌석가격 : " + c.getPd_seatprice());
+			System.out.println("포스터 이미지 경로 : " + c.getPd_poster());
+			System.out.println("줄거리 : " + c.getPd_story());
+			System.out.println("장르 : " + c.getPd_genre());
+			System.out.println("공연 상태 : " + c.getPd_state());
+			System.out.println("오픈런 : " + c.getPd_openturn());
+			System.out.println("현장구매 : " + c.getPd_visit());
+			System.out.println("어린아이 허용 : " + c.getPd_child());
+			System.out.println("대학로 : " + c.getPd_daehakro());
+			System.out.println("축제 : " + c.getPd_festival());
+			System.out.println("뮤지컬 라이센스 : " + c.getPd_musicallicense());
+			System.out.println("뮤지컬 창작 : " + c.getPd_musicalcreate());
+			System.out.println("최종 수정일 : " + c.getPd_updatedate());
+			System.out.println("공연 시간 : " + c.getPd_runtime());
+			System.out.println("-----------------------------------");
+			System.out.println();
+		}
 		return pList;
 	}
 

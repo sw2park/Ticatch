@@ -13,11 +13,9 @@ public class PFJoinDTO {
 	private String pf_location; // 공연 위치
 	private String pf_hall_name; // 공연장 이름
 	private String pf_cast; // 출연진
-	private String pf_crew; // 감독 및 연출
 	private String pf_runtime; // 상영시간
 	private String pf_seatprice; // 좌석가격
 	private String pf_genre; // 공연 장르
-	private String pf_visit; // 현장 구매 여부
 	private String pf_child; // 어린이 시청 여부
 	private String pf_img; // 상세 이미지
 	private String pf_time; // 공연 일정
@@ -27,6 +25,4 @@ public class PFJoinDTO {
 	private String pf_addr; // 시설 주소
 	private String pf_la; // 시설 위도
 	private String pf_lo; // 시설 경도
-	private String pf_facility; // 공연장 목록
-	private String pf_seatscale; // 좌석 규모
 }

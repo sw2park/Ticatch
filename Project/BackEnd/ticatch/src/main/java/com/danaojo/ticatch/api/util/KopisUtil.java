@@ -22,12 +22,15 @@ public class KopisUtil {
 			pf.setP_end_date(list.get(i).getPf_end_date());
 			pf.setPd_location(list.get(i).getPf_location());
 			pf.setPd_hall_name(list.get(i).getPf_hall_name());
-			pf.setPd_cast(list.get(i).getPf_cast());
-			pf.setPd_crew(list.get(i).getPf_crew());
+			if(list.get(i).getPf_cast().equals(" ")) {
+				continue;
+//				pf.setPd_cast(null);
+			} else {
+				pf.setPd_cast(list.get(i).getPf_cast());				
+			}
 			pf.setPd_runtime(list.get(i).getPf_runtime());
-			pf.setPd_seatprice(list.get(i).getPf_runtime());
-			pf.setP_genre(list.get(i).getPf_runtime());
-			pf.setPd_visit(list.get(i).getPf_visit());
+			pf.setPd_seatprice(list.get(i).getPf_seatprice());
+			pf.setP_genre(list.get(i).getPf_genre());
 			pf.setPd_child(list.get(i).getPf_child());
 			pf.setPd_img(list.get(i).getPf_img());
 			pf.setPl_location_sido(list.get(i).getPf_location_sido());
@@ -36,8 +39,7 @@ public class KopisUtil {
 			pf.setFd_addr(list.get(i).getPf_addr());
 			pf.setFd_latitude(list.get(i).getPf_la());
 			pf.setFd_longitude(list.get(i).getPf_lo());
-			pf.setFd_facility(list.get(i).getPf_facility());
-			pf.setFd_seatscale(list.get(i).getPf_seatscale());
+			pf.setPd_time(list.get(i).getPf_time());
 			
 			result.add(pf);
 		}
