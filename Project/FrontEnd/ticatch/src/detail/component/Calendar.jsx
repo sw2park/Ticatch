@@ -23,12 +23,12 @@ export default function Calendar() {
 
     return (
         <DatePicker 
-            dateFormat='yyyy.MM.dd' // 사용안함
+            dateFormat='yyyy.MM.dd'
             minDate={new Date()}  // 오늘 날짜부터 선택 가능
             maxDate={maxSelectableDate}  // 2024년 12월 31일까지 선택 가능
             selected={selectedDate}
             onChange={(date) => setSelectedDate(date)}  // 날짜 선택 시 selectedDate 업데이트
-            inline  // 항상 달력 출력
+            inline   항상 달력 출력
             locale={ko} // 달력 한글 설정
             dayClassName={getDayClassName} // 날짜별 클래스 동적 적용
             
