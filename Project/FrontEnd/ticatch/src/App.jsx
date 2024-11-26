@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import "./App.css";
 import SeatBooking from "./Seats/SeatBooking.jsx";
 import Performance from "./Detail/Performance.jsx";
-import Performance2 from "./Detail/Performance2.jsx";
-import Calendar from "./Calendar/Calendar.jsx";
+
+function Order() {
+  alert("예매 완료!");
+}
 
 const App = () => {
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date()); // 날짜 상태 추가
+  const [selectedDate, setSelectedDate] = useState(new Date()); // 날짜 상태 관리
 
   return (
     <div className="app-container">
@@ -16,18 +18,17 @@ const App = () => {
           selectedSeats={selectedSeats}
           setSelectedSeats={setSelectedSeats}
         />
-        <Calendar />
       </div>
       <div className="right">
         <div className="r r1">
-          <Performance />
-        </div>
-        <div className="r r2">
-          <Performance2
+          <Performance
             selectedSeats={selectedSeats}
-            selectedDate={selectedDate}
+            selectedDate={selectedDate} // 날짜 전달
           />
         </div>
+        <button className="reserve-button" onClick={Order}>
+          예매하기
+        </button>
       </div>
     </div>
   );
