@@ -3,12 +3,14 @@ package com.danaojo.ticatch.api.kopis;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import com.danaojo.ticatch.api.kopis.dto.FacilityDetailDTO;
 import com.danaojo.ticatch.api.kopis.dto.FacilityListDTO;
 import com.danaojo.ticatch.api.kopis.dto.FacilityTypeDTO;
 import com.danaojo.ticatch.api.kopis.dto.PFJoinDTO;
 import com.danaojo.ticatch.api.kopis.dto.PerformDetailDTO;
 import com.danaojo.ticatch.api.kopis.dto.PerformListDTO;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -16,7 +18,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 public class Kopis extends KopisApiController {
-
 	public List<PFJoinDTO> PfDBList() {
 		 // 최종 리턴 리스트
 	    List<PFJoinDTO> resultList = new ArrayList<>();
@@ -179,10 +180,12 @@ public class Kopis extends KopisApiController {
 
 	public List<PerformDetailDTO> mappingPerformDetail(String pfDetailStr)
 			throws JsonMappingException, JsonProcessingException {
+
 		XmlMapper xmlMapper = new XmlMapper();
 
 		// xmlMapper 설정, 불필요한거 스킵
 		xmlMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
 
 		List<PerformDetailDTO> pList = new ArrayList<>();
 

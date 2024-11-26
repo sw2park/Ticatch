@@ -1,12 +1,15 @@
 package com.danaojo.ticatch.api;
 
+
 import com.danaojo.ticatch.api.kopis.Kopis;
 import com.danaojo.ticatch.api.kopis.KopisApiController;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 public class ApiTestMain {
 	public static void main(String[] args) throws JsonMappingException, JsonProcessingException {
+
 		KopisApiController k = new KopisApiController();
 		
 //		String facilityName = "부산문화회관";
@@ -17,6 +20,5 @@ public class ApiTestMain {
 		//System.out.println(k.callConcertList());
 		Kopis kp = new Kopis();
 		kp.PfDBList();
-		
 	}
 }
