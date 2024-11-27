@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.danaojo.ticatch.api.repository.PFJoin;
 import com.danaojo.ticatch.detail.domain.Expectation;
 import com.danaojo.ticatch.detail.domain.Review;
+import com.danaojo.ticatch.detail.dto.ExpectationDTO;
+import com.danaojo.ticatch.detail.dto.ReviewDTO;
 import com.danaojo.ticatch.detail.service.ExpService;
 import com.danaojo.ticatch.detail.service.ProductService;
 import com.danaojo.ticatch.detail.service.ReviewService;
@@ -35,31 +37,45 @@ public class DetailController {
     }
 	
 	// tab 상세정보 이미지
-	@GetMapping("/detail/{pd_id}/detailTab")
-	public String detailTab(Model model, @PathVariable("pd_id") int pd_id) {
-		//Product prd = productService.detailTab(pd_id);
+	@GetMapping("/detail/{seq_pfjoin_id}/detailTab")
+	public String detailTab(@PathVariable("seq_pfjoin_id") int seq_pfjoin_id) {
+		//Product prd = productService.detailTab(seq_pfjoin_id);
 		
 		return null;
 	}
 	
-	// tab 리뷰 조회
-	@GetMapping("/detail/{pd_id}/review")
-	public String reviewView(Model model, @PathVariable("pd_id") Long pd_id) {
-		List<Review> reviews = reviewService.findReviews(pd_id);
-		model.addAttribute("reviews", reviews);
-		
+	// 리뷰 조회
+	@GetMapping("/detail/{seq_pfjoin_id}/review")
+	public String reviewView(@PathVariable("seq_pfjoin_id") Long seq_pfjoin_id) {
+		List<Review> reviews = reviewService.findReviews(seq_pfjoin_id);
 		return null;
 	}
 	
-	// tab 기대평 조회
-	@GetMapping("/detail/{pd_id}/exp")
-	public String expView(Model model, @PathVariable("pd_id") Long pd_id) {
-		List<Expectation> exps = expService.findExps(pd_id);
-		model.addAttribute("exps", exps);
-		
+	// 기대평 조회
+	@GetMapping("/detail/{seq_pfjoin_id}/exp")
+	public List<Expectation> expView(@PathVariable("seq_pfjoin_id") Long seq_pfjoin_id) {
+		List<Expectation> exps = expService.findExps(seq_pfjoin_id);
+	
+		return exps;
+	}
+	
+	// 리뷰 저장	-> 공연 아이디 받아와야되나
+	@GetMapping("detail/reviw/new")
+	public String createReview(ReviewDTO reviewDto) {
+		Review review = new Review();
+		reviewService.saveReview(review);
 		return null;
 	}
 	
+	// 기대평 저장
+	@GetMapping("detail/exp/new")
+	public String createExp(ExpectationDTO expDto) {
+		Expectation exp = new Expectation();
+		expService.saveExp(exp);
+		return null;
+	}
+	
+	// 
 	
 	// 공연, 전시 상세페이지 구분
 //	@GetMapping("/detail/{pd_id}/view")
@@ -87,7 +103,7 @@ public class DetailController {
 	// 데이터 전달 테스트
 	@GetMapping("/detail/{seq_pfjoin_id}")
 	public PFJoin test1(@PathVariable("seq_pfjoin_id") Long seq_pfjoin_id) {
-		System.out.println(""+productService.dataTest(seq_pfjoin_id));
+		System.out.println(""+productService.findOne(seq_pfjoin_id));
 	    return productService.findOne(seq_pfjoin_id); 
 	}
 	

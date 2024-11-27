@@ -18,11 +18,15 @@ public class ExpRepository {
 	private final EntityManager em;
 	
 	// 해당 공연 기대평 조회
-		public List<Expectation> findExp(Long seq_pId) {
-			return em.createQuery(
-					"select r from Expctation r where seq_pfjoin_id = :seq_pId", 
-					Expectation.class)
-					.getResultList();
-		}
+	public List<Expectation> findExp(Long seq_pfjoin_id) {
+		return em.createQuery(
+				"select r from Expectation r where seq_pfjoin_id = :seq_pfjoin_id", 
+				Expectation.class)
+				.getResultList();
+	}
 
+	// 리뷰 저장
+	public void save(Expectation expectation) {
+		em.persist(expectation);
+	}
 }

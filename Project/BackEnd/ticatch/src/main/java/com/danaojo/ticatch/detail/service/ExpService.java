@@ -17,8 +17,12 @@ public class ExpService {
 	@Autowired
 	private final ExpRepository expRepository;
 	
-	public List<Expectation> findExps(Long seq_pdId) {
-		return expRepository.findExp(seq_pdId);
+	public List<Expectation> findExps(Long seq_pfjoin_id) {
+		return expRepository.findExp(seq_pfjoin_id);
+	}
+
+	public void saveExp(Expectation expectation) {
+		expRepository.save(expectation);
 	}
 
 }

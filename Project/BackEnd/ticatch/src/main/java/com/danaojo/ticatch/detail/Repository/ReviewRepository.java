@@ -25,4 +25,9 @@ public class ReviewRepository {
 				.getResultList();
 	}
 
+	// 리뷰 저장
+	public void save(Review review) {
+		em.persist(review);
+	}
+
 }

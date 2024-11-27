@@ -22,4 +22,8 @@ public class ReviewService {
 		return reviewRepository.findReview(seq_pdId);
 	}
 
+	public void saveReview(Review review) {
+		reviewRepository.save(review);
+	}
+
 }
