@@ -13,13 +13,24 @@ const Performance = ({ selectedSeats = [] }) => {
     axios
       .get(`/api/order`)
       .then((response) => {
-        // console.log(response.data); // API 응답 데이터 확인
         setDetail(response.data); // 응답 데이터를 상태에 저장
       })
       .catch((error) => {
         console.error("스프링 데이터 가져오기 에러:", error);
       });
   }, []); // 컴포넌트가 마운트될 때 한 번 실행
+
+  // 테스트
+  const fetchDetailById = (id) => {
+    axios
+      .get(`/api/order/${id}`) // 특정 id를 기반으로 API 호출
+      .then((response) => {
+        setSelectedDetail(response.data); // 가져온 데이터를 상태에 저장
+      })
+      .catch((error) => {
+        console.error("특정 데이터 가져오기 에러:", error);
+      });
+  };
 
   return (
     <div>
@@ -40,6 +51,7 @@ const Performance = ({ selectedSeats = [] }) => {
         R : 100석 | S : 150석
       </p>
 
+      {/* 공연 장소 및 회차 표시 */}
       <ul>
         {detail
           .filter((item) => item.seqPfjoinId === 1)
@@ -47,7 +59,7 @@ const Performance = ({ selectedSeats = [] }) => {
             <li key={item.seqPfjoinId}>
               <p>{item.fdAddr}</p>
               <p>공연 회차: {item.pdTime}</p>
-            </li> // seqPfjoinId를 key로 사용
+            </li>
           ))}
       </ul>
 
@@ -70,6 +82,11 @@ const Performance = ({ selectedSeats = [] }) => {
       {/* 총 가격 표시 */}
       <h2 style={{ textAlign: "center" }}>총 가격: 원</h2>
       <button className="reserve-button">예매하기</button>
+
+      {/* 테스트 */}
+      <button className="reserve-button" onClick={() => fetchDetailById(3)}>
+        ID 1 데이터 가져오기
+      </button>
     </div>
   );
 };
