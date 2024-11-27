@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../css/Main.css';
 import Calendar from './Calendar.jsx';
 import Description from './desc.jsx';
@@ -10,6 +10,7 @@ import Location from './Location.jsx';
 import poster from '../images/pirate_PST_1007.jpg';
 
 export default function DetailMain() {
+
     const [activeTab, setActiveTab] = useState('상세정보');
     const tabContent = {
         상세정보: <Description/>,

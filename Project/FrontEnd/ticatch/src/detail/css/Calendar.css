@@ -136,16 +136,6 @@
     padding: 5px;
 }
 
-/* 오늘 날짜 - 이거 글자색 적용 왜안되냐*/
-/* .react-datepicker__day--today {
-    background-color: #87c0e1;
-    border-radius: 50%;
-    color: #ffffff;
-} */
-
-
-/* border-radius 왜 적용안되는데 */
-
 /* 날짜 영역 배경색 
 .react-datepicker__month {
     background-color: black;
