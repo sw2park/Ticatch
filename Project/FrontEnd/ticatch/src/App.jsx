@@ -26,9 +26,6 @@ const App = () => {
             selectedDate={selectedDate} // 날짜 전달
           />
         </div>
-        <button className="reserve-button" onClick={Order}>
-          예매하기
-        </button>
       </div>
     </div>
   );

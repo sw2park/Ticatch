@@ -24,6 +24,7 @@ body {
   display: flex;
   flex-direction: column;
   box-shadow: 0 10px 35px rgba(200, 200, 200, 0.5);
+  justify-content: center;
 }
 .r {
   flex: 1;
@@ -39,17 +40,3 @@ body {
 
 /* .r2 {
 } */
-
-.reserve-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.reserve-button:hover {
-  background-color: #45a049;
-}
