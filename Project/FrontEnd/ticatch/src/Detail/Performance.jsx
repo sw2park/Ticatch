@@ -84,6 +84,7 @@ const Performance = ({ selectedSeats = [] }) => {
       <button className="reserve-button">예매하기</button>
 
       {/* 테스트 */}
+      {/* 아직은 작동 안함 */}
       <button className="reserve-button" onClick={() => fetchDetailById(3)}>
         ID 1 데이터 가져오기
       </button>
