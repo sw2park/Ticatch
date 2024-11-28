@@ -10,6 +10,7 @@ import com.danaojo.ticatch.api.kopis.dto.PFJoinDTO;
 import com.danaojo.ticatch.api.kopis.dto.PerformDetailDTO;
 import com.danaojo.ticatch.api.kopis.dto.PerformListDTO;
 import com.danaojo.ticatch.api.util.KopisUtil;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -17,10 +18,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 public class Kopis extends KopisApiController {
-
 	public List<PFJoinDTO> PfDBList() {
 		KopisUtil util = new KopisUtil();
-		
+
 		 // 최종 리턴 리스트
 	    List<PFJoinDTO> resultList = new ArrayList<>();
 	    
@@ -40,6 +40,7 @@ public class Kopis extends KopisApiController {
 	                // 공연 ID로 세부 공연 정보 조회 및 매핑
 	                String pfDetailStr = callConcertDetail(perform.getPl_id());
 	                List<PerformDetailDTO> pfDetailList = mappingPerformDetail(pfDetailStr);
+
 	                // 이미지 한줄로 합치기
 	                String detailImg = "";
 	                detailImg = util.concatDetailImage(pfDetailList.get(0).getPd_img());
@@ -49,7 +50,7 @@ public class Kopis extends KopisApiController {
 	                    // 공연장 상세 정보 조회 및 매핑
 	                    String fcDetailStr = callFacilityDetail(pfDetail.getPd_facility_id());
 	                    List<FacilityDetailDTO> fcDetailList = mappingFacilityDetail(fcDetailStr);
-	                    
+
 	                    for (FacilityDetailDTO fcDetail : fcDetailList) {
 	                        // 공연장 이름으로 추가 정보 조회
 	                        String facilityStr = callFacilityList(fcDetail.getFd_fcltynm());
@@ -73,7 +74,6 @@ public class Kopis extends KopisApiController {
 	                        	resultStr.setPf_time(pfDetail.getPd_time());
 	                        	resultStr.setPf_genre(pfDetail.getPd_genre());
 	                        	resultStr.setPf_child(pfDetail.getPd_child());
-	                        	// 여기 수정중
 	                        	resultStr.setPf_img(detailImg);
 	                        	resultStr.setPf_time(pfDetail.getPd_time());
 	                        	resultStr.setPf_location_sido(facility.getFl_sidonm());

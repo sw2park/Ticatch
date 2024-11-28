@@ -17,5 +17,4 @@ public class KopisRepository {
 	public void savePFJoinList(PFJoin pfjoin) {
 		em.persist(pfjoin);
 	}
-	
 }
