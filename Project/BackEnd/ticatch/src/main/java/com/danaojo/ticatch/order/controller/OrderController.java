@@ -18,8 +18,8 @@ import lombok.RequiredArgsConstructor;
 public class OrderController {
 	public final OrderRepository1 orderRepository;
 
-//	@GetMapping("/{seqPfjoinId}")
-//	@GetMapping
+	// 전체 조회
+	@GetMapping
 	public List<Order> Order() {
 
 		List<Order> order = orderRepository.findAll();
@@ -29,13 +29,15 @@ public class OrderController {
 		return order;
 	}
 
-	// 테스트
-	// 지금 보니 id 값만 리턴해서 남어지 데이터가 없네
-	
-	@GetMapping("/{id}")
-	public List<Order> getOrderById(@PathVariable Long id) {
-	    System.out.println(id);
-		return orderRepository.findBySeqPfjoinId(id);
-	}
+	// seqPfjoinId 로 동일한 값만 조회
+	@GetMapping("/{seqPfjoinId}")
+	public List<Order> getOrderById(@PathVariable Long seqPfjoinId) {
+		
+		System.out.println(seqPfjoinId);
+	    
+	    List<Order> findBySeqPfJoinId = orderRepository.findBySeqPfjoinId(seqPfjoinId);
+	    
+	    return findBySeqPfJoinId;
+	} 
 
 }

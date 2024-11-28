@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import SeatBooking from "./Seats/SeatBooking.jsx";
-import Performance from "./Detail/Performance.jsx";
+import Performance from "./Orders/Order.jsx";
 
 function Order() {
   alert("예매 완료!");

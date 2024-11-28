@@ -1,0 +1,56 @@
+ul {
+  list-style: none;
+  max-width: 310px; /* 텍스트 영역의 최대 너비 설정 */
+  white-space: normal; /* 텍스트 줄바꿈 허용 */
+  overflow: hidden; /* 넘친 텍스트는 숨김 */
+  text-overflow: ellipsis; /* 넘친 텍스트는 "..."로 표시 */
+  padding: 0;
+  font-weight: bold;
+}
+
+.reserve-button {
+  font-size: 16px;
+  background-color: #004d7c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.reserve-button:hover {
+  background-color: #4852ed;
+}
+
+/*  */
+.simple-slider-container {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* 버튼과 텍스트 간 간격 */
+}
+
+.simple-slider-arrow {
+  background: none;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: #004d7c;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.simple-slider-arrow:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.simple-slider-arrow:hover:not(:disabled) {
+  color: #003366; /* 호버 시 더 어두운 색상 */
+}
+
+.simple-slider-content {
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+}
