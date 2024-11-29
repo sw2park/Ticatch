@@ -141,6 +141,7 @@ const Performance = ({ selectedSeats = [] }) => {
                       const seatType = match[1]; // 좌석 등급 (예: "VIP석", "R석")
                       const price = parseInt(match[2].replace(/,/g, ""), 10); // 가격 변환
                       prices[seatType] = price; // 좌석 등급별 가격 저장
+                      console.log(price);
                     }
                   });
                   return prices;
