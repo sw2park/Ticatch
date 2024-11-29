@@ -1,0 +1,72 @@
+.confirm-wrapper {
+    width: 90%;
+    margin: 10px auto;
+}
+
+.confirm-title > h1 {
+    border-bottom: 2px solid #ccc;
+}
+
+.confirm-subtitle {
+    font-size: small;
+}
+
+.confirm-subtitle > p > strong {
+    color: #f05650;;
+}
+
+.confirm-menu-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.confirm-menu-left {
+    display: flex;
+    width: 50%;
+}
+
+.confirm-menu-left > p {
+    width: 25%;
+}
+
+.confirm-menu-button-section {
+    background-color: red;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+}
+
+.confirm-menu-select-button {
+    border: 1px solid #ccc;
+    background-color: white;
+    color: black;
+    
+    width: 25%;
+    height: 100%;
+}
+
+.confirm-menu-select-button:hover {
+    cursor: pointer;
+}
+
+.confirm-menu-right {
+    background-color: red;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+}
+
+.confirm-menu-right > p {
+    background-color: blue;
+    width: 25%;
+}
+
+.confirm-menu-search-select {
+    flex-direction: row;
+    width: auto;
+}
+
+.confirm-menu-search-select > select {
+    width: 30%;
+}
