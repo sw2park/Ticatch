@@ -29,8 +29,14 @@ public class DetailController {
 	private final ExpService expService;
 	
 	// 공연 아이디(pd_id)로 상품 상세 정보 조회
+//	@GetMapping("/detail/{seq_pfjoin_id}")
+//    public PFJoin productView01(@PathVariable("pd_id") Long seq_pfjoin_id) {
+//		return productService.findOne(seq_pfjoin_id);
+//    }
+	
+	// 공연 아이디(pd_id)로 상품 상세 정보 조회
 	@GetMapping("/detail/{pd_id}/view")
-    public String productView(Model model, @PathVariable("pd_id") Long pd_id) {
+    public String productView02(Model model, @PathVariable("pd_id") Long pd_id) {
 		PFJoin prd = productService.findOne(pd_id);
 		
 		return null;
@@ -103,24 +109,9 @@ public class DetailController {
 	// 데이터 전달 테스트
 	@GetMapping("/detail/{seq_pfjoin_id}")
 	public PFJoin test1(@PathVariable("seq_pfjoin_id") Long seq_pfjoin_id) {
-		System.out.println(""+productService.findOne(seq_pfjoin_id));
+		System.out.println(seq_pfjoin_id);
 	    return productService.findOne(seq_pfjoin_id); 
 	}
-	
-	
-//	@GetMapping("/detail/{seq_pfjoin_id}")
-//	public String test1(@PathVariable("seq_pfjoin_id") int seq_pfjoin_id) {
-//		PFJoin search = productService.findOne(seq_pfjoin_id); 
-//		String testData = ""+search.getP_title();
-//		System.out.println(testData);
-//	    return  testData;
-//	}
-	
-//	@GetMapping("/details/{seq_pfjoin_id}")
-//	public List<PFJoin> test2(@PathVariable("seq_pfjoin_id") int seq_pfjoin_id) {
-//		System.out.println(""+productService.dataTest(seq_pfjoin_id));
-//	    return productService.dataTest(seq_pfjoin_id); 
-//	}
 
 	// 데이터 전달 테스트
 	@GetMapping("/test")

@@ -1,22 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function Test() {
+const App = () => {
+  const [pfJoin, setPfJoin] = useState(""); // 상태 선언
+  const [seqPfjoinId, setSeqPfjoinId] = useState(1); // seq_pfjoin_id 관리용 상태 선언
 
-  const [pfJoin, setPfJoin] = useState('')
-const seq_pfjoin_id=1;
+  // seqPfjoinId 변경 시 데이터 가져오기
   useEffect(() => {
-    axios.get(`/detail/${seq_pfjoin_id}`)
-      .then(res => setPfJoin(res.pfJoin))
-      .catch(err => console.log(err));
-  }, []);
+    console.log(seqPfjoinId);
+    axios
+      .get(`/detail/${seqPfjoinId}`)
+      .then((response) => {
+        setPfJoin(response.data); // 서버 응답에 따라 데이터 설정
+      })
+      .catch((err) => console.error(err));
+  }, [seqPfjoinId]); // seqPfjoinId 변경 시 실행
 
   return (
     <div>
-        <h2>title : {pfJoin}</h2>
+      <h2>id: {seqPfjoinId}</h2>
+      <button onClick={() => setSeqPfjoinId(2)}>Change to ID 2</button>
     </div>
   );
-}
+};
 
-
-export default Test;
+export default App;
