@@ -73,12 +73,13 @@ const Performance = ({ selectedSeats = [] }) => {
         availableDays={availableDays}
         maxSelectableDate={maxSelectableDate}
       />
-      <p style={{ textAlign: "center", color: "#004d7c", fontWeight: "bold" }}>
-        VIP : 10석 | A : 50석
-      </p>
-      <p style={{ textAlign: "center", color: "#004d7c", fontWeight: "bold" }}>
-        R : 100석 | S : 150석
-      </p>
+
+      {/* 좌석 등급 및 가격 */}
+      <ul style={{ textAlign: "center", fontWeight: "bold" }}>
+        {fetchId.map((item) => (
+          <li key={item.seqPfjoinId}>{item.pdSeatprice}</li>
+        ))}
+      </ul>
 
       <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
         <p style={{ marginRight: "10px", fontWeight: "bold" }}>공연 회차:</p>
@@ -120,6 +121,7 @@ const Performance = ({ selectedSeats = [] }) => {
       <h2 style={{ textAlign: "center" }}>총 가격: 원</h2>
       <button className="reserve-button">예매하기</button>
 
+      {/* test 용 */}
       <button className="reserve-button" onClick={() => fetchDetailById(1)}>
         fetchDetailById 데이터 가져오기
       </button>
