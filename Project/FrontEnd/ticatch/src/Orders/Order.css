@@ -41,7 +41,7 @@ ul {
 
 .simple-slider-arrow:disabled {
   color: #ccc;
-  cursor: not-allowed;
+  /* cursor: not-allowed; */
 }
 
 .simple-slider-arrow:hover:not(:disabled) {

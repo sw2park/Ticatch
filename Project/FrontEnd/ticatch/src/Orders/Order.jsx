@@ -12,6 +12,8 @@ const Performance = ({ selectedSeats = [] }) => {
   const [selectedTimeIndex, setSelectedTimeIndex] = useState(0); // 현재 표시 중인 회차의 인덱스
 
   // 스프링 API 호출
+
+  // 전체 조회된값
   // useEffect(() => {
   //   axios
   //     .get(`/api/order`)
@@ -42,7 +44,7 @@ const Performance = ({ selectedSeats = [] }) => {
       const times = pdTime.match(/\((.*?)\)/)[1].split(","); // 괄호 안의 시간 분리
       return times.map((time) => `${day}(${time})`);
     } catch (error) {
-      console.error("pdTime 형식 오류:", pdTime);
+      // console.error("pdTime 형식 오류:", pdTime);
       return ["형식 오류"];
     }
   };
@@ -50,7 +52,6 @@ const Performance = ({ selectedSeats = [] }) => {
   // 현재 표시 중인 회차
   const currentPdTime =
     fetchId.length > 0 ? formatPdTime(fetchId[0].pdTime) : [];
-
   // 화살표 버튼 핸들러
   const handleNext = () => {
     if (selectedTimeIndex < currentPdTime.length - 1) {
@@ -128,7 +129,7 @@ const Performance = ({ selectedSeats = [] }) => {
       <button className="reserve-button">예매하기</button>
 
       {/* 테스트 (나중에는 Detial 페이지에서 seq_id 를 가지고와서 보여주는거임) */}
-      <button className="reserve-button" onClick={() => fetchDetailById(2)}>
+      <button className="reserve-button" onClick={() => fetchDetailById(1)}>
         fetchDetailById 데이터 가져오기
       </button>
     </div>

@@ -6,7 +6,7 @@ import "../Calendar/Calendar.css";
 
 export default function Calendar({ selectedDate, setSelectedDate }) {
   // 상태 전달받음
-  const maxSelectableDate = new Date(2024, 11, 31);
+  const maxSelectableDate = new Date(2024, 11, 31); // 한달 더 선택가능함
 
   const getDayClassName = (date) => {
     const day = date.getDay();
