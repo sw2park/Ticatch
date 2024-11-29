@@ -58,6 +58,13 @@ const Performance = ({ selectedSeats = [] }) => {
       ? [fetchId[0].pdTime.match(/^[가-힣]+/)[0].split("")[0]]
       : [];
 
+  // 등급 및 가격 구하기
+  fetchId.map((item) => {
+    // 쉼표가 숫자 사이에 있는 경우 무시하고 나머지는 분리
+    const seatPriceArray = item.pdSeatprice.split(/,(?!\d)/);
+    console.log("쉼표로 분리된 배열:", seatPriceArray);
+  });
+
   return (
     <div>
       <ul>
@@ -118,7 +125,40 @@ const Performance = ({ selectedSeats = [] }) => {
           : "좌석 데이터 오류"}
       </h3>
 
-      <h2 style={{ textAlign: "center" }}>총 가격: 원</h2>
+      <h2 style={{ textAlign: "center" }}>
+        총액:{" "}
+        {Array.isArray(selectedSeats) && selectedSeats.length > 0
+          ? selectedSeats
+              .reduce((total, seat) => {
+                // fetchId에서 좌석별 가격 정보 추출
+                const seatPrices = fetchId.reduce((prices, item) => {
+                  const seatPriceArray = item.pdSeatprice.split(/,(?!\d)/); // 쉼표로 분리
+                  seatPriceArray.forEach((seatPrice) => {
+                    const match = seatPrice
+                      .trim()
+                      .match(/([가-힣A-Z]+)\s([\d,]+)원/);
+                    if (match) {
+                      const seatType = match[1]; // 좌석 등급 (예: "VIP석", "R석")
+                      const price = parseInt(match[2].replace(/,/g, ""), 10); // 가격 변환
+                      prices[seatType] = price; // 좌석 등급별 가격 저장
+                    }
+                  });
+                  return prices;
+                }, {}); // 좌석별 가격 매핑 완료
+
+                // 좌석 번호에서 그룹(A~P) 추출
+                const seatGroup = seat[0]; // 좌석 번호의 첫 글자 추출 (예: "A1" -> "A")
+                const seatType = Object.keys(seatPrices).find((type) =>
+                  type.includes(seatGroup)
+                ); // 해당 좌석 그룹에 맞는 등급 찾기
+                const seatPrice = seatPrices[seatType] || 0; // 유효한 가격 가져오기
+
+                return total + seatPrice; // 총액 계산
+              }, 0)
+              .toLocaleString("ko-KR") + "원"
+          : "선택된 좌석이 없습니다."}
+      </h2>
+
       <button className="reserve-button">예매하기</button>
 
       {/* test 용 */}
