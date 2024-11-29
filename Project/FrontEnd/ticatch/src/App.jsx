@@ -3,6 +3,7 @@ import './App.css'
 import axios from 'axios';
 import Main from './detail/component/Main.jsx';
 import Test from './detail/component/Test.jsx';
+import MainTest from './detail/component/MainTest.jsx';
 
 function App() {
   const [data, setData] = useState('')
@@ -20,9 +21,12 @@ function App() {
     //    <>
     //     <Main />
     //    </>
-       <>
-        <Test />
-       </>
+    //    <>
+    //     <Test />
+    //    </>
+    <>
+        <MainTest/>
+    </>
    );
 }
 

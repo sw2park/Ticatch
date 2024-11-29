@@ -28,21 +28,21 @@ public class DetailController {
 	private final ReviewService reviewService;
 	private final ExpService expService;
 	
-	// 공연 아이디(pd_id)로 상품 상세 정보 조회
-//	@GetMapping("/detail/{seq_pfjoin_id}")
-//    public PFJoin productView01(@PathVariable("pd_id") Long seq_pfjoin_id) {
-//		return productService.findOne(seq_pfjoin_id);
-//    }
+	// 상품 시퀀스 아이디 받아오기.
+	@GetMapping("/detail/{seq_pfjoin_id}")
+	public PFJoin idOne(@PathVariable("seq_pfjoin_id") Long seq_pfjoin_id) {
+		// System.out.println(seq_pfjoin_id);
+	    return productService.findOne(seq_pfjoin_id); 
+	}
 	
-	// 공연 아이디(pd_id)로 상품 상세 정보 조회
-	@GetMapping("/detail/{pd_id}/view")
-    public String productView02(Model model, @PathVariable("pd_id") Long pd_id) {
-		PFJoin prd = productService.findOne(pd_id);
-		
-		return null;
+	// 시퀀스 아이디로 상품 상세 정보 조회
+	@GetMapping("/detail/{seq_pfjoin_id}/view")
+    public List<PFJoin> detailList(@PathVariable("seq_pfjoin_id") Long seq_pfjoin_id) {
+		return productService.detailList(seq_pfjoin_id);
     }
 	
-	// tab 상세정보 이미지
+	
+	// Tab 상세정보 이미지
 	@GetMapping("/detail/{seq_pfjoin_id}/detailTab")
 	public String detailTab(@PathVariable("seq_pfjoin_id") int seq_pfjoin_id) {
 		//Product prd = productService.detailTab(seq_pfjoin_id);
@@ -50,14 +50,14 @@ public class DetailController {
 		return null;
 	}
 	
-	// 리뷰 조회
+	// Tab 리뷰 조회
 	@GetMapping("/detail/{seq_pfjoin_id}/review")
 	public String reviewView(@PathVariable("seq_pfjoin_id") Long seq_pfjoin_id) {
 		List<Review> reviews = reviewService.findReviews(seq_pfjoin_id);
 		return null;
 	}
 	
-	// 기대평 조회
+	// Tab 기대평 조회
 	@GetMapping("/detail/{seq_pfjoin_id}/exp")
 	public List<Expectation> expView(@PathVariable("seq_pfjoin_id") Long seq_pfjoin_id) {
 		List<Expectation> exps = expService.findExps(seq_pfjoin_id);
@@ -80,42 +80,5 @@ public class DetailController {
 		expService.saveExp(exp);
 		return null;
 	}
-	
-	// 
-	
-	// 공연, 전시 상세페이지 구분
-//	@GetMapping("/detail/{pd_id}/view")
-//	public String productView01(@PathVariable("pd_id") String pd_id, Model model) {
-//	    // "PF"로 시작하는지 확인
-//	    if (pd_id.startsWith("PF")) {
-//	        // "PF"로 시작하는 경우
-//	        Product product = productRepository.findByPdId(pd_id); // Repository를 통해 조회
-//	        if (product == null) {
-//	            return "error/404"; // 해당 ID가 없을 경우 404 페이지로 이동
-//	        }
-//	        model.addAttribute("product", product);
-//	        return "detail/pf_view"; // "PF"로 시작하는 상세 페이지
-//	    } else {
-//	        // "PF"로 시작하지 않는 경우
-//	        PerformDetail performDetail = performRepository.findByPdId(pd_id); // 다른 Repository 사용
-//	        if (performDetail == null) {
-//	            return "error/404"; // 해당 ID가 없을 경우 404 페이지로 이동
-//	        }
-//	        model.addAttribute("performDetail", performDetail);
-//	        return "detail/perform_view"; // 다른 상세 페이지
-//	    }
-//	}
-	
-	// 데이터 전달 테스트
-	@GetMapping("/detail/{seq_pfjoin_id}")
-	public PFJoin test1(@PathVariable("seq_pfjoin_id") Long seq_pfjoin_id) {
-		System.out.println(seq_pfjoin_id);
-	    return productService.findOne(seq_pfjoin_id); 
-	}
-
-	// 데이터 전달 테스트
-	@GetMapping("/test")
-	public String Test() {
-		return "hi";
-	}
+ 
 }

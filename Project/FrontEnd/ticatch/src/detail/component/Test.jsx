@@ -20,6 +20,7 @@ const App = () => {
     <div>
       <h2>id: {seqPfjoinId}</h2>
       <button onClick={() => setSeqPfjoinId(2)}>Change to ID 2</button>
+      <button onClick={() => setSeqPfjoinId(3)}>Change to ID 3</button>
     </div>
   );
 };

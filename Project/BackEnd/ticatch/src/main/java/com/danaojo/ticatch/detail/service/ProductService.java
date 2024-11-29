@@ -15,14 +15,14 @@ public class ProductService {
 	@Autowired
 	private final ProductRepository productRepository;
 	
-	// 공연, 전시 상품 id 조회
+	// 공연 시퀀스 아이디 조회
 	public PFJoin findOne(Long seq_pfjoin_id) {
 		return productRepository.findOne(seq_pfjoin_id);
 	}
 	
-	
-	// 데이터 전달 테스트
-	public List<PFJoin> dataTest(Long seq_pfjoin_id) {
-		return productRepository.detaList(seq_pfjoin_id);
+	// 전달받은 시퀀스 아이디에 해당하는 공연의 상세정보 데이터 출력
+	public List<PFJoin> detailList(Long seq_pfjoin_id) {
+		return productRepository.detailList(seq_pfjoin_id);
 	}
+	
 }
