@@ -1,18 +1,25 @@
-import { useState } from "react";
+import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
-import "../Calendar/Calendar.css";
+import "./Calendar.css";
 
-export default function Calendar({ selectedDate, setSelectedDate }) {
-  // 상태 전달받음
-  const maxSelectableDate = new Date(2024, 11, 31); // 한달 더 선택가능함
-
+export default function Calendar({
+  selectedDate,
+  setSelectedDate,
+  availableDays,
+  maxSelectableDate,
+}) {
   const getDayClassName = (date) => {
     const day = date.getDay();
     if (day === 0) return "react-datepicker__day--sunday";
     if (day === 6) return "react-datepicker__day--saturday";
     return "";
+  };
+
+  const filterDate = (date) => {
+    const dayNames = ["일", "월", "화", "수", "목", "금", "토"];
+    return availableDays.includes(dayNames[date.getDay()]);
   };
 
   return (
@@ -21,7 +28,8 @@ export default function Calendar({ selectedDate, setSelectedDate }) {
       minDate={new Date()}
       maxDate={maxSelectableDate}
       selected={selectedDate}
-      onChange={(date) => setSelectedDate(date)} // 날짜 변경 시 부모 상태 업데이트
+      onChange={(date) => setSelectedDate(date)}
+      filterDate={filterDate}
       inline
       locale={ko}
       dayClassName={getDayClassName}

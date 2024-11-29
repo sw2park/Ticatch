@@ -18,14 +18,14 @@ body {
 }
 
 .stage-box {
-  width: 300px; /* 박스의 너비 */
-  height: 50px; /* 박스의 높이 */
+  width: 350px; /* 박스의 너비 */
+  height: 55px; /* 박스의 높이 */
   background-color: black;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
   border-radius: 5px;
 }
