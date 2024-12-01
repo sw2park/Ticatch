@@ -1,43 +1,55 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-const DetailList = ({ seqPfjoinId }) => {
-  const [detailData, setDetailData] = useState([]); // 데이터 상태 관리
+const DetailList = () => {
+  const { seqpfjoinId } = useParams(); // URL 파라미터 가져오기
+  const [productData, setProductData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (seqPfjoinId) {
-      axios
-        .get(`/detail/${seqPfjoinId}/view`) // 백엔드 API 호출
-        .then((response) => {
-          console.log("응답 데이터:", response.data); // 서버에서 받은 데이터 확인
-          setDetailData(response.data); // 응답 받은 데이터를 상태에 저장
-        })
-        .catch((err) => console.error("API 호출 오류:", err));
-    }
-  }, [seqPfjoinId]); // seqPfjoinId가 변경될 때마다 데이터 요청
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:9090/detail/${seqpfjoinId}/view`);
+        const data = await response.json(); // 얘 빼면 데이터 못 받아옴
+
+        if (Array.isArray(data)) {
+          setProductData(data); // 배열일 경우 그대로 저장
+        } else {
+          setProductData([data]); // 객체일 경우 배열로 변환
+        }
+      } catch (error) {
+        console.error("데이터를 가져오는 중 오류 발생:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [seqpfjoinId]);
+
+  if (isLoading) {
+    return <div>로딩 중...</div>;
+  }
+
+  if (!productData || productData.length === 0) {
+    return <div>데이터가 없습니다.</div>;
+  }
 
   return (
     <div>
-      <h1>공연 상세 정보</h1>
-      {detailData.length > 0 ? (
-        // 데이터가 있으면, 해당 데이터를 map()으로 출력
-        detailData.map((detail) => (
-          <div key={detail.seq_pfjoin_id}>
-            <h2>제목: {detail.p_title}</h2>
-            <img
-              src={detail.p_poster}
-              alt="Poster"
-              style={{ width: "200px" }}
-            />
-            <p>시작일: {detail.p_start_date}</p>
-            <p>종료일: {detail.p_end_date}</p>
-            <p>시간: {detail.pd_time}</p>
-          </div>
-        ))
-      ) : (
-        // 데이터가 없거나 로딩 중일 때
-        <p>데이터를 불러오는 중이거나 데이터가 없습니다.</p>
-      )}
+      <h1>상세 정보</h1>
+      <ul>
+        {productData.map((item, index) => (
+          <li key={index}>
+            <h2>{item.p_title}</h2>
+            <img src={item.p_poster} alt={item.p_title} />
+            <p>장소: {item.pd_hall_name}</p>
+            <p>가격: {item.pd_seatprice}</p>
+            <p>출연진: {item.pd_cast}</p>
+            {/* 추가 정보 출력 */}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

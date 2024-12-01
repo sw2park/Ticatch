@@ -24,5 +24,6 @@ public class ProductService {
 	public List<PFJoin> detailList(Long seq_pfjoin_id) {
 		return productRepository.detailList(seq_pfjoin_id);
 	}
+
 	
 }

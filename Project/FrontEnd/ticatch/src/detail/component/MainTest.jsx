@@ -1,19 +1,20 @@
-import React, { useState } from "react";
-import DetailList from "./DetailList";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const MainTest = () => {
-  const [seqPfjoinId, setSeqPfjoinId] = useState(); // 초기값을 1로 설정 (기본값)
+  const navigate = useNavigate();
+  const productId = 123;  // 하드코딩된 productId
+
+  const handleClick = () => {
+    // 버튼 클릭 시 productId를 전달하여 상세 페이지로 이동
+    navigate(`/detail/${productId}/view`);
+  };
 
   return (
     <div>
-      <h1>공연 선택</h1>
-      {/* 버튼으로 seqPfjoinId 변경 */}
-      <button onClick={() => setSeqPfjoinId(1)}>공연1</button>
-      <button onClick={() => setSeqPfjoinId(2)}>공연2</button>
-      <button onClick={() => setSeqPfjoinId(3)}>공연3</button>
-
-      {/* DetailList 컴포넌트에 seqPfjoinId 전달 */}
-      <DetailList seqPfjoinId={seqPfjoinId} />
+      <h1>상품 목록</h1>
+      {/* 버튼 클릭 시 상세 페이지로 이동 */}
+      <button onClick={handleClick}>상품 상세 보기</button>
     </div>
   );
 };
