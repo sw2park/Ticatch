@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
 import '../css/Main.css';
-import Calendar from './Calendar.jsx';
 import Description from './desc.jsx';
 import CancelInfo from './Cancel_info.jsx';
 import Review from './Review.jsx';
 import Expectation from './Expectation.jsx';
 import Location from './Location.jsx';
-// poster image 예시
-import poster from '../images/pirate_PST_1007.jpg';
-import Reserve from './reserve.jsx';
+import Info from './Info.jsx';
 
 export default function DetailMain() {
 
@@ -25,54 +22,7 @@ export default function DetailMain() {
         <div className='wrap'>
             <div className="Detail_wrap">
 
-                <div className="info_wrap">
-                    <div className="poster_container">
-                        <div className="poster_box">
-                            <img className='detailview_poster_img' 
-                                // src='https://ticketimage.interpark.com/Play/image/large/24/24014409_p.gif'
-                                src={poster}
-                                >
-                            </img>
-                        </div>
-                    </div>
-                    <div className="simple_info_container">
-                        <div className="simple_info_header">
-                            <h1 className="perform_title">뮤지컬 해적 : THE LAST VOYAGE</h1>
-                        </div>
-
-                        <ul className="simple_info_ul">
-                            <li className="simple_info_li">
-                                <span className='info_title'>장소</span>
-                                <div className='simple_info_desc'>
-                                    링크아트센터 벅스홀
-                                </div>
-                            </li>
-                            <li className="simple_info_li">
-                                <span className='info_title'>관람시간</span>
-                                <div className='simple_info_desc'>
-                                    110분
-                                </div>
-                            </li>
-                            <li className="simple_info_li">
-                                <span className='info_title'>기간</span>
-                                <div className='simple_info_desc'>
-                                    2024.11.05 ~ 2025.02.02
-                                </div>
-                            </li>
-                            <li className="simple_info_li">
-                                <span className='info_title'>가격</span>
-                                <div className='simple_info_desc'>
-                                    <li>R석 <span>140,000</span>원</li>
-                                    <li>S석 <span>100,000</span>원</li>
-                                    <li>A석 <span>70,000</span>원</li>
-                                </div>
-                            </li>
-                        </ul>
-
-                    </div>
-                </div>
-
-                <Reserve/>
+                <Info/>
 
                 <section className='section_tab_wrap'>
                     <ul className='section_tab_ul'>

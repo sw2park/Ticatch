@@ -21,23 +21,25 @@ function App() {
     //    <div>
     //        받아온 값 : {data}
     //    </div>
-    //    <>
-    //     <Main />
-    //    </>
+      //  <>
+      //   <Main />
+      //  </>
+      <Router> {/* BrowserRouter로 감싸줍니다 */}
+       <Routes>
+         <Route path="/detail/:seqpfjoinId/view" element={<Main />} />
+       </Routes>
+     </Router>
       //  <>
       //   <Test />
       //  </>
       // <>
       //   <TestConnection/>
       // </>
-    // <>
-    //      <DetailList/>
-    // </>
-    <Router> {/* BrowserRouter로 감싸줍니다 */}
-      <Routes>
-        <Route path="/detail/:seqpfjoinId/view" element={<DetailList />} /> {/* component 대신 element 사용 */}
-      </Routes>
-    </Router>
+    // <Router> {/* BrowserRouter로 감싸줍니다 */}
+    //   <Routes>
+    //     <Route path="/detail/:seqpfjoinId/view" element={<DetailList />} /> {/* component 대신 element 사용 */}
+    //   </Routes>
+    // </Router>
     
    );
 }

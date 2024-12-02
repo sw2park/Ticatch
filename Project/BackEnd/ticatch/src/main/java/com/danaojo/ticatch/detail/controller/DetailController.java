@@ -30,7 +30,7 @@ public class DetailController {
 	private final ReviewService reviewService;
 	private final ExpService expService;
 	
-	// 상품 시퀀스 아이디 받아오기
+	// 상품 시퀀스 아이디 받아오기 9090에 json 형식으로 출력
 	@GetMapping(value = "/detail/{seq_pfjoin_id}", produces = "application/json")
 	public PFJoin idOne(@PathVariable("seq_pfjoin_id") Long seq_pfjoin_id) {
 		// System.out.println(seq_pfjoin_id);
@@ -39,6 +39,7 @@ public class DetailController {
 	
 	// 시퀀스 아이디로 상품 상세 정보 조회
 	@GetMapping("detail/{seq_pfjoin_id}/view")
+	//@GetMapping(value = "/detail/{seq_pfjoin_id}/view", produces = "application/json")
     public List<PFJoin> detailList(@PathVariable("seq_pfjoin_id") Long seq_pfjoin_id) {
 		return productService.detailList(seq_pfjoin_id);
     }
