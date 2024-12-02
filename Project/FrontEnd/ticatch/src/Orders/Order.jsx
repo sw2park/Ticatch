@@ -192,7 +192,6 @@ const Performance = ({ selectedSeats = [] }) => {
           : "좌석 데이터 오류"}
       </h3>
 
-      {/* 아래 어렵네 (등급에 따라 좌석을 등급별 가격으로 나누고 나눈 좌석선택시 그 등급이랑 좌석 표시됨 (모든 등급이 다 오는것도 아니고 아 모르겠음) */}
       <h2 style={{ textAlign: "center" }}>
         총액:{" "}
         {totalPrice > 0
@@ -200,9 +199,7 @@ const Performance = ({ selectedSeats = [] }) => {
           : "선택된 좌석이 없습니다."}
       </h2>
 
-      <button className="reserve-button" onClick={() => Order()}>
-        예매하기
-      </button>
+      <button className="reserve-button">예매하기</button>
 
       {/* test 용 */}
       <button className="reserve-button" onClick={() => fetchDetailById(1)}>
