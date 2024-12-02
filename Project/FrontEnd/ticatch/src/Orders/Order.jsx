@@ -125,6 +125,7 @@ const Performance = ({ selectedSeats = [] }) => {
           : "좌석 데이터 오류"}
       </h3>
 
+      {/* 아래 어렵네 (등급에 따라 좌석을 등급별 가격으로 나누고 나눈 좌석선택시 그 등급이랑 좌석 표시됨 (모든 등급이 다 오는것도 아니고 아 모르겠음) */}
       <h2 style={{ textAlign: "center" }}>
         총액:{" "}
         {Array.isArray(selectedSeats) && selectedSeats.length > 0
@@ -141,7 +142,7 @@ const Performance = ({ selectedSeats = [] }) => {
                       const seatType = match[1]; // 좌석 등급 (예: "VIP석", "R석")
                       const price = parseInt(match[2].replace(/,/g, ""), 10); // 가격 변환
                       prices[seatType] = price; // 좌석 등급별 가격 저장
-                      console.log(price);
+                      console.log("가격: " + price);
                     }
                   });
                   return prices;
@@ -152,6 +153,7 @@ const Performance = ({ selectedSeats = [] }) => {
                 const seatType = Object.keys(seatPrices).find((type) =>
                   type.includes(seatGroup)
                 ); // 해당 좌석 그룹에 맞는 등급 찾기
+                console.log("좌석등급: " + seatGroup);
                 const seatPrice = seatPrices[seatType] || 0; // 유효한 가격 가져오기
 
                 return total + seatPrice; // 총액 계산

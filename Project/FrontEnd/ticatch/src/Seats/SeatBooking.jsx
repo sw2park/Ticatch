@@ -18,9 +18,6 @@ const rows = [
   "N",
   "O",
   "P",
-  // "Q",
-  // "R",
-  // "S",
 ];
 const seatsPerRow = 10;
 
