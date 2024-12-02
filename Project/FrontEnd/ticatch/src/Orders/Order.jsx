@@ -81,7 +81,7 @@ const Performance = ({ selectedSeats = [] }) => {
         maxSelectableDate={maxSelectableDate}
       />
 
-      {/* 좌석 등급 및 가격 */}
+      {/* 좌석 등급 및 가격 표시 */}
       <ul style={{ textAlign: "center", fontWeight: "bold" }}>
         {fetchId.map((item) => (
           <li key={item.seqPfjoinId}>{item.pdSeatprice}</li>
@@ -134,27 +134,60 @@ const Performance = ({ selectedSeats = [] }) => {
                 // fetchId에서 좌석별 가격 정보 추출
                 const seatPrices = fetchId.reduce((prices, item) => {
                   const seatPriceArray = item.pdSeatprice.split(/,(?!\d)/); // 쉼표로 분리
-                  seatPriceArray.forEach((seatPrice) => {
-                    const match = seatPrice
+                  console.log("쉼표로 분리된 배열:", seatPriceArray);
+
+                  // 배열 길이에 따라 처리
+                  if (seatPriceArray.length === 1) {
+                    // 길이가 1인 경우 모든 좌석(A~P)에 동일 가격 적용
+                    const match = seatPriceArray[0]
                       .trim()
                       .match(/([가-힣A-Z]+)\s([\d,]+)원/);
                     if (match) {
-                      const seatType = match[1]; // 좌석 등급 (예: "VIP석", "R석")
-                      const price = parseInt(match[2].replace(/,/g, ""), 10); // 가격 변환
-                      prices[seatType] = price; // 좌석 등급별 가격 저장
-                      console.log("가격: " + price);
+                      const price = parseInt(match[2].replace(/,/g, ""), 10);
+                      for (let i = 0; i < 16; i++) {
+                        const group = String.fromCharCode(65 + i); // A~P 그룹
+                        prices[group] = price;
+                      }
+                      console.log("모든 좌석 동일 가격:", price);
                     }
-                  });
+                  } else {
+                    // 길이가 2 이상인 경우 A~H, I~P로 나눔
+                    const dividedLength = Math.ceil(16 / seatPriceArray.length); // 등급 간격 계산
+                    seatPriceArray.forEach((seatPrice, index) => {
+                      const match = seatPrice
+                        .trim()
+                        .match(/([가-힣A-Z]+)\s([\d,]+)원/);
+                      if (match) {
+                        const price = parseInt(match[2].replace(/,/g, ""), 10);
+
+                        // 좌석 그룹(A~P) 나누기
+                        if (index === 0) {
+                          for (let i = 0; i < 8; i++) {
+                            const group = String.fromCharCode(65 + i); // A~H
+                            prices[group] = price;
+                          }
+                        } else if (index === 1) {
+                          for (let i = 8; i < 16; i++) {
+                            const group = String.fromCharCode(65 + i); // I~P
+                            prices[group] = price;
+                          }
+                        }
+                        console.log(
+                          `좌석 등급 매핑: ${
+                            match[1]
+                          }, 가격: ${price}, 그룹: ${Object.keys(prices)}`
+                        );
+                      }
+                    });
+                  }
+
                   return prices;
                 }, {}); // 좌석별 가격 매핑 완료
 
-                // 좌석 번호에서 그룹(A~P) 추출
+                // 선택한 좌석 번호에서 그룹(A~P) 추출
                 const seatGroup = seat[0]; // 좌석 번호의 첫 글자 추출 (예: "A1" -> "A")
-                const seatType = Object.keys(seatPrices).find((type) =>
-                  type.includes(seatGroup)
-                ); // 해당 좌석 그룹에 맞는 등급 찾기
-                console.log("좌석등급: " + seatGroup);
-                const seatPrice = seatPrices[seatType] || 0; // 유효한 가격 가져오기
+                const seatPrice = seatPrices[seatGroup] || 0; // 해당 그룹에 맞는 가격 가져오기
+                console.log("좌석 그룹:", seatGroup, "가격:", seatPrice);
 
                 return total + seatPrice; // 총액 계산
               }, 0)
@@ -165,7 +198,7 @@ const Performance = ({ selectedSeats = [] }) => {
       <button className="reserve-button">예매하기</button>
 
       {/* test 용 */}
-      <button className="reserve-button" onClick={() => fetchDetailById(1)}>
+      <button className="reserve-button" onClick={() => fetchDetailById(3)}>
         fetchDetailById 데이터 가져오기
       </button>
     </div>
