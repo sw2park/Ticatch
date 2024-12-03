@@ -5,15 +5,15 @@ import SelectSection from "../mypage_components/mypage_confirm/SelectSection";
 import ConfirmSubTitle from "../mypage_components/mypage_confirm/ConfirmSubTitle";
 import ConfirmMenuNoitce from "../mypage_components/mypage_confirm/ConfirmMenuNotice";
 
-import './CancleReservePage.css';
+import "./ConfirmReservePage.css";
 
-function CancleReservePage() {
+function ConfirmReservePage() {
   return (
     <div className="confirm-wrapper">
       <div className="confirm-title">
-        <h1>예매 취소</h1>
-      </div>
-      <ConfirmSubTitle />
+      <h1>예매 확인</h1>
+    </div>
+      <ConfirmSubTitle/>
       <div className="confirm-menu-wrapper">
         <div className="confirm-menu-left">
           <SearchWeek />
@@ -32,4 +32,4 @@ function CancleReservePage() {
   );
 }
 
-export default CancleReservePage;
+export default ConfirmReservePage;

@@ -2,14 +2,12 @@ import { useState } from "react";
 
 import "./MyPage.css";
 import Calendar from "./mypage_components/Calendar";
-import MemberInfo from "./mypage_components/MemberInfo";
 import Topbar from "./mypage_components/TopBar";
 import TabList from "./mypage_components/mypage_menu/TabList";
 
 import CancleReservePage from "./mypage_pages/CancleReservePage";
-import ConfirmReservePage from "./mypage_pages/ConfirmResevePage";
+import ConfirmReservePage from "./mypage_pages/ConfirmReservePage";
 import DeleteMemberPage from "./mypage_pages/DeleteMemberPage";
-import LogoutPage from "./mypage_pages/LogoutPage";
 import ManageExceptionPage from "./mypage_pages/ManageExceptionPage";
 import ManageLikeListPage from "./mypage_pages/ManageLikeListPage";
 import ManageReviewPage from "./mypage_pages/ManageReviewPage";
@@ -36,8 +34,6 @@ function MyPage() {
         return <ManageLikeListPage />;
       case "ModifyMemberInfoPage":
         return <ModifyMemberInfoPage />;
-      case "LogoutPage":
-        return <LogoutPage />;
       case "DeleteMemberPage":
         return <DeleteMemberPage />;
       default:
@@ -107,13 +103,6 @@ function MyPage() {
                   }}
                 >
                   회원정보수정
-                </TabList>
-                <TabList
-                  onClick={() => {
-                    handleSelect("LogoutPage");
-                  }}
-                >
-                  로그아웃
                 </TabList>
                 <TabList
                   onClick={() => {
