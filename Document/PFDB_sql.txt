@@ -1,0 +1,34 @@
+CREATE TABLE PFJoin (
+    seq_pfjoin_id NUMBER PRIMARY KEY, -- PK로 사용하는 시퀀스
+    p_id VARCHAR2(255), -- 공연 아이디
+    p_title VARCHAR2(255), -- 제목
+    p_poster VARCHAR2(255), -- 공연 포스터
+    p_start_date VARCHAR2(255), -- 공연 시작일
+    p_end_date VARCHAR2(255), -- 공연 종료일
+    pd_location VARCHAR2(255), -- 공연 위치
+    pd_hall_name VARCHAR2(255), -- 공연장 이름
+    pd_cast VARCHAR2(255), -- 출연진
+    pd_crew VARCHAR2(255), -- 감독 및 연출
+    pd_runtime VARCHAR2(255), -- 상영시간
+    pd_seatprice VARCHAR2(255), -- 좌석가격
+    p_genre VARCHAR2(255), -- 공연 장르
+    pd_visit VARCHAR2(255), -- 현장 구매 여부
+    pd_child VARCHAR2(255), -- 어린이 시청 여부
+    pd_img VARCHAR2(255), -- 상세 이미지
+    pd_time VARCHAR2(255), -- 공연 일정
+    pl_location_sido VARCHAR2(255), -- 공연 지역, 시도
+    pl_location_gun VARCHAR2(255), -- 공연 지역, 구군
+    fd_phone VARCHAR2(255), -- 시설 전화번호
+    fd_addr VARCHAR2(255), -- 시설 주소
+    fd_latitude VARCHAR2(255), -- 시설 위도
+    fd_longitude VARCHAR2(255), -- 시설 경도
+    fd_facility VARCHAR2(255), -- 공연장 목록
+    fd_seatscale VARCHAR2(255) -- 좌석 규모
+);
+
+CREATE SEQUENCE PFJoin_seq
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+SELECT * FROM PFJoin;
