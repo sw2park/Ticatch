@@ -47,35 +47,6 @@ public class OrderController {
 	    return findBySeqPfJoinId;
 	} 
 	
-		// 이건되는데
-//	    @PostMapping("/reservation")
-//	    public ResponseEntity<String> handleReservation(@RequestBody myPageOrderList request) {
-//	        // 처리 로직
-//	    	System.out.println("here");
-//	        return ResponseEntity.ok("예매가 성공적으로 처리되었습니다.");
-//	    }
-//	}
-	
-//	@PostMapping("/reservation")
-//	public ResponseEntity<String> createReservation(@RequestBody OrderDTO reservationDTO) {
-//	    // 디버깅: 수신된 데이터 확인
-//	    System.out.println("수신된 데이터: " + reservationDTO);
-//
-//	    // 매핑된 데이터 확인
-//	    System.out.println("공연 ID: " + reservationDTO.getSeqPfjoinIds());
-//	    System.out.println("선택된 날짜: " + reservationDTO.getSelectedDate());
-//	    System.out.println("총 가격: " + reservationDTO.getTotalPrice());
-//	    System.out.println("선택된 시간: " + reservationDTO.getSelectedTime());
-//	    System.out.println("좌석 정보:");
-//	    for (OrderDTO.SeatInfo seatInfo : reservationDTO.getSelectedSeatsInfo()) {
-//	        System.out.println(" - 좌석: " + seatInfo.getSeat());
-//	        System.out.println(" - 등급: " + seatInfo.getGrade());
-//	        System.out.println(" - 가격: " + seatInfo.getPrice());
-//	    }
-//
-//	    return ResponseEntity.ok("데이터 수신 성공");
-//	}
-	
 	@PostMapping("/reservation")
 	public ResponseEntity<String> createReservation(@RequestBody OrderDTO reservationDTO) {
 	    // 데이터 매핑
