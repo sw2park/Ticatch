@@ -23,34 +23,26 @@ ul {
 }
 
 /*  */
-.simple-slider-container {
+.time-selector {
+  padding-top: 10px;
+  font-weight: bold;
   display: flex;
+  align-items: center; /* 버튼과 텍스트를 수직으로 정렬 */
+  justify-content: center;
+}
+
+.time-selector button:hover:not(:disabled) {
+  color: #003366;
+}
+
+button {
   align-items: center;
-  gap: 8px; /* 버튼과 텍스트 간 간격 */
-}
-
-.simple-slider-arrow {
-  background: none;
-  border: none;
-  font-size: 18px;
-  font-weight: bold;
-  color: #004d7c;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-family: inherit;
   cursor: pointer;
-  transition: color 0.2s ease;
+  border: none;
 }
-
-.simple-slider-arrow:disabled {
-  color: #ccc;
-  /* cursor: not-allowed; */
-}
-
-.simple-slider-arrow:hover:not(:disabled) {
-  color: #003366; /* 호버 시 더 어두운 색상 */
-}
-
-.simple-slider-content {
-  font-weight: bold;
-  font-size: 16px;
-  color: #333;
-  text-align: center;
+button:hover {
+  border-color: #646cff;
 }
