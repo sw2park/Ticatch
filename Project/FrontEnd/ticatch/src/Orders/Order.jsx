@@ -5,14 +5,53 @@ import axios from "axios";
 import "./Order.css";
 
 const Performance = ({ selectedSeats = [] }) => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
   const [fetchId, setFetchId] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTimeIndex, setSelectedTimeIndex] = useState(0);
   const [maxSelectableDate, setMaxSelectableDate] = useState(
     new Date(2025, 11, 31)
   );
   const [totalPrice, setTotalPrice] = useState(0);
   const [seatInfo, setSeatInfo] = useState([]);
+
+  // 전달해야되는 값들
+  const seqPfjoinIds = fetchId.map((item) => item.seqPfjoinId);
+  console.log("seqPfjoinIds:", seqPfjoinIds); // id
+  console.log("selectedDate: " + selectedDate); // 선택한 날짜
+  console.log("totalPrice: " + totalPrice); // 총합
+
+  // Spring으로 데이터 전송
+  const handleReservation = () => {
+    const dataToSend = {
+      seqPfjoinIds,
+      selectedDate: selectedDate.toISOString().split("T")[0],
+      totalPrice,
+      selectedTime: currentPdTime[selectedTimeIndex] || "시간 정보 없음",
+      selectedSeatsInfo: selectedSeats.map((seat) => {
+        const seatGroup = seat[0];
+        const seatInfoForGroup = seatInfo.find(
+          (info) => seatGroup >= info.groupStart && seatGroup <= info.groupEnd
+        );
+        return {
+          seat,
+          grade: seatInfoForGroup?.grade || "정보 없음",
+          price: seatInfoForGroup?.price || 0,
+        };
+      }),
+    };
+    console.log("전송할 데이터:", dataToSend);
+
+    axios
+      .post("/api/order/reservation", dataToSend)
+      .then((response) => {
+        console.log("데이터 전송 성공:", response.data);
+        alert("예매가 완료되었습니다!");
+      })
+      .catch((error) => {
+        console.error("데이터 전송 실패:", error);
+        alert("예매에 실패했습니다.");
+      });
+  };
 
   // API 데이터 가져오기
   const fetchDetailById = useCallback((id) => {
@@ -106,7 +145,11 @@ const Performance = ({ selectedSeats = [] }) => {
 
   const currentPdTime =
     fetchId.length > 0 ? formatPdTime(fetchId[0].pdTime) : [];
-  const availableDays = fetchId.length > 0 ? [fetchId[0].pdTime[0]] : [];
+
+  console.log(
+    "현재 선택된 공연 회차:",
+    currentPdTime[selectedTimeIndex] || "회차 없음"
+  );
 
   return (
     <div>
@@ -121,7 +164,7 @@ const Performance = ({ selectedSeats = [] }) => {
       <Calendar
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
-        availableDays={availableDays}
+        availableDays={fetchId.length > 0 ? [fetchId[0].pdTime[0]] : []}
         maxSelectableDate={maxSelectableDate}
       />
 
@@ -164,7 +207,10 @@ const Performance = ({ selectedSeats = [] }) => {
       <h3>선택된 좌석: {selectedSeats.join(", ") || "없음"}</h3>
       <h2>총액: {totalPrice.toLocaleString("ko-KR")}원</h2>
 
-      <button className="reserve-button">예매하기</button>
+      <button className="reserve-button" onClick={handleReservation}>
+        예매하기
+      </button>
+
       <button className="reserve-button" onClick={() => fetchDetailById(1)}>
         데이터 가져오기
       </button>

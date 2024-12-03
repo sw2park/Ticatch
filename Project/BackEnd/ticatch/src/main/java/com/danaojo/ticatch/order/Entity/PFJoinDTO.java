@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "PFJOIN") // 예약어가 아닌 기존 테이블 이름으로 설정
-public class Order {
+public class PFJoinDTO {
 
     @Id
     @Column(name = "SEQ_PFJOIN_ID")

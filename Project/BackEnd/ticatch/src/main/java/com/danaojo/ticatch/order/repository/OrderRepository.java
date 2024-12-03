@@ -1,21 +1,16 @@
 package com.danaojo.ticatch.order.repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.danaojo.ticatch.order.Entity.Order;
+import com.danaojo.ticatch.order.Entity.OrderEntity;
+import com.danaojo.ticatch.order.Entity.PFJoinDTO;
 
+public interface OrderRepository extends JpaRepository<PFJoinDTO, Long>{
 
-@Repository
-public class OrderRepository {
-//	private static final Map<Long, Order> store = new HashMap<>();
+	List<PFJoinDTO> findBySeqPfjoinId(Long seqPfjoinId);
 
-//	// 전체 검색
-//	public List<Order> findAll(){
-//		return new ArrayList<Order>(store.values());
-//	}
+	OrderEntity save(OrderEntity order);
+
 }
