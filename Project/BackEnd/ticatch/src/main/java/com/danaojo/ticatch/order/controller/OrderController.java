@@ -47,6 +47,8 @@ public class OrderController {
 	    return findBySeqPfJoinId;
 	} 
 	
+	// 리액트에서 DB로 값 저장하는거 추후에 수정하기 테이블이 Orders 랑 Seat 테이블에 저장하게
+	// SQL 만들어서 테이블 만들고 거기에 추가 하기 (나중에 다른 사람이 테이블 만들면 알아서 값 저장되게 테이블 이름이 같으면 되니깐)
 	@PostMapping("/reservation")
 	public ResponseEntity<String> createReservation(@RequestBody OrderDTO reservationDTO) {
 	    // 데이터 매핑
