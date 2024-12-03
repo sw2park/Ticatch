@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.danaojo.ticatch.api.repository.PFJoin;
 import com.danaojo.ticatch.detail.domain.Expectation;
 import com.danaojo.ticatch.detail.domain.Review;
+import com.danaojo.ticatch.detail.domain.Seat;
 import com.danaojo.ticatch.detail.dto.ExpectationDTO;
 import com.danaojo.ticatch.detail.dto.ReviewDTO;
 import com.danaojo.ticatch.detail.service.ExpService;
 import com.danaojo.ticatch.detail.service.ProductService;
 import com.danaojo.ticatch.detail.service.ReviewService;
+import com.danaojo.ticatch.detail.service.SeatService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,6 +29,7 @@ public class DetailController {
 	
 	@Autowired
 	private final ProductService productService;
+	private final SeatService seatService;
 	private final ReviewService reviewService;
 	private final ExpService expService;
 	
@@ -38,23 +41,24 @@ public class DetailController {
 	}
 	
 	// 시퀀스 아이디로 상품 상세 정보 조회
-	@GetMapping("detail/{seq_pfjoin_id}/view")
+	@GetMapping("/detail/{seq_pfjoin_id}/view")
 	//@GetMapping(value = "/detail/{seq_pfjoin_id}/view", produces = "application/json")
     public List<PFJoin> detailList(@PathVariable("seq_pfjoin_id") Long seq_pfjoin_id) {
 		return productService.detailList(seq_pfjoin_id);
     }
 	
-	@GetMapping("/test/ping")
-    public String ping() {
-        return "pong";
-    }
+	// 해당 공연의 날짜의 회차의 복합키 조합이 존재하지 않을 경우 레코드 생성
+	@GetMapping("/detail/seat/{seatId}/create")
+	public String createSeat() {
+		return null;
+	}
 	
+	// 해당 공연의 날짜의 회차의 잔여좌석 조회
+	@GetMapping("/detail/seat/{seatId}/view")
+	public Seat seatView(@PathVariable("seatId") Long seqPfjoinId, String selectDate, String selectTime) {
+		return seatService.seatView(seqPfjoinId, selectDate, selectTime);
+	}
 	
-//	@GetMapping("/detail/{seq_pfjoin_id}/view")
-//	public ResponseEntity<List<PFJoin>> detailList(@PathVariable("seq_pfjoin_id") Long seq_pfjoin_id) {
-//        List<PFJoin> productDetails = productService.detailList(seq_pfjoin_id);
-//        return ResponseEntity.ok().body(productDetails);  // JSON 형식으로 반환
-//    }
 	
 	
 	// Tab 상세정보 이미지

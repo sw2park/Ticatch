@@ -13,7 +13,7 @@ export default function Reserve({ productData }) {
                         <div className='product_title'>관람일 선택</div>
                     </div>
                     <div className='product_date_choice'>
-                        {productData.map((product, index) => {
+                        {productData.map((product) => {
                             const startDate = product.p_start_date;
                             const endDate = product.p_end_date;
                             const time = product.pd_time;
@@ -30,11 +30,17 @@ export default function Reserve({ productData }) {
                         <div className='product_title'>회차 선택</div>
                     </div>
                     <div className='product_time_choice'>
-                        <Time />
+                    {productData.map((product) => {
+                            const time = product.pd_time;
+
+                            return (
+                                <Time time={time} />
+                            );
+                        })}
                     </div>
                 </div>
                 <div className='product_seat_container'>
-                    <Seat />
+                    <Seat/>
                 </div>
             </div>
 

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.danaojo.ticatch.api.repository.PFJoin;
+
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 
@@ -28,5 +29,6 @@ public class ProductRepository {
 	        .setParameter("seq_pfjoin_id", seq_pfjoin_id)
 	        .getResultList();
 	}
+
 
 }
