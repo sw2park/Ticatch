@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import "./Seats.css";
-import { set } from "date-fns";
 
 const rows = [
   "A",

@@ -20,7 +20,6 @@ import com.danaojo.ticatch.order.Entity.SeatEntity;
 import com.danaojo.ticatch.order.Entity.SeatId;
 import com.danaojo.ticatch.order.repository.OrderRepository;
 import com.danaojo.ticatch.order.repository.SeatRepository;
-import com.danaojo.ticatch.order.service.OrderService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -38,15 +37,12 @@ public class OrderController {
 
 		List<PFJoinDTO> order = orderRepository.findAll();
 
-		System.out.println(order.size());
-
 		return order;
 	}
 
 	// seqPfjoinId 로 동일한 값만 조회
 	@GetMapping("/{seqPfjoinId}")
 	public List<PFJoinDTO> getOrderById(@PathVariable Long seqPfjoinId) {
-		
 		System.out.println(seqPfjoinId);
 	    
 	    List<PFJoinDTO> findBySeqPfJoinId = orderRepository.findBySeqPfjoinId(seqPfjoinId);
@@ -131,8 +127,6 @@ public class OrderController {
 	    	System.out.println(savedSeat);
 	    }
 	    
-	    
-
 	    return ResponseEntity.ok("예약이 성공적으로 처리되었습니다.");
 	}
 
