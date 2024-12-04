@@ -1,5 +1,7 @@
 package com.danaojo.ticatch.api.util;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,24 @@ import com.danaojo.ticatch.api.kopis.dto.PFJoinDTO;
 import com.danaojo.ticatch.api.repository.PFJoin;
 
 public class KopisUtil {
+	// 오늘 날짜 구해서 +31일 한 후 yyyyMMdd 형태로 반환 메소드
+	public String returnAfterday() {
+	    LocalDate nowDate = LocalDate.now();
+	    LocalDate afterDate = nowDate.plusDays(31);
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+	    
+	    return afterDate.format(formatter);
+	}
+	
+	// 오늘 날짜 구해서 yyyyMMdd 형태로 반환 메소드
+	public String returnNowToday() { 
+		LocalDate now = LocalDate.now();
+		DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyyMMdd");
+		String formNow = now.format(form);
+		
+		return formNow;
+	}
+	
 	// PFJOIN DB 저장용 변환 메소드
 	public List<PFJoin> returnPFJoinList(List<PFJoinDTO> list){
 		List<PFJoin> result = new ArrayList<>();

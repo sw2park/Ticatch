@@ -1,0 +1,21 @@
+.confirm-notice-wrapper {
+  display: flex;
+  text-align: right;
+  justify-content: right;
+  align-items: center;
+  width: 100%;
+}
+
+.confirm-menu-notice {
+  font-size: small;
+}
+
+.confirm-menu-notice-emp {
+  color: #f05650;
+  text-decoration: underline;
+}
+
+.confirm-menu-notice-emp:hover {
+  cursor: pointer;
+  font-weight: bolder;
+}
