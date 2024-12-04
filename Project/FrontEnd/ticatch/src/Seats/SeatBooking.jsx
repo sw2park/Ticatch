@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Seats.css";
+import { set } from "date-fns";
 
 const rows = [
   "A",
@@ -31,7 +32,15 @@ const SeatBooking = ({ selectedSeats, setSelectedSeats, noSeatInfo }) => {
     }
   };
 
-  // console.log("여기: " + noSeatInfo);
+  // 배열 초기화
+  useEffect(() => {
+    setSelectedSeats([]);
+  }, []);
+
+  // 회차 및 날짜 변경시 선택된 좌석 선택 해제
+  useEffect(() => {
+    setSelectedSeats([]);
+  }, [noSeatInfo]);
 
   const parseAndCompare = (selectedSeats, noSeatInfo) => {
     // noSeatInfo가 null 또는 undefined인 경우 빈 배열로 처리
@@ -57,10 +66,7 @@ const SeatBooking = ({ selectedSeats, setSelectedSeats, noSeatInfo }) => {
     return { validSeats, filteredSeats, parsedNoSeatInfo, matches };
   };
 
-  const { filteredSeats, parsedNoSeatInfo, matches } = parseAndCompare(
-    selectedSeats,
-    noSeatInfo
-  );
+  const { parsedNoSeatInfo } = parseAndCompare(selectedSeats, noSeatInfo);
 
   return (
     <div>
@@ -96,12 +102,6 @@ const SeatBooking = ({ selectedSeats, setSelectedSeats, noSeatInfo }) => {
           </div>
         ))}
       </div>
-      <p>Selected Seats: {selectedSeats.join(", ")}</p>
-      <p>Filtered Seats (Valid A1 ~ P10): {filteredSeats.join(", ")}</p>
-      <p>Parsed noSeatInfo: {parsedNoSeatInfo.join(", ")}</p>
-      <p>
-        Matching Seats: {matches.length > 0 ? matches.join(", ") : "No match"}
-      </p>
     </div>
   );
 };

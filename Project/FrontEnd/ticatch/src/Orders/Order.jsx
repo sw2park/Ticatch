@@ -14,8 +14,6 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [seatInfo, setSeatInfo] = useState([]);
 
-  const DataContext = createContext();
-
   // 전달해야되는 값들
   const seqPfjoinIds = fetchId.map((item) => item.seqPfjoinId);
 

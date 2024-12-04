@@ -7,8 +7,6 @@ const App = () => {
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [noSeatInfo, setNoSeatInfo] = useState(null); // 공통 상태 생성
 
-  // console.log("APP: " + noSeatInfo);
-
   return (
     <div className="app-container">
       <div className="left">
