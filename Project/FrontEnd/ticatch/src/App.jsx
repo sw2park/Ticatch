@@ -1,22 +1,27 @@
-import {useEffect, useState } from 'react'
-// import './App.css'
-import axios from 'axios';
-import MyPage from './pages/mypage/MyPage';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import SeatBooking from "./Seats/SeatBooking.jsx";
+import Performance from "./Orders/Order.jsx";
 
-function App() {
-  const [data, setData] = useState('')
+const App = () => {
+  const [selectedSeats, setSelectedSeats] = useState([]);
 
-   useEffect(() => {
-       axios.get("/api/hello")
-       .then(res => setData(res.data))
-       .catch(err => console.log(err))
-   }, []);
+  return (
+    <div className="app-container">
+      <div className="left">
+        <SeatBooking
+          selectedSeats={selectedSeats}
+          setSelectedSeats={setSelectedSeats}
+        />
+      </div>
+      <div className="right">
+        <div className="r r1">
+          <Performance selectedSeats={selectedSeats} />
+        </div>
+      </div>
+    </div>
+  );
+};
 
-   return (
-       <div>
-           {/* 받아온 값 : {data} */}
-       </div>
-   );
-}
 
 export default App;
