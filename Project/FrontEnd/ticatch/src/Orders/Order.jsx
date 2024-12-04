@@ -1,28 +1,10 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  createContext,
-  useContext,
-} from "react";
+import React, { useState, useEffect, useCallback, createContext } from "react";
 import Calendar from "../Calendar/Calendar";
 import axios from "axios";
 
 import "./Order.css";
 
-const DataContext = createContext();
-
-export const DataProvider = ({ children }) => {
-  const [noseatInfo, setNoSeatInfo] = useState("");
-
-  return (
-    <DataContext.Provider value={{ noseatInfo, setNoSeatInfo }}>
-      {children}
-    </DataContext.Provider>
-  );
-};
-
-const Performance = ({ selectedSeats = [] }) => {
+const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
   const [fetchId, setFetchId] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTimeIndex, setSelectedTimeIndex] = useState(0);
@@ -31,9 +13,6 @@ const Performance = ({ selectedSeats = [] }) => {
   );
   const [totalPrice, setTotalPrice] = useState(0);
   const [seatInfo, setSeatInfo] = useState([]);
-  const [noseatInfo, setNoSeatInfo] = useState("");
-
-  console.log("noseatInfo: " + noseatInfo);
 
   const DataContext = createContext();
 
@@ -106,23 +85,24 @@ const Performance = ({ selectedSeats = [] }) => {
     }
   };
 
-  const sendData = () => {
-    setNoSeatInfo(noseatInfo);
-  };
-
   // selectedDate 변경 시 데이터 전송
   useEffect(() => {
     sendDataToBackend();
   }, [selectedDate]);
 
-  // selectedTimeIndex 변경 시 데이터 전송
+  // selectedDate 변경 시 데이터 전송
   useEffect(() => {
     sendDataToBackend();
   }, [selectedTimeIndex]);
 
+  // 백에서 가지고온 좌석 정보 SeatBooking 으로 넘겨주는거
   useEffect(() => {
-    sendData();
-  }, [selectedDate]);
+    if (selectedSeats.length === 0) {
+      setNoSeatInfo("No seats selected");
+    } else {
+      setNoSeatInfo(`Selected seats: ${selectedSeats.join(", ")}`);
+    }
+  }, [selectedDate, selectedTimeIndex]);
 
   // 공연 시간을 포맷팅
   const formatPdTime = useCallback((pdTime) => {

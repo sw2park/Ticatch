@@ -100,8 +100,6 @@ public class OrderController {
 	    // 디버깅 출력
 	    System.out.println("저장된 데이터: " + savedOrder);
 	    
-	    // 리액트에서 날짜, 회차 선택시 onClick 이벤트 넣어서 여기 pk 값 3개로 계속 조회해서 
-	    // 정확한 값 보내주기
 	    SeatId seatId = new SeatId(idAsLong, reservationDTO.getSelectedDate(), reservationDTO.getSelectedTime());
 	    SeatEntity seat = seatRepository.findById(seatId).orElse(null);
 	   
