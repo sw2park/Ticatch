@@ -1,8 +1,26 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  createContext,
+  useContext,
+} from "react";
 import Calendar from "../Calendar/Calendar";
 import axios from "axios";
 
 import "./Order.css";
+
+const DataContext = createContext();
+
+export const DataProvider = ({ children }) => {
+  const [noseatInfo, setNoSeatInfo] = useState("");
+
+  return (
+    <DataContext.Provider value={{ noseatInfo, setNoSeatInfo }}>
+      {children}
+    </DataContext.Provider>
+  );
+};
 
 const Performance = ({ selectedSeats = [] }) => {
   const [fetchId, setFetchId] = useState([]);
@@ -13,12 +31,14 @@ const Performance = ({ selectedSeats = [] }) => {
   );
   const [totalPrice, setTotalPrice] = useState(0);
   const [seatInfo, setSeatInfo] = useState([]);
+  const [noseatInfo, setNoSeatInfo] = useState("");
+
+  console.log("noseatInfo: " + noseatInfo);
+
+  const DataContext = createContext();
 
   // 전달해야되는 값들
   const seqPfjoinIds = fetchId.map((item) => item.seqPfjoinId);
-  console.log("seqPfjoinIds:", seqPfjoinIds); // id
-  console.log("selectedDate: " + selectedDate); // 선택한 날짜
-  console.log("totalPrice: " + totalPrice); // 총합
 
   // Spring으로 데이터 전송
   const handleReservation = () => {
@@ -68,6 +88,41 @@ const Performance = ({ selectedSeats = [] }) => {
       })
       .catch((error) => console.error("데이터 가져오기 에러:", error));
   }, []);
+
+  // 데이터 전송 함수
+  const sendDataToBackend = async () => {
+    const dataToSend = {
+      seqPfjoinIds,
+      selectedDate: selectedDate.toISOString().split("T")[0], // 날짜 (YYYY-MM-DD)
+      selectedTime: currentPdTime[selectedTimeIndex] || "시간 정보 없음", // 현재 선택된 시간
+    };
+
+    try {
+      const response = await axios.post("/api/order/data", dataToSend);
+      console.log("백엔드 전송 성공:", response.data);
+      setNoSeatInfo(response.data);
+    } catch (error) {
+      console.error("백엔드 전송 실패:", error);
+    }
+  };
+
+  const sendData = () => {
+    setNoSeatInfo(noseatInfo);
+  };
+
+  // selectedDate 변경 시 데이터 전송
+  useEffect(() => {
+    sendDataToBackend();
+  }, [selectedDate]);
+
+  // selectedTimeIndex 변경 시 데이터 전송
+  useEffect(() => {
+    sendDataToBackend();
+  }, [selectedTimeIndex]);
+
+  useEffect(() => {
+    sendData();
+  }, [selectedDate]);
 
   // 공연 시간을 포맷팅
   const formatPdTime = useCallback((pdTime) => {
@@ -145,11 +200,6 @@ const Performance = ({ selectedSeats = [] }) => {
 
   const currentPdTime =
     fetchId.length > 0 ? formatPdTime(fetchId[0].pdTime) : [];
-
-  console.log(
-    "현재 선택된 공연 회차:",
-    currentPdTime[selectedTimeIndex] || "회차 없음"
-  );
 
   return (
     <div>

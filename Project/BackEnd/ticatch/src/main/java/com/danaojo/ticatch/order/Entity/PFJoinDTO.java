@@ -6,11 +6,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-@Getter
-@Setter
 @Table(name = "PFJOIN") // 예약어가 아닌 기존 테이블 이름으로 설정
+@Getter @Setter @ToString
 public class PFJoinDTO {
 
     @Id
@@ -76,4 +76,7 @@ public class PFJoinDTO {
 
     @Column(name = "PL_LOCATION_SIDO")
     private String plLocationSido;
+    
+    public PFJoinDTO() {}
+    
 }
