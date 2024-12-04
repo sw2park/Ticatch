@@ -3,11 +3,12 @@ import {useEffect, useState } from 'react'
 import axios from 'axios';
 import MyPage from './pages/mypage/MyPage';
 
-function App() {
-  const [data, setData] = useState('')
+
+const App = () => {
+  const [selectedSeats, setSelectedSeats] = useState([]);
 
    useEffect(() => {
-       axios.get("/api/hello")
+       axios.get("/test")
        .then(res => setData(res.data))
        .catch(err => console.log(err))
    }, []);
