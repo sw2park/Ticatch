@@ -3,7 +3,7 @@ import "./Footer.css";
 export default function Footer() {
   return (
     <footer class="bottom-bar">
-      <div class="con">
+      <div class="con2">
         <div class="menu-2">
           <ul>
             <li>회사소개</li>

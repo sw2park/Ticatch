@@ -4,7 +4,7 @@ export default function Header() {
   return (
     <header>
       <div className="top-bar">
-        <div className="con top-con">
+        <div className="con2 top-con">
           <div className="logo-box">
             <a href="#">다나오조</a>
           </div>
@@ -34,7 +34,6 @@ export default function Header() {
           </nav>
         </div>
       </div>
-      <hr />
     </header>
   );
 }

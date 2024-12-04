@@ -1,0 +1,45 @@
+.con {
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    margin : 0 auto;
+    width: 1400px; 
+  }
+  
+  .carousel-slides {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    width: 100%; /* 슬라이드 컨테이너 너비 */
+  }
+  
+  .slide {
+    flex: 0 0 25%; /* 슬라이드 너비를 4개씩 보여줌 (화면에 맞게 조정) */
+    box-sizing: border-box;
+    padding: 20px;
+  }
+  
+  .slide img {
+    width: 100%;
+    border-radius: 15px;
+    display: block;
+    height: 500px;
+  }
+  button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+  }
+  button.prev {
+    left: 10px;
+  }
+  button.next {
+    right: 10px;
+  }
+  
