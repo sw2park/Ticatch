@@ -6,22 +6,12 @@ import Performance from "./Orders/Order.jsx";
 const App = () => {
   const [selectedSeats, setSelectedSeats] = useState([]);
 
-  return (
-    <div className="app-container">
-      <div className="left">
-        <SeatBooking
-          selectedSeats={selectedSeats}
-          setSelectedSeats={setSelectedSeats}
-        />
-      </div>
-      <div className="right">
-        <div className="r r1">
-          <Performance selectedSeats={selectedSeats} />
-        </div>
-      </div>
-    </div>
-  );
-};
+   useEffect(() => {
+       axios.get("/test")
+       .then(res => setData(res.data))
+       .catch(err => console.log(err))
+   }, []);
+
 
 
 export default App;
