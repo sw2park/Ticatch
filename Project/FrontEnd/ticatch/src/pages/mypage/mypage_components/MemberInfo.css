@@ -1,0 +1,9 @@
+.member-info {
+  border: 1px solid black;
+  background-color: yellow;
+
+  text-align: left;
+  justify-content: center;
+
+  height: auto;
+}

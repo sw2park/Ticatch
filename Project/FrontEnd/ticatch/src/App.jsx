@@ -1,15 +1,10 @@
-import {useEffect, useState } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css'
-import axios from 'axios';
-import Main from './detail/component/Main.jsx';
-import Test from './detail/component/Test.jsx';
-import MainTest from './detail/component/MainTest.jsx';
-import DetailList from './detail/component/DetailList.jsx';
-import TestConnection from './detail/component/TestConnection.jsx';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import SeatBooking from "./Seats/SeatBooking.jsx";
+import Performance from "./Orders/Order.jsx";
 
-function App() {
-  const [data, setData] = useState('')
+const App = () => {
+  const [selectedSeats, setSelectedSeats] = useState([]);
 
    useEffect(() => {
        axios.get("/test")
@@ -17,12 +12,6 @@ function App() {
        .catch(err => console.log(err))
    }, []);
 
-   return (
-       <div>
-           받아온 값 : {data}
-       </div>
-   );
-}
 
 
 export default App;
