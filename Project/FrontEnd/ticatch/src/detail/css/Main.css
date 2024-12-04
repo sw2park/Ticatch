@@ -220,13 +220,13 @@ button {
     justify-content: space-between;
 }
 
-.product_seat_remain_li_loading {
-    text-align: left;
-}
-
 .product_seat_grade {
     color: #62676c;
     margin-left: 0px;
+}
+
+.product_seat_grade--null {
+    text-align: left;
 }
 
 .product_seat_counttext {
@@ -261,6 +261,7 @@ button {
 
 .reservation_link {
     color: #ffffff;
+    text-decoration: none;
 }
 .reservation_link:hover {
     color: #ffffff;

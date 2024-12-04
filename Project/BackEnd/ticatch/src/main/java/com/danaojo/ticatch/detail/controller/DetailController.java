@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.danaojo.ticatch.api.repository.PFJoin;
@@ -53,9 +54,17 @@ public class DetailController {
 		return null;
 	}
 	
+	
 	// 해당 공연의 날짜의 회차의 잔여좌석 조회
-	@GetMapping("/detail/seat/{seatId}/view")
-	public Seat seatView(@PathVariable("seatId") Long seqPfjoinId, String selectDate, String selectTime) {
+//	@GetMapping("/detail/seat")
+//	public Seat seatView(
+//	        @RequestParam("seqPfjoinId") Long seqPfjoinId,
+//	        @RequestParam("selectDate") String selectDate,
+//	        @RequestParam("selectTime") String selectTime) {
+//	    return seatService.seatView(seqPfjoinId, selectDate, selectTime);
+//	}
+	@GetMapping("/detail/seat/{seqPfjoinId}/{selectDate}/{selectTime}/view")
+	public int seatView(@PathVariable("seqPfjoinId") Long seqPfjoinId, @PathVariable("selectDate") String selectDate, @PathVariable("selectTime") String selectTime) {
 		return seatService.seatView(seqPfjoinId, selectDate, selectTime);
 	}
 	

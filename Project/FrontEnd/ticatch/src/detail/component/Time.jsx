@@ -1,22 +1,27 @@
 import React, { useState } from 'react';
 
-export default function Time({ time }) {
+export default function Time({ time, setSelectTime }) {
     const extractTimes = (timeString) => {
-        const match = timeString.match(/\(([^)]+)\)/); // 괄호 안의 값을 추출
+        const match = timeString.match(/\(([^)]+)\)/); // 괄호 안의 값 추출
         if (match) {
-            return match[1].split(','); // 쉼표로 구분된 시간 배열 반환
+            return match[1].split(/\s*,\s*/); // 쉼표(,)와 공백(\s*)을 정규식으로 처리
         }
         return [];
     };
 
     const times = extractTimes(time);
 
-    // 현재 선택된 시간을 관리하는 상태
-    const [selectedTime, setSelectedTime] = useState(null);
+    const [selectTime, setSelectedTime] = useState(null);
 
-    const handleClick = (time) => {
-        setSelectedTime(time); // 선택된 시간을 업데이트
+    const handleClick = (data) => {
+        setSelectedTime(data);
+        // setSelectTime(selectTime);
+        setSelectTime(data);
     };
+
+    // console.log('Time time : ' + time)
+    // console.log('Time : ' + selectTime);
+    // console.log('========================================')
 
     return (
         <ul className="product_time_choice_ul">
@@ -24,7 +29,7 @@ export default function Time({ time }) {
                 <li className="product_time_choice_li" key={index}>
                     <button
                         className={
-                            selectedTime === time
+                            selectTime === time
                                 ? "product_time_choice_btn--selected"
                                 : "product_time_choice_btn"
                         }

@@ -11,20 +11,20 @@ export default function Info() {
 
     useEffect(() => {
         const fetchData = async () => {
-          try {
+            try {
             setLoading(true); // 로딩 상태 시작
             const response = await axios.get(`http://localhost:9090/detail/${seqpfjoinId}/view`);
             setProductData(response.data);
             setError(null); // 에러 초기화
-          } catch (err) {
-            setError("데이터를 불러오는 데 실패했습니다.");
-          } finally {
+            } catch (err) {
+            setError("상세정보를 불러오는 데 실패했습니다.");
+            } finally {
             setLoading(false); // 로딩 상태 종료
-          }
-        };
+            }
+    };
     
         fetchData();
-      }, [seqpfjoinId]);
+    }, [seqpfjoinId]);
     
       if (loading) return <div>로딩 중...</div>;
       if (error) return <div>{error}</div>;

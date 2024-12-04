@@ -15,9 +15,10 @@ public class SeatRepository {
 	@Autowired
 	private final EntityManager em;
 
-	public Seat seatView(Long seqPfjoinId, String selectDate, String selectTime) {
+	public int seatView(Long seqPfjoinId, String selectDate, String selectTime) {
 		return em.createQuery(
-				"SELECT s FROM SEAT s WHERE s.seqPfjoinId = :seqPfjoinId AND s.selectDate = :selectDate AND s.selectTime = :selectTime", Seat.class)
+				"SELECT s.total FROM Seat s WHERE s.seatId.seqPfjoinId = :seqPfjoinId AND s.seatId.selectDate = :selectDate AND s.seatId.selectTime = :selectTime", 
+				Integer.class)
 				.setParameter("seqPfjoinId", seqPfjoinId)
 	            .setParameter("selectDate", selectDate)
 	            .setParameter("selectTime", selectTime)

@@ -15,7 +15,7 @@ public class SeatService {
 	@Autowired
 	private final SeatRepository seatRepository;
 	
-	public Seat seatView(Long seqPfjoinId, String selectDate, String selectTime) {
+	public int seatView(Long seqPfjoinId, String selectDate, String selectTime) {
 		return seatRepository.seatView(seqPfjoinId, selectDate, selectTime);
 	}
 
