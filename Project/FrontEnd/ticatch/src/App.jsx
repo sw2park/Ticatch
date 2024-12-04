@@ -15,7 +15,6 @@ function App() {
    return (
        <div>
            {/* 받아온 값 : {data} */}
-           <MyPage></MyPage>
        </div>
    );
 }
