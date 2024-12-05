@@ -18,12 +18,13 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
   const seqPfjoinIds = fetchId.map((item) => item.seqPfjoinId);
 
   // Spring으로 데이터 전송
+  // 이거 고치기
   const handleReservation = () => {
     const dataToSend = {
       seqPfjoinIds,
       selectedDate: selectedDate.toISOString().split("T")[0],
       totalPrice,
-      selectedTime: currentPdTime[selectedTimeIndex] || "시간 정보 없음",
+      selectedTime: currentPdTime[selectedTimeIndex],
       selectedSeatsInfo: selectedSeats.map((seat) => {
         const seatGroup = seat[0];
         const seatInfoForGroup = seatInfo.find(
@@ -31,11 +32,12 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
         );
         return {
           seat,
-          grade: seatInfoForGroup?.grade || "정보 없음",
-          price: seatInfoForGroup?.price || 0,
+          grade: seatInfoForGroup?.grade || "등급 없음",
+          price: seatInfoForGroup?.price,
         };
       }),
     };
+
     console.log("전송할 데이터:", dataToSend);
 
     axios
@@ -235,7 +237,14 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
       <h3>선택된 좌석: {selectedSeats.join(", ") || "없음"}</h3>
       <h2>총액: {totalPrice.toLocaleString("ko-KR")}원</h2>
 
-      <button className="reserve-button" onClick={handleReservation}>
+      <button
+        className="reserve-button"
+        onClick={() => {
+          selectedSeats.length != 0
+            ? handleReservation()
+            : alert("좌석을 선택해주세요");
+        }}
+      >
         예매하기
       </button>
 
