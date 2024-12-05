@@ -1,0 +1,43 @@
+.manage-table {
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+  justify-content: center;
+
+  width: 100%;
+  height: auto;
+
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.manage-table-head {
+  background-color: #f8f9fb;
+}
+
+.manage-table-head {
+  font-weight: bolder;
+  color: #3b3b3b;
+}
+
+.manage-table-row {
+  background-color: white;
+}
+
+.manage-table-row > td {
+  height: 1px;
+  overflow: auto;
+}
+
+.manage-table-name {
+  width: 35%;
+}
+
+.manage-table-contents {
+  width: 35%;
+}
+
+.manage-table-day {
+  width: 30%;
+}

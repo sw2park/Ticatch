@@ -6,13 +6,24 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import com.danaojo.ticatch.api.util.KopisUtil;
+
 public class KopisApiController {
+	KopisUtil util = new KopisUtil();
+	
 	public String callConcertList() {
 		StringBuilder response = new StringBuilder();
 		try {
+			String apiUrl = "http://kopis.or.kr/openApi/restful/pblprfr?service=";
+			apiUrl += KopisConst.KOPIS_API_KEY;
+			apiUrl += "&stdate=";
+			apiUrl += util.returnNowToday();
+			apiUrl += "&eddate=";
+			apiUrl += util.returnAfterday();
+			apiUrl += "&cpage=1&rows=10";
+			
 			// URL API 설정
-			URL url = new URL("http://kopis.or.kr/openApi/restful/pblprfr?service=" + KopisConst.KOPIS_API_KEY
-					+ "&stdate=20240101&eddate=20241231&cpage=1&rows=10");
+			URL url = new URL(apiUrl);
 			HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 			httpURLConnection.setRequestMethod("GET");
 

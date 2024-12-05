@@ -43,7 +43,7 @@ public class Kopis extends KopisApiController {
 
 	                // 이미지 한줄로 합치기
 	                String detailImg = "";
-	                detailImg = util.concatDetailImage(pfDetailList.get(0).getPd_img());
+	                detailImg = util.concatDetailImage(pfDetailList.get(listFail).getPd_img());
 	                System.out.println(pfDetailList.get(0).getPd_img().size());
 	                
 	                for (PerformDetailDTO pfDetail : pfDetailList) {
@@ -74,6 +74,8 @@ public class Kopis extends KopisApiController {
 	                        	resultStr.setPf_time(pfDetail.getPd_time());
 	                        	resultStr.setPf_genre(pfDetail.getPd_genre());
 	                        	resultStr.setPf_child(pfDetail.getPd_child());
+	                        	
+//	                        	resultStr.setPf_img(null);
 	                        	resultStr.setPf_img(detailImg);
 	                        	resultStr.setPf_time(pfDetail.getPd_time());
 	                        	resultStr.setPf_location_sido(facility.getFl_sidonm());
