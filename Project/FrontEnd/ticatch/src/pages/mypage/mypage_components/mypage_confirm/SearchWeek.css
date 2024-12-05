@@ -1,0 +1,20 @@
+.confirm-menu-button-section {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.confirm-menu-select-button {
+  border: 1px solid #ccc;
+  background-color: white;
+  color: black;
+
+  width: 20%;
+  height: 60%;
+}
+
+.confirm-menu-select-button:hover {
+  cursor: pointer;
+}

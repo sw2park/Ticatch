@@ -1,0 +1,55 @@
+.confirm-table {
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+  justify-content: center;
+
+  width: 100%;
+  height: auto;
+
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.confirm-table-head {
+  background-color: #f8f9fb;
+}
+
+.confirm-table-head > th {
+  font-weight: bolder;
+  color: #3b3b3b;
+}
+
+.confirm-table-row {
+  background-color: white;
+}
+
+.confirm-table-row > td {
+  height: 1px;
+  overflow: auto;
+}
+
+.confirm-table-num {
+  width: 13.6%;
+}
+
+.confirm-table-name {
+  width: 30%;
+}
+
+.confirm-table-day {
+  width: 20%;
+}
+
+.confirm-table-count {
+  width: 7.6%;
+}
+
+.confirm-table-cancel {
+  width: 15.2%;
+}
+
+.confirm-table-status {
+  width: 13.6%;
+}

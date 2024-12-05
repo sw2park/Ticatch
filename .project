@@ -1,17 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>Ticatch</name>
+<<<<<<< HEAD
 	<comment>Project Ticatch created by Buildship.</comment>
+=======
+	<comment></comment>
+>>>>>>> 3056983a26899a56f4d46e38736e8c91ca543f6b
 	<projects>
 	</projects>
 	<buildSpec>
 		<buildCommand>
+<<<<<<< HEAD
 			<name>org.eclipse.buildship.core.gradleprojectbuilder</name>
+=======
+			<name>org.eclipse.wst.validation.validationbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+>>>>>>> 3056983a26899a56f4d46e38736e8c91ca543f6b
 			<arguments>
 			</arguments>
 		</buildCommand>
 	</buildSpec>
 	<natures>
+<<<<<<< HEAD
 		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
+=======
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
+>>>>>>> 3056983a26899a56f4d46e38736e8c91ca543f6b
 	</natures>
 </projectDescription>

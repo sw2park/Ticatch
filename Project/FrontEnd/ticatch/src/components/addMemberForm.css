@@ -1,0 +1,52 @@
+.create-user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.create-user .con {
+  width: 1400px;
+  margin: 0 auto;
+}
+
+.create-user .con div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.create-user label {
+  margin-bottom: 8px;
+  font-weight: bold;
+  text-align: left;
+  width: 100%;
+}
+
+.create-user input {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 500px;
+}
+
+.create-btn > button {
+  width: 600px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.create-btn > button:hover {
+  background-color: #ccc;
+  color: black;
+}

@@ -12,6 +12,26 @@ public class HelloController {
     	Kopis kopis = new Kopis();
     	String data = kopis.callConcertList();
     	System.out.println("응답");
+
         return data;
     }
+    
+//    @GetMapping("/api/save")
+//    public String test() {
+//    	Kopis kopis = new Kopis();
+//    	List<PFJoinDTO> testList = kopis.PfDBList();
+//    	String data = testList.get(0).getPf_id();
+//    	for(PFJoinDTO p : testList) {
+//    		data += p.getPf_id() + " | ";
+//    	}
+//        return data;
+//    }
+//    
+//    @GetMapping("/detail")
+//	public String test1() {
+//		 
+//		String testData = "ddd";
+//		System.out.println(testData);
+//	    return  testData;
+//	}
 }

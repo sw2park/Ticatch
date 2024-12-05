@@ -1,77 +1,81 @@
 package com.danaojo.ticatch.api.util;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.danaojo.ticatch.api.kopis.dto.ConcertDetailDTO;
-import com.danaojo.ticatch.api.kopis.dto.ConcertListDTO;
-import com.danaojo.ticatch.api.repository.PerformDetail;
-import com.danaojo.ticatch.api.repository.PerformList;
+import com.danaojo.ticatch.api.kopis.dto.PFJoinDTO;
+import com.danaojo.ticatch.api.repository.PFJoin;
 
 public class KopisUtil {
-	// PerformList DB 저장용
-	public List<PerformList> returnPerformList(List<ConcertListDTO> list) {
-		List<PerformList> pList = new ArrayList<>();
-
-		for (int i = 0; i < list.size(); i++) {
-			PerformList performList = new PerformList();
-
-			performList.setPl_id(list.get(i).getPl_id());
-			performList.setPl_title(list.get(i).getPl_title());
-			performList.setPl_start_date(list.get(i).getPl_start_date());
-			performList.setPl_end_date(list.get(i).getPl_end_date());
-			performList.setPl_hall_name(list.get(i).getPl_hall_name());
-			performList.setPl_poster(list.get(i).getPl_poster());
-			performList.setPl_location(list.get(i).getPl_location());
-			performList.setPl_genre(list.get(i).getPl_genre());
-
-			pList.add(performList);
-		}
-		return pList;
-	}
-
-	// ID 뽑아서 전달용 메서드
-	public List<String> returnPerformId(List<ConcertListDTO> performId) {
-		List<String> idList = new ArrayList<>();
-
-		for (int i = 0; i < performId.size(); i++) {
-			String id;
-			id = performId.get(i).getPl_id();
-			
-			idList.add(id);
-		}
-
-		return idList;
+	// 오늘 날짜 구해서 +31일 한 후 yyyyMMdd 형태로 반환 메소드
+	public String returnAfterday() {
+	    LocalDate nowDate = LocalDate.now();
+	    LocalDate afterDate = nowDate.plusDays(31);
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+	    
+	    return afterDate.format(formatter);
 	}
 	
-	// PerformDetail DB 저장용	
-	public List<PerformDetail> returnPerformDetail(List<ConcertDetailDTO> list){
-		List<PerformDetail> detailList = new ArrayList<>();
+	// 오늘 날짜 구해서 yyyyMMdd 형태로 반환 메소드
+	public String returnNowToday() { 
+		LocalDate now = LocalDate.now();
+		DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyyMMdd");
+		String formNow = now.format(form);
 		
-		for(int i=0; i < list.size(); i++) {
-			PerformDetail detail = new PerformDetail();
+		return formNow;
+	}
+	
+	// PFJOIN DB 저장용 변환 메소드
+	public List<PFJoin> returnPFJoinList(List<PFJoinDTO> list){
+		List<PFJoin> result = new ArrayList<>();
+		
+		for(int i=0; i<list.size(); i++) {
+			PFJoin pf = new PFJoin();
 			
-			detail.setPd_id(list.get(i).getPd_id());
-			detail.setPd_title(list.get(i).getPd_title());
-			detail.setPd_start(list.get(i).getPd_start());
-			detail.setPd_end(list.get(i).getPd_end());
-			detail.setPd_location(list.get(i).getPd_location());
-			detail.setPd_cast(list.get(i).getPd_cast());
-			detail.setPd_crew(list.get(i).getPd_crew());
-			detail.setPd_runtime(list.get(i).getPd_runtime());
-			detail.setPd_seatprice(list.get(i).getPd_seatprice());
-			detail.setPd_poster(list.get(i).getPd_poster());
-			detail.setPd_genre(list.get(i).getPd_genre());
-			detail.setPd_openturn(list.get(i).getPd_openturn());
-			detail.setPd_visit(list.get(i).getPd_visit());
-			detail.setPd_child(list.get(i).getPd_child());
-			// 아직 미완성이라 주석처리 후 임의값 지정
-			detail.setPd_img("상세 이미지 들어갈거에요");
-			detail.setPd_time(list.get(i).getPd_time());
+			pf.setP_id(list.get(i).getPf_id());
+			pf.setP_title(list.get(i).getPf_title());
+			pf.setP_poster(list.get(i).getPf_poster());
+			pf.setP_start_date(list.get(i).getPf_start_date());
+			pf.setP_end_date(list.get(i).getPf_end_date());
+			pf.setPd_location(list.get(i).getPf_location());
+			pf.setPd_hall_name(list.get(i).getPf_hall_name());
+			if(list.get(i).getPf_cast().equals(" ")) {
+				continue;
+//				pf.setPd_cast(null);
+			} else {
+				pf.setPd_cast(list.get(i).getPf_cast());				
+			}
+			pf.setPd_runtime(list.get(i).getPf_runtime());
+			pf.setPd_seatprice(list.get(i).getPf_seatprice());
+			pf.setP_genre(list.get(i).getPf_genre());
+			pf.setPd_child(list.get(i).getPf_child());
+			pf.setPd_img(list.get(i).getPf_img());
+			pf.setPl_location_sido(list.get(i).getPf_location_sido());
+			pf.setPl_location_gun(list.get(i).getPf_location_gun());
+			pf.setFd_phone(list.get(i).getPf_phone());
+			pf.setFd_addr(list.get(i).getPf_addr());
+			pf.setFd_latitude(list.get(i).getPf_la());
+			pf.setFd_longitude(list.get(i).getPf_lo());
+			pf.setPd_time(list.get(i).getPf_time());
 			
-			detailList.add(detail);
+			result.add(pf);
 		}
+		return result;
+	}
+	
+	// PFJoinDB 상세이미지 저장용
+	public String concatDetailImage(List<String> list) {
+		String result = "";
 		
-		return detailList;
+		for(String str : list) {
+			if(str.equals(" ")) {
+				continue;
+			} else {
+				result += str + "|";
+			}
+		}
+		return result;
 	}
 }
