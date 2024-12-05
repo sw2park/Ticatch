@@ -2,25 +2,41 @@ import React, { useState, useEffect, useRef } from 'react';
 import './BannerSlider.css'; // 스타일 파일 분리 (CSS 따로 작성)
 
 const Slider = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(1); // 시작 슬라이드를 1로 설정
   const [slidesCount, setSlidesCount] = useState(0);
   const [slideWidth, setSlideWidth] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
   const slideContainerRef = useRef(null);
   const slideWrapRef = useRef(null);
   let autoSlideInterval = useRef(null);
+  const startDrag = useRef(null);
+  const dragDistance = useRef(0);
+
+  const slides = [
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255167_241203_114423.jpg", link: "http://example.com/page1" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255164_241203_113353.jpg", link: "http://example.com/page2" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255163_241203_113239.png", link: "http://example.com/page3" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255162_241203_112959.png", link: "http://example.com/page4" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255160_241203_112533.gif", link: "http://example.com/page5" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255167_241203_114423.jpg", link: "http://example.com/page1" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255164_241203_113353.jpg", link: "http://example.com/page2" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255163_241203_113239.png", link: "http://example.com/page3" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255162_241203_112959.png", link: "http://example.com/page4" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255160_241203_112533.gif", link: "http://example.com/page5" }
+  ];
 
   useEffect(() => {
     const slideWrap = slideWrapRef.current;
     const slides = slideContainerRef.current.children;
-    setSlidesCount(slides.length);
+    setSlidesCount(slides.length - 2); // 클론된 슬라이드를 제외한 개수로 설정
     setSlideWidth(slideWrap.offsetWidth);
 
-    // 초기 페이지네이션 생성
     createPagination();
 
-    // 윈도우 리사이즈 이벤트
     const handleResize = () => setSlideWidth(slideWrap.offsetWidth);
     window.addEventListener('resize', handleResize);
+
+    startAutoSlide();
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -28,21 +44,42 @@ const Slider = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (slidesCount > 0) {
+      startAutoSlide();
+    }
+    return () => stopAutoSlide();
+  }, [slidesCount]);
+
+  useEffect(() => {
+    const pagination = document.querySelectorAll('.pagination li');
+    pagination.forEach((li, i) => {
+      li.classList.toggle('act', i === (currentSlide - 1 + slidesCount) % slidesCount);
+    });
+    if (currentSlide === 0) {
+      setTimeout(() => {
+        slideContainerRef.current.style.transition = 'none';
+        setCurrentSlide(slidesCount);
+        slideContainerRef.current.style.transform = `translateX(-${slideWidth * slidesCount}px)`;
+      }, 500);
+    } else if (currentSlide === slidesCount + 1) {
+      setTimeout(() => {
+        slideContainerRef.current.style.transition = 'none';
+        setCurrentSlide(1);
+        slideContainerRef.current.style.transform = `translateX(-${slideWidth}px)`;
+      }, 500);
+    }
+  }, [currentSlide, slideWidth, slidesCount]);
+
   const goToSlide = (index) => {
     setCurrentSlide(index);
     slideContainerRef.current.style.transition = 'transform 0.5s ease';
     slideContainerRef.current.style.transform = `translateX(-${slideWidth * index}px)`;
-
-    // 페이지네이션 업데이트
-    const pagination = document.querySelectorAll('.pagination li');
-    pagination.forEach((li, i) => {
-      li.classList.toggle('act', i === index);
-    });
   };
 
   const createPagination = () => {
-    const pagination = document.createElement('div');
-    pagination.className = 'pagination';
+    const paginationContainer = document.createElement('div');
+    paginationContainer.className = 'pagination';
 
     for (let i = 0; i < slidesCount; i++) {
       const li = document.createElement('li');
@@ -50,46 +87,74 @@ const Slider = () => {
       li.innerHTML = '<a href="#">•</a>';
       li.addEventListener('click', (event) => {
         event.preventDefault();
-        goToSlide(i);
+        goToSlide(i + 1);
       });
-      pagination.appendChild(li);
+      paginationContainer.appendChild(li);
     }
 
-    slideWrapRef.current.appendChild(pagination);
+    if (slideWrapRef.current) {
+      slideWrapRef.current.appendChild(paginationContainer);
+    }
   };
 
   const handlePrev = () => {
-    const index = (currentSlide - 1 + slidesCount) % slidesCount;
-    goToSlide(index);
+    if (currentSlide === 1) {
+      goToSlide(0);
+    } else {
+      const index = currentSlide - 1;
+      goToSlide(index);
+    }
   };
 
   const handleNext = () => {
-    const index = (currentSlide + 1) % slidesCount;
-    goToSlide(index);
+    if (currentSlide === slidesCount) {
+      goToSlide(slidesCount + 1);
+    } else {
+      const index = currentSlide + 1;
+      goToSlide(index);
+    }
   };
 
-  const handleDrag = (start, end) => {
-    if (start < end) {
-      handlePrev();
-    } else {
-      handleNext();
+  const handleDragStart = (start) => {
+    setIsDragging(true);
+    startDrag.current = start;
+  };
+
+  const handleDragMove = (current) => {
+    if (isDragging) {
+      const dragAmount = current - startDrag.current;
+      dragDistance.current = dragAmount;
+      slideContainerRef.current.style.transition = 'none';
+      slideContainerRef.current.style.transform = `translateX(-${slideWidth * currentSlide - dragAmount}px)`;
+    }
+  };
+
+  const handleDragEnd = () => {
+    if (isDragging) {
+      setIsDragging(false);
+      if (Math.abs(dragDistance.current) > slideWidth / 4) {
+        if (dragDistance.current > 0) {
+          handlePrev();
+        } else {
+          handleNext();
+        }
+      } else {
+        goToSlide(currentSlide);
+      }
+      dragDistance.current = 0;
     }
   };
 
   const startAutoSlide = () => {
+    if (autoSlideInterval.current) clearInterval(autoSlideInterval.current);
     autoSlideInterval.current = setInterval(() => {
       handleNext();
     }, 3000);
   };
 
   const stopAutoSlide = () => {
-    clearInterval(autoSlideInterval.current);
+    if (autoSlideInterval.current) clearInterval(autoSlideInterval.current);
   };
-
-  useEffect(() => {
-    startAutoSlide();
-    return () => stopAutoSlide();
-  }, [currentSlide]);
 
   return (
     <div
@@ -101,19 +166,31 @@ const Slider = () => {
       <div
         className="Bannerslides"
         ref={slideContainerRef}
-        onMouseDown={(e) => (startDrag.current = e.pageX)}
-        onMouseUp={(e) => handleDrag(startDrag.current, e.pageX)}
-        onTouchStart={(e) => (startDrag.current = e.touches[0].pageX)}
-        onTouchEnd={(e) => handleDrag(startDrag.current, e.changedTouches[0].pageX)}
+        onMouseDown={(e) => handleDragStart(e.pageX)}
+        onMouseMove={(e) => handleDragMove(e.pageX)}
+        onMouseUp={handleDragEnd}
+        onMouseLeave={handleDragEnd}
+        onTouchStart={(e) => handleDragStart(e.touches[0].pageX)}
+        onTouchMove={(e) => handleDragMove(e.touches[0].pageX)}
+        onTouchEnd={handleDragEnd}
       >
-        {/* 슬라이드 내용 */}
-        <div className="Bannerslide">Slide 1</div>
-        <div className="Bannerslide">Slide 2</div>
-        <div className="Bannerslide">Slide 3</div>
-        <div className="Bannerslide">Slide 4</div>
-        <div className="Bannerslide">Slide 5</div>
-        <div className="Bannerslide">Slide 6</div>
-        <div className="Bannerslide">Slide 7</div>
+        <div className="Bannerslide">
+          <a href={slides[6].link} target="_blank" rel="noopener noreferrer">
+            <img src={slides[6].src} alt="Slide 7" className="banner-image" />
+          </a>
+        </div> {/* 마지막 슬라이드의 클론 */}
+        {slides.map((slide, index) => (
+          <div className="Bannerslide" key={index}>
+            <a href={slide.link} target="_blank" rel="noopener noreferrer">
+              <img src={slide.src} alt={`Slide ${index + 1}`} className="banner-image" />
+            </a>
+          </div>
+        ))}
+        <div className="Bannerslide">
+          <a href={slides[0].link} target="_blank" rel="noopener noreferrer">
+            <img src={slides[0].src} alt="Slide 1" className="banner-image" />
+          </a>
+        </div> {/* 첫 슬라이드의 클론 */}
       </div>
 
       <button className="leftbtn btn" onClick={handlePrev}>

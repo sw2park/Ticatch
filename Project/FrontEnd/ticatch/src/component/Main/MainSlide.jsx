@@ -7,16 +7,16 @@ const Carousel = () => {
   const slideRef = useRef(null);
   const slidesToShow = 4; // 화면에 표시할 슬라이드 개수
   const slides = [
-    "https://picsum.photos/id/325/400/300",
-    "https://picsum.photos/id/159/400/300",
-    "https://picsum.photos/id/230/400/300",
-    "https://picsum.photos/id/266/400/300",
-    "https://picsum.photos/id/225/400/300",
-    "https://picsum.photos/id/230/400/300",
-    "https://picsum.photos/id/240/400/300",
-    "https://picsum.photos/id/270/400/300",
-    "https://picsum.photos/id/280/400/300",
-    "https://picsum.photos/id/260/400/300"
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255167_241203_114423.jpg", link: "http://example.com/page1" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255164_241203_113353.jpg", link: "http://example.com/page2" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255163_241203_113239.png", link: "http://example.com/page3" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255162_241203_112959.png", link: "http://example.com/page4" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255160_241203_112533.gif", link: "http://example.com/page5" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255167_241203_114423.jpg", link: "http://example.com/page1" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255164_241203_113353.jpg", link: "http://example.com/page2" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255163_241203_113239.png", link: "http://example.com/page3" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255162_241203_112959.png", link: "http://example.com/page4" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255160_241203_112533.gif", link: "http://example.com/page5" }
   ];
 
   const totalSlides = slides.length;
@@ -26,8 +26,8 @@ const Carousel = () => {
 
     // 화면에 표시할 슬라이드 개수를 고려하여 인덱스 범위 조정
     if (newSlide < 0) {
-      newSlide = totalSlides - 1;
-    } else if (newSlide >= totalSlides) {
+      newSlide = totalSlides - slidesToShow;
+    } else if (newSlide > totalSlides - slidesToShow) {
       newSlide = 0;
     }
 
@@ -48,14 +48,16 @@ const Carousel = () => {
     <div className="con">
       <button className="prev" onClick={() => moveSlide(-1)}>&lt;</button>
       <div className="carousel-slides" ref={slidesContainerRef}>
-        {slides.map((src, index) => (
+        {slides.map((slide, index) => (
           <div
             className="slide"
             key={index}
             style={{ flex: `0 0 ${100 / slidesToShow}%` }}
             ref={index === 0 ? slideRef : null}
           >
-            <img src={src} alt={`Image ${index + 1}`} />
+            <a href={slide.link} target="_blank" rel="noopener noreferrer">
+              <img src={slide.src} alt={`Image ${index + 1}`} />
+            </a>
           </div>
         ))}
       </div>

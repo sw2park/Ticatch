@@ -1,63 +1,67 @@
 .slidewrap {
-    position: relative;
-    overflow: hidden;
-    width: 1400px;
-    margin: 0 auto; 
-  }
-  
-  .Bannerslides {
-    display: flex;
-    transition: transform 0.5s ease;
-  }
-  
-  .Bannerslide {
-    min-width: 100%;
-    height: 700px;
-    background: #ccc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    color: #333;
-  }
-  
-  .pagination {
-    display: flex;
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .pagination li {
-    list-style: none;
-    font-size: 20px;
-    color: white;
-    opacity: 0.5;
-    margin: 0 5px;
-    cursor: pointer;
-  }
-  
-  .pagination .act {
-    opacity: 1;
-  }
-  
-  .btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 10px 20px;
-  }
-  
-  .leftbtn {
-    left: 10px;
-  }
-  
-  .rightbtn {
-    right: 10px;
-  }
-  
+  position: relative;
+  overflow: hidden;
+  width: 1400px;
+  margin: 0 auto;
+}
+
+.Bannerslides {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.Bannerslide {
+  min-width: 100%;
+  height: 700px;
+  background: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box; /* 패딩과 보더를 포함하여 너비 계산 */
+}
+
+.Bannerslide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 이미지가 슬라이드 크기에 맞게 조정되도록 설정 */
+}
+
+.pagination {
+  display: flex;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.pagination li {
+  list-style: none;
+  font-size: 20px;
+  color: white;
+  opacity: 0.5;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.pagination .act {
+  opacity: 1;
+}
+
+.btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.leftbtn {
+  left: 10px;
+}
+
+.rightbtn {
+  right: 10px;
+}

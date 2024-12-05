@@ -7,6 +7,8 @@ import Banner from './component/Main/bannerSlider.jsx';
 import MainSlide from './component/Main/MainSlide.jsx';
 import MainSlide2 from './component/Main/MainSlide2.jsx';
 
+
+
 function App() {
   const [data, setData] = useState('')
 
