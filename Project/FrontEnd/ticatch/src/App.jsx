@@ -1,27 +1,22 @@
 import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import "./App.css";
-import SeatBooking from "./Seats/SeatBooking.jsx";
-import Order from "./Orders/Order.jsx";
+import OrderPage from "./OrderPage/OrderPage";
+import FinishOrder from "./FinishOrder/FinishOrder";
+import { SuccessPage } from "./TossPayments/Success";
+import { FailPage } from "./TossPayments/Fail";
 
 const App = () => {
-  const [selectedSeats, setSelectedSeats] = useState([]);
-  const [noSeatInfo, setNoSeatInfo] = useState(null); // 공통 상태 생성
-
   return (
-    <div className="app-container">
-      <div className="left">
-        <SeatBooking
-          selectedSeats={selectedSeats}
-          setSelectedSeats={setSelectedSeats}
-          noSeatInfo={noSeatInfo}
-        />
-      </div>
-      <div className="right">
-        <div className="r r1">
-          <Order selectedSeats={selectedSeats} setNoSeatInfo={setNoSeatInfo} />
-        </div>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/order" element={<OrderPage />} />
+        <Route path="/order/finishOrder" element={<FinishOrder />} />
+        <Route path="/success" element={<SuccessPage />} />
+        <Route path="/fail" element={<FailPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

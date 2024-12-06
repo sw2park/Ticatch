@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.danaojo.ticatch.order.Entity.KakaoPayDTO;
 import com.danaojo.ticatch.order.Entity.OrderDTO;
 import com.danaojo.ticatch.order.Entity.PFJoinDTO;
 import com.danaojo.ticatch.order.repository.OrderRepository;
@@ -42,21 +43,24 @@ public class OrderController {
 		return findBySeqPfJoinId;
 	}
 
-	// 예매 버튼 눌르면 여기로 옴 테이블에 데이터 저장 하는거임
-	@PostMapping("/reservation")
-	public ResponseEntity<String> createReservation(@RequestBody OrderDTO orderListDTO) {
-		String result = orderService.createOrder(orderListDTO);
-		
-		return ResponseEntity.ok(result);
-	}
-
 	// 날짜 및 회차 바꾸면 이거 실행됨 계속 올바른 값 조회해서 돌려줌
 	@PostMapping("/data")
 	public ResponseEntity<String> getNewData(@RequestBody OrderDTO seatDTO) {
-		String result =orderService.getSoldSeats(seatDTO);
+		String result = orderService.getSoldSeats(seatDTO);
 		
 		return ResponseEntity.ok(result);
 	}
+	
+	// 예매 버튼 눌르면 여기로 옴 테이블에 데이터 저장 하는거임 (카카오페이 결제)
+	@PostMapping("/pay")
+	public ResponseEntity<String> createReservation(@RequestBody OrderDTO orderListDTO) {
+		String result = orderService.createOrder(orderListDTO);
+		
+		System.out.println("dddddd");
+		
+		return ResponseEntity.ok(result);
+	}
+	
 
 }
 
