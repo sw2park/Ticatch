@@ -242,7 +242,7 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
       </button>
 
       <button className="reserve-button" onClick={() => fetchDetailById(1)}>
-        데이터 가져오기
+        테스트 데이터 가져오기
       </button>
     </div>
   );

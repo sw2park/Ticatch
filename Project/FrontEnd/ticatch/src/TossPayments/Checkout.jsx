@@ -92,7 +92,6 @@ export function CheckoutPage() {
         {/* 결제 UI */}
         <div id="payment-method" />
         {/* 이용약관 UI */}
-        {/* 나중에 이거 박스 체크 안되어있으면 alert 띄우기 동의하라고 */}
         <div id="agreement" />
 
         {/* 결제하기 버튼 */}
@@ -109,6 +108,9 @@ export function CheckoutPage() {
               await widgets.requestPayment({
                 orderId: uniqueOrderId,
                 orderName: JSON.stringify(tossdata.selectedSeatsInfo),
+
+                // 이 아래 값들은 나중에 유저 테이블되면 앞에서 부터 가지고 오던 세션에서 가지고오기(?)
+                // 아직은 모르겠음 그냥 자바에서 하는게 더 편할듯 (아 비교해야되나..?)
                 // customerEmail: "customer123@gmail.com",
                 // customerName: "김토스",
                 // customerMobilePhone: "01012341234",
@@ -130,7 +132,9 @@ export function CheckoutPage() {
               // 에러 처리하기
               console.error(error);
 
-              alert("구매 실패, 잠시후 다시 시도해주세요");
+              // alert("구매 실패, 잠시후 다시 시도해주세요");
+              // 실패하면 체크 박스 체크 안해서 일어나는거만 지금은 됨
+              alert("약관에 동의해주세요");
             }
           }}
         >
