@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.danaojo.ticatch.detail.Repository.ReviewRepository;
 import com.danaojo.ticatch.detail.domain.Review;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ReviewService {
 	
 	@Autowired
@@ -22,6 +24,8 @@ public class ReviewService {
 		return reviewRepository.findReviews(seq_pfjoin_id);
 	}
 
+	// 리뷰 저장
+	@Transactional
 	public void saveReview(Review review) {
 		reviewRepository.save(review);
 	}

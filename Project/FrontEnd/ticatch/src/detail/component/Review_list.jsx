@@ -38,7 +38,7 @@ export default function ReviewList() {
                             productData.map((review, index) => (
                                 <li className='review_list_item' key={index}>
                                     <div className='review_item_star'>
-                                        ★{review.rating}
+                                        <span className='review_item_start_icon'>★</span>{review.rating}
                                     </div>
                                     <span className='review_item_content'>
                                         {review.review_content}

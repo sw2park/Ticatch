@@ -24,6 +24,10 @@
     color: #004d7c;
 }
 
+.review_item_start_icon {
+    margin-right: 4px;
+}
+
 .review_item_content {
     font-size: 15px;
 }

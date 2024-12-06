@@ -75,12 +75,19 @@ public class DetailController {
 		return expService.findExps(seq_pfjoin_id);
 	}
 	
-	// 리뷰 저장	-> 공연 아이디 받아와야되나
+	// 리뷰 저장
 	@PostMapping("/detail/reviw/new")
 	public String createReview(ReviewDTO reviewDto) {
-		Review review = new Review();
+		Review review = new Review();		
+		review.setSeq_review_id(reviewDto.getSeq_review_id());
+		review.setUser_id(reviewDto.getUser_id());
+		review.setReview_content(reviewDto.getReview_content());
+		review.setReview_date(reviewDto.getReview_date());
+		review.setRating(reviewDto.getRating());
+		
 		reviewService.saveReview(review);
-		return null;
+		
+		return "redirect:/";
 	}
 	
 	// 기대평 저장
