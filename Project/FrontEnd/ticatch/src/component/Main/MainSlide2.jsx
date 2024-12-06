@@ -7,16 +7,16 @@ const Carousel = () => {
   const slideRef = useRef(null);
   const slidesToShow = 4; // 화면에 표시할 슬라이드 개수
   const slides = [
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255167_241203_114423.jpg", link: "http://example.com/page1" },
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255164_241203_113353.jpg", link: "http://example.com/page2" },
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255163_241203_113239.png", link: "http://example.com/page3" },
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255162_241203_112959.png", link: "http://example.com/page4" },
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255160_241203_112533.gif", link: "http://example.com/page5" },
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255167_241203_114423.jpg", link: "http://example.com/page1" },
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255164_241203_113353.jpg", link: "http://example.com/page2" },
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255163_241203_113239.png", link: "http://example.com/page3" },
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255162_241203_112959.png", link: "http://example.com/page4" },
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255160_241203_112533.gif", link: "http://example.com/page5" }
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255216_241204_113008.jpg", link: "http://example.com/page1" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255217_241204_113314.jpg", link: "http://example.com/page2" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255219_241204_113739.gif", link: "http://example.com/page3" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255220_241204_113934.gif", link: "http://example.com/page4" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255221_241204_114518.jpg", link: "http://example.com/page5" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255229_241204_122535.gif", link: "http://example.com/page1" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255237_241204_125425.gif", link: "http://example.com/page2" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255244_241204_135119.png", link: "http://example.com/page3" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255216_241204_113008.jpg", link: "http://example.com/page4" },
+    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255219_241204_113739.gif", link: "http://example.com/page5" }
   ];
 
   const totalSlides = slides.length;
