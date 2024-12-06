@@ -87,7 +87,7 @@ export function CheckoutPage() {
   }, [widgets, amount]);
 
   return (
-    <div className="wrapper" style={{ width: "100%" }}>
+    <div className="wrapper" style={{ minWidth: "600px" }}>
       <div className="box_section">
         {/* 결제 UI */}
         <div id="payment-method" />
@@ -97,6 +97,13 @@ export function CheckoutPage() {
         {/* 결제하기 버튼 */}
         <button
           className="button"
+          style={{
+            backgroundColor: "#004d7c",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            transition: "0.1s",
+          }}
           disabled={!ready}
           onClick={async () => {
             try {
@@ -110,7 +117,7 @@ export function CheckoutPage() {
                 orderName: JSON.stringify(tossdata.selectedSeatsInfo),
 
                 // 이 아래 값들은 나중에 유저 테이블되면 앞에서 부터 가지고 오던 세션에서 가지고오기(?)
-                // 아직은 모르겠음 그냥 자바에서 하는게 더 편할듯 (아 비교해야되나..?)
+                // 아직은 모르겠음 그냥 자바에서 하는게 더 편할듯 (아 백에서 비교해야되나..?)
                 // customerEmail: "customer123@gmail.com",
                 // customerName: "김토스",
                 // customerMobilePhone: "01012341234",
@@ -133,7 +140,8 @@ export function CheckoutPage() {
               console.error(error);
 
               // alert("구매 실패, 잠시후 다시 시도해주세요");
-              // 실패하면 체크 박스 체크 안해서 일어나는거만 지금은 됨
+
+              // 실패하면 체크 박스 체크 안해서 위 alert 떴는데 이제 오류 나면 이 아래 문구 출력됨
               alert("약관에 동의해주세요");
             }
           }}

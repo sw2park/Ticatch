@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.danaojo.ticatch.order.Entity.KakaoPayDTO;
 import com.danaojo.ticatch.order.Entity.OrderDTO;
 import com.danaojo.ticatch.order.Entity.PFJoinDTO;
 import com.danaojo.ticatch.order.repository.OrderRepository;
@@ -51,12 +50,10 @@ public class OrderController {
 		return ResponseEntity.ok(result);
 	}
 	
-	// 예매 버튼 눌르면 여기로 옴 테이블에 데이터 저장 하는거임 (토스페이 결제)
+	// 예매 버튼 눌르면 여기로 옴 테이블에 데이터 저장 하는거임 (토스페이 결제 API)
 	@PostMapping("/pay")
 	public ResponseEntity<String> createReservation(@RequestBody OrderDTO orderListDTO) {
 		String result = orderService.createOrder(orderListDTO);
-		
-		System.out.println("dddddd");
 		
 		return ResponseEntity.ok(result);
 	}

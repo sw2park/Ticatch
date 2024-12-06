@@ -16,10 +16,8 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [seatInfo, setSeatInfo] = useState([]);
 
-  // 전달해야되는 값들 (DB까지 전달해서 저장함)
   const seqPfjoinIds = fetchId.map((item) => item.seqPfjoinId);
 
-  // Spring으로 데이터 전송
   // 결제 페이지로 값 옮기기 (checkout)
   const handleReservation = () => {
     const dataToSend = {
