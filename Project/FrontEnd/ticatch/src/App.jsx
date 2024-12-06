@@ -5,7 +5,6 @@ import "./App.css";
 import OrderPage from "./OrderPage/OrderPage";
 import { CheckoutPage } from "./TossPayments/Checkout";
 import { SuccessPage } from "./TossPayments/Success";
-import { FailPage } from "./TossPayments/Fail";
 
 const App = () => {
   return (
@@ -13,8 +12,7 @@ const App = () => {
       <Routes>
         <Route path="/order" element={<OrderPage />} />
         <Route path="/order/checkout" element={<CheckoutPage />} />
-        <Route path="/success" element={<SuccessPage />} />
-        <Route path="/fail" element={<FailPage />} />
+        <Route path="/order/success" element={<SuccessPage />} />
       </Routes>
     </BrowserRouter>
   );

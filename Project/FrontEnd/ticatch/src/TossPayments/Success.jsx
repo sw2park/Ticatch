@@ -1,9 +1,8 @@
-import { useEffect } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import styles from "./Success.module.css";
 
 export function SuccessPage() {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
 
   // 데이터 받기
   const location = useLocation();
@@ -22,22 +21,34 @@ export function SuccessPage() {
     selectedSeatsInfo: orderData.selectedSeatsInfo,
   };
 
+  const formatNumberToKRW = (number) => {
+    return new Intl.NumberFormat("ko-KR").format(number);
+  };
+  const NumberWithCommaKRW = () => {
+    const number = tossdata.totalPrice; // orderData 대신 tossdata에서 가져옴
+    return formatNumberToKRW(number); // 숫자를 포맷한 결과 반환
+  };
   return (
-    <div className="result wrapper">
-      <div className="box_section">
-        <h2>결제 성공</h2>
-        <p>SeqId: {tossdata.seqPfjoinIds}</p>
-        <p>총합: {tossdata.totalPrice}</p>
-        <p>마이페이지 - 주문내역에서 조회가능합니다</p>
-        {/* <p>{`paymentKey: ${searchParams.get("paymentKey")}`}</p> */}
-        <button
-          onClick={() => {
-            navigate("/order"); // 지금은 예매 페이지로 이동함 나중에 바꾸기
-          }}
-        >
-          마이페이지로 이동
-        </button>
+    <div className={styles.payment_success}>
+      <div className={styles.success_icon}>✅</div>
+      <h2 className={styles.h2}>결제 완료</h2>
+
+      <div className={styles.payment_details}>
+        <div className={styles.detail_row}>
+          <span>주문번호: </span>
+          <span>{orderData.seqPfjoinIds}</span>
+        </div>
+        <div className={styles.detail_row_total}>
+          <span>총 결제금액: </span>
+          <span>{NumberWithCommaKRW()}원</span>
+        </div>
       </div>
+
+      <p className={styles.notice}>마이페이지 - 주문내역에서 조회 가능합니다</p>
+
+      <button className={styles.mypage_btn} onClick={() => navigate("/order")}>
+        마이페이지로 이동
+      </button>
     </div>
   );
 }

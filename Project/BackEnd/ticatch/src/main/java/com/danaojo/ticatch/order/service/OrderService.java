@@ -37,7 +37,15 @@ public class OrderService {
 		for (OrderDTO.SeatInfo seatInfo : orderListDTO.getSelectedSeatsInfo()) {
 			seatNumbers.append(seatInfo.getSeat()).append(", "); // 리액트에서 전달 받은 좌석 데이터를 , 로 붙임 (인덱스로 넘어옴)
 		}
+		
+		// 마지막에 ", " 저장되서 지우는거
+		if (seatNumbers.length() > 0) {
+		    seatNumbers.deleteCharAt(seatNumbers.length() - 1); // 마지막 공백 제거
+		    seatNumbers.deleteCharAt(seatNumbers.length() - 1); // 마지막 쉼표 제거
+		}
+		
 		String seatNums = seatNumbers.substring(0, seatNumbers.length());
+		
 		order.setSeatNum(seatNums); // 좌석 위치 저장 예) A1, B1
 
 		int seatCount = seatNums.split(", ").length;

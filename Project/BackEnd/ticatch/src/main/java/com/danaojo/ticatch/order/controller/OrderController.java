@@ -51,7 +51,7 @@ public class OrderController {
 		return ResponseEntity.ok(result);
 	}
 	
-	// 예매 버튼 눌르면 여기로 옴 테이블에 데이터 저장 하는거임 (카카오페이 결제)
+	// 예매 버튼 눌르면 여기로 옴 테이블에 데이터 저장 하는거임 (토스페이 결제)
 	@PostMapping("/pay")
 	public ResponseEntity<String> createReservation(@RequestBody OrderDTO orderListDTO) {
 		String result = orderService.createOrder(orderListDTO);

@@ -125,12 +125,12 @@ export function CheckoutPage() {
 
               console.log("결제 정보 저장 성공: ", response.data);
 
-              navigate("/success", { state: tossdata });
+              navigate("/order/success", { state: tossdata });
             } catch (error) {
               // 에러 처리하기
               console.error(error);
 
-              navigate("/fail");
+              alert("구매 실패, 잠시후 다시 시도해주세요");
             }
           }}
         >
