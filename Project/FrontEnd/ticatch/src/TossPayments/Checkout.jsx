@@ -4,16 +4,16 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid"; // UUID를 생성하기 위해 라이브러리 사용
 
-const clientKey = "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm";
-// const customerKey = "_cMnaHj7WK7r8NSVnw-IX";
+const clientKey = "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm"; // 테스트용키
+// const customerKey = "_cMnaHj7WK7r8NSVnw-IX"; // 계속 만들기 싫어서 주석 후 비회원으로만 결제 가능하게 만듬
 
 export function CheckoutPage() {
   const uniqueOrderId = uuidv4(); // UUID 생성 (orderId 6자 이상이여야되서 seq로는 안됨)
   const navigate = useNavigate(); // 이걸로 페이지 이동함
-  // 전페이지에서 오는거 받는거
+  // 이전 페이지에서 오는거 받는거
   const location = useLocation();
   const orderData = location.state;
-  // 받은 데이터가 없으면 이거 출력함
+  // 받은 데이터가 없으면 아래를 화면에 출력함
   if (!orderData) {
     return <p>전달된 데이터가 없습니다.</p>;
   }
