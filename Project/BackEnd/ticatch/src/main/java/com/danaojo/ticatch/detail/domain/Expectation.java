@@ -15,10 +15,10 @@ public class Expectation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_exp_id")
 	@SequenceGenerator(name = "seq_exp_id", sequenceName = "seq_exp_id", allocationSize = 1)
-	private int exp_id;
+	private int seq_exp_id;
 	
 	private String user_id;
-	private String seq_pfjoin_id;
+	private Long seq_pfjoin_id;
 	private String exp_content;
 	private String exp_date;
 

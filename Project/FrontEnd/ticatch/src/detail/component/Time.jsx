@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-export default function Time({ time, setSelectTime }) {
+export default function Time({ time, setSelectTime, selectDate }) {
     const extractTimes = (timeString) => {
         const match = timeString.match(/\(([^)]+)\)/); // 괄호 안의 값 추출
         if (match) {
@@ -9,38 +9,47 @@ export default function Time({ time, setSelectTime }) {
         return [];
     };
 
-    const times = extractTimes(time);
-
+    const times = time ? extractTimes(time) : [];
     const [selectTime, setSelectedTime] = useState(null);
 
     const handleClick = (data) => {
         setSelectedTime(data);
-        // setSelectTime(selectTime);
         setSelectTime(data);
     };
 
-    // console.log('Time time : ' + time)
-    // console.log('Time : ' + selectTime);
-    // console.log('========================================')
+    // 날짜 변경 시 선택된 회차 초기화
+    useEffect(() => {
+        setSelectedTime(null);
+    }, [selectDate]);
+
+    // console.log(selectDate);
 
     return (
         <ul className="product_time_choice_ul">
-            {times.map((time, index) => (
-                <li className="product_time_choice_li" key={index}>
-                    <button
-                        className={
-                            selectTime === time
-                                ? "product_time_choice_btn--selected"
-                                : "product_time_choice_btn"
-                        }
-                        onClick={() => handleClick(time)}
-                    >
-                        <span className="product_time_choice_span">
-                            {time.replace(':', '시 ') + '분'}
-                        </span>
-                    </button>
+            {!selectDate ? (
+                <li className="product_time_choice_li">
+                    <span className="product_time_choice_message">
+                        예매 날짜를 선택해주세요
+                    </span>
                 </li>
-            ))}
+            ) : (
+                times.map((time, index) => (
+                    <li className="product_time_choice_li" key={index}>
+                        <button
+                            className={
+                                selectTime === time
+                                    ? "product_time_choice_btn--selected"
+                                    : "product_time_choice_btn"
+                            }
+                            onClick={() => handleClick(time)}
+                        >
+                            <span className="product_time_choice_span">
+                                {time.replace(':', '시 ') + '분'}
+                            </span>
+                        </button>
+                    </li>
+                ))
+            )}
         </ul>
     );
 }

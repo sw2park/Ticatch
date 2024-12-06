@@ -30,5 +30,12 @@ public class ProductRepository {
 	        .getResultList();
 	}
 
+	public List<PFJoin> detailTab(Long seq_pfjoin_id) {
+		return em.createQuery(
+				"SELECT p.p_start_date, p.p_end_date, p.pd_img, p.pd_time FROM PFJoin p WHERE p.seq_pfjoin_id = :seq_pfjoin_id ",
+				PFJoin.class)
+				.setParameter("seq_pfjoin_id", seq_pfjoin_id)
+				.getResultList();
+	}
 
 }

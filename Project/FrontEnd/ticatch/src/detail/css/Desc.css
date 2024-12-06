@@ -13,8 +13,13 @@
     height: auto;
 }
 
+.desc_content_submit {
+    font-size: 20px;
+}
+
 .desc_text {
-    font-size: 17px;
+    font-size: 15px;
+    font-weight: 600;
     color: #5a5a5a;
 }
 

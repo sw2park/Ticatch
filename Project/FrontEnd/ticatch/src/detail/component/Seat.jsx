@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 
 export default function Seat({ seqPfjoinId, selectDate, selectTime }) {
-    const [seatData, setSeatData] = useState(null);  // 초기값을 null로 설정
+    const [seatData, setSeatData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -11,9 +11,10 @@ export default function Seat({ seqPfjoinId, selectDate, selectTime }) {
             try {
                 setLoading(true);
                 const response = await axios.get(`http://localhost:9090/detail/seat/${seqPfjoinId}/${selectDate}/${selectTime}/view`);
-                setSeatData(response.data);  // seatData에 응답 저장
+                setSeatData(response.data ?? null); // 조회 값이 없으면 null
                 setError(null);
             } catch (err) {
+                setSeatData(null); // 에러 발생 시 seatData 초기화
                 setError("잔여 좌석을 불러오는데 실패했습니다.");
             } finally {
                 setLoading(false);
@@ -22,13 +23,13 @@ export default function Seat({ seqPfjoinId, selectDate, selectTime }) {
 
         if (selectDate && selectTime) {
             fetchData();
+        } else {
+            setSeatData(null); // 날짜 또는 시간값이 없으면 초기화
         }
     }, [selectDate, selectTime, seqPfjoinId]);
 
     const isDateOrTimeInvalid = !selectDate || !selectTime;
-
-    // seatData가 존재하면 seatData를 출력, 존재하지 않으면 160 출력
-    const totalSeats = seatData !== undefined && seatData !== null ? seatData : 160;
+    const totalSeats = seatData !== null ? seatData : 160;
 
     return (
         <>
@@ -40,7 +41,11 @@ export default function Seat({ seqPfjoinId, selectDate, selectTime }) {
                 <ul className='product_seat_remain_ul'>
                     {isDateOrTimeInvalid || loading ? (
                         <li className='product_seat_remain_li'>
-                            <span className='product_seat_grade'>예매하실 날짜와 회차를 선택해주세요</span>
+                            <span className='product_seat_grade'>
+                                {isDateOrTimeInvalid
+                                    ? '예매 날짜/회차를 선택해주세요'
+                                    : '로딩 중...'}
+                            </span>
                         </li>
                     ) : (
                         <li className='product_seat_remain_li'>

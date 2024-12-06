@@ -7,6 +7,8 @@ import Test from './detail/component/Test.jsx';
 import MainTest from './detail/component/MainTest.jsx';
 import DetailList from './detail/component/DetailList.jsx';
 import TestConnection from './detail/component/TestConnection.jsx';
+import DetailMain from './detail/component/Main.jsx';
+import KakaoMap from './detail/component/KakaoMap.jsx';
 
 function App() {
   const [data, setData] = useState('')
@@ -18,9 +20,28 @@ function App() {
    }, []);
 
    return (
-       <div>
-           받아온 값 : {data}
-       </div>
+    //    <div>
+    //        받아온 값 : {data}
+    //    </div>
+    //    <>
+    //     <Main />
+    //    </>
+      //  <>
+      //   <Test />
+      //  </>
+      // <>
+      //   <TestConnection/>
+      // </>
+    // <>
+    //      <DetailList/>
+    // </>
+    <Router>
+      <Routes>
+        <Route path="/detail/:seqpfjoinId/view" element={<DetailMain />} /> {/* component 대신 element 사용 */}
+      </Routes>
+    </Router>
+    
+    // <KakaoMap />
    );
 }
 

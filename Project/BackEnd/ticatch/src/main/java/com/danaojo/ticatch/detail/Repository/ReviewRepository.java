@@ -18,10 +18,11 @@ public class ReviewRepository {
 	private final EntityManager em;
 	
 	// 해당 공연 리뷰 조회
-	public List<Review> findReview(Long seq_pId) {
+	public List<Review> findReviews(Long seq_pfjoin_id) {
 		return em.createQuery(
-				"select r from Review r where seq_pfjoin_id = :seq_pId", 
+				"SELECT r FROM Review r WHERE seq_pfjoin_id = :seq_pfjoin_id", 
 				Review.class)
+				.setParameter("seq_pfjoin_id", seq_pfjoin_id)
 				.getResultList();
 	}
 

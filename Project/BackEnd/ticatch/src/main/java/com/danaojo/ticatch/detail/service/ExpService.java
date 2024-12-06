@@ -18,7 +18,7 @@ public class ExpService {
 	private final ExpRepository expRepository;
 	
 	public List<Expectation> findExps(Long seq_pfjoin_id) {
-		return expRepository.findExp(seq_pfjoin_id);
+		return expRepository.findExps(seq_pfjoin_id);
 	}
 
 	public void saveExp(Expectation expectation) {

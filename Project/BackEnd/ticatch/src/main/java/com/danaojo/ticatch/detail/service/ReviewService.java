@@ -18,8 +18,8 @@ public class ReviewService {
 	private final ReviewRepository reviewRepository;
 	
 	// 해당 공연의 리뷰 찾기
-	public List<Review> findReviews(Long seq_pdId) {
-		return reviewRepository.findReview(seq_pdId);
+	public List<Review> findReviews(Long seq_pfjoin_id) {
+		return reviewRepository.findReviews(seq_pfjoin_id);
 	}
 
 	public void saveReview(Review review) {
