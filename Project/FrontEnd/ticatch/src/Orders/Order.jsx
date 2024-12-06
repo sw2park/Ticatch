@@ -20,7 +20,7 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
   const seqPfjoinIds = fetchId.map((item) => item.seqPfjoinId);
 
   // Spring으로 데이터 전송
-  // 결제 페이지로 값 옮기기
+  // 결제 페이지로 값 옮기기 (checkout)
   const handleReservation = () => {
     const dataToSend = {
       seqPfjoinIds,
@@ -42,19 +42,7 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
 
     console.log("전송할 데이터:", dataToSend);
 
-    navigate("/order/finishOrder", { state: dataToSend });
-
-    // 백에 저장하는거 잠시 주석처리 나중에 결제페이지에서 결제 완료되면 백으로 보낼 예정
-    // axios
-    //   .post("/api/order/reservation", dataToSend)
-    //   .then((response) => {
-    //     console.log("데이터 전송 성공:", response.data);
-    //     alert("예매가 완료되었습니다!");
-    //   })
-    //   .catch((error) => {
-    //     console.error("데이터 전송 실패:", error);
-    //     alert("예매에 실패했습니다.");
-    //   });
+    navigate("/order/checkout", { state: dataToSend });
   };
 
   // API 데이터 가져오기

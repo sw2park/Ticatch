@@ -1,15 +1,37 @@
 import { loadTossPayments, ANONYMOUS } from "@tosspayments/tosspayments-sdk";
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid"; // UUID를 생성하기 위해 라이브러리 사용
 
 const clientKey = "test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm";
 // const customerKey = "_cMnaHj7WK7r8NSVnw-IX";
 
 export function CheckoutPage() {
+  const uniqueOrderId = uuidv4(); // UUID 생성 (orderId 6자 이상이여야되서 seq로는 안됨)
+  const navigate = useNavigate(); // 이걸로 페이지 이동함
+  // 전페이지에서 오는거 받는거
+  const location = useLocation();
+  const orderData = location.state;
+  // 받은 데이터가 없으면 이거 출력함
+  if (!orderData) {
+    return <p>전달된 데이터가 없습니다.</p>;
+  }
+  // 있으면 알맞게 매핑
   const [amount, setAmount] = useState({
     currency: "KRW",
-    // value: 50_000,
-    value: 10,
+    value: orderData.totalPrice, // 앞 페이지에서 가지고온 값으로 매핑
   });
+
+  let tossdata = {
+    seqPfjoinIds: orderData.seqPfjoinIds,
+    selectedDate: orderData.selectedDate,
+    selectedTime: orderData.selectedTime,
+    //   seat: orderData.selectedSeatsInfo,
+    totalPrice: orderData.totalPrice,
+    selectedSeatsInfo: orderData.selectedSeatsInfo,
+  };
+
   const [ready, setReady] = useState(false);
   const [widgets, setWidgets] = useState(null);
 
@@ -17,10 +39,6 @@ export function CheckoutPage() {
     async function fetchPaymentWidgets() {
       // ------  결제위젯 초기화 ------
       const tossPayments = await loadTossPayments(clientKey);
-      // 회원 결제
-      //   const widgets = tossPayments.widgets({
-      //     customerKey,
-      //   });
 
       // 비회원으로 해서 저기 위에 있는 customerKey를 안쓰고(저거 계속 랜덤하게 만들어야됨)
       // 그냥 저장할거임
@@ -31,7 +49,7 @@ export function CheckoutPage() {
     }
 
     fetchPaymentWidgets();
-  }, [clientKey]); // 회원을 쓸거임 여기에 customerKey 추가하면됨
+  }, [clientKey]);
 
   useEffect(() => {
     async function renderPaymentWidgets() {
@@ -69,7 +87,7 @@ export function CheckoutPage() {
   }, [widgets, amount]);
 
   return (
-    <div className="wrapper">
+    <div className="wrapper" style={{ width: "100%" }}>
       <div className="box_section">
         {/* 결제 UI */}
         <div id="payment-method" />
@@ -86,18 +104,33 @@ export function CheckoutPage() {
               // ------ '결제하기' 버튼 누르면 결제창 띄우기 ------
               // 결제를 요청하기 전에 orderId, amount를 서버에 저장하세요.
               // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도입니다.
+
+              // 난 반대로했음 결제요청하고 다 되면 급액 서버에 저장함
               await widgets.requestPayment({
-                orderId: "A_SXxQqM1YIE890ykfvqW",
-                orderName: "토스 티셔츠 외 2건",
-                successUrl: window.location.origin + "/success",
-                failUrl: window.location.origin + "/fail",
-                customerEmail: "customer123@gmail.com",
-                customerName: "김토스",
-                customerMobilePhone: "01012341234",
+                orderId: uniqueOrderId,
+                orderName: JSON.stringify(tossdata.selectedSeatsInfo),
+                // customerEmail: "customer123@gmail.com",
+                // customerName: "김토스",
+                // customerMobilePhone: "01012341234",
               });
+
+              console.log("결제 성공!");
+
+              // ------ 결제 성공 후 데이터 서버 전송 ------ //
+              const response = await axios.post("/api/order/pay", tossdata, {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              });
+
+              console.log("결제 정보 저장 성공: ", response.data);
+
+              navigate("/success", { state: tossdata });
             } catch (error) {
               // 에러 처리하기
               console.error(error);
+
+              navigate("/fail");
             }
           }}
         >
