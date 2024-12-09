@@ -1,0 +1,108 @@
+.top-bar {
+  width: 1400px;
+  margin: 10px auto;
+
+  border: 1px solid #ccc;
+
+  display: flex;
+}
+
+.left-title {
+  display: flex;
+  flex-direction: row;
+
+  background-color: black;
+
+  width: 20%;
+  height: 140px;
+  align-items: center;
+  justify-content: center;
+}
+
+.mypage-title {
+  color: white;
+
+  justify-content: center;
+  text-align: center;
+
+  width: 100%;
+}
+
+.right-title {
+  display: flex;
+  flex-direction: row;
+
+  width: 80%;
+}
+
+.mypage-point {
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  display: flex;
+}
+
+.mypage-exceptions {
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+
+  border-right: 1px solid #ccc;
+
+  width: 25%;
+  height: auto;
+}
+
+.mypage-reservation-count {
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+
+  border-right: 1px solid #ccc;
+
+  width: 25%;
+  height: auto;
+}
+
+.mypage-edit-myInfo {
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+
+  width: 25%;
+  height: auto;
+}
+
+.mypage-review {
+  display: flex;
+  flex-direction: column;
+
+  border-right: 1px solid #ccc;
+
+  text-align: center;
+
+  width: 25%;
+  height: auto;
+}
+
+.span-title,
+.span-subtitle {
+  font-weight: bold;
+}
+
+.span-title {
+  font-size: larger;
+}
+
+.span-subtitle {
+  font-size: large;
+  color: red;
+}
+
+.span-subtitle:hover {
+  text-decoration: 2px underline;
+}
