@@ -39,11 +39,18 @@
 }
 
 .location_map_box {
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
     width: 100%;
     height: 648px;
     margin-top: 18px;
 }
+
+/* #map {
+    background-color: antiquewhite;
+    width: 100%;
+    height: 648px;
+    margin-top: 18px;
+} */
 
 .location_search_btn {
     background-color: #004d7c;

@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import Calendar from './Calendar';
 import Seat from './Seat';
 import Time from './Time';
 
 export default function Reserve({ productData }) {
-
     const [selectDate, setSelectDate] = useState('');
     const [selectTime, setSelectTime] = useState('');
-    
-    console.log("***************************************")
-    console.log('Reserve 선택날짜 for Calendar : ' + selectDate);
-    console.log('Reserve 선택회차 for Time : ' + selectTime);
-    console.log("***************************************")
+
+    console.log("===========================");
+    console.log("Reserve Date : " + selectDate);
+    console.log("Reserve Time : " + selectTime);
+    console.log("===========================");
 
     return (
         <>
@@ -29,7 +27,12 @@ export default function Reserve({ productData }) {
                             const time = product.pd_time;
 
                             return (
-                                <Calendar startDate={startDate} endDate={endDate} time={time} setSelectDate={setSelectDate} />
+                                <Calendar
+                                    startDate={startDate}
+                                    endDate={endDate}
+                                    time={time}
+                                    setSelectDate={setSelectDate}
+                                />
                             );
                         })}
                     </div>
@@ -40,33 +43,37 @@ export default function Reserve({ productData }) {
                         <div className='product_title'>회차 선택</div>
                     </div>
                     <div className='product_time_choice'>
-                    {productData.map((product) => {
+                        {productData.map((product) => {
                             const time = product.pd_time;
 
                             return (
-                                <Time time={time} setSelectTime={setSelectTime} />
+                                <Time
+                                    time={time}
+                                    setSelectTime={setSelectTime}
+                                    selectDate={selectDate} // 날짜를 선택했는지 확인하기 위해 날짜값 전달
+                                />
                             );
                         })}
                     </div>
                 </div>
                 <div className='product_seat_container'>
-                {productData.map((product) => {
-                            const seqPfjoinId = product.seq_pfjoin_id;
+                    {productData.map((product) => {
+                        const seqPfjoinId = product.seq_pfjoin_id;
 
-                            return (
-                                <Seat seqPfjoinId={seqPfjoinId} selectDate={selectDate} selectTime={selectTime} />
-                            );
-                        })}
+                        return (
+                            <Seat
+                                seqPfjoinId={seqPfjoinId}
+                                selectDate={selectDate}
+                                selectTime={selectTime}
+                            />
+                        );
+                    })}
                 </div>
             </div>
 
             <div className='resevation_wrap'>
                 <button className='reseve_btn'>
-                    <Link className='reservation_link'
-                    
-                    >
-                        예매하기
-                    </Link>
+                    <a className='reservation_link'>예매하기</a>
                 </button>
             </div>
         </>

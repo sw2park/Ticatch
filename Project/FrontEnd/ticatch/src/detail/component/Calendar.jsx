@@ -45,12 +45,12 @@ export default function Calendar({ startDate, endDate, time, setSelectDate }) {
     // 선택한 날짜 데이터값 포맷
     const handleDateChange = (date) => {
         const selectDate = format(date, 'yyyy.MM.dd'); 
-        console.log("-----------------------------")
-        console.log('Calendar-Formatted Date:', selectDate);
+        // console.log("-----------------------------")
+        // console.log('Calendar-Formatted Date:', selectDate);
         setSelectedDate(selectDate);
         setSelectDate(selectDate);  // Reserve한테 전달
-        console.log('Calendar : ', selectDate);
-        console.log("-----------------------------")
+        // console.log('Calendar : ', selectDate);
+        // console.log("-----------------------------")
     };
 
     return (

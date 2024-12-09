@@ -8,6 +8,14 @@ import Location from './Location.jsx';
 import Info from './Info.jsx';
 
 export default function DetailMain() {
+    
+    // useEffect(() => {
+    //     // 개발 중 임의로 사용자 아이디 저장
+    //     localStorage.setItem("userId", "test1");
+    // }, []);
+
+    // const userId = localStorage.getItem("userId");
+    //console.log('임시 session값 저장 : ' + userId);
 
     const [activeTab, setActiveTab] = useState('상세정보');
     const tabContent = {
@@ -17,6 +25,7 @@ export default function DetailMain() {
         위치정보: <Location/>,
         예매취소안내: <CancelInfo/>,
     };
+
 
     return(
         <div className='wrap'>

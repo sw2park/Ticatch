@@ -74,10 +74,43 @@
     font-weight: 500;
     padding: 0 20px;
     margin-bottom: 18px;
+    display: flex;
 }
 
+.commnet_star_rate_choice {
+    margin: 0px 3px 0px 0px;
+}
+
+.commnet_rate_choice {
+    display: flex;
+    line-height: 15px;
+}
+
+.comment_star_choice_icon {
+    font-size: 20px;
+    margin: 0px 2px 0px 0px;
+    color: #004d7c;
+}
+
+/* 비활성화된 별 */
+.comment_star_choice_icon {
+    display: inline-block;
+    font-size: 21px;
+    color: #ddd; 
+    cursor: pointer;
+    transition: color 0.1s ease-in-out;
+}
+
+/* 활성화된 별 */
+.comment_star_choice_icon.filled {
+    color: #004d7c; 
+}
+
+
 .comment_rate_text {
-    margin-left: 10px;
+    margin-left: 5px;
+    font-weight: 600;
+    font-size: 15px;
 }
 
 .comment_textarea {

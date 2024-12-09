@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
+// 프론트-백 연결 테스트 코드
+
 const DetailList = () => {
   const { seqpfjoinId } = useParams(); // URL에서 seqpfjoinId 파라미터를 가져옴
   const [productData, setProductData] = useState(null); // 초기값을 null로 설정

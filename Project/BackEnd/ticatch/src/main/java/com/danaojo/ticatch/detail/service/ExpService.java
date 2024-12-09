@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.danaojo.ticatch.detail.Repository.ExpRepository;
 import com.danaojo.ticatch.detail.domain.Expectation;
@@ -17,10 +18,14 @@ public class ExpService {
 	@Autowired
 	private final ExpRepository expRepository;
 	
+	// 해당 공연의 기대평 조회
+	@Transactional(readOnly = true)
 	public List<Expectation> findExps(Long seq_pfjoin_id) {
-		return expRepository.findExp(seq_pfjoin_id);
+		return expRepository.findExps(seq_pfjoin_id);
 	}
 
+	// 기대평 저장
+	@Transactional
 	public void saveExp(Expectation expectation) {
 		expRepository.save(expectation);
 	}
