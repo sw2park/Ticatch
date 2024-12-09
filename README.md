@@ -11,7 +11,6 @@
 (추후 개발) 
 (예매 하면 고객의 캘린더의 고객이 예매한 날짜랑 장소를 조회 할 수 있다) 
 (관리자 페이지가 따로 있으며 여기서는 모든 회원들의 정보 및 예매한 티켓의 로그(누가 무엇을 언제 예매하였고 그 티캣의 날짜 장소 등) 를 조회 할 수 있다)
-(좌석 선택 좌석에 따라서 가격이 다름)
 ()
 
 ## 타켓사이트 
@@ -39,7 +38,7 @@
 (나중에 문서 작업 및 발표 적기)
 
 ## 설계도
-[플로우 차트 / ERD / 와이어프레임 등](https://drive.google.com/file/d/1rJ98jUYeRiusLpkJjoduckJKTypFYKiF/view?usp=sharing)
+[플로우 차트 / ERD / 와이어프레임 유스케이스 등](https://drive.google.com/file/d/1rJ98jUYeRiusLpkJjoduckJKTypFYKiF/view?usp=sharing)
 
 ## 개발 환경
 ### Front-End
