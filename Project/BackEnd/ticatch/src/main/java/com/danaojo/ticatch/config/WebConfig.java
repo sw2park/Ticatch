@@ -13,7 +13,7 @@ public class WebConfig{
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**").allowedMethods("*") // 모든 http 메소드를 허용
-                .allowedOrigins("http://localhost:3000");
+                .allowedOrigins("http://localhost:3001");
             }
         };
     }

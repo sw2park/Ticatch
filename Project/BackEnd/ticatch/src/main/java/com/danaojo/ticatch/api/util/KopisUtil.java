@@ -1,5 +1,7 @@
 package com.danaojo.ticatch.api.util;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +9,25 @@ import com.danaojo.ticatch.api.kopis.dto.PFJoinDTO;
 import com.danaojo.ticatch.api.repository.PFJoin;
 
 public class KopisUtil {
-	// PFJOIN DB 저장용 변환 메소드
+	// 오늘 날짜 구해서 +31일 한 후 yyyyMMdd 형태로 반환 메소드
+	public String returnAfterday() {
+	    LocalDate nowDate = LocalDate.now();
+	    LocalDate afterDate = nowDate.plusDays(31);
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+	    
+	    return afterDate.format(formatter);
+	}
 	
+	// 오늘 날짜 구해서 yyyyMMdd 형태로 반환 메소드
+	public String returnNowToday() { 
+		LocalDate now = LocalDate.now();
+		DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyyMMdd");
+		String formNow = now.format(form);
+		
+		return formNow;
+	}
+	
+	// PFJOIN DB 저장용 변환 메소드
 	public List<PFJoin> returnPFJoinList(List<PFJoinDTO> list){
 		List<PFJoin> result = new ArrayList<>();
 		
@@ -42,6 +61,20 @@ public class KopisUtil {
 			pf.setPd_time(list.get(i).getPf_time());
 			
 			result.add(pf);
+		}
+		return result;
+	}
+	
+	// PFJoinDB 상세이미지 저장용
+	public String concatDetailImage(List<String> list) {
+		String result = "";
+		
+		for(String str : list) {
+			if(str.equals(" ")) {
+				continue;
+			} else {
+				result += str + "|";
+			}
 		}
 		return result;
 	}

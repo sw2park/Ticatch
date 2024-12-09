@@ -1,3 +1,4 @@
+
 import {useEffect, useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'
@@ -10,14 +11,24 @@ import TestConnection from './detail/component/TestConnection.jsx';
 import DetailMain from './detail/component/Main.jsx';
 import KakaoMap from './detail/component/KakaoMap.jsx';
 
-function App() {
-  const [data, setData] = useState('')
 
-   useEffect(() => {
-       axios.get("/test")
-       .then(res => setData(res.data))
-       .catch(err => console.log(err))
-   }, []);
+import "./App.css";
+import OrderPage from "./OrderPage/OrderPage";
+import { CheckoutPage } from "./TossPayments/Checkout";
+import { SuccessPage } from "./TossPayments/Success";
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/order" element={<OrderPage />} />
+        <Route path="/order/checkout" element={<CheckoutPage />} />
+        <Route path="/order/success" element={<SuccessPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
 
    return (
     //    <div>
@@ -47,3 +58,5 @@ function App() {
 
 
 export default App;
+
+
