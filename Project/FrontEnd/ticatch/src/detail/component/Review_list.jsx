@@ -25,6 +25,18 @@ export default function ReviewList() {
 
         fetchData();
     }, [seqpfjoinId]);
+
+    // 2024-12-09 05:36 이런형식으로 출력
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // 1월이 0이므로 +1
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+
+        return `${year}-${month}-${day} ${hours}:${minutes}`;
+    };
     
     // if (loading) return <div>로딩 중...</div>;
     if (error) return <div>{error}</div>;
@@ -48,7 +60,7 @@ export default function ReviewList() {
                                             {review.user_id}
                                         </span>
                                         <span className='review_item_create_date'>
-                                            {review.review_date}
+                                            {formatDate(review.review_date)}
                                         </span>
                                         <span className='review_item_purchaser'>
                                             관람자

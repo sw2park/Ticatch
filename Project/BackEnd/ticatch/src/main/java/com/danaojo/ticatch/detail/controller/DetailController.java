@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -75,12 +76,13 @@ public class DetailController {
 		return expService.findExps(seq_pfjoin_id);
 	}
 	
+	
 	// 리뷰 저장
-	@PostMapping("/detail/reviw/new")
-	public String createReview(ReviewDTO reviewDto) {
+	@PostMapping("/detail/review/new")
+	public String createReview(@RequestBody ReviewDTO reviewDto) {
 		Review review = new Review();		
-		review.setSeq_review_id(reviewDto.getSeq_review_id());
 		review.setUser_id(reviewDto.getUser_id());
+		review.setSeq_pfjoin_id(reviewDto.getSeq_pfjoin_id());
 		review.setReview_content(reviewDto.getReview_content());
 		review.setReview_date(reviewDto.getReview_date());
 		review.setRating(reviewDto.getRating());
@@ -92,10 +94,16 @@ public class DetailController {
 	
 	// 기대평 저장
 	@PostMapping("/detail/exp/new")
-	public String createExp(ExpectationDTO expDto) {
+	public String createExp(@RequestBody ExpectationDTO expDto) {
 		Expectation exp = new Expectation();
+		exp.setUser_id(expDto.getUser_id());
+		exp.setSeq_pfjoin_id(expDto.getSeq_pfjoin_id());
+		exp.setExp_content(expDto.getExp_content());
+		exp.setExp_date(expDto.getExp_date());
+		
 		expService.saveExp(exp);
-		return null;
+		
+		return "redirect:/";
 	}
  
 }

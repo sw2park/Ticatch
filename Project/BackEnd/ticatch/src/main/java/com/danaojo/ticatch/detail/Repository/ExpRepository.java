@@ -20,7 +20,7 @@ public class ExpRepository {
 	// 해당 공연 기대평 조회
 	public List<Expectation> findExps(Long seq_pfjoin_id) {
 		return em.createQuery(
-				"SELECT r FROM Expectation r WHERE seq_pfjoin_id = :seq_pfjoin_id", 
+				"SELECT e FROM Expectation e WHERE seq_pfjoin_id = :seq_pfjoin_id ORDER BY e.exp_date DESC", 
 				Expectation.class)
 				.setParameter("seq_pfjoin_id", seq_pfjoin_id)
 				.getResultList();

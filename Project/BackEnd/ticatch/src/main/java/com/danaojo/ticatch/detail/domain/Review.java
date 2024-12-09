@@ -1,5 +1,7 @@
 package com.danaojo.ticatch.detail.domain;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +22,7 @@ public class Review {
 	private String user_id;
 	private Long seq_pfjoin_id;
 	private String review_content;
-	private String review_date;
-	private String rating;
+	private LocalDateTime review_date;
+	private int rating;
 	
 }

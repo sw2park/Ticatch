@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../css/Review.css';
 import ReviewList from './Review_list';
 
-export default function Review({}) {
+export default function Review() {
 
+    const { seqpfjoinId } = useParams();
     const [hoverValue, setHoverValue] = useState(0); // 마우스 오버 중인 별점 값
     const [selectedValue, setSelectedValue] = useState(0); // 선택한 별점 값
     const [commentCount, setCommentCount] = useState(0); // 리뷰 글자수 카운트
@@ -48,22 +50,26 @@ export default function Review({}) {
         return stars;
     };
     
-    // 리뷰 작성
+    // 관람후기 작성
     const handleSubmit = async (event) => {
         event.preventDefault();
         
+        // 세션 저장
+        sessionStorage.setItem('user_id', 'test2');
+
         // 사용자의 세션 아이디를 가져오기
         const userId = sessionStorage.getItem('user_id');
-
+        //console.log("Review sessionId : " + userId);
+        
         if (!userId) {
-            alert('로그인 후 리뷰를 작성해주세요.');
+            alert('로그인 후 작성해주세요.');
             return;
         }
-
+        
         // 서버로 보낼 리뷰 데이터
         const reviewData = {
-            seq_review_id: Date.now(), // seq_review_id는 서버에서 자동으로 생성하므로 임시로 현재 시간 사용
             user_id: userId,
+            seq_pfjoin_id: seqpfjoinId,
             review_content: reviewContent,
             review_date: new Date(),
             rating: selectedValue,
@@ -71,7 +77,7 @@ export default function Review({}) {
 
         try {
             // 서버로 POST 요청 보내기
-            const response = await axios.post('/detail/reviw/new', reviewData);
+            const response = await axios.post('http://localhost:9090/detail/review/new', reviewData);
             if (response.status === 200) {
                 alert('리뷰가 등록되었습니다!');
                 setReviewContent(''); // 리뷰 내용 초기화

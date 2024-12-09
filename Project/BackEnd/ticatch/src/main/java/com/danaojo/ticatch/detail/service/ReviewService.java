@@ -13,13 +13,13 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class ReviewService {
 	
 	@Autowired
 	private final ReviewRepository reviewRepository;
 	
 	// 해당 공연의 리뷰 찾기
+	@Transactional(readOnly = true)
 	public List<Review> findReviews(Long seq_pfjoin_id) {
 		return reviewRepository.findReviews(seq_pfjoin_id);
 	}

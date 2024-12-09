@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../css/Location.css'
-import { Map } from 'react-kakao-maps-sdk';
 import KakaoMap from './KakaoMap';
+import { Map } from 'react-kakao-maps-sdk';
 
 export default function Location() {
     const { seqpfjoinId } = useParams(); // 경로에서 공연 시퀀스 아이디값 가져옴
@@ -56,12 +56,11 @@ export default function Location() {
 
                         <div className='location_map_wrap'>
                             <div className='location_map_box'>
+                                <KakaoMap />
                                 map_box
                                 위도 : {location.fd_latitude}
                                 경도 : {location.fd_longitude}
-
                             </div>
-                            <KakaoMap />
                             <button className='location_search_btn'>빠른 길찾기</button>
                         </div>
                     </div>

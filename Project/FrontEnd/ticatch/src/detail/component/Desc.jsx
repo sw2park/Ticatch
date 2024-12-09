@@ -38,8 +38,8 @@ export default function Description() {
                 <div className='desc_wrap' key={index}>
                     <div className='desc_text_container'>
                         <h3 className='desc_content_submit'>공연 시간 정보</h3>
-                        <sapn className='desc_text'>* 공연 기간 : {product.p_start_date} ~ {product.p_end_date}</sapn><br/>
-                        <sapn className='desc_text'>* 공연 시간 : {product.pd_time}</sapn>
+                        <span className='desc_text'>* 공연 기간 : {product.p_start_date} ~ {product.p_end_date}</span><br/>
+                        <span className='desc_text'>* 공연 시간 : {product.pd_time}</span>
                     </div>
                     <div className='desc_img_container'>
                         <img src={product.pd_img}></img>

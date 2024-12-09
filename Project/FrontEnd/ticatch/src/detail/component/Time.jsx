@@ -22,7 +22,7 @@ export default function Time({ time, setSelectTime, selectDate }) {
         setSelectedTime(null);
     }, [selectDate]);
 
-    // console.log(selectDate);
+    // console.log("Time Date : " +  selectDate);
 
     return (
         <ul className="product_time_choice_ul">

@@ -9,23 +9,23 @@ import Info from './Info.jsx';
 
 export default function DetailMain() {
     
-    useEffect(() => {
-        // 개발 중 임의로 사용자 아이디 저장
-        localStorage.setItem("userId", "test1");
-    }, []);
+    // useEffect(() => {
+    //     // 개발 중 임의로 사용자 아이디 저장
+    //     localStorage.setItem("userId", "test1");
+    // }, []);
 
-    const userId = localStorage.getItem("userId");
+    // const userId = localStorage.getItem("userId");
+    //console.log('임시 session값 저장 : ' + userId);
 
     const [activeTab, setActiveTab] = useState('상세정보');
     const tabContent = {
         상세정보: <Description/>,
-        관람후기: <Review userId={userId}/>,
+        관람후기: <Review/>,
         기대평: <Expectation/>,
         위치정보: <Location/>,
         예매취소안내: <CancelInfo/>,
     };
 
-    console.log('임시 session값 저장 : ' + userId);
 
     return(
         <div className='wrap'>
