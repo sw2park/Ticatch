@@ -8,10 +8,10 @@ import "./Order.css";
 const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
   const navigate = useNavigate(); // 이걸로 페이지 이동함
   const [fetchId, setFetchId] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date(2024, 11, 25));
   const [selectedTimeIndex, setSelectedTimeIndex] = useState(0);
   const [maxSelectableDate, setMaxSelectableDate] = useState(
-    new Date(2025, 11, 31)
+    new Date(2025, 11, 30)
   );
   const [totalPrice, setTotalPrice] = useState(0);
   const [seatInfo, setSeatInfo] = useState([]);
