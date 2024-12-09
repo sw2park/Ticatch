@@ -63,7 +63,7 @@ body {
 }
 
 .seat.available {
-  background-color: #c68fe6;
+  background-color: #747be9;
 }
 
 .seat.unavailable {
@@ -72,7 +72,7 @@ body {
 }
 
 .seat.selected {
-  background-color: #6c48c5;
+  background-color: #004d7c;
 }
 
 /* 줄 이름(알파벳) 스타일 */

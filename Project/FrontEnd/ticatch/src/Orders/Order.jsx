@@ -1,24 +1,24 @@
-import React, { useState, useEffect, useCallback, createContext } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import Calendar from "../Calendar/Calendar";
 import axios from "axios";
 
 import "./Order.css";
 
 const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
+  const navigate = useNavigate(); // 이걸로 페이지 이동함
   const [fetchId, setFetchId] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date(2024, 11, 25));
   const [selectedTimeIndex, setSelectedTimeIndex] = useState(0);
   const [maxSelectableDate, setMaxSelectableDate] = useState(
-    new Date(2025, 11, 31)
+    new Date(2025, 11, 30)
   );
   const [totalPrice, setTotalPrice] = useState(0);
   const [seatInfo, setSeatInfo] = useState([]);
 
-  // 전달해야되는 값들
   const seqPfjoinIds = fetchId.map((item) => item.seqPfjoinId);
 
-  // Spring으로 데이터 전송
-  // 이거 고치기
+  // 결제 페이지로 값 옮기기 (checkout)
   const handleReservation = () => {
     const dataToSend = {
       seqPfjoinIds,
@@ -40,16 +40,7 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
 
     console.log("전송할 데이터:", dataToSend);
 
-    axios
-      .post("/api/order/reservation", dataToSend)
-      .then((response) => {
-        console.log("데이터 전송 성공:", response.data);
-        alert("예매가 완료되었습니다!");
-      })
-      .catch((error) => {
-        console.error("데이터 전송 실패:", error);
-        alert("예매에 실패했습니다.");
-      });
+    navigate("/order/checkout", { state: dataToSend });
   };
 
   // API 데이터 가져오기
@@ -249,7 +240,7 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
       </button>
 
       <button className="reserve-button" onClick={() => fetchDetailById(1)}>
-        데이터 가져오기
+        테스트 데이터 가져오기
       </button>
     </div>
   );

@@ -42,21 +42,22 @@ public class OrderController {
 		return findBySeqPfJoinId;
 	}
 
-	// 예매 버튼 눌르면 여기로 옴 테이블에 데이터 저장 하는거임
-	@PostMapping("/reservation")
+	// 날짜 및 회차 바꾸면 이거 실행됨 계속 올바른 값 조회해서 돌려줌
+	@PostMapping("/data")
+	public ResponseEntity<String> getNewData(@RequestBody OrderDTO seatDTO) {
+		String result = orderService.getSoldSeats(seatDTO);
+		
+		return ResponseEntity.ok(result);
+	}
+	
+	// 예매 버튼 눌르면 여기로 옴 테이블에 데이터 저장 하는거임 (토스페이 결제 API)
+	@PostMapping("/pay")
 	public ResponseEntity<String> createReservation(@RequestBody OrderDTO orderListDTO) {
 		String result = orderService.createOrder(orderListDTO);
 		
 		return ResponseEntity.ok(result);
 	}
-
-	// 날짜 및 회차 바꾸면 이거 실행됨 계속 올바른 값 조회해서 돌려줌
-	@PostMapping("/data")
-	public ResponseEntity<String> getNewData(@RequestBody OrderDTO seatDTO) {
-		String result =orderService.getSoldSeats(seatDTO);
-		
-		return ResponseEntity.ok(result);
-	}
+	
 
 }
 
