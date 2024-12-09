@@ -3,6 +3,8 @@ package com.danaojo.ticatch.api.repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.danaojo.ticatch.mypage.entity.PFJoin;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;

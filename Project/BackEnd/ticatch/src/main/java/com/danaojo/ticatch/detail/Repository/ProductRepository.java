@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.danaojo.ticatch.api.repository.PFJoin;
+import com.danaojo.ticatch.mypage.entity.PFJoin;
 
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;

@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import com.danaojo.ticatch.api.kopis.Kopis;
 import com.danaojo.ticatch.api.kopis.dto.PFJoinDTO;
 import com.danaojo.ticatch.api.repository.KopisRepository;
-import com.danaojo.ticatch.api.repository.PFJoin;
 import com.danaojo.ticatch.api.util.KopisUtil;
+import com.danaojo.ticatch.mypage.entity.PFJoin;
 
 import jakarta.transaction.Transactional;
 

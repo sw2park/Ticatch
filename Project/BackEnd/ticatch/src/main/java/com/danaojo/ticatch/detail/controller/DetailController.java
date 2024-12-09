@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.danaojo.ticatch.api.repository.PFJoin;
 import com.danaojo.ticatch.detail.domain.Expectation;
 import com.danaojo.ticatch.detail.domain.Review;
 import com.danaojo.ticatch.detail.domain.Seat;
@@ -19,6 +18,7 @@ import com.danaojo.ticatch.detail.service.ExpService;
 import com.danaojo.ticatch.detail.service.ProductService;
 import com.danaojo.ticatch.detail.service.ReviewService;
 import com.danaojo.ticatch.detail.service.SeatService;
+import com.danaojo.ticatch.mypage.entity.PFJoin;
 
 import lombok.RequiredArgsConstructor;
 

@@ -1,4 +1,4 @@
-package com.danaojo.ticatch.api.repository;
+package com.danaojo.ticatch.mypage.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

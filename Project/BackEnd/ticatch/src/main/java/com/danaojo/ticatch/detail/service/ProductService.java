@@ -3,8 +3,9 @@ package com.danaojo.ticatch.detail.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.danaojo.ticatch.api.repository.PFJoin;
+
 import com.danaojo.ticatch.detail.Repository.ProductRepository;
+import com.danaojo.ticatch.mypage.entity.PFJoin;
 
 import lombok.RequiredArgsConstructor;
 

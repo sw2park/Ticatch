@@ -1,4 +1,4 @@
-package com.danaojo.ticatch.entity;
+package com.danaojo.ticatch.mypage.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +17,7 @@ public class Users {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Users_seq")
 	@SequenceGenerator(name = "Users_seq", sequenceName = "seq_users_id", allocationSize = 1)
-	private Long seq_users_id;
+	private Long seq_user_id;
 	
 	private String user_id;
 	private String user_pw;

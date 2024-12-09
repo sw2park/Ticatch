@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.danaojo.ticatch.api.kopis.dto.PFJoinDTO;
-import com.danaojo.ticatch.api.repository.PFJoin;
+import com.danaojo.ticatch.mypage.entity.PFJoin;
 
 public class KopisUtil {
 	// 오늘 날짜 구해서 +31일 한 후 yyyyMMdd 형태로 반환 메소드
