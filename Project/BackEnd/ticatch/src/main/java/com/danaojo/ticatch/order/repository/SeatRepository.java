@@ -6,4 +6,5 @@ import com.danaojo.ticatch.order.Entity.SeatEntity;
 import com.danaojo.ticatch.order.Entity.SeatId;
 
 public interface SeatRepository extends JpaRepository<SeatEntity, SeatId> {
+
 }

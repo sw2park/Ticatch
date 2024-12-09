@@ -35,7 +35,8 @@ public class SeatEntity {
 	@Column(name = "sold_seat", length = 255)
 	private String soldSeat; // 판매된 좌석 수
 
-	public SeatEntity() {}
+	public SeatEntity() {
+	}
 
 	public SeatEntity(Long seqPfjoinId, String selectDate, String selectTime, Integer total, String soldSeat) {
 		super();

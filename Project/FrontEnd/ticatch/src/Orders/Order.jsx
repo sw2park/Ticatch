@@ -1,28 +1,10 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  createContext,
-  useContext,
-} from "react";
+import React, { useState, useEffect, useCallback, createContext } from "react";
 import Calendar from "../Calendar/Calendar";
 import axios from "axios";
 
 import "./Order.css";
 
-const DataContext = createContext();
-
-export const DataProvider = ({ children }) => {
-  const [noseatInfo, setNoSeatInfo] = useState("");
-
-  return (
-    <DataContext.Provider value={{ noseatInfo, setNoSeatInfo }}>
-      {children}
-    </DataContext.Provider>
-  );
-};
-
-const Performance = ({ selectedSeats = [] }) => {
+const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
   const [fetchId, setFetchId] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTimeIndex, setSelectedTimeIndex] = useState(0);
@@ -31,22 +13,18 @@ const Performance = ({ selectedSeats = [] }) => {
   );
   const [totalPrice, setTotalPrice] = useState(0);
   const [seatInfo, setSeatInfo] = useState([]);
-  const [noseatInfo, setNoSeatInfo] = useState("");
-
-  console.log("noseatInfo: " + noseatInfo);
-
-  const DataContext = createContext();
 
   // 전달해야되는 값들
   const seqPfjoinIds = fetchId.map((item) => item.seqPfjoinId);
 
   // Spring으로 데이터 전송
+  // 이거 고치기
   const handleReservation = () => {
     const dataToSend = {
       seqPfjoinIds,
       selectedDate: selectedDate.toISOString().split("T")[0],
       totalPrice,
-      selectedTime: currentPdTime[selectedTimeIndex] || "시간 정보 없음",
+      selectedTime: currentPdTime[selectedTimeIndex],
       selectedSeatsInfo: selectedSeats.map((seat) => {
         const seatGroup = seat[0];
         const seatInfoForGroup = seatInfo.find(
@@ -54,11 +32,12 @@ const Performance = ({ selectedSeats = [] }) => {
         );
         return {
           seat,
-          grade: seatInfoForGroup?.grade || "정보 없음",
-          price: seatInfoForGroup?.price || 0,
+          grade: seatInfoForGroup?.grade || "등급 없음",
+          price: seatInfoForGroup?.price,
         };
       }),
     };
+
     console.log("전송할 데이터:", dataToSend);
 
     axios
@@ -106,23 +85,24 @@ const Performance = ({ selectedSeats = [] }) => {
     }
   };
 
-  const sendData = () => {
-    setNoSeatInfo(noseatInfo);
-  };
-
   // selectedDate 변경 시 데이터 전송
   useEffect(() => {
     sendDataToBackend();
   }, [selectedDate]);
 
-  // selectedTimeIndex 변경 시 데이터 전송
+  // selectedDate 변경 시 데이터 전송
   useEffect(() => {
     sendDataToBackend();
   }, [selectedTimeIndex]);
 
+  // 백에서 가지고온 좌석 정보 SeatBooking 으로 넘겨주는거
   useEffect(() => {
-    sendData();
-  }, [selectedDate]);
+    if (selectedSeats.length === 0) {
+      setNoSeatInfo("No seats selected");
+    } else {
+      setNoSeatInfo(`Selected seats: ${selectedSeats.join(", ")}`);
+    }
+  }, [selectedDate, selectedTimeIndex]);
 
   // 공연 시간을 포맷팅
   const formatPdTime = useCallback((pdTime) => {
@@ -257,7 +237,14 @@ const Performance = ({ selectedSeats = [] }) => {
       <h3>선택된 좌석: {selectedSeats.join(", ") || "없음"}</h3>
       <h2>총액: {totalPrice.toLocaleString("ko-KR")}원</h2>
 
-      <button className="reserve-button" onClick={handleReservation}>
+      <button
+        className="reserve-button"
+        onClick={() => {
+          selectedSeats.length != 0
+            ? handleReservation()
+            : alert("좌석을 선택해주세요");
+        }}
+      >
         예매하기
       </button>
 

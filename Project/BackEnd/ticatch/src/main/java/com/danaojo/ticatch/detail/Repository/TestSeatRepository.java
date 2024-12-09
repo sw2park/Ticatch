@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 
 @Repository
 @RequiredArgsConstructor
-public class SeatRepository {
+public class TestSeatRepository {
 	
 	@Autowired
 	private final EntityManager em;
@@ -24,5 +24,4 @@ public class SeatRepository {
 	            .setParameter("selectTime", selectTime)
 	            .getSingleResult();
 	}
-
 }

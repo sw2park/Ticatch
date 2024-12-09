@@ -11,7 +11,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "PFJOIN") // 예약어가 아닌 기존 테이블 이름으로 설정
 @Getter @Setter @ToString
-public class PFJoinDTO {
+public class TestPFJoinDTO {
 
     @Id
     @Column(name = "SEQ_PFJOIN_ID")
@@ -77,6 +77,6 @@ public class PFJoinDTO {
     @Column(name = "PL_LOCATION_SIDO")
     private String plLocationSido;
     
-    public PFJoinDTO() {}
+    public TestPFJoinDTO() {}
     
 }
