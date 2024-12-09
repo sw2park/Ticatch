@@ -1,6 +1,8 @@
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import styles from "./Success.module.css";
 
+import qr from "./image/ticketLink_QR.png";
+
 export function SuccessPage() {
   const navigate = useNavigate();
 
@@ -21,6 +23,11 @@ export function SuccessPage() {
     selectedSeatsInfo: orderData.selectedSeatsInfo,
   };
 
+  // 좌석만 출력
+  const titleSeats = `${orderData.selectedSeatsInfo
+    .map((seat) => seat.seat)
+    .join(", ")}`;
+
   const formatNumberToKRW = (number) => {
     return new Intl.NumberFormat("ko-KR").format(number);
   };
@@ -32,11 +39,24 @@ export function SuccessPage() {
     <div className={styles.payment_success}>
       <div className={styles.success_icon}>✅</div>
       <h2 className={styles.h2}>결제 완료</h2>
-
+      {/* 이건 티켓링크로 가는 QR 코드임 */}
+      <img style={{ maxWidth: "100%" }} src={qr} alt="qr코드" />
       <div className={styles.payment_details}>
         <div className={styles.detail_row}>
           <span>주문번호: </span>
           <span>{orderData.seqPfjoinIds}</span>
+        </div>
+        <div className={styles.detail_row}>
+          <span>공연날짜: </span>
+          <span>{orderData.selectedDate}</span>
+        </div>
+        <div className={styles.detail_row}>
+          <span>회차: </span>
+          <span>{orderData.selectedTime}</span>
+        </div>
+        <div className={styles.detail_row}>
+          <span>좌석: </span>
+          <span>{titleSeats}</span>
         </div>
         <div className={styles.detail_row_total}>
           <span>총 결제금액: </span>
@@ -44,8 +64,11 @@ export function SuccessPage() {
         </div>
       </div>
 
-      <p className={styles.notice}>마이페이지 - 주문내역에서 조회 가능합니다</p>
+      <p className={styles.notice}>
+        장소는 마이페이지 - 주문내역에서 조회 가능합니다
+      </p>
 
+      {/* 지금은 그냥 예매페이지로 이동함 */}
       <button className={styles.mypage_btn} onClick={() => navigate("/order")}>
         마이페이지로 이동
       </button>

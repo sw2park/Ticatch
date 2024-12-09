@@ -32,6 +32,14 @@ export function CheckoutPage() {
     selectedSeatsInfo: orderData.selectedSeatsInfo,
   };
 
+  // 제목을 문자열로 보내줘야되서 함(난 좌석선택된걸로 보내줌)
+  const titleSeats = `좌석: ${orderData.selectedSeatsInfo
+    .map((seat) => seat.seat)
+    .join(", ")}`;
+
+  console.log(orderData.selectedSeatsInfo);
+  console.log(JSON.stringify(orderData.selectedSeatsInfo));
+
   const [ready, setReady] = useState(false);
   const [widgets, setWidgets] = useState(null);
 
@@ -114,10 +122,13 @@ export function CheckoutPage() {
               // 난 반대로했음 결제요청하고 다 되면 급액 서버에 저장함
               await widgets.requestPayment({
                 orderId: uniqueOrderId,
-                orderName: JSON.stringify(tossdata.selectedSeatsInfo),
+                orderName: titleSeats,
 
                 // 이 아래 값들은 나중에 유저 테이블되면 앞에서 부터 가지고 오던 세션에서 가지고오기(?)
                 // 아직은 모르겠음 그냥 자바에서 하는게 더 편할듯 (아 백에서 비교해야되나..?)
+
+                // 추가내용: 아래 다 필요없는거 같다? 지금은 비회원으로만 하니
+
                 // customerEmail: "customer123@gmail.com",
                 // customerName: "김토스",
                 // customerMobilePhone: "01012341234",
