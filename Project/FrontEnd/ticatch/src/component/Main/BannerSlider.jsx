@@ -13,16 +13,16 @@ const Slider = () => {
   const dragDistance = useRef(0);
 
   const slides = [
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255167_241203_114423.jpg", link: "http://example.com/page1" },
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255164_241203_113353.jpg", link: "http://example.com/page2" },
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255163_241203_113239.png", link: "http://example.com/page3" },
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255162_241203_112959.png", link: "http://example.com/page4" },
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255160_241203_112533.gif", link: "http://example.com/page5" },
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255167_241203_114423.jpg", link: "http://example.com/page1" },
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255164_241203_113353.jpg", link: "http://example.com/page2" },
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255163_241203_113239.png", link: "http://example.com/page3" },
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255162_241203_112959.png", link: "http://example.com/page4" },
-    { src: "http://www.kopis.or.kr/upload/pfmPoster/PF_PF255160_241203_112533.gif", link: "http://example.com/page5" }
+    { src: "../src/component/images/241209030423_16007528.jpeg", link: "http://example.com/page1" },
+    { src: "src/component/images/241205021648_24016695.jpeg", link: "http://example.com/page2" },
+    { src: "src/component/images/241205011108_16007528.png", link: "http://example.com/page3" },
+    { src: "src/component/images/241016043016_16007528.png", link: "http://example.com/page4" },
+    { src: "src/component/images/241128031052_16007528.png", link: "http://example.com/page5" },
+    { src: "src/component/images/241125051028_24016737.png", link: "http://example.com/page1" },
+    { src: "src/component/images/240816042019_24011935.jpeg", link: "http://example.com/page2" },
+    { src: "src/component/images/241008024945_24014511.png", link: "http://example.com/page3" },
+    { src: "src/component/images/241107041700_24015649.jpeg", link: "http://example.com/page4" },
+    { src: "src/component/images/240904095711_24012498.png", link: "http://example.com/page5" }
   ];
 
   useEffect(() => {
