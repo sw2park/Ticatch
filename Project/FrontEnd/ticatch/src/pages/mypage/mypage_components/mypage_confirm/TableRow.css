@@ -1,0 +1,8 @@
+.confirm-table-row {
+  background-color: white;
+}
+
+.confirm-table-row > td {
+  height: 1px;
+  overflow: auto;
+}

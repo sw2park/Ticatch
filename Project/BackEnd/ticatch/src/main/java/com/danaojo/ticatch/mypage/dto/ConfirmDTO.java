@@ -4,9 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class confirmDTO {
+public class ConfirmDTO {
 	// 마이페이지 기준
-	private String seq_order_id; // 예매번호
+	private Long seq_order_id; // 예매번호
 	private String pf_title; // 티켓명
 	private String view_date; // 관람일시
 	private String total_ticket; // 매수

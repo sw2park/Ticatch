@@ -1,5 +1,4 @@
 import ConfirmNotice from "../mypage_components/mypage_confirm/ConfirmNotice";
-import ConfirmTable from "../mypage_components/mypage_confirm/ConfirmTable";
 import SearchWeek from "../mypage_components/mypage_confirm/SearchWeek";
 import SelectSection from "../mypage_components/mypage_confirm/SelectSection";
 import ConfirmSubTitle from "../mypage_components/mypage_confirm/ConfirmSubTitle";
@@ -26,7 +25,6 @@ function CancleReservePage() {
       <div className="confirm-notice-wrapper">
         <ConfirmMenuNoitce />
       </div>
-      <ConfirmTable />
       <ConfirmNotice />
     </div>
   );
