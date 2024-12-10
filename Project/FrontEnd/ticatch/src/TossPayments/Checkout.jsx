@@ -121,6 +121,7 @@ export function CheckoutPage() {
 
               // 난 반대로했음 결제요청하고 다 되면 급액 서버에 저장함
               await widgets.requestPayment({
+                // 여기있는건 결제창에 이름이랑 뜨는거
                 orderId: uniqueOrderId,
                 orderName: titleSeats,
 
