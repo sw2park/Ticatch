@@ -1,0 +1,224 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.booking-page {
+  width: 1400px; /* Fixed width */
+  margin: 0 auto; /* Center the page */
+  padding: 20px;
+  background-color: #ffffff; /* Optional: white background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow for aesthetics */
+  flex: 1; /* Ensures it stretches to fill the height */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header2 */
+/* Header Styling */
+.booking-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ddd;
+}
+
+.booking-header .logo {
+  display: flex;
+  align-items: center;
+}
+
+.booking-header .logo img {
+  height: 50px;
+  width: auto;
+}
+
+.booking-header .search-bar {
+  flex-grow: 1;
+  margin: 0 20px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.booking-header .user-links {
+  display: flex;
+  gap: 10px;
+}
+
+.booking-header .user-links a {
+  color: #333;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.booking-header .user-links a:hover {
+  text-decoration: underline;
+}
+
+/* Navigation Menu */
+.navigation-menu {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ddd;
+  gap: 20px;
+}
+
+.navigation-menu a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  position: relative;
+  padding-bottom: 5px; /* Ensure spacing below text */
+}
+
+.navigation-menu a:hover {
+  color: #007bff;
+}
+
+.navigation-menu a:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background-color: #007bff;
+  transform: scaleX(1);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Prevent layout shift */
+.navigation-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background-color: transparent; /* Initially invisible */
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Concert List */
+.concert-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  min-height: 675px; /* Ensures a consistent height */
+  flex: 1;
+}
+
+.concert-slider {
+  display: flex;
+  gap: 20px;
+  overflow: hidden;
+  width: 100%;
+  justify-content: center;
+}
+
+.concert-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  padding: 15px;
+  text-align: center;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column; /* Align children vertically */
+  justify-content: space-between; /* Distribute space evenly */
+}
+
+.concert-image {
+  width: 100%;
+  height: 300px; /* Fixed height for consistency */
+  object-fit: cover; /* Ensure image covers the area without distortion */
+  border-radius: 8px;
+}
+
+.concert-title {
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+
+.concert-genre,
+.concert-location,
+.concert-date,
+.concert-price {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+.booking-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  background-color: #004d7c;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.booking-button:hover {
+  background-color: #000000;
+}
+
+/* Navigation Buttons */
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #004d7c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.nav-button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.left-button {
+  left: -50px;
+}
+
+.right-button {
+  right: -50px;
+}
+
+/* Footer */
+.booking-footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #222;
+  color: white;
+  margin-top: 20px;
+  font-size: 0.9rem;
+}

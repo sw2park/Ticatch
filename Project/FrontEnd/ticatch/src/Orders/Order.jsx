@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import Calendar from "../Calendar/Calendar";
 import axios from "axios";
 
@@ -7,8 +7,9 @@ import "./Order.css";
 
 const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
   const navigate = useNavigate(); // 이걸로 페이지 이동함
+  const location = useLocation(); // 테스트 페이지에서 데이터 가지고 오기 위해서 (state 를) 가지고 오기위해서
   const [fetchId, setFetchId] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date(2024, 11, 25));
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTimeIndex, setSelectedTimeIndex] = useState(0);
   const [maxSelectableDate, setMaxSelectableDate] = useState(
     new Date(2025, 11, 30)
@@ -17,6 +18,56 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
   const [seatInfo, setSeatInfo] = useState([]);
 
   const seqPfjoinIds = fetchId.map((item) => item.seqPfjoinId);
+
+  // 테스트페이지에서 받은 값들
+  const { selectedDay, selectedTime, seqId } = location.state || {}; // 전달된 state를 구조 분해 할당
+
+  // 테스트 페이지에서 받아온 seqid 를 fetchDetailById 에 담기
+  const fetchDetailById = useCallback(() => {
+    if (!seqId) {
+      console.error("seqId가 존재하지 않습니다.");
+      return;
+    }
+
+    console.log("API 요청 시작: ", `/api/order/${seqId}`);
+
+    axios
+      .get(`/api/order/${seqId}`)
+      .then((response) => {
+        const data = response.data;
+        setFetchId(data);
+
+        if (data.length > 0 && data[0].pendDate) {
+          const [year, month, day] = data[0].pendDate.split(".");
+          setMaxSelectableDate(new Date(year, parseInt(month) - 1, day));
+        }
+      })
+      .catch((error) => console.error("데이터 가져오기 에러:", error));
+  }, [seqId]);
+
+  // 테스트 페이지에서 받아온 값들이 있으면 fetchDtailByID 를 호출
+  useEffect(() => {
+    if (seqId) {
+      fetchDetailById();
+    }
+  }, [seqId, fetchDetailById]);
+
+  // 테스트 페이지에서 받아온 날짜랑 회차를 딱 한번만 초기값으로 설정해주기
+  // 초기값 설정 여부를 추적하는 useRef
+  const isInitialRender = useRef(true);
+
+  useEffect(() => {
+    if (isInitialRender.current) {
+      // 초기값 설정
+      if (selectedDay) {
+        setSelectedDate(new Date(selectedDay));
+      }
+      if (selectedTime) {
+        setSelectedTimeIndex(parseInt(selectedTime, 10));
+      }
+      isInitialRender.current = false; // 초기 설정 완료 표시
+    }
+  }, [selectedDay, selectedTime]);
 
   // 결제 페이지로 값 옮기기 (checkout)
   const handleReservation = () => {
@@ -44,23 +95,32 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
   };
 
   // API 데이터 가져오기
-  const fetchDetailById = useCallback((id) => {
-    axios
-      .get(`/api/order/${id}`)
-      .then((response) => {
-        const data = response.data;
-        setFetchId(data);
+  // const fetchDetailById = useCallback((id) => {
+  //   axios
+  //     .get(`/api/order/${id}`)
+  //     .then((response) => {
+  //       const data = response.data;
+  //       setFetchId(data);
 
-        if (data.length > 0 && data[0].pendDate) {
-          const [year, month, day] = data[0].pendDate.split(".");
-          setMaxSelectableDate(new Date(year, parseInt(month) - 1, day));
-        }
-      })
-      .catch((error) => console.error("데이터 가져오기 에러:", error));
-  }, []);
+  //       if (data.length > 0 && data[0].pendDate) {
+  //         const [year, month, day] = data[0].pendDate.split(".");
+  //         setMaxSelectableDate(new Date(year, parseInt(month) - 1, day));
+  //       }
+  //     })
+  //     .catch((error) => console.error("데이터 가져오기 에러:", error));
+  // }, []);
 
-  // 데이터 전송 함수
+  // 처음에 받고 보여주는거랑 날짜랑 회차 바꿀때 마다 데이터 전송 함수
   const sendDataToBackend = async () => {
+    if (fetchId.length === 0) {
+      console.log(
+        "fetchId가 비어 있습니다. 데이터 로드를 기다립니다. (값은 있음)"
+      );
+      return;
+    }
+
+    const seqPfjoinIds = fetchId.map((item) => item.seqPfjoinId); // 다시 선언
+
     const dataToSend = {
       seqPfjoinIds,
       selectedDate: selectedDate.toISOString().split("T")[0], // 날짜 (YYYY-MM-DD)
@@ -75,6 +135,13 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
       console.error("백엔드 전송 실패:", error);
     }
   };
+
+  // 테스트 페이지에서 올때 처음에 fetchId 가 있고 실행되서 오류 없앴음
+  useEffect(() => {
+    if (fetchId.length > 0) {
+      sendDataToBackend(); // fetchId가 설정된 후 호출
+    }
+  }, [fetchId]);
 
   // selectedDate 변경 시 데이터 전송
   useEffect(() => {
@@ -239,9 +306,9 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
         예매하기
       </button>
 
-      <button className="reserve-button" onClick={() => fetchDetailById(1)}>
+      {/* <button className="reserve-button" onClick={() => fetchDetailById(1)}>
         테스트 데이터 가져오기
-      </button>
+      </button> */}
     </div>
   );
 };

@@ -69,7 +69,10 @@ export function SuccessPage() {
       </p>
 
       {/* 지금은 그냥 예매페이지로 이동함 */}
-      <button className={styles.mypage_btn} onClick={() => navigate("/order")}>
+      <button
+        className={styles.mypage_btn}
+        onClick={() => navigate("/order/TestDataPage")}
+      >
         마이페이지로 이동
       </button>
     </div>

@@ -26,7 +26,7 @@ public class OrderController {
 
 	private final OrderService orderService;
 
-	// 전체 조회 (테스트용)
+	// 전체 조회
 	@GetMapping
 	public List<PFJoinDTO> Order() {
 		List<PFJoinDTO> order = orderRepository.findAll();
