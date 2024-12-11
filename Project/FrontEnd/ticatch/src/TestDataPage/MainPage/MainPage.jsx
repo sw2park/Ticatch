@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 import "./MainPage.css";
 import axios from "axios";
 
 const MainPage = () => {
-  const navigate = useNavigate(); // 이걸로 페이지 이동함
+  const navigate = useNavigate();
   const [concerts, setConcerts] = useState([]);
   const [search, setSearch] = useState("");
+  const [genreFilter, setGenreFilter] = useState("All");
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // 스프링 가서 데이터 전체조회된거 가지고 오기
+  // Fetch data from the API
   useEffect(() => {
     axios
       .get("/api/order")
@@ -21,13 +21,17 @@ const MainPage = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
-  const filteredConcerts = concerts.filter(
-    (concert) =>
+  // Apply filters for both genre and title
+  const filteredConcerts = concerts.filter((concert) => {
+    const matchesGenre =
+      genreFilter === "All" || concert.pgenre === genreFilter;
+    const matchesSearch =
       concert.ptitle &&
-      concert.ptitle.toLowerCase().includes(search.toLowerCase())
-  );
+      concert.ptitle.toLowerCase().includes(search.toLowerCase());
+    return matchesGenre && matchesSearch;
+  });
 
-  const ITEMS_PER_SLIDE = 3; // 슬라이드 인덱스 한개에 3개의 공연 정보 보여줌 (나중에 4개로 바꾸기 지금은 작동 여부 땜에 3개 해놓음)
+  const ITEMS_PER_SLIDE = 3;
 
   const handleNext = () => {
     if (currentIndex + ITEMS_PER_SLIDE < filteredConcerts.length) {
@@ -41,10 +45,14 @@ const MainPage = () => {
     }
   };
 
-  // 검색 로직 (프론트에서 실행됨)
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
-    setCurrentIndex(0); // 지금 슬라이드 첫번째 페이지에서만 검색이되서 검색하면 그냥 다시 처음 슬라이드 페이지로 오게끔 만듬
+    setCurrentIndex(0); // Reset to the first slide
+  };
+
+  const handleGenreFilter = (value) => {
+    setGenreFilter(value);
+    setCurrentIndex(0); // Reset to the first slide
   };
 
   return (
@@ -52,11 +60,12 @@ const MainPage = () => {
       {/* Header */}
       <header className="booking-header">
         <div className="logo">
-          {/* <img src="logo.png" alt="Logo" /> */}
           <h2
-            style={{ cursor: "pointer" }} // Use a JavaScript object
+            style={{ cursor: "pointer" }}
             onClick={() => {
-              navigate("/mainPage");
+              setSearch(""); // Reset search
+              setGenreFilter("All"); // Reset genre filter
+              setCurrentIndex(0); // Reset to the first slide
             }}
           >
             다나오조
@@ -67,25 +76,56 @@ const MainPage = () => {
           placeholder="공연 제목으로 찾아보세요."
           className="search-bar"
           value={search}
-          onChange={handleSearchChange} // Attach the handler here
+          onChange={handleSearchChange}
         />
         <div className="user-links">
-          {/* 전부 Link 로 변경 */}
           <a href="/login">로그인</a>
           <a href="/signup">회원가입</a>
           <a href="/mypage">마이페이지</a>
         </div>
       </header>
+
+      {/* Navigation Menu for Genre Filter */}
       <nav className="navigation-menu">
-        {/* a 태그 말고 그냥 서버가서 뮤지컬인거만 조회해서 보여주기?(아니면 그냥 위에 있는 검색마냥 이름같은거 바로 조회?) */}
-        <a href="/musical">뮤지컬</a>
-        <a href="/classic">대중음악</a>
-        <a href="/concert">복합</a>
-        <a href="/exhibition">전시/행사</a>
-        <a href="/theater">서양음악(클랙식)</a>
+        <span
+          className={genreFilter === "All" ? "active" : ""}
+          onClick={() => handleGenreFilter("All")}
+        >
+          전체
+        </span>
+        <span
+          className={genreFilter === "뮤지컬" ? "active" : ""}
+          onClick={() => handleGenreFilter("뮤지컬")}
+        >
+          뮤지컬
+        </span>
+        <span
+          className={genreFilter === "대중음악" ? "active" : ""}
+          onClick={() => handleGenreFilter("대중음악")}
+        >
+          대중음악
+        </span>
+        <span
+          className={genreFilter === "복합" ? "active" : ""}
+          onClick={() => handleGenreFilter("복합")}
+        >
+          복합
+        </span>
+        <span
+          className={genreFilter === "전시/행사" ? "active" : ""}
+          onClick={() => handleGenreFilter("전시/행사")}
+        >
+          전시/행사
+        </span>
+        <span
+          className={genreFilter === "서양음악(클래식)" ? "active" : ""}
+          onClick={() => handleGenreFilter("서양음악(클래식)")}
+        >
+          서양음악(클래식)
+        </span>
       </nav>
 
-      {/* 공연 리스트 */}
+      {/* Concert List */}
       <main className="concert-container">
         <button
           className="nav-button left-button"
@@ -102,21 +142,20 @@ const MainPage = () => {
                 <h3 className="concert-title">
                   {concert.ptitle || "No Title"}
                 </h3>
-                <img
-                  src={concert.pposter || "https://via.placeholder.com/300x400"}
-                  alt={concert.ptitle || "Concert Poster"}
-                  className="concert-image"
-                />
+                {/* 이미지 눌르면 상세페이지로 seqid 값 전달 */}
+                <Link to={`/detail/${concert.seqPfjoinId}/view`}>
+                  <img
+                    src={
+                      concert.pposter || "https://via.placeholder.com/300x400"
+                    }
+                    alt={concert.ptitle || "Concert Poster"}
+                    className="concert-image"
+                  />
+                </Link>
                 <p className="concert-genre">장르: {concert.pgenre || "N/A"}</p>
-                <p className="concert-location">
-                  장소: {concert.fdAddr || "Unknown"}
-                </p>
                 <p className="concert-price">
                   가격: {concert.pdSeatprice || "N/A"}
                 </p>
-                <button className="booking-button">
-                  상세페이지로 이동할거임?
-                </button>
               </div>
             ))}
         </div>
