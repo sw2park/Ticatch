@@ -23,7 +23,7 @@ public class OrderService {
 	private final OrderRepository orderRepository;
 	private final SeatRepository seatRepository;
 
-	// 예약 버튼 눌르면 작동되는 로직 (테이블에 데이터 저장)
+	// 결제가 성공적으로 되면 작동되는 로직 (테이블에 데이터 저장)
 	public String createOrder(OrderDTO orderListDTO) {
 		// OrderEntity 생성 및 데이터 매핑
 		OrderEntity order = new OrderEntity();
@@ -87,7 +87,7 @@ public class OrderService {
 			seat.setSoldSeat(seatNums); // 판매된 좌석 예) A1, B1 을 set (만약 여기에 값이 있다면 구매 못하게 막았음)
 			SeatEntity seatnullsaved = seatRepository.save(seat); // 저장
 			System.out.println("seatnullsaved: " + seatnullsaved);
-		} else {
+		} else { // 있으면 그냥 그 행에 판매된 좌석만 추가
 			seat.setTotal(seat.getTotal() - seatCount); // 해당 행이 있다면 저장되있는 좌석 총 개수에서 구매한 티켓 개수 만큼 빼서 set
 			String seats = seat.getSoldSeat();
 			seat.setSoldSeat(seats + ", " + seatNums); // 판매된 좌석 정보를 , 로 붙여서 set

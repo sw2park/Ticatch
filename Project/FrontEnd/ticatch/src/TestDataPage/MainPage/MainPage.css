@@ -187,7 +187,6 @@ body {
 
 .nav-button:disabled {
   background-color: #ddd;
-  cursor: not-allowed;
 }
 
 .left-button {

@@ -24,7 +24,7 @@ const TestDataPage = () => {
       return;
     }
 
-    // 선택된 데이터를 /order 페이지로 전달
+    // 선택된 데이터를 /order 페이지로 전달 (상세페이지 만드는 사람에게도 이렇게 전달해달라고 말했음)
     navigate("/order", {
       state: {
         seqId,
