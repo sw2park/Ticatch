@@ -1,5 +1,6 @@
 package com.danaojo.ticatch.api.kopis.dto;
 
+import java.util.List;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 import lombok.Getter;
@@ -88,8 +89,8 @@ public class PerformDetailDTO {
 	@JacksonXmlProperty(localName = "updatedate")
 	private String pd_updatedate; // 최종수정일
 	
-//	@JacksonXmlProperty(localName = "styurls")
-//	private List<String> pd_img;	// 상세정보 이미지
+	@JacksonXmlProperty(localName = "styurls")
+	private List<String> pd_img;	// 상세정보 이미지
 	
 	@JacksonXmlProperty(localName = "dtguidance")
 	private String pd_time; //공연 시간 

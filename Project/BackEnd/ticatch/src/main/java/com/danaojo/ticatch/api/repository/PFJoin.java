@@ -1,5 +1,6 @@
 package com.danaojo.ticatch.api.repository;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,7 +31,10 @@ public class PFJoin {
 	private String pd_seatprice; // 좌석가격
 	private String p_genre; // 공연 장르
 	private String pd_child; // 어린이 시청 여부
+  
+	@Column(name = "PD_IMG", length = 500)
 	private String pd_img; // 상세 이미지
+	
 	private String pd_time; // 공연 일정
 	private String pl_location_sido; // 공연 지역, 시도
 	private String pl_location_gun; // 공연 지역, 구군

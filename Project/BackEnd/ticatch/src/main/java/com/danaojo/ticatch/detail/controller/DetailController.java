@@ -82,12 +82,12 @@ public class DetailController {
 	public ResponseEntity<Double> avgRate(@PathVariable("seq_pfjoin_id") Long seq_pfjoin_id) {
 	    return reviewService.avgRate(seq_pfjoin_id);
 	}
-	
 	// Tab 리뷰 조회
 	@GetMapping("/detail/{seq_pfjoin_id}/review")
 	public List<Review> findReview(@PathVariable("seq_pfjoin_id") Long seq_pfjoin_id) {
 		return reviewService.findReviews(seq_pfjoin_id);
 	}
+
 //	@GetMapping("detail/{seq_pfjoin_id}/review")
 //    public List<ReviewOrderDTO> findReviewsOrders(@PathVariable("seq_pfjoin_id") Long seqPfjoinId) {
 //        return reviewService.findReviewsOrders(seqPfjoinId);
@@ -166,6 +166,4 @@ public class DetailController {
 	    // 반환값에 따라 알림 메시지 다르게 설정
 	    return ResponseEntity.ok(result);
 	}
-
- 
 }

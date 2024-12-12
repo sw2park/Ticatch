@@ -1,0 +1,13 @@
+.manage-wrapper {
+  width: 90%;
+  margin: 10px auto;
+}
+
+.manage-title > h1 {
+  border-bottom: 2px solid #ccc;
+}
+
+.manage-subtitle {
+  font-size: small;
+  color: #313131d0;
+}

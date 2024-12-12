@@ -78,6 +78,7 @@ public class ReviewRepository {
 		em.persist(review);
 	}
 
+
 	// 리뷰 작성자가 관람자인지 Orders 테이블에서 조회
 //	public List<OrderEntity> viewUser(Long seq_review_id) {
 //		return em.createQuery(
@@ -86,5 +87,4 @@ public class ReviewRepository {
 //				.setParameter("seq_review_id", seq_review_id)
 //				.getResultList();
 //	}
-
 }

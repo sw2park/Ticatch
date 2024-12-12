@@ -1,0 +1,49 @@
+ul {
+  list-style: none;
+  max-width: 310px; /* 텍스트 영역의 최대 너비 설정 */
+  white-space: normal; /* 텍스트 줄바꿈 허용 */
+  overflow: hidden; /* 넘친 텍스트는 숨김 */
+  text-overflow: ellipsis; /* 넘친 텍스트는 "..."로 표시 */
+  padding: 0;
+  font-weight: bold;
+}
+
+.reserve-button {
+  font-size: 16px;
+  background-color: #004d7c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.1s;
+}
+
+.reserve-button:hover {
+  background-color: #4852ed;
+}
+
+/*  */
+.time-selector {
+  padding-top: 10px;
+  font-weight: bold;
+  display: flex;
+  align-items: center; /* 버튼과 텍스트를 수직으로 정렬 */
+  justify-content: center;
+}
+
+.time-selector button:hover:not(:disabled) {
+  color: #003366;
+}
+
+button {
+  align-items: center;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+}
+button:hover {
+  border-color: #646cff;
+}

@@ -41,12 +41,12 @@ public class ReviewService {
 //	public ResponseEntity<Double> avgRate(Long seq_pfjoin_id) {
 //		return reviewRepository.avgRate(seq_pfjoin_id);
 //	}
-	
 	// 해당 공연의 리뷰 찾기
 	@Transactional(readOnly = true)
 	public List<Review> findReviews(Long seq_pfjoin_id) {
 		return reviewRepository.findReviews(seq_pfjoin_id);
 	}
+  
 	// 관람자 표시를 위한 리뷰 조회
 	@Transactional(readOnly = true)
 	public List<ReviewOrderDTO> findReviewsOrders(Long seqPfjoinId) {
