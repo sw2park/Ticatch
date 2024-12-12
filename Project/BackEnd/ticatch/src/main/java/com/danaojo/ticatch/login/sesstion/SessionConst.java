@@ -1,4 +1,4 @@
-package com.danaojo.login.web.sesstion;
+package com.danaojo.ticatch.login.sesstion;
 
 public class SessionConst {
 

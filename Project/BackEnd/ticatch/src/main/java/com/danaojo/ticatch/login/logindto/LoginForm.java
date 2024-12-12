@@ -1,4 +1,4 @@
-package com.danaojo.ticatch.loginDTO;
+package com.danaojo.ticatch.login.logindto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class LoginForm {
-	private String userId;
+	private String loginId;
 	private String password;
 }

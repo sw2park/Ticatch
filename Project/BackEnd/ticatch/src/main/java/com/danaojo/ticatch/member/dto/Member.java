@@ -1,4 +1,4 @@
-package com.danaojo.login.web.member.dto;
+package com.danaojo.ticatch.member.dto;
 
 import jakarta.persistence.*;
 import lombok.Getter;

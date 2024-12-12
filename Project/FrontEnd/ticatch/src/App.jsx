@@ -1,18 +1,20 @@
-import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import axios from "axios";
-import Footer from "./component/footer/Footer.jsx";
-import Header from "./component/header/Header.jsx";
-import Login from "./signUp/login.jsx";
-
-const App = () => {
+import Header from "./component/header/Header";
+import Login from "./signUp/LoginForm";
+import AddMemberForm from "./signUp/addMemberForm";
+import "./signUp/login.css";
+function App() {
   return (
-    <div>
-      <Header></Header>
-      <Login />
-      <Footer></Footer>
-    </div>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<AddMemberForm />} />
+        <Route path="/" element={<div>홈 페이지</div>} />
+      </Routes>
+    </Router>
   );
-};
+}
 
 export default App;

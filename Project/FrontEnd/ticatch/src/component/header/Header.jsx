@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Header.css";
 
 export default function Header() {
@@ -6,29 +7,29 @@ export default function Header() {
       <div className="top-bar">
         <div className="con top-con">
           <div className="logo-box">
-            <a href="#">다나오조</a>
+            <Link to="/">다나오조</Link>
           </div>
           <nav className="join">
             <div>
-              <a href="#">로그인</a>
+              <Link to="/login">로그인</Link>
             </div>
             <div>
-              <a href="#">회원가입</a>
+              <Link to="/signup">회원가입</Link>
             </div>
           </nav>
           <nav className="menu-1">
             <ul>
               <li>
-                <a href="#">메뉴아이템1</a>
+                <Link to="/menu1">메뉴아이템1</Link>
               </li>
               <li>
-                <a href="#">메뉴아이템2</a>
+                <Link to="/menu2">메뉴아이템2</Link>
               </li>
               <li>
-                <a href="#">메뉴아이템3</a>
+                <Link to="/menu3">메뉴아이템3</Link>
               </li>
               <li>
-                <a href="#">메뉴아이템4</a>
+                <Link to="/menu4">메뉴아이템4</Link>
               </li>
             </ul>
           </nav>

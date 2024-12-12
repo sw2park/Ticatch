@@ -1,8 +1,8 @@
-package com.danaojo.login.web.member.repository;
+package com.danaojo.ticatch.member.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.danaojo.login.web.member.dto.Member;
+import com.danaojo.ticatch.member.dto.Member;
 
 import java.util.Optional;
 

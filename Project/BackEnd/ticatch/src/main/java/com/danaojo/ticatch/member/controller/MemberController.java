@@ -1,4 +1,4 @@
-package com.danaojo.login.web.member.controller;
+package com.danaojo.ticatch.member.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.danaojo.login.web.member.dto.Member;
-import com.danaojo.login.web.member.repository.MemberRepository;
+import com.danaojo.ticatch.member.dto.Member;
+import com.danaojo.ticatch.member.repository.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
 

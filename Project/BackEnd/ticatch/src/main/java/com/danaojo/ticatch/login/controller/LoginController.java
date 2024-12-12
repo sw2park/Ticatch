@@ -1,4 +1,4 @@
-package com.danaojo.login.web.controller;
+package com.danaojo.ticatch.login.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.danaojo.login.web.login.dto.LoginForm;
-import com.danaojo.login.web.login.service.LoginService;
-import com.danaojo.login.web.member.dto.Member;
-import com.danaojo.login.web.sesstion.SessionConst;
+import com.danaojo.ticatch.login.logindto.LoginForm;
+import com.danaojo.ticatch.login.service.LoginService;
+import com.danaojo.ticatch.login.sesstion.SessionConst;
+import com.danaojo.ticatch.member.dto.Member;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

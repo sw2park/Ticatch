@@ -1,9 +1,9 @@
-package com.danaojo.login.web.login.service;
+package com.danaojo.ticatch.login.service;
 
 import org.springframework.stereotype.Service;
 
-import com.danaojo.login.web.member.dto.Member;
-import com.danaojo.login.web.member.repository.MemberRepository;
+import com.danaojo.ticatch.member.dto.Member;
+import com.danaojo.ticatch.member.repository.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
 
