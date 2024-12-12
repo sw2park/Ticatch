@@ -74,7 +74,6 @@ public class Kopis extends KopisApiController {
 	                        	resultStr.setPf_time(pfDetail.getPd_time());
 	                        	resultStr.setPf_genre(pfDetail.getPd_genre());
 	                        	resultStr.setPf_child(pfDetail.getPd_child());
-	                        	
 //	                        	resultStr.setPf_img(null);
 	                        	resultStr.setPf_img(detailImg);
 	                        	resultStr.setPf_time(pfDetail.getPd_time());

@@ -1,7 +1,6 @@
 package com.danaojo.ticatch.api.kopis.dto;
 
 import java.util.List;
-
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 import lombok.Getter;

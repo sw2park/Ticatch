@@ -18,6 +18,10 @@ public class ExpService {
 	@Autowired
 	private final ExpRepository expRepository;
 	
+	// 기대평 갯수 조회
+		public Long countExps(Long seq_pfjoin_id) {
+			return expRepository.countExps(seq_pfjoin_id);
+		}
 	// 해당 공연의 기대평 조회
 	@Transactional(readOnly = true)
 	public List<Expectation> findExps(Long seq_pfjoin_id) {

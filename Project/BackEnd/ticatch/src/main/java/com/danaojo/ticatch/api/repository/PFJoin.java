@@ -31,7 +31,7 @@ public class PFJoin {
 	private String pd_seatprice; // 좌석가격
 	private String p_genre; // 공연 장르
 	private String pd_child; // 어린이 시청 여부
-	
+  
 	@Column(name = "PD_IMG", length = 500)
 	private String pd_img; // 상세 이미지
 	
