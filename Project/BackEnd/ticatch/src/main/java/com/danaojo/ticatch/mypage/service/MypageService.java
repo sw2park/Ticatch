@@ -31,7 +31,6 @@ public class MypageService {
 		
 		Long userSeq = getUserSeq(userName);
 		
-		int testCnt = 1;
 		List<Orders> orderList = getMypageOrder(userSeq);
 		for(Orders ocDto : orderList) {
 			ConfirmDTO cDto = new ConfirmDTO();

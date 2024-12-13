@@ -6,32 +6,63 @@ import SelectSection from "../mypage_components/mypage_confirm/SelectSection";
 import ConfirmSubTitle from "../mypage_components/mypage_confirm/ConfirmSubTitle";
 import ConfirmMenuNoitce from "../mypage_components/mypage_confirm/ConfirmMenuNotice";
 import TableRow from "../mypage_components/mypage_confirm/TableRow";
-import MypageContextProvider from "../mypageContext/mypageContext";
+import MypageContextProvider, {
+  MypageContext,
+} from "../mypageContext/mypageContext";
+import { useContext } from "react";
 
 import "./ConfirmReservePage.css";
 import axios from "axios";
 
+const BASE_URL = "http://localhost:9090/mypage/";
+
 function ConfirmReservePage() {
   const [listData, setListData] = useState([]);
-
-  const baseUrl = "http://localhost:9090/mypage/";
+  const { selectMode } = useContext(MypageContext);
+  const { selectMonth } = useContext(MypageContext);
+  const { selectYear } = useContext(MypageContext);
+  const { searchWeek } = useContext(MypageContext);
 
   useEffect(() => {
-    async function getTableData() {
-      await axios
-        .get(baseUrl + "searchConfirm")
-        .then((response) => {
-          console.log("데이터 통신 성공");
-          console.log(response.data);
-
-          setListData(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
+    setTableQuery();
     getTableData();
   }, []);
+
+  async function setTableQuery() {
+    await axios
+      .post(
+        BASE_URL + "searchConfirmQuery",
+        {
+          searchWeek,
+          selectMode,
+          selectMonth,
+          selectYear,
+        },
+        { "Content-Type": "application/json", withCredentials: true }
+      )
+      .then((response) => {
+        console.log("데이터 통신 성공");
+        console.log(searchWeek, selectMode, selectMonth, selectYear);
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  async function getTableData() {
+    await axios
+      .get(BASE_URL + "searchConfirm")
+      .then((response) => {
+        console.log("데이터 통신 성공");
+        console.log(response.data);
+
+        setListData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   return (
     <MypageContextProvider>
@@ -63,7 +94,6 @@ function ConfirmReservePage() {
             <TableRow listData={listData} />
           </table>
         </div>
-        <div className="confirm-table-paging">페이징 버튼 들어갈 자리</div>
         <ConfirmNotice />
       </div>
     </MypageContextProvider>
