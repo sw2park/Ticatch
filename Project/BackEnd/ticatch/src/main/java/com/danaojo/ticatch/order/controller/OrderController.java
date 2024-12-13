@@ -70,6 +70,7 @@ public class OrderController {
 		Sort descSort = Sort.by(Sort.Direction.DESC, "seqPfjoinId");
 		List<PFJoinDTO> rank = orderRepository.findAll(descSort);
 
+		// 이거 좌석 하려고 적었던거임 아무것도 없음
 //	    String result = orderService.findRank();
 
 		// 5개만 보낼거임
@@ -89,14 +90,13 @@ public class OrderController {
 			return ResponseEntity.ok(response);
 		} catch (RuntimeException e) {
 			System.out.println(e.getMessage());
-			return ResponseEntity.status(400).body(null); // Return 400 Bad Request on error
+			return ResponseEntity.status(400).body(null); // 오류 나면 400 돌려줌
 		}
 	}
 
 	// 회원가입
 	@PostMapping("/signup")
 	public ResponseEntity<String> signUp(@RequestBody UserDTO userDTO) {
-		System.out.println("here");
 		
 		return orderService.saveUser(userDTO);
 		

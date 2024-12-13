@@ -130,6 +130,7 @@ public class OrderService {
 	public String findRank() {
 		
 		
+		
 		return null;
 	}
 	
@@ -140,12 +141,12 @@ public class OrderService {
 
 	    // Check if user exists
 	    if (user == null) {
-	        throw new RuntimeException("User not found");
+	        throw new RuntimeException("아이디 없음 / 틀렸음");
 	    }
 
 	    // Check if password matches
 	    if (!user.getPassword().equals(userDTO.getPassword())) {
-	        throw new RuntimeException("Password does not match");
+	        throw new RuntimeException("비밀번호가 없음 / 틀렸음");
 	    }
 
 	    // Map User entity to UserDTO
@@ -155,12 +156,12 @@ public class OrderService {
 	// 회원 가입 로직
 	public ResponseEntity<String> saveUser(UserDTO userDTO) {
 		try {
-            System.out.println("Service: Saving user...");
+            System.out.println("회원가입 (회원 저장중)");
 
             // DTO -> Entity 변환
             UserEntity userEntity = new UserEntity();
             userEntity.setUserId(userDTO.getUserId());
-            userEntity.setPassword(userDTO.getPassword()); // 반드시 설정
+            userEntity.setPassword(userDTO.getPassword());
             userEntity.setName(userDTO.getName());
             userEntity.setEmail(userDTO.getEmail());
             userEntity.setPhone(userDTO.getPhone());
@@ -171,12 +172,12 @@ public class OrderService {
             // 저장
             userRepository.save(userEntity);
 
-            System.out.println("Service: User saved successfully.");
-            return ResponseEntity.ok("User saved successfully");
+            System.out.println("회원가입 성공");
+            return ResponseEntity.ok("회원가입 성공");
 
         } catch (Exception e) {
-            System.err.println("Service: Error saving user - " + e.getMessage());
-            return ResponseEntity.status(500).body("Error saving user");
+            System.err.println("회원가입 오류 - " + e.getMessage());
+            return ResponseEntity.status(500).body("회원가입 오류");
         }
 	}
 
