@@ -24,7 +24,7 @@ const MainPage = () => {
     "https://www.albuquerqueamphitheater.com/wp-content/uploads/2024/05/The-Marley-Brothers-banner-3-1400-x-500-px.jpg-1.webp",
   ];
 
-  // 자동 슬라이더 작동하는거
+  // 자동 슬라이더 작동
   useEffect(() => {
     const interval = setInterval(() => {
       setSliderIndex((prevIndex) => (prevIndex + 1) % sliderImages.length);
@@ -36,8 +36,8 @@ const MainPage = () => {
     axios
       .get("/api/order/rank")
       .then((response) => {
-        console.log("rank: ", response.data); // Check if the data you need is in response.data
-        setRank(response.data || []); // Assign response.data directly to rank
+        console.log("rank: ", response.data);
+        setRank(response.data || []);
       })
       .catch((error) => console.error("Rank Error: ", error));
   }, []);
@@ -53,6 +53,9 @@ const MainPage = () => {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
+  // @@@
+  // 지금 검색이나 장르 선택 사용하면 padding 이랑 margin 이 안 없어짐
+
   // 선택한 장르로 필터링
   const filteredConcerts = concerts.filter((concert) => {
     const matchesGenre =
@@ -63,7 +66,7 @@ const MainPage = () => {
     return matchesGenre && matchesSearch;
   });
 
-  const ITEMS_PER_SLIDE = 4; // 한 슬라이드에 4개 아이템 보여줌 (모든 탭에서 4개씩만 보여줌)
+  const ITEMS_PER_SLIDE = 4;
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
@@ -100,9 +103,9 @@ const MainPage = () => {
           onChange={handleSearchChange}
         />
         <div className="user-links">
-          <a href="/login">로그인</a>
-          <a href="/signup">회원가입</a>
-          <a href="/mypage">마이페이지</a>
+          <Link to="/login">로그인</Link>
+          <Link to="/signup">회원가입</Link>
+          <Link to="/mypage">마이페이지</Link>
         </div>
       </header>
 
@@ -147,80 +150,81 @@ const MainPage = () => {
       </nav>
 
       {/* 메인 콘텐츠 */}
-      {/* nav 이용하면 위쪽 패딩 없샘 */}
-      <main
-        className={`main-content ${genreFilter !== "All" ? "no-slider" : ""}`}
-      >
-        {/* 슬라이더: 전체일 때만 표시 */}
-        {genreFilter === "All" && (
-          <div className="auto-slider">
-            <img
-              src={sliderImages[sliderIndex]}
-              alt={`Slide ${sliderIndex + 1}`}
-              className="slider-image"
-            />
-          </div>
-        )}
-
-        {/* 랭킹 좌석 판매순임 동일한 값이 있으면 db desc 로 리스트 가지고와서 5개 보여줌 */}
-        {genreFilter === "All" && (
-          <div>
-            <h2>랭킹</h2>
-            <div className="concert-slider">
-              {rank.slice(0, ITEMS_PER_SLIDE).map((item, index) => (
-                <div className="concert-card" key={item.seqPfjoinId}>
-                  <h3 className="concert-title">{item.ptitle || "No Title"}</h3>
-                  <div className="image-container">
-                    <Link to={`/detail/${item.seqPfjoinId}/view`}>
-                      <img
-                        src={
-                          item.pposter || "https://via.placeholder.com/500x500"
-                        }
-                        alt={item.ptitle || "Concert Poster"}
-                        className="concert-image"
-                      />
-                    </Link>
-                    <span className="rank">{index + 1}</span>
-                  </div>
-                </div>
-              ))}
+      <main className="main-content">
+        {/* 검색 상태일 때 슬라이더와 랭킹 숨기기 */}
+        {!search && genreFilter === "All" && (
+          <>
+            <div className="auto-slider">
+              <img
+                src={sliderImages[sliderIndex]}
+                alt={`Slide ${sliderIndex + 1}`}
+                className="slider-image"
+              />
             </div>
-          </div>
+            <div>
+              <h2>랭킹</h2>
+              <div className="concert-slider">
+                {rank.slice(0, ITEMS_PER_SLIDE).map((item, index) => (
+                  <div className="concert-card" key={item.seqPfjoinId}>
+                    <h3 className="concert-title">
+                      {item.ptitle || "No Title"}
+                    </h3>
+                    <div className="image-container">
+                      <Link to={`/detail/${item.seqPfjoinId}/view`}>
+                        <img
+                          src={
+                            item.pposter ||
+                            "https://via.placeholder.com/500x500"
+                          }
+                          alt={item.ptitle || "Concert Poster"}
+                          className="concert-image"
+                        />
+                      </Link>
+                      <span className="rank">{index + 1}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
         )}
 
         {/* 공연 목록 */}
-        {genreFilter === "All" && <h2>전체 목록</h2>}
         <div className="concert-container">
           <div className="concert-slider">
-            {filteredConcerts
-              .slice(currentIndex, currentIndex + ITEMS_PER_SLIDE)
-              .map((concert) => (
-                <div className="concert-card" key={concert.seqPfjoinId}>
-                  <h3 className="concert-title">
-                    {concert.ptitle || "No Title"}
-                  </h3>
-                  <Link to={`/detail/${concert.seqPfjoinId}/view`}>
-                    <img
-                      src={
-                        concert.pposter || "https://via.placeholder.com/500x500"
-                      }
-                      alt={concert.ptitle || "Concert Poster"}
-                      className="concert-image"
-                    />
-                  </Link>
-                  <p className="concert-genre">
-                    장르: {concert.pgenre || "N/A"}
-                  </p>
-                  <p className="concert-price">
-                    가격: {concert.pdSeatprice || "N/A"}
-                  </p>
-                </div>
-              ))}
+            {filteredConcerts.length > 0 ? (
+              filteredConcerts
+                .slice(currentIndex, currentIndex + ITEMS_PER_SLIDE)
+                .map((concert) => (
+                  <div className="concert-card" key={concert.seqPfjoinId}>
+                    <h3 className="concert-title">
+                      {concert.ptitle || "No Title"}
+                    </h3>
+                    <Link to={`/detail/${concert.seqPfjoinId}/view`}>
+                      <img
+                        src={
+                          concert.pposter ||
+                          "https://via.placeholder.com/500x500"
+                        }
+                        alt={concert.ptitle || "Concert Poster"}
+                        className="concert-image"
+                      />
+                    </Link>
+                    <p className="concert-genre">
+                      장르: {concert.pgenre || "N/A"}
+                    </p>
+                    <p className="concert-price">
+                      가격: {concert.pdSeatprice || "N/A"}
+                    </p>
+                  </div>
+                ))
+            ) : (
+              <p>검색 결과가 없습니다.</p>
+            )}
           </div>
         </div>
       </main>
 
-      {/* 푸터 */}
       <footer className="booking-footer">
         <p>&copy; {new Date().getFullYear()} 다나오조. All Rights Reserved.</p>
       </footer>

@@ -1,9 +1,11 @@
 package com.danaojo.ticatch.order.service;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.danaojo.ticatch.order.Entity.OrderDTO;
@@ -11,8 +13,11 @@ import com.danaojo.ticatch.order.Entity.OrderEntity;
 import com.danaojo.ticatch.order.Entity.PFJoinDTO;
 import com.danaojo.ticatch.order.Entity.SeatEntity;
 import com.danaojo.ticatch.order.Entity.SeatId;
+import com.danaojo.ticatch.order.Entity.UserDTO;
+import com.danaojo.ticatch.order.Entity.UserEntity;
 import com.danaojo.ticatch.order.repository.OrderRepository;
 import com.danaojo.ticatch.order.repository.SeatRepository;
+import com.danaojo.ticatch.order.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,6 +27,7 @@ public class OrderService {
 
 	private final OrderRepository orderRepository;
 	private final SeatRepository seatRepository;
+	private final UserRepository userRepository;
 
 	// 결제가 성공적으로 되면 작동되는 로직 (테이블에 데이터 저장)
 	public String createOrder(OrderDTO orderListDTO) {
@@ -126,4 +132,54 @@ public class OrderService {
 		
 		return null;
 	}
+	
+	// 로그인 처리 로직 
+	public UserDTO login(UserDTO userDTO) {
+	    // Fetch the user from the database (returns a User entity)
+	    UserEntity user = userRepository.findByUserId(userDTO.getUserId());
+
+	    // Check if user exists
+	    if (user == null) {
+	        throw new RuntimeException("User not found");
+	    }
+
+	    // Check if password matches
+	    if (!user.getPassword().equals(userDTO.getPassword())) {
+	        throw new RuntimeException("Password does not match");
+	    }
+
+	    // Map User entity to UserDTO
+	    return new UserDTO();
+	}
+
+	// 회원 가입 로직
+	public ResponseEntity<String> saveUser(UserDTO userDTO) {
+		try {
+            System.out.println("Service: Saving user...");
+
+            // DTO -> Entity 변환
+            UserEntity userEntity = new UserEntity();
+            userEntity.setUserId(userDTO.getUserId());
+            userEntity.setPassword(userDTO.getPassword()); // 반드시 설정
+            userEntity.setName(userDTO.getName());
+            userEntity.setEmail(userDTO.getEmail());
+            userEntity.setPhone(userDTO.getPhone());
+            userEntity.setLoginType(userDTO.getLoginType());
+            userEntity.setCreateDate(new java.util.Date());
+            userEntity.setLoginType("일반"); // 그냥 박았음 일반이라고 카카오나 네이버 같은거 사용해서 로그인하는거 시간이 없음
+
+            // 저장
+            userRepository.save(userEntity);
+
+            System.out.println("Service: User saved successfully.");
+            return ResponseEntity.ok("User saved successfully");
+
+        } catch (Exception e) {
+            System.err.println("Service: Error saving user - " + e.getMessage());
+            return ResponseEntity.status(500).body("Error saving user");
+        }
+	}
+
+	
+	
 }

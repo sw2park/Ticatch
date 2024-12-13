@@ -9,6 +9,8 @@ import { SuccessPage } from "./TossPayments/Success";
 import TestDatePage from "./TestDataPage/TestDataPage";
 import MainPage from "./TestDataPage/MainPage/MainPage";
 import DeatailPage from "./TestDataPage/DetailPage";
+import LoginPage from "./TestDataPage/LoginPage/LoginPage";
+import SignupPage from "./TestDataPage/LoginPage/SignupPage";
 
 const App = () => {
   return (
@@ -21,6 +23,8 @@ const App = () => {
         <Route path="/order/testDatePage" element={<TestDatePage />} />
         <Route path="/mainPage" element={<MainPage />} />
         <Route path="/detail/:seqPfjoinId/view" element={<DeatailPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
       </Routes>
     </BrowserRouter>
   );

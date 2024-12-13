@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.danaojo.ticatch.order.Entity.OrderDTO;
 import com.danaojo.ticatch.order.Entity.PFJoinDTO;
+import com.danaojo.ticatch.order.Entity.UserDTO;
 import com.danaojo.ticatch.order.repository.OrderRepository;
+import com.danaojo.ticatch.order.repository.UserRepository;
 import com.danaojo.ticatch.order.service.OrderService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,8 @@ public class OrderController {
 	private final OrderRepository orderRepository;
 
 	private final OrderService orderService;
+
+	private final UserRepository userRepository;
 
 	// 전체 조회
 	@GetMapping
@@ -62,18 +66,39 @@ public class OrderController {
 	// 메인 페이지 매핑 (뒤에서부터 값 가지고옴 중에 좌석 팔린 순서로 랭킹 할거임)
 	@GetMapping("/rank")
 	public List<PFJoinDTO> Rank() {
-	    // Sort by seqPfjoinId in descending order
-	    Sort descSort = Sort.by(Sort.Direction.DESC, "seqPfjoinId");
-	    List<PFJoinDTO> rank = orderRepository.findAll(descSort);
+		// Sort by seqPfjoinId in descending order
+		Sort descSort = Sort.by(Sort.Direction.DESC, "seqPfjoinId");
+		List<PFJoinDTO> rank = orderRepository.findAll(descSort);
 
 //	    String result = orderService.findRank();
-	    
-	    // 5개만 보낼거임
-	    if (rank.size() > 5) {
-	        return rank.subList(0, 5);
-	    }
 
-	    return rank; // 데이터가 5개보다 적으면 다 보냄
+		// 5개만 보낼거임
+		if (rank.size() > 5) {
+			return rank.subList(0, 5);
+		}
+
+		return rank; // 데이터가 5개보다 적으면 다 보냄
 	}
 
+	// 로그인
+	@PostMapping("/login")
+	public ResponseEntity<UserDTO> login(@RequestBody UserDTO userDTO) {
+		try {
+			UserDTO response = orderService.login(userDTO);
+			System.out.println("Login successful");
+			return ResponseEntity.ok(response);
+		} catch (RuntimeException e) {
+			System.out.println(e.getMessage());
+			return ResponseEntity.status(400).body(null); // Return 400 Bad Request on error
+		}
+	}
+
+	// 회원가입
+	@PostMapping("/signup")
+	public ResponseEntity<String> signUp(@RequestBody UserDTO userDTO) {
+		System.out.println("here");
+		
+		return orderService.saveUser(userDTO);
+		
+	}
 }
