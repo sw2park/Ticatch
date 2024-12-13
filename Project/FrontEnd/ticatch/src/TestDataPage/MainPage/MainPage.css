@@ -4,41 +4,40 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f5f5f5;
   color: #333;
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
+  overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
+/* Booking Page Layout */
 .booking-page {
-  width: 1400px; /* Fixed width */
-  margin: 0 auto; /* Center the page */
+  width: 100%;
+  max-width: 1400px;
+  min-width: 1400px;
+  min-height: 100vh;
+  margin: 0 auto;
   padding: 20px;
-  background-color: #ffffff; /* Optional: white background */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow for aesthetics */
-  flex: 1; /* Ensures it stretches to fill the height */
   display: flex;
   flex-direction: column;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Header2 */
 /* Header Styling */
 .booking-header {
+  position: sticky; /* Keep header at the top when scrolling */
+  top: 0; /* Stick to the top of the page */
+  z-index: 1000; /* Ensure it stays above other elements */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 20px 30px;
   background-color: #f8f8f8;
   border-bottom: 1px solid #ddd;
 }
 
-.booking-header .logo {
-  display: flex;
-  align-items: center;
-}
-
-.booking-header .logo img {
-  height: 50px;
-  width: auto;
+.booking-header .logo h2 {
+  cursor: pointer;
+  margin: 0;
 }
 
 .booking-header .search-bar {
@@ -50,15 +49,11 @@ body {
   border-radius: 4px;
 }
 
-.booking-header .user-links {
-  display: flex;
-  gap: 10px;
-}
-
 .booking-header .user-links a {
   color: #333;
   text-decoration: none;
   font-size: 0.9rem;
+  margin: 0 10px;
 }
 
 .booking-header .user-links a:hover {
@@ -67,51 +62,83 @@ body {
 
 /* Navigation Menu */
 .navigation-menu {
+  position: sticky; /* Keep navigation at the top when scrolling */
+  top: 80px; /* Adjust according to header height */
+  z-index: 999;
   display: flex;
   justify-content: center;
   padding: 10px 0;
-  background-color: #ffffff;
+  background-color: #fff;
   border-bottom: 1px solid #ddd;
   gap: 20px;
 }
 
 .navigation-menu span {
-  color: #333;
-  text-decoration: none;
   font-size: 1rem;
   font-weight: bold;
-  position: relative;
-  padding-bottom: 5px; /* Ensure spacing below text */
-}
-
-.navigation-menu span:hover {
-  color: #007bff;
   cursor: pointer;
 }
 
-.navigation-menu span:hover::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 2px;
-  background-color: #007bff;
-  transform: scaleX(1);
-  transition: transform 0.3s ease-in-out;
+.navigation-menu span:hover,
+.navigation-menu .active {
+  color: #007bff;
 }
 
-/* Prevent layout shift */
-.navigation-menu span::after {
-  content: "";
+.filtered-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* 랭킹 이미지 숫자 나오는거 */
+
+.rank {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 2px;
-  background-color: transparent; /* Initially invisible */
-  transform: scaleX(0);
-  transition: transform 0.3s ease-in-out;
+  bottom: 0; /* Align at the bottom of the image */
+  left: 15px; /* Align at the left edge */
+  font-size: 5rem; /* Adjust font size for visibility */
+  font-weight: bold;
+  color: white; /* White text for better contrast */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 1); /* Add shadow for better contrast */
+}
+
+.image-container {
+  position: relative;
+}
+
+/* Main Content */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  padding-top: 750px;
+  gap: 20px;
+  margin-top: 330px;
+}
+
+.main-content.no-slider {
+  margin-top: 50px; /* Reduced margin when slider is not visible */
+  padding-top: 0px;
+}
+
+.main-content.no-padding {
+  padding-top: 50px; /* 기존 패딩 값 설정 */
+}
+
+/* Auto Slider */
+.auto-slider {
+  width: 100%;
+  height: 500px;
+  padding-top: 150px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Concert List */
@@ -119,9 +146,7 @@ body {
   position: relative;
   display: flex;
   align-items: center;
-  margin-top: 20px;
-  min-height: 675px; /* Ensures a consistent height */
-  flex: 1;
+  gap: 20px;
 }
 
 .concert-slider {
@@ -130,71 +155,24 @@ body {
   overflow: hidden;
   width: 100%;
   justify-content: center;
+  padding-bottom: 20px;
 }
 
 .concert-card {
-  background: white;
+  background: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 300px;
   padding: 15px;
   text-align: center;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column; /* Align children vertically */
-  justify-content: space-between; /* Distribute space evenly */
 }
 
 .concert-image {
   width: 100%;
-  height: 300px; /* Fixed height for consistency */
-  object-fit: cover; /* Ensure image covers the area without distortion */
+  height: auto;
+  object-fit: cover;
   border-radius: 8px;
-}
-
-.concert-title {
-  font-size: 1.5rem;
-  margin: 10px 0;
-}
-
-.concert-genre,
-.concert-location,
-.concert-date,
-.concert-price {
-  font-size: 1rem;
-  margin: 5px 0;
-}
-
-/* Navigation Buttons */
-.nav-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #004d7c;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s;
-}
-
-.nav-button:disabled {
-  background-color: #ddd;
-}
-
-.left-button {
-  left: -50px;
-}
-
-.right-button {
-  right: -50px;
 }
 
 /* Footer */
@@ -202,7 +180,6 @@ body {
   text-align: center;
   padding: 15px;
   background-color: #222;
+  margin-top: auto; /* Pushes the footer to the bottom */
   color: white;
-  margin-top: 20px;
-  font-size: 0.9rem;
 }

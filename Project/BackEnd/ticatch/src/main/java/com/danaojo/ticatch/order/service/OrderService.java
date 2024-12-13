@@ -118,4 +118,12 @@ public class OrderService {
 			return soldSeats;
 		}
 	}
+
+	// 시간 남으면
+	// 좌석 팔린 기준으로 많은것들이 랭킹 1위임 (해당 seqpfjoin 에 가장 좌석이 많이 팔린게 랭킹 1위)
+	public String findRank() {
+		
+		
+		return null;
+	}
 }

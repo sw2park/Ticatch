@@ -2,6 +2,7 @@ package com.danaojo.ticatch.order.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +31,7 @@ public class OrderController {
 	@GetMapping
 	public List<PFJoinDTO> Order() {
 		List<PFJoinDTO> order = orderRepository.findAll();
-		
+
 		return order;
 	}
 
@@ -38,7 +39,7 @@ public class OrderController {
 	@GetMapping("/{seqPfjoinId}")
 	public List<PFJoinDTO> getOrderById(@PathVariable Long seqPfjoinId) {
 		List<PFJoinDTO> findBySeqPfJoinId = orderRepository.findBySeqPfjoinId(seqPfjoinId);
-		
+
 		return findBySeqPfJoinId;
 	}
 
@@ -46,19 +47,33 @@ public class OrderController {
 	@PostMapping("/data")
 	public ResponseEntity<String> getNewData(@RequestBody OrderDTO seatDTO) {
 		String result = orderService.getSoldSeats(seatDTO);
-		
+
 		return ResponseEntity.ok(result);
 	}
-	
+
 	// 예매 버튼 눌르면 여기로 옴 테이블에 데이터 저장 하는거임 (토스페이 결제 API)
 	@PostMapping("/pay")
 	public ResponseEntity<String> createReservation(@RequestBody OrderDTO orderListDTO) {
 		String result = orderService.createOrder(orderListDTO);
-		
+
 		return ResponseEntity.ok(result);
 	}
-	
+
+	// 메인 페이지 매핑 (뒤에서부터 값 가지고옴 중에 좌석 팔린 순서로 랭킹 할거임)
+	@GetMapping("/rank")
+	public List<PFJoinDTO> Rank() {
+	    // Sort by seqPfjoinId in descending order
+	    Sort descSort = Sort.by(Sort.Direction.DESC, "seqPfjoinId");
+	    List<PFJoinDTO> rank = orderRepository.findAll(descSort);
+
+//	    String result = orderService.findRank();
+	    
+	    // 5개만 보낼거임
+	    if (rank.size() > 5) {
+	        return rank.subList(0, 5);
+	    }
+
+	    return rank; // 데이터가 5개보다 적으면 다 보냄
+	}
 
 }
-
-
