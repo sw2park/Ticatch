@@ -29,7 +29,7 @@ export default function NaverMap({ lat, lng, addr }) {
     <>
       <div ref={mapRef} style={{ width: "1400px", height: "648px" }}></div>
       <div>
-        <button className="location_search_btn"><a href={directionUrl}>빠른 길찾기</a></button>
+        <button className="location_search_btn"><a href={directionUrl} className="location_search_btn_link">빠른 길찾기</a></button>
       </div>
     </>
   );

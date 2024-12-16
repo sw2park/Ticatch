@@ -33,9 +33,13 @@ export default function ReviewRate() {
     if (error) {
         return <div>{error}</div>;
     }
+
+    // 소숫점 1자리까지 출력 (없으면 0으로 표시)
+    const formattedData = productData ? productData.toFixed(1) : 'N/A';
+
     return(
         <>
-            {productData}.0
+            {formattedData}
         </>
     );
 }
