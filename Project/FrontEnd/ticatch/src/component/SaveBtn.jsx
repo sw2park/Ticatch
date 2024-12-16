@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import axios from 'axios';
+import cssSave from '../css/Main.module.css';
 
 export default function SaveBtn() {
     const { seqpfjoinId } = useParams();
@@ -46,7 +47,7 @@ export default function SaveBtn() {
     return (
         <>
             <button 
-                className='detailview_save_btn'
+                className={cssSave.detailview_save_btn}
                 onClick={handleSubmit}
             >
                 💙찜하기
