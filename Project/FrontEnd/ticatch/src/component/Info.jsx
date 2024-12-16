@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Reserve from "./reserve";
 import SaveBtn from "./SaveBtn";
+import cssInfo from '../css/Main.module.css'
 
 export default function Info() {
   const { seqpfjoinId } = useParams(); // 경로에서 공연 시퀀스 아이디값 가져옴
@@ -38,32 +39,32 @@ export default function Info() {
       {Array.isArray(productData) ? (
         productData.map((product, index) => (
           <>
-            <div className="info_wrap" key={index}>
-              <div className="poster_container">
-                <div className="poster_box">
+            <div className={cssInfo.info_wrap} key={index}>
+              <div className={cssInfo.poster_container}>
+                <div className={cssInfo.poster_box}>
                   <img
-                    className="detailview_poster_img"
+                    className={cssInfo.detailview_poster_img}
                     src={product.p_poster}
                     alt={product.p_title}
                   />
                 </div>
               </div>
-              <div className="simple_info_container">
-                <div className="simple_info_header">
-                  <h1 className="perform_title">{product.p_title}</h1>
+              <div className={cssInfo.simple_info_container}>
+                <div className={cssInfo.simple_info_header}>
+                  <h1 className={cssInfo.perform_title}>{product.p_title}</h1>
                   <SaveBtn />
                 </div>
 
-                <ul className="simple_info_ul">
-                  <li className="simple_info_li">
-                    <span className="info_title">장소</span>
-                    <div className="simple_info_desc">
+                <ul className={cssInfo.simple_info_ul}>
+                  <li className={cssInfo.simple_info_li}>
+                    <span className={cssInfo.info_title}>장소</span>
+                    <div className={cssInfo.simple_info_desc}>
                       {product.pd_hall_name} <br /> {product.fd_addr}
                     </div>
                   </li>
-                  <li className="simple_info_li">
-                    <span className="info_title">관람시간</span>
-                    <div className="simple_info_desc">
+                  <li className={cssInfo.simple_info_li}>
+                    <span className={cssInfo.info_title}>관람시간</span>
+                    <div className={cssInfo.simple_info_desc}>
                       {(() => {
                         const runtime = product.pd_runtime;
 
@@ -86,16 +87,16 @@ export default function Info() {
                       })()}
                     </div>
                   </li>
-                  <li className="simple_info_li">
-                    <span className="info_title">기간</span>
-                    <div className="simple_info_desc">
+                  <li className={cssInfo.simple_info_li}>
+                    <span className={cssInfo.info_title}>기간</span>
+                    <div className={cssInfo.simple_info_desc}>
                       {product.p_start_date} ~ {product.p_end_date}
                     </div>
                   </li>
-                  <li className="simple_info_li">
-                    <span className="info_title">가격</span>
-                    <div className="simple_info_desc">
-                      <li>
+                  <li className={cssInfo.simple_info_li}>
+                    <span className={cssInfo.info_title}>가격</span>
+                    <div className={cssInfo.simple_info_desc}>
+                      <li className={cssInfo.li}>
                         {/* 
                                     1. ",원"으로 등급별 가격 정보 나누기 
                                     2. 공백 기준으로 등급과 가격 나눠서 가격은 <span> 태그에 출력
@@ -108,26 +109,26 @@ export default function Info() {
                                 .trim()
                                 .split(" ");
                               return (
-                                <li key={index}>
-                                  {seatType} <span>{seatPrice}</span>
+                                <li className={cssInfo.li} key={index}>
+                                  {seatType} <span className={cssInfo.span}>{seatPrice}</span>
                                 </li>
                               );
                             })
                         ) : (
-                          <li>
-                            <span>{product.pd_seatprice}</span>
+                          <li className={cssInfo.li}>
+                            <span className={cssInfo.span}>{product.pd_seatprice}</span>
                           </li>
                         )}
                       </li>
                     </div>
                   </li>
-                  <li className="simple_info_li">
-                    <span className="info_title">출연진</span>
-                    <div className="simple_info_desc">{product.pd_cast}</div>
+                  <li className={cssInfo.simple_info_li}>
+                    <span className={cssInfo.info_title}>출연진</span>
+                    <div className={cssInfo.simple_info_desc}>{product.pd_cast}</div>
                   </li>
-                  <li className="simple_info_li">
-                    <span className="info_title">아동관람</span>
-                    <div className="simple_info_desc">{product.pd_child}</div>
+                  <li className={cssInfo.simple_info_li}>
+                    <span className={cssInfo.info_title}>아동관람</span>
+                    <div className={cssInfo.simple_info_desc}>{product.pd_child}</div>
                   </li>
                 </ul>
               </div>

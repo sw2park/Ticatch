@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import '../css/Review.css';
 import ReviewList from './Review_list';
 import ReviewNum from './Review_num'; 
 import ReviewRate from './Review_Rate';
+import cssReview from '../css/Review.module.css';
 
 
 
@@ -41,7 +41,7 @@ export default function Review() {
             stars.push(
                 <li
                     key={i}
-                    className={`comment_star_choice_icon ${i <= (hoverValue || selectedValue) ? 'filled' : ''}`}
+                    className={` ${cssReview.comment_star_choice_icon} ${i <= (hoverValue || selectedValue) ? cssReview.filled : ''}`}
                     data-value={i}
                     onMouseEnter={() => handleMouseEnter(i)}
                     onMouseLeave={handleMouseLeave}
@@ -95,50 +95,50 @@ export default function Review() {
     };
 
     return (
-        <div className='wrap'>
-            <div className='review_wrap'>
-                <div className='review_header'>
-                    <h2 className='review_header_title'>
+        <div className={cssReview.wrap}>
+            <div className={cssReview.review_wrap}>
+                <div className={cssReview.review_header}>
+                    <h2 className={cssReview.review_header_title}>
                         관람후기
-                        <span className='review_header_count'>
+                        <span className={cssReview.review_header_count}>
                             <ReviewNum />
                         </span>
                     </h2>
-                    <div className='review_header_rate'>
-                        <span className='rate_star'>
+                    <div className={cssReview.review_header_rate}>
+                        <span className={cssReview.rate_star}>
                             ★
                         </span>
-                        <div className='review_header_rate_score'>
-                            <span className='rate_score_avg'>
+                        <div className={cssReview.review_header_rate_score}>
+                            <span className={cssReview.rate_score_avg}>
                                 <ReviewRate/>
                             </span>
-                            <span className='rate_score_max'>&nbsp;/&nbsp;5.0</span>
+                            <span className={cssReview.rate_score_max}>&nbsp;/&nbsp;5.0</span>
                         </div>
                     </div>
                 </div>
 
-                <div className='review_notice'>
-                    <span className='review_notice_text'>
+                <div className={cssReview.review_notice}>
+                    <span className={cssReview.review_notice_text}>
                         게시판 운영규정에 맞지 않는 글은 사전 통보 없이 삭제될 수 있습니다.
                     </span>
                 </div>
 
-                <div className='review_comment_wrap'>
-                    <div className='comment_container'>
-                        <div className='comment_star_rate'>
-                            <span className='commnet_star_rate_choice'>
-                                <ul className='commnet_rate_choice'>
+                <div className={cssReview.review_comment_wrap}>
+                    <div className={cssReview.comment_container}>
+                        <div className={cssReview.comment_star_rate}>
+                            <span className={cssReview.commnet_star_rate_choice}>
+                                <ul className={cssReview.commnet_rate_choice}>
                                     {renderStars()}
                                 </ul>
                             </span>
-                            <span className='comment_rate_text'>
+                            <span className={cssReview.comment_rate_text}>
                                 {selectedValue ? `${selectedValue}점` : "별점을 선택해주세요."}
                             </span>
                         </div>
 
-                        <div className='commnet_input_container'>
+                        <div className={cssReview.commnet_input_container}>
                             <textarea
-                                className='comment_textarea'
+                                className={cssReview.comment_textarea}
                                 placeholder='관람후기를 작성해보세요!'
                                 maxLength={500}
                                 value={reviewContent}
@@ -146,15 +146,15 @@ export default function Review() {
                             />
                         </div>
 
-                        <div className='comment_submitbtn_container'>
-                            <span className='comment_text_count'>
-                                <span className='commentCount_span'>
+                        <div className={cssReview.comment_submitbtn_container}>
+                            <span className={cssReview.comment_text_count}>
+                                <span className={cssReview.commentCount_span}>
                                     {commentCount}
                                 </span>
-                                <span className='commentMaxLength_span'>&nbsp;/&nbsp;500</span>
+                                <span className={cssReview.commentMaxLength_span}>&nbsp;/&nbsp;500</span>
                             </span>
                             <button
-                                className='comment_submit_btn'
+                                className={cssReview.comment_submit_btn}
                                 onClick={handleSubmit}
                             >
                                 등록
@@ -163,7 +163,7 @@ export default function Review() {
                     </div>
                 </div>
 
-                <div className='review_list_wrap'>
+                <div className={cssReview.review_list_wrap}>
                     <ReviewList />
                 </div>
             </div>

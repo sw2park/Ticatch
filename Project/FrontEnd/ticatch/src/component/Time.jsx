@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import cssTime from '../css/Main.module.css';
 
 export default function Time({ time, setSelectTime, selectDate }) {
     const extractTimes = (timeString) => {
@@ -25,25 +26,25 @@ export default function Time({ time, setSelectTime, selectDate }) {
     // console.log("Time Date : " +  selectDate);
 
     return (
-        <ul className="product_time_choice_ul">
+        <ul className={cssTime.product_time_choice_ul}>
             {!selectDate ? (
-                <li className="product_time_choice_li">
-                    <span className="product_time_choice_message">
+                <li className={cssTime.product_time_choice_li}>
+                    <span className={cssTime.product_time_choice_message}>
                         예매 날짜를 선택해주세요
                     </span>
                 </li>
             ) : (
                 times.map((time, index) => (
-                    <li className="product_time_choice_li" key={index}>
+                    <li className={cssTime.product_time_choice_li} key={index}>
                         <button
                             className={
                                 selectTime === time
-                                    ? "product_time_choice_btn--selected"
-                                    : "product_time_choice_btn"
+                                    ? cssTime.product_time_choice_btn_selected
+                                    : cssTime.product_time_choice_btn
                             }
                             onClick={() => handleClick(time)}
                         >
-                            <span className="product_time_choice_span">
+                            <span className={cssTime.product_time_choice_span}>
                                 {time.replace(':', '시 ') + '분'}
                             </span>
                         </button>

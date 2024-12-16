@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import '../css/Review.css'
 import ExpectationList from './Expectation_list';
 import ExpNum from './Expctation_Num';
+import cssExp from '../css/Review.module.css'
 
 export default function Expectation() {
     const { seqpfjoinId } = useParams();
@@ -55,47 +55,47 @@ export default function Expectation() {
     };
 
     return(
-        <div className='wrap'>
-            <div className='review_wrap'>
-                <div className='review_header'>
-                    <h2 className='review_header_title'>기대평
-                        <span className='review_header_count'>
+        <div className={cssExp.cssExp}>
+            <div className={cssExp.review_wrap}>
+                <div className={cssExp.review_header}>
+                    <h2 className={cssExp.review_header_title}>기대평
+                        <span className={cssExp.review_header_count}>
                             <ExpNum/>
                         </span>
                     </h2>
                 </div>
 
-                <div className='review_notice'>
-                    <spna className='review_notice_text'>
+                <div className={cssExp.review_notice}>
+                    <spna className={cssExp.review_notice_text}>
                         게시판 운영규정에 맞지 않는 글은 사전 통보없이 삭제될 수 있습니다.
                     </spna>
                 </div>
 
-                <div className='review_comment_wrap'>
-                    <div className='comment_container'>
-                        <div className='commnet_input_container'>
-                            <textarea className='comment_textarea' 
+                <div className={cssExp.review_comment_wrap}>
+                    <div className={cssExp.comment_container}>
+                        <div className={cssExp.commnet_input_container}>
+                            <textarea className={cssExp.comment_textarea} 
                                       placeholder='기대평을 작성해보세요!'
                                       MaxLength={500}
                                       value={expContent}
                                       onChange={handleInputChange}>
                             </textarea>
                         </div>
-                        <div className='comment_submitbtn_container'>
-                            <span className='comment_text_count' >
-                                <span className='commentCount_span'>
+                        <div className={cssExp.comment_submitbtn_container}>
+                            <span className={cssExp.comment_text_count} >
+                                <span className={cssExp.commentCount_span}>
                                     {commentCount}
                                 </span>
-                                <span className='commentMaxLength_span'>&nbsp;/&nbsp;500</span>
+                                <span className={cssExp.commentMaxLength_span}>&nbsp;/&nbsp;500</span>
                             </span>
                             <button 
-                            className='comment_submit_btn'
+                            className={cssExp.comment_submit_btn}
                             onClick={handleSubmit}
                             >등록</button>
                         </div>
                     </div>
                 </div>
-                <div className='review_list_wrap'>
+                <div className={cssExp.review_list_wrap}>
                     <ExpectationList />
                 </div>
             </div>

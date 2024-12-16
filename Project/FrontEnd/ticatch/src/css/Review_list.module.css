@@ -8,6 +8,10 @@
     width: 100%;
 }
 
+.review_list {
+    max-width: 1400px;
+}
+
 .review_list_wrap {
     width: 1400px;
     margin-top: 23px;
