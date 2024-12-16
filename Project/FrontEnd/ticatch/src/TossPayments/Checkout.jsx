@@ -30,7 +30,9 @@ export function CheckoutPage() {
     //   seat: orderData.selectedSeatsInfo,
     totalPrice: orderData.totalPrice,
     selectedSeatsInfo: orderData.selectedSeatsInfo,
+    userId: sessionStorage.getItem("userId"),
   };
+  // console.log(userId);
 
   // 제목을 문자열로 보내줘야되서 함(난 좌석선택된걸로 보내줌)
   const titleSeats = `좌석: ${orderData.selectedSeatsInfo

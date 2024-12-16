@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./LoginPage.css";
@@ -7,6 +7,14 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const userToken = sessionStorage.getItem("userToken");
+    if (userToken) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const handleLogin = async () => {
     try {
@@ -15,14 +23,16 @@ const LoginPage = () => {
         password: password,
       };
 
-      console.log("userId: " + userId);
-      console.log("pw: " + password);
-
+      // 먼저 백에 보내야됨
       const response = await axios.post("/api/order/login", loginData, {
         headers: {
           "Content-Type": "application/json",
         },
       });
+
+      // 로그인 성공시 세션이 유저 아이디 저장 (보안에 취약하다는데 시간이 없으니...)
+      sessionStorage.setItem("userToken", response.data.token);
+      sessionStorage.setItem("userId", userId);
 
       console.log("로그인 성공: ", response.data);
 

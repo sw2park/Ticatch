@@ -11,6 +11,34 @@ const MainPage = () => {
   const [genreFilter, setGenreFilter] = useState("All");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sliderIndex, setSliderIndex] = useState(0);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    const userToken = sessionStorage.getItem("userToken");
+    const storedUserId = sessionStorage.getItem("userId");
+
+    if (userToken && storedUserId) {
+      setIsLoggedIn(true);
+      setUserId(storedUserId);
+    } else {
+      setIsLoggedIn(false);
+      setUserId("");
+    }
+  }, []);
+
+  // 세션에서 유저 아이디 가지고 오기 (테스트용)
+  // userId = sessionStorage.getItem("userId");
+  // console.log("현재 로그인된 사용자:", userId);
+
+  // 테스트 로그아웃용 버튼
+  const handleLogout = () => {
+    sessionStorage.removeItem("userToken");
+    sessionStorage.removeItem("userId");
+    setIsLoggedIn(false);
+    setUserId("");
+    alert("로그아웃되었습니다.");
+  };
 
   // 자동 슬라이더 이미지들
   const sliderImages = [
@@ -102,10 +130,24 @@ const MainPage = () => {
           value={search}
           onChange={handleSearchChange}
         />
-        <div className="user-links">
-          <Link to="/login">로그인</Link>
-          <Link to="/signup">회원가입</Link>
-          <Link to="/mypage">마이페이지</Link>
+        <div>
+          <div className="user-links">
+            {isLoggedIn ? (
+              <>
+                <span>{userId}님 환영합니다!</span>
+                {/* 로그아웃 테스트웃 테스트용 */}
+                <button onClick={handleLogout} style={{ marginLeft: "10px" }}>
+                  로그아웃
+                </button>
+                <Link to="/mypage">마이페이지</Link>
+              </>
+            ) : (
+              <>
+                <Link to="/login">로그인</Link>
+                <Link to="/signup">회원가입</Link>
+              </>
+            )}
+          </div>
         </div>
       </header>
 
@@ -151,7 +193,6 @@ const MainPage = () => {
 
       {/* 메인 콘텐츠 */}
       <main className="main-content">
-        {/* 검색 상태일 때 슬라이더와 랭킹 숨기기 */}
         {!search && genreFilter === "All" && (
           <>
             <div className="auto-slider">
@@ -166,19 +207,10 @@ const MainPage = () => {
               <div className="concert-slider">
                 {rank.slice(0, ITEMS_PER_SLIDE).map((item, index) => (
                   <div className="concert-card" key={item.seqPfjoinId}>
-                    <h3 className="concert-title">
-                      {item.ptitle || "No Title"}
-                    </h3>
+                    <h3 className="concert-title">{item.ptitle}</h3>
                     <div className="image-container">
                       <Link to={`/detail/${item.seqPfjoinId}/view`}>
-                        <img
-                          src={
-                            item.pposter ||
-                            "https://via.placeholder.com/500x500"
-                          }
-                          alt={item.ptitle || "Concert Poster"}
-                          className="concert-image"
-                        />
+                        <img src={item.pposter} className="concert-image" />
                       </Link>
                       <span className="rank">{index + 1}</span>
                     </div>
@@ -197,25 +229,12 @@ const MainPage = () => {
                 .slice(currentIndex, currentIndex + ITEMS_PER_SLIDE)
                 .map((concert) => (
                   <div className="concert-card" key={concert.seqPfjoinId}>
-                    <h3 className="concert-title">
-                      {concert.ptitle || "No Title"}
-                    </h3>
+                    <h3 className="concert-title">{concert.ptitle}</h3>
                     <Link to={`/detail/${concert.seqPfjoinId}/view`}>
-                      <img
-                        src={
-                          concert.pposter ||
-                          "https://via.placeholder.com/500x500"
-                        }
-                        alt={concert.ptitle || "Concert Poster"}
-                        className="concert-image"
-                      />
+                      <img src={concert.pposter} className="concert-image" />
                     </Link>
-                    <p className="concert-genre">
-                      장르: {concert.pgenre || "N/A"}
-                    </p>
-                    <p className="concert-price">
-                      가격: {concert.pdSeatprice || "N/A"}
-                    </p>
+                    <p className="concert-genre">장르: {concert.pgenre}</p>
+                    <p className="concert-price">가격: {concert.pdSeatprice}</p>
                   </div>
                 ))
             ) : (
@@ -225,6 +244,7 @@ const MainPage = () => {
         </div>
       </main>
 
+      {/* 푸터 */}
       <footer className="booking-footer">
         <p>&copy; {new Date().getFullYear()} 다나오조. All Rights Reserved.</p>
       </footer>

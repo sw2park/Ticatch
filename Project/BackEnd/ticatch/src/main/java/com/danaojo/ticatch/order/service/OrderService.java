@@ -37,6 +37,7 @@ public class OrderService {
 		order.setViewDate(orderListDTO.getSelectedDate()); // 공연 날짜 set
 		order.setViewTime(orderListDTO.getSelectedTime()); // 회차 set
 		order.setTotalSum(orderListDTO.getTotalPrice()); // 총합 set
+		order.setUserId(orderListDTO.getUserId()); // userid set
 
 		// 좌석 정보 처리
 		StringBuilder seatNumbers = new StringBuilder();

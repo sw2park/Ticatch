@@ -12,6 +12,7 @@ import lombok.ToString;
 public class OrderDTO {
 
 	private List<Integer> seqPfjoinIds; // 공연 ID 배열
+	private String userId;
 	private String selectedDate; // 선택된 날짜
 	private String totalPrice; // 총 가격
 	private String selectedTime; // 선택된 시간
