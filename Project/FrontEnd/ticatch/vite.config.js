@@ -12,6 +12,8 @@ export default defineConfig({
         secure: false,
       },
     },
-    port: 3001,
-  },
-});
+
+    port : 3000
+  }
+})
+
