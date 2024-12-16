@@ -3,7 +3,6 @@ package com.danaojo.ticatch.api.kopis;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.danaojo.ticatch.api.kopis.dto.FacilityDetailDTO;
 import com.danaojo.ticatch.api.kopis.dto.FacilityListDTO;
 import com.danaojo.ticatch.api.kopis.dto.FacilityTypeDTO;
@@ -19,6 +18,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 public class Kopis extends KopisApiController {
 	public List<PFJoinDTO> PfDBList() {
+    
 		 // 최종 리턴 리스트
 	    List<PFJoinDTO> resultList = new ArrayList<>();
 	    
@@ -67,8 +67,10 @@ public class Kopis extends KopisApiController {
 	                        	resultStr.setPf_time(pfDetail.getPd_time());
 	                        	resultStr.setPf_genre(pfDetail.getPd_genre());
 	                        	resultStr.setPf_child(pfDetail.getPd_child());
+
 	                        	// 임시로 null처리
 	                        	resultStr.setPf_img(null);
+
 	                        	resultStr.setPf_time(pfDetail.getPd_time());
 	                        	resultStr.setPf_location_sido(facility.getFl_sidonm());
 	                        	resultStr.setPf_location_gun(facility.getFl_gugunnm());
@@ -193,6 +195,7 @@ public class Kopis extends KopisApiController {
 		});
 
 		// 테스트 출력
+
 		for (PerformDetailDTO c : pList) {
 			System.out.println("공연 ID : " + c.getPd_id());
 			System.out.println("공연시설 ID : " + c.getPd_facility_id());
@@ -225,6 +228,7 @@ public class Kopis extends KopisApiController {
 			System.out.println("-----------------------------------");
 			System.out.println();
 		}
+    
 		return pList;
 	}
 
