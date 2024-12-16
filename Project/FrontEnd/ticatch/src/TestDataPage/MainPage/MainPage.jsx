@@ -27,10 +27,6 @@ const MainPage = () => {
     }
   }, []);
 
-  // 세션에서 유저 아이디 가지고 오기 (테스트용)
-  // userId = sessionStorage.getItem("userId");
-  // console.log("현재 로그인된 사용자:", userId);
-
   // 테스트 로그아웃용 버튼
   const handleLogout = () => {
     sessionStorage.removeItem("userToken");
@@ -80,9 +76,6 @@ const MainPage = () => {
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
-
-  // @@@
-  // 지금 검색이나 장르 선택 사용하면 padding 이랑 margin 이 안 없어짐 (위쪽에 여백 너무 많이 남음 원래는 자동 슬라이드 보려고 해서 이렇게 만들었는데 여백이 너무 많이 남는다)
 
   // 선택한 장르로 필터링
   const filteredConcerts = concerts.filter((concert) => {

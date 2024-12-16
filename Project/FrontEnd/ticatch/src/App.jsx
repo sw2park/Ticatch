@@ -12,6 +12,9 @@ import MainPage from "./TestDataPage/MainPage/MainPage";
 import LoginPage from "./TestDataPage/LoginPage/LoginPage";
 import SignupPage from "./TestDataPage/LoginPage/SignupPage";
 
+// main2.0
+import Main2 from "./TestDataPage/MainPage/Main2";
+
 // detail
 import DetailMain from "./component/Main";
 
@@ -27,6 +30,7 @@ const App = () => {
         <Route path="/order/testDataPage" element={<TestDatePage />} />
         <Route path="/mainPage" element={<MainPage />} />
         {/* <Route path="/detail/:seqPfjoinId/view" element={<DeatailPage />} /> */}
+        <Route path="main2" element={<Main2 />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         {/* detail */}
