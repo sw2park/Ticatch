@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./MainPage.css";
+import style from "./MainPage.module.css";
 import axios from "axios";
 
 const MainPage = () => {
@@ -107,10 +107,10 @@ const MainPage = () => {
   };
 
   return (
-    <div className="booking-page">
+    <div className={style.main_content}>
       {/* 헤더 */}
-      <header className="booking-header">
-        <div className="logo">
+      <header className={style.booking_header}>
+        <div className={style.logo}>
           <h2
             style={{ cursor: "pointer" }}
             onClick={() => {
@@ -126,12 +126,12 @@ const MainPage = () => {
         <input
           type="text"
           placeholder="공연 제목으로 찾아보세요."
-          className="search-bar"
+          className={style.search_bar}
           value={search}
           onChange={handleSearchChange}
         />
         <div>
-          <div className="user-links">
+          <div className={style.user_links}>
             {isLoggedIn ? (
               <>
                 <span>{userId}님 환영합니다!</span>
@@ -139,12 +139,18 @@ const MainPage = () => {
                 <button onClick={handleLogout} style={{ marginLeft: "10px" }}>
                   로그아웃
                 </button>
-                <Link to="/mypage">마이페이지</Link>
+                <Link to="/mypage" className={style.atag}>
+                  마이페이지
+                </Link>
               </>
             ) : (
               <>
-                <Link to="/login">로그인</Link>
-                <Link to="/signup">회원가입</Link>
+                <Link to="/login" className={style.atag}>
+                  로그인
+                </Link>
+                <Link to="/signup" className={style.atag}>
+                  회원가입
+                </Link>
               </>
             )}
           </div>
@@ -152,39 +158,39 @@ const MainPage = () => {
       </header>
 
       {/* 장르 필터 */}
-      <nav className="navigation-menu">
+      <nav className={style.navigation_menu}>
         <span
-          className={genreFilter === "All" ? "active" : ""}
+          className={genreFilter === "All" ? style.active : ""}
           onClick={() => handleGenreFilter("All")}
         >
           전체
         </span>
         <span
-          className={genreFilter === "뮤지컬" ? "active" : ""}
+          className={genreFilter === "뮤지컬" ? style.active : ""}
           onClick={() => handleGenreFilter("뮤지컬")}
         >
           뮤지컬
         </span>
         <span
-          className={genreFilter === "대중음악" ? "active" : ""}
+          className={genreFilter === "대중음악" ? style.active : ""}
           onClick={() => handleGenreFilter("대중음악")}
         >
           대중음악
         </span>
         <span
-          className={genreFilter === "복합" ? "active" : ""}
+          className={genreFilter === "복합" ? style.active : ""}
           onClick={() => handleGenreFilter("복합")}
         >
           복합
         </span>
         <span
-          className={genreFilter === "전시/행사" ? "active" : ""}
+          className={genreFilter === "전시/행사" ? style.active : ""}
           onClick={() => handleGenreFilter("전시/행사")}
         >
           전시/행사
         </span>
         <span
-          className={genreFilter === "서양음악(클래식)" ? "active" : ""}
+          className={genreFilter === "서양음악(클래식)" ? style.active : ""}
           onClick={() => handleGenreFilter("서양음악(클래식)")}
         >
           서양음악(클래식)
@@ -192,27 +198,30 @@ const MainPage = () => {
       </nav>
 
       {/* 메인 콘텐츠 */}
-      <main className="main-content">
+      <main className={style.main_content}>
         {!search && genreFilter === "All" && (
           <>
-            <div className="auto-slider">
+            <div className={style.auto_slider}>
               <img
                 src={sliderImages[sliderIndex]}
                 alt={`Slide ${sliderIndex + 1}`}
-                className="slider-image"
+                className={style.slider_image}
               />
             </div>
             <div>
               <h2>랭킹</h2>
-              <div className="concert-slider">
+              <div className={style.concert_slider}>
                 {rank.slice(0, ITEMS_PER_SLIDE).map((item, index) => (
-                  <div className="concert-card" key={item.seqPfjoinId}>
-                    <h3 className="concert-title">{item.ptitle}</h3>
-                    <div className="image-container">
+                  <div className={style.concert_card} key={item.seqPfjoinId}>
+                    <h3>{item.ptitle}</h3>
+                    <div className={style.image_container}>
                       <Link to={`/detail/${item.seqPfjoinId}/view`}>
-                        <img src={item.pposter} className="concert-image" />
+                        <img
+                          src={item.pposter}
+                          className={style.concert_image}
+                        />
                       </Link>
-                      <span className="rank">{index + 1}</span>
+                      <span className={style.rank}>{index + 1}</span>
                     </div>
                   </div>
                 ))}
@@ -222,8 +231,8 @@ const MainPage = () => {
         )}
 
         {/* 공연 목록 */}
-        <div className="concert-container">
-          <div className="concert-slider">
+        <div className={style.concert_container}>
+          <div className={style.concert_slider}>
             {filteredConcerts.length > 0 ? (
               filteredConcerts
                 .slice(currentIndex, currentIndex + ITEMS_PER_SLIDE)
@@ -231,10 +240,13 @@ const MainPage = () => {
                   <div className="concert-card" key={concert.seqPfjoinId}>
                     <h3 className="concert-title">{concert.ptitle}</h3>
                     <Link to={`/detail/${concert.seqPfjoinId}/view`}>
-                      <img src={concert.pposter} className="concert-image" />
+                      <img
+                        src={concert.pposter}
+                        className={style.concert_image}
+                      />
                     </Link>
-                    <p className="concert-genre">장르: {concert.pgenre}</p>
-                    <p className="concert-price">가격: {concert.pdSeatprice}</p>
+                    <p>장르: {concert.pgenre}</p>
+                    <p>가격: {concert.pdSeatprice}</p>
                   </div>
                 ))
             ) : (
@@ -245,7 +257,7 @@ const MainPage = () => {
       </main>
 
       {/* 푸터 */}
-      <footer className="booking-footer">
+      <footer className={style.booking_footer}>
         <p>&copy; {new Date().getFullYear()} 다나오조. All Rights Reserved.</p>
       </footer>
     </div>

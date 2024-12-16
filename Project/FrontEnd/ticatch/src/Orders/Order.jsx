@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Calendar from "../Calendar/Calendar";
 import axios from "axios";
 
-import "./Order.css";
+import style from "./Order.module.css";
 
 const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
   const navigate = useNavigate(); // 이걸로 페이지 이동함
@@ -257,9 +257,9 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
       />
 
       {seatInfo.length > 0 ? (
-        <div className="seat-info">
+        <div>
           {seatInfo.map((info, index) => (
-            <div key={index} className="time-selector">
+            <div key={index} className={style.time_selector}>
               {info.grade} {info.price.toLocaleString("ko-KR")}원, 그룹:{" "}
               {info.groupStart} ~ {info.groupEnd}
             </div>
@@ -269,7 +269,7 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
         <div>좌석 및 가격 정보가 없습니다.</div>
       )}
 
-      <div className="time-selector">
+      <div className={style.time_selector}>
         <button
           onClick={() =>
             setSelectedTimeIndex(Math.max(0, selectedTimeIndex - 1))
@@ -291,20 +291,27 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
         </button>
       </div>
 
-      <h3>공연날: {selectedDate.toLocaleDateString().slice(0, -1)}</h3>
-      <h3>선택된 좌석: {selectedSeats.join(", ") || "없음"}</h3>
-      <h2>총액: {totalPrice.toLocaleString("ko-KR")}원</h2>
-
-      <button
-        className="reserve-button"
-        onClick={() => {
-          selectedSeats.length != 0
-            ? handleReservation()
-            : alert("좌석을 선택해주세요");
-        }}
-      >
-        예매하기
-      </button>
+      <h3 className={style.time_selector}>
+        공연날: {selectedDate.toLocaleDateString().slice(0, -1)}
+      </h3>
+      <h3 className={style.padding}>
+        선택된 좌석: {selectedSeats.join(", ") || "없음"}
+      </h3>
+      <h2 className={style.padding}>
+        총액: {totalPrice.toLocaleString("ko-KR")}원
+      </h2>
+      <div className={style.padding_top}>
+        <button
+          className={style.reserve_button}
+          onClick={() => {
+            selectedSeats.length != 0
+              ? handleReservation()
+              : alert("좌석을 선택해주세요");
+          }}
+        >
+          예매하기
+        </button>
+      </div>
 
       {/* <button className="reserve-button" onClick={() => fetchDetailById(1)}>
         테스트 데이터 가져오기

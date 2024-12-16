@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import "./SignupPage.css";
+import style from "./SignupPage.module.css";
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="signup-page">
+    <div className={style.signup_page}>
       <h2
         style={{ cursor: "pointer" }}
         onClick={() => {
@@ -57,9 +57,12 @@ const SignupPage = () => {
         <span style={{ color: "black" }}>다</span>
         <span style={{ color: "red" }}>나오조</span>
       </h2>
-      <form className="signup-form" onSubmit={handleSubmit}>
-        <label htmlFor="userId">아이디</label>
+      <form className={style.signup_form} onSubmit={handleSubmit}>
+        <label htmlFor="userId" className={style.signup_label}>
+          아이디
+        </label>
         <input
+          className={style.signup_input}
           type="text"
           id="userId"
           name="userId"
@@ -71,6 +74,7 @@ const SignupPage = () => {
 
         <label htmlFor="password">비밀번호</label>
         <input
+          className={style.signup_input}
           type="password"
           id="password"
           name="password"
@@ -82,6 +86,7 @@ const SignupPage = () => {
 
         <label htmlFor="confirmPassword">비밀번호 확인</label>
         <input
+          className={style.signup_input}
           type="password"
           id="confirmPassword"
           name="confirmPassword"
@@ -93,6 +98,7 @@ const SignupPage = () => {
 
         <label htmlFor="name">이름</label>
         <input
+          className={style.signup_input}
           type="text"
           id="name"
           name="name"
@@ -104,6 +110,7 @@ const SignupPage = () => {
 
         <label htmlFor="phone">핸드폰</label>
         <input
+          className={style.signup_input}
           type="text"
           id="phone"
           name="phone"
@@ -115,6 +122,7 @@ const SignupPage = () => {
 
         <label htmlFor="email">이메일</label>
         <input
+          className={style.signup_input}
           type="email"
           id="email"
           name="email"
@@ -124,11 +132,11 @@ const SignupPage = () => {
           required
         />
 
-        <button className="signup-button" type="submit">
+        <button className={style.signup_button} type="submit">
           가입완료
         </button>
         <button
-          className="signup-button"
+          className={style.signup_button}
           type="button"
           onClick={() => navigate("/login")}
         >

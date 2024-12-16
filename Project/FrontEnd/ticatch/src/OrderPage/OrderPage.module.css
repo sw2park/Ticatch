@@ -2,7 +2,7 @@ body {
   background-color: black;
 }
 
-.app-container {
+.app_container {
   display: flex;
   justify-content: center;
   width: 1400px;
@@ -26,20 +26,15 @@ body {
   box-shadow: 0 10px 35px rgba(200, 200, 200, 0.5);
   justify-content: center;
 }
+
 .r {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
-}
-
-.r1 {
   background-color: white;
 }
-
-/* .r2 {
-} */
 
 /* index.css 옮김 */
 :root {

@@ -8,7 +8,7 @@ ul {
   font-weight: bold;
 }
 
-.reserve-button {
+.reserve_button {
   font-size: 16px;
   background-color: #004d7c;
   color: white;
@@ -17,14 +17,19 @@ ul {
   cursor: pointer;
   width: 100%;
   transition: background-color 0.1s;
+  padding: 10px;
+  display: flex; /* Flexbox 사용 */
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  text-align: center; /* 텍스트 중앙 정렬 */
 }
 
-.reserve-button:hover {
+.reserve_button:hover {
   background-color: #4852ed;
 }
 
 /*  */
-.time-selector {
+.time_selector {
   padding-top: 10px;
   font-weight: bold;
   display: flex;
@@ -32,7 +37,7 @@ ul {
   justify-content: center;
 }
 
-.time-selector button:hover:not(:disabled) {
+.time_selector button:hover:not(:disabled) {
   color: #003366;
 }
 
@@ -44,6 +49,15 @@ button {
   cursor: pointer;
   border: none;
 }
+
 button:hover {
   border-color: #646cff;
+}
+
+.padding {
+  padding-top: 10px;
+}
+
+.padding_top {
+  padding-top: 10px;
 }

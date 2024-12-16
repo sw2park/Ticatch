@@ -1,5 +1,5 @@
 /* Login Page Container */
-.login-page {
+.login_page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,7 +10,7 @@
 }
 
 /* Login Form Container */
-.login-container {
+.login_container {
   width: 350px;
   padding: 30px;
   background-color: #fff;
@@ -20,27 +20,28 @@
 }
 
 /* Login Form Styling */
-.login-form {
+.login_form {
   display: flex;
   flex-direction: column;
   gap: 15px;
   margin-bottom: 20px;
 }
 
-.login-form label {
+.login_label {
   text-align: left;
   font-size: 14px;
   color: #555;
 }
 
-.login-form input {
+.login_input {
+  width: 90%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 14px;
 }
 
-.login-button {
+.login_button {
   padding: 10px;
   background-color: #555;
   color: white;
@@ -50,6 +51,6 @@
   cursor: pointer;
 }
 
-.login-button:hover {
+.login_button:hover {
   background-color: #333;
 }

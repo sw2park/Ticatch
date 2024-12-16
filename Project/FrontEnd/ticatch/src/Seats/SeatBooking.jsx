@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./Seats.css";
+import style from "./Seats.module.css";
 
 const rows = [
   "A",
@@ -69,24 +69,24 @@ const SeatBooking = ({ selectedSeats, setSelectedSeats, noSeatInfo }) => {
 
   return (
     <div>
-      <div className="stage-container">
-        <div className="stage-box">STAGE</div>
+      <div className={style.stage_container}>
+        <div className={style.stage_box}>STAGE</div>
       </div>
-      <div id="seat-groups">
+      <div className={style.seat_groups}>
         {rows.map((row) => (
-          <div key={row} className="seat-row">
+          <div key={row} className={style.seat_row}>
             {/* 알파벳 표시 */}
-            <div className="row-label">{row}</div>
-            <div className="seat-container">
+            <div className={style.row_label}>{row}</div>
+            <div className={style.seat_container}>
               {Array.from({ length: seatsPerRow }, (_, index) => (
                 <div
                   key={index}
-                  className={`seat ${
+                  className={`${style.seat} ${
                     parsedNoSeatInfo.includes(`${row}${index + 1}`)
-                      ? "seat-unavailable" // parsedNoSeatInfo에 포함된 좌석은 "seat-unavailable"
+                      ? style.unavailable // parsedNoSeatInfo에 포함된 좌석은 "seat-unavailable"
                       : selectedSeats.includes(`${row}${index + 1}`)
-                      ? "selected" // 선택된 좌석은 "selected"
-                      : "available" // 나머지 좌석은 "available"
+                      ? style.selected // 선택된 좌석은 "selected"
+                      : style.available // 나머지 좌석은 "available"
                   }`}
                   onClick={
                     parsedNoSeatInfo.includes(`${row}${index + 1}`)

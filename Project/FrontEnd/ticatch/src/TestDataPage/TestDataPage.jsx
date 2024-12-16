@@ -37,8 +37,7 @@ const TestDataPage = () => {
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>공연 날짜 및 회차 선택</h1>
-      {/* <h2>{data.se}</h2> */}
-      <div style={{ marginBottom: "20px" }}>
+      <div style={{ margin: "20px" }}>
         <label htmlFor="seqId">공연 제목:</label>
         <select
           id="seqId"

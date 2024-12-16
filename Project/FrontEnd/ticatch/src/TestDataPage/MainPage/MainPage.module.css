@@ -8,22 +8,8 @@ body {
   overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
-/* Booking Page Layout */
-.booking-page {
-  width: 100%;
-  max-width: 1400px;
-  min-width: 1400px;
-  min-height: 100vh;
-  margin: 0 auto;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
 /* Header Styling */
-.booking-header {
+.booking_header {
   position: sticky; /* Keep header at the top when scrolling */
   top: 0; /* Stick to the top of the page */
   z-index: 1000; /* Ensure it stays above other elements */
@@ -33,14 +19,10 @@ body {
   padding: 20px 30px;
   background-color: #f8f8f8;
   border-bottom: 1px solid #ddd;
+  width: 97%;
 }
 
-.booking-header .logo h2 {
-  cursor: pointer;
-  margin: 0;
-}
-
-.booking-header .search-bar {
+.search_bar {
   flex-grow: 1;
   margin: 0 20px;
   padding: 10px;
@@ -49,22 +31,24 @@ body {
   border-radius: 4px;
 }
 
-.booking-header .user-links a {
+.atag {
   color: #333;
   text-decoration: none;
   font-size: 0.9rem;
   margin: 0 10px;
+  all: unset; /* 모든 스타일 초기화 */
+  text-decoration: none; /* 밑줄 제거 */
+  color: inherit; /* 부모 색상 상속 */
 }
 
-.booking-header .user-links a:hover {
+.user_links a:hover {
   text-decoration: underline;
 }
 
 /* Navigation Menu */
-.navigation-menu {
+.navigation_menu {
   position: sticky; /* Keep navigation at the top when scrolling */
   top: 80px; /* Adjust according to header height */
-  z-index: 999;
   display: flex;
   justify-content: center;
   padding: 10px 0;
@@ -73,23 +57,15 @@ body {
   gap: 20px;
 }
 
-.navigation-menu span {
+.navigation_menu span {
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
 }
 
-.navigation-menu span:hover,
-.navigation-menu .active {
+.navigation_menu span:hover,
+.navigation_menu .active {
   color: #007bff;
-}
-
-.filtered-content {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 20px;
 }
 
 /* 랭킹 이미지 숫자 나오는거 */
@@ -104,51 +80,50 @@ body {
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 1); /* Add shadow for better contrast */
 }
 
-.image-container {
+.image_container {
   position: relative;
 }
 
 /* Main Content */
-.main-content {
+.main_content {
   display: flex;
   flex-direction: column;
-  padding-top: 750px;
-  margin-top: 330px;
+  margin-top: 430px;
   gap: 20px;
 }
 
-.main-content.no-slider {
+.main_content.no-slider {
   margin-top: 50px; /* Reduced margin when slider is not visible */
   padding-top: 0px;
 }
 
-.main-content.no-padding {
+.main_content.no-padding {
   padding-top: 50px; /* 기존 패딩 값 설정 */
 }
 
 /* Auto Slider */
-.auto-slider {
+.auto_slider {
   width: 100%;
   height: 500px;
   overflow: hidden;
   border-radius: 5px;
 }
 
-.slider-image {
+.slider_image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
 /* Concert List */
-.concert-container {
+.concert_container {
   position: relative;
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-.concert-slider {
+.concert_slider {
   display: flex;
   gap: 20px;
   overflow: hidden;
@@ -157,7 +132,7 @@ body {
   padding-bottom: 20px;
 }
 
-.concert-card {
+.concert_card {
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -167,7 +142,7 @@ body {
   text-align: center;
 }
 
-.concert-image {
+.concert_image {
   width: 100%;
   height: auto;
   object-fit: cover;
@@ -175,7 +150,7 @@ body {
 }
 
 /* Footer */
-.booking-footer {
+.booking_footer {
   text-align: center;
   padding: 15px;
   background-color: #222;

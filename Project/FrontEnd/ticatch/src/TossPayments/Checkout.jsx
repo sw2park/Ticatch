@@ -104,15 +104,21 @@ export function CheckoutPage() {
         {/* 이용약관 UI */}
         <div id="agreement" />
 
+        <br />
+
         {/* 결제하기 버튼 */}
         <button
-          className="button"
           style={{
             backgroundColor: "#004d7c",
             color: "white",
             border: "none",
             borderRadius: "5px",
-            transition: "0.1s",
+            fontsize: "16px",
+            cursor: "pointer",
+            width: "11%",
+            padding: "15px",
+            display: "flex" /* Flexbox 사용 */,
+            alignitems: "center" /* 수직 중앙 정렬 */,
           }}
           disabled={!ready}
           onClick={async () => {

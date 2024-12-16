@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./OrderPage.css";
+import style from "./OrderPage.module.css";
 import SeatBooking from "../Seats/SeatBooking.jsx";
 import Order from "../Orders/Order.jsx";
 
@@ -8,16 +8,16 @@ const OrderPage = () => {
   const [noSeatInfo, setNoSeatInfo] = useState(null); // 공통 상태 생성
 
   return (
-    <div className="app-container">
-      <div className="left">
+    <div className={style.app_container}>
+      <div className={style.left}>
         <SeatBooking
           selectedSeats={selectedSeats}
           setSelectedSeats={setSelectedSeats}
           noSeatInfo={noSeatInfo}
         />
       </div>
-      <div className="right">
-        <div className="r r1">
+      <div className={style.right}>
+        <div className={style.r}>
           <Order selectedSeats={selectedSeats} setNoSeatInfo={setNoSeatInfo} />
         </div>
       </div>

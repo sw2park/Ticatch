@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./LoginPage.css";
+import style from "./LoginPage.module.css";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -45,7 +45,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-page">
+    <div className={style.login_page}>
       <h2
         style={{ cursor: "pointer" }}
         onClick={() => {
@@ -55,10 +55,13 @@ const LoginPage = () => {
         <span style={{ color: "black" }}>다</span>
         <span style={{ color: "red" }}>나오조</span>
       </h2>
-      <div className="login-container">
-        <div className="login-form">
-          <label htmlFor="userId">아이디</label>
+      <div className={style.login_container}>
+        <div className={style.login_form}>
+          <label htmlFor="userId" className={style.login_label}>
+            아이디
+          </label>
           <input
+            className={style.login_input}
             type="text"
             id="userId"
             placeholder="아이디"
@@ -66,8 +69,11 @@ const LoginPage = () => {
             onChange={(e) => setUserId(e.target.value)}
           />
 
-          <label htmlFor="password">비밀번호</label>
+          <label htmlFor="password" className={style.login_label}>
+            비밀번호
+          </label>
           <input
+            className={style.login_input}
             type="password"
             id="password"
             placeholder="비밀번호"
@@ -76,7 +82,7 @@ const LoginPage = () => {
           />
 
           <button
-            className="login-button"
+            className={style.login_button}
             onClick={() => {
               handleLogin();
             }}
@@ -84,7 +90,7 @@ const LoginPage = () => {
             로그인하기
           </button>
           <button
-            className="login-button"
+            className={style.login_button}
             onClick={() => {
               navigate("/signup");
             }}

@@ -10,14 +10,14 @@ body {
   background-color: white;
 }
 
-.stage-container {
+.stage_container {
   display: flex;
   justify-content: center; /* 가로 중앙 정렬 */
   align-items: center; /* 세로 중앙 정렬 */
   margin-bottom: 20px; /* 아래 공간 */
 }
 
-.stage-box {
+.stage_box {
   width: 350px; /* 박스의 너비 */
   height: 55px; /* 박스의 높이 */
   background-color: black;
@@ -36,14 +36,14 @@ body {
   text-align: center;
 }
 
-#seat-groups {
+.seat_groups {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
 }
 
-.seat-container {
+.seat_container {
   display: grid;
   grid-template-columns: repeat(10, 30px);
   grid-gap: 5px;
@@ -62,21 +62,21 @@ body {
   color: white;
 }
 
-.seat.available {
+.available {
   background-color: #747be9;
 }
 
-.seat.unavailable {
+.unavailable {
   background-color: gray;
   pointer-events: none;
 }
 
-.seat.selected {
+.selected {
   background-color: #004d7c;
 }
 
 /* 줄 이름(알파벳) 스타일 */
-.row-label {
+.row_label {
   width: 30px; /* 알파벳의 고정 너비 */
   font-size: 16px;
   font-weight: bold;
@@ -86,7 +86,7 @@ body {
   margin-right: 10px; /* 좌석 번호와 간격 */
 }
 
-.seat-row {
+.seat_row {
   display: flex; /* 줄(row)을 좌측 레이블과 좌석으로 정렬 */
   align-items: center;
   margin-bottom: 10px; /* 줄 간 간격 */
