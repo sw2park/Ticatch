@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.danaojo.ticatch.detail.Repository.ReviewRepository;
-import com.danaojo.ticatch.detail.domain.OrderEntity;
 import com.danaojo.ticatch.detail.domain.Review;
 import com.danaojo.ticatch.detail.dto.ReviewOrderDTO;
 

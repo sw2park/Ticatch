@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 
 @Repository
 @RequiredArgsConstructor
-public class SeatRepository {
+public class DetailSeatRepository {
 	
 	@Autowired
 	private final EntityManager em;
