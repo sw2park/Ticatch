@@ -71,6 +71,12 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
 
   // 결제 페이지로 값 옮기기 (checkout)
   const handleReservation = () => {
+    // @@@
+    // 세션이 비여있음 로그인으로 보냄 (테스트 안해봄)
+    if (sessionStorage.getItem("userId") === null || undefined) {
+      navigate("/login");
+      return;
+    }
     const dataToSend = {
       seqPfjoinIds,
       selectedDate: selectedDate.toISOString().split("T")[0],
