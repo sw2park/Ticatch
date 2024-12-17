@@ -2,7 +2,7 @@ import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ko } from "date-fns/esm/locale";
-import "./Calendar.css";
+import style from "./Calendar.module.css";
 
 export default function Calendar({
   selectedDate,
@@ -23,26 +23,27 @@ export default function Calendar({
   };
 
   return (
-    <DatePicker
-      dateFormat="yyyy.MM.dd"
-      minDate={new Date()}
-      maxDate={maxSelectableDate}
-      selected={selectedDate}
-      onChange={(date) => setSelectedDate(date)}
-      filterDate={filterDate}
-      inline
-      locale={ko}
-      dayClassName={getDayClassName}
-      renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
-        <div className="custom-header">
-          <button onClick={decreaseMonth}>&lt;</button>
-          <span>{`${date.getFullYear()}.${String(date.getMonth() + 1).padStart(
-            2,
-            "0"
-          )}`}</span>
-          <button onClick={increaseMonth}>&gt;</button>
-        </div>
-      )}
-    />
+    <div className={style.calender_main}>
+      <DatePicker
+        dateFormat="yyyy.MM.dd"
+        minDate={new Date()}
+        maxDate={maxSelectableDate}
+        selected={selectedDate}
+        onChange={(date) => setSelectedDate(date)}
+        filterDate={filterDate}
+        inline
+        locale={ko}
+        dayClassName={getDayClassName}
+        renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
+          <div className={style.custom_header}>
+            <button onClick={decreaseMonth}>&lt;</button>
+            <span>{`${date.getFullYear()}.${String(
+              date.getMonth() + 1
+            ).padStart(2, "0")}`}</span>
+            <button onClick={increaseMonth}>&gt;</button>
+          </div>
+        )}
+      />
+    </div>
   );
 }

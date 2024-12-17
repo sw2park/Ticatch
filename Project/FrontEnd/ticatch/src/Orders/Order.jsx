@@ -249,7 +249,7 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
     <div>
       <ul>
         {fetchId.map((item) => (
-          <li key={item.seqPfjoinId}>
+          <li key={item.seqPfjoinId} className={style.title}>
             [ {item.pgenre} ]<h3>&lt;{item.ptitle}&gt;</h3>
           </li>
         ))}

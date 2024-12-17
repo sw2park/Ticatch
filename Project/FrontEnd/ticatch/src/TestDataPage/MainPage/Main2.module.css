@@ -1,3 +1,12 @@
 .hello {
   color: red;
 }
+
+.main {
+  width: 1400px;
+}
+
+/* 링크 누루면 흰색이 되서 그냥 검정색으로 바꿈 */
+li a:visited {
+  color: black;
+}
