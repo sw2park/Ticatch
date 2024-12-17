@@ -34,7 +34,7 @@ function Main2() {
 
   return (
     <div className={style.main}>
-      <header>
+      <header className={style.header}>
         <div>
           <h1
             style={{ cursor: "pointer" }}
@@ -75,7 +75,7 @@ function Main2() {
         </div>
       </header>
       <main>
-        <h1 className={style.hello}>Hello</h1>
+        <div>ddd</div>
       </main>
       <footer>footer</footer>
     </div>

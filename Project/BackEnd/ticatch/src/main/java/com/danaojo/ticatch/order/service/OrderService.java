@@ -131,7 +131,6 @@ public class OrderService {
 	public String findRank() {
 		
 		
-		
 		return null;
 	}
 	
@@ -156,6 +155,9 @@ public class OrderService {
 
 	// 회원 가입 로직
 	public ResponseEntity<String> saveUser(UserDTO userDTO) {
+		if (userRepository.findByUserId(userDTO.getUserId()) != null) {
+		    return ResponseEntity.ok("아이디 중복");
+		}
 		try {
             System.out.println("회원가입 (회원 저장중)");
 
