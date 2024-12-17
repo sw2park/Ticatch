@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Calendar from './Calendar';
 import Seat from './Seat';
 import Time from './Time';
 import cssReseve from '../css/Main.module.css';
 
 export default function Reserve({ productData }) {
+    const { seqpfjoinId } = useParams();
     const [selectDate, setSelectDate] = useState('');
     const [selectTime, setSelectTime] = useState('');
 
@@ -12,6 +15,25 @@ export default function Reserve({ productData }) {
     console.log("Reserve Date : " + selectDate);
     console.log("Reserve Time : " + selectTime);
     console.log("===========================");
+
+
+    // 주문 페이지로 값 넘기기
+    const navigate = useNavigate();
+
+    const handleReserve = () => {
+        if (!selectDate || !selectTime) {
+            alert('예매 정보를 모두 선택해주세요.');
+            return;
+        }
+
+        navigate("/order", {
+        state: {
+            seqId: seqpfjoinId,
+            selectedDay: selectDate,
+            selectedTime: selectTime,
+        },
+        });
+    };
 
     return (
         <>
@@ -73,7 +95,9 @@ export default function Reserve({ productData }) {
             </div>
 
             <div className={cssReseve.resevation_wrap}>
-                <button className={cssReseve.reseve_btn}>
+                <button className={cssReseve.reseve_btn}
+                        onClick={handleReserve}
+                >
                     <a className={cssReseve.reservation_link}>예매하기</a>
                 </button>
             </div>

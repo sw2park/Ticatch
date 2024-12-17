@@ -3,6 +3,11 @@
     margin: 0 auto;
 }
 
+ul {
+    overflow: visible !important;
+    font-weight: 500;
+}
+
 .wrap {
     width: 100%;
     margin: 0 auto;

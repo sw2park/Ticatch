@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import cssTime from '../css/Main.module.css';
 
 export default function Time({ time, setSelectTime, selectDate }) {
+    // timeString에서 괄호 안의 값을 추출하는 함수
     const extractTimes = (timeString) => {
         const match = timeString.match(/\(([^)]+)\)/); // 괄호 안의 값 추출
         if (match) {
@@ -10,20 +11,23 @@ export default function Time({ time, setSelectTime, selectDate }) {
         return [];
     };
 
+    // 주어진 time을 배열로 변환
     const times = time ? extractTimes(time) : [];
     const [selectTime, setSelectedTime] = useState(null);
+    const [selectedTimeIndex, setSelectedTimeIndex] = useState(null); // 선택된 시간의 인덱스값을 저장
 
-    const handleClick = (data) => {
-        setSelectedTime(data);
-        setSelectTime(data);
+    // 클릭 시 선택된 시간과 그 인덱스를 상태에 저장
+    const handleClick = (data, index) => {
+        setSelectedTime(data); // 선택된 시간 저장
+        setSelectedTimeIndex(index); // 선택된 시간의 인덱스 저장
+        setSelectTime(data); // 부모 컴포넌트에 시간 값 전달
     };
 
     // 날짜 변경 시 선택된 회차 초기화
     useEffect(() => {
         setSelectedTime(null);
+        setSelectedTimeIndex(null);
     }, [selectDate]);
-
-    // console.log("Time Date : " +  selectDate);
 
     return (
         <ul className={cssTime.product_time_choice_ul}>
@@ -42,7 +46,7 @@ export default function Time({ time, setSelectTime, selectDate }) {
                                     ? cssTime.product_time_choice_btn_selected
                                     : cssTime.product_time_choice_btn
                             }
-                            onClick={() => handleClick(time)}
+                            onClick={() => handleClick(time, index)} // 시간과 인덱스를 전달
                         >
                             <span className={cssTime.product_time_choice_span}>
                                 {time.replace(':', '시 ') + '분'}
