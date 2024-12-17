@@ -97,7 +97,7 @@ export function CheckoutPage() {
   }, [widgets, amount]);
 
   return (
-    <div className="wrapper" style={{ minWidth: "600px" }}>
+    <div className="wrapper" style={{ maxWidth: "600px", paddingTop: "150px" }}>
       <div className="box_section">
         {/* 결제 UI */}
         <div id="payment-method" />
@@ -116,7 +116,7 @@ export function CheckoutPage() {
             fontsize: "16px",
             cursor: "pointer",
             width: "11%",
-            padding: "15px",
+            padding: "13px",
             display: "flex" /* Flexbox 사용 */,
             alignitems: "center" /* 수직 중앙 정렬 */,
           }}
@@ -131,7 +131,7 @@ export function CheckoutPage() {
               await widgets.requestPayment({
                 // 여기있는건 결제창에 이름이랑 뜨는거
                 orderId: uniqueOrderId,
-                orderName: titleSeats,
+                orderName: titleSeats, // 좌석 정보가 제품명임
 
                 // 이 아래 값들은 나중에 유저 테이블되면 앞에서 부터 가지고 오던 세션에서 가지고오기(?)
                 // 아직은 모르겠음 그냥 자바에서 하는게 더 편할듯 (아 백에서 비교해야되나..?)
