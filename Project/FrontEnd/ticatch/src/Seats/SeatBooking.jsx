@@ -68,7 +68,7 @@ const SeatBooking = ({ selectedSeats, setSelectedSeats, noSeatInfo }) => {
   const { parsedNoSeatInfo } = parseAndCompare(selectedSeats, noSeatInfo);
 
   return (
-    <div>
+    <div className={style.main_body}>
       <div className={style.stage_container}>
         <div className={style.stage_box}>STAGE</div>
       </div>

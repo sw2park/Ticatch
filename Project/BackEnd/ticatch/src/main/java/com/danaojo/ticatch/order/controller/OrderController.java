@@ -97,7 +97,7 @@ public class OrderController {
 	// 회원가입
 	@PostMapping("/signup")
 	public ResponseEntity<String> signUp(@RequestBody UserDTO userDTO) {
-		
+		System.out.println("here");
 		return orderService.saveUser(userDTO);
 		
 	}

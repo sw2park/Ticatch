@@ -1,11 +1,6 @@
-ul {
-  list-style: none;
-  max-width: 310px; /* 텍스트 영역의 최대 너비 설정 */
-  white-space: normal; /* 텍스트 줄바꿈 허용 */
-  overflow: hidden; /* 넘친 텍스트는 숨김 */
-  text-overflow: ellipsis; /* 넘친 텍스트는 "..."로 표시 */
-  padding: 0;
+.title {
   font-weight: bold;
+  padding-bottom: 15px;
 }
 
 .reserve_button {
@@ -28,7 +23,6 @@ ul {
   background-color: #4852ed;
 }
 
-/*  */
 .time_selector {
   padding-top: 10px;
   font-weight: bold;
@@ -37,21 +31,13 @@ ul {
   justify-content: center;
 }
 
+.time_selector button {
+  font-size: 20px;
+}
+
 .time_selector button:hover:not(:disabled) {
-  color: #003366;
-}
-
-button {
-  align-items: center;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-family: inherit;
   cursor: pointer;
-  border: none;
-}
-
-button:hover {
-  border-color: #646cff;
+  color: #003366;
 }
 
 .padding {

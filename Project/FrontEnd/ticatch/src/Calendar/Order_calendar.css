@@ -1,3 +1,9 @@
+/* 중간 정렬 */
+.calendar_main {
+  display: flex;
+  align-items: center;
+}
+
 /* 달력 전체 배경 */
 .react_datepicker {
   background-color: #ffffff;
@@ -33,7 +39,6 @@
   margin-left: 16px;
 }
 
-/* 다음 달력 버튼 왜 nth-child(3)이지? */
 .custom_header_button:nth-child(3) {
   background: none;
   border: none;
@@ -115,12 +120,6 @@
   border-radius: 50% !important;
 }
 
-/* 이전 달의 선택된 날짜에 대한 스타일 수정 -> 안됨
-.react-datepicker__day--outside-month.react-datepicker__day--selected {
-    border-radius: 50% !important;
-}
-*/
-
 /* 요일 밑에 border 속성 없애기 */
 .react-datepicker__header {
   border-bottom: none !important; /* 헤더 전체의 하단 경계선 제거 */
@@ -135,15 +134,3 @@
   font-weight: 500;
   padding: 5px;
 }
-
-/* 날짜 영역 배경색 
-.react-datepicker__month {
-    background-color: black;
-}
-*/
-
-/* 날짜 셀 배경색 
-.react-datepicker__day {
-    background-color: #004d7c;
-}
-*/

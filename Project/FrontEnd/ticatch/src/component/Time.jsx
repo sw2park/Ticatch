@@ -29,6 +29,8 @@ export default function Time({ time, setSelectTime, selectDate }) {
         setSelectedTimeIndex(null);
     }, [selectDate]);
 
+    console.log('회차 인덱스 : ' + selectedTimeIndex);
+
     return (
         <ul className={cssTime.product_time_choice_ul}>
             {!selectDate ? (

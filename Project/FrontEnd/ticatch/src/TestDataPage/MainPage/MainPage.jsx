@@ -38,21 +38,18 @@ const MainPage = () => {
 
   // 자동 슬라이더 이미지들
   const sliderImages = [
-    "https://www.clevelandamphitheater.com/wp-content/uploads/2024/07/Cleveland-Orchestra-Return-of-the-King-banner-2-1400-x-500-px.jpg-1.webp",
-    "https://www.kivaauditorium.com/wp-content/uploads/sites/60/2024/05/Experience-Hendrix-banner-1400-x-500-px.jpg-1.webp",
-    "https://www.pineknobamp.com/wp-content/uploads/2024/10/Weird-Al-Yankovic-banner-1400-x-500-px-2.jpg-4.webp",
-    "https://www.paramounttheatreseattle.net/wp-content/uploads/2024/10/Foster-The-People-banner-2-1400-x-500-px.jpg-1.webp",
-    "https://www.marymooramphitheatre.com/wp-content/uploads/2024/05/The-Wailers-Banner-updated-1400-x-500-px.jpg-1.webp",
-    "https://www.marymooramphitheatre.com/wp-content/uploads/2024/06/Switchfoot-Blue-October-Matt-Nathanson-banner-1400-x-500-px.jpg-1.webp",
-    "https://www.deervalleyamphitheater.com/wp-content/uploads/2024/05/The-Rascals-The-Utah-Symphony-banner-1400-x-500-px.jpg-1.webp",
-    "https://www.albuquerqueamphitheater.com/wp-content/uploads/2024/05/The-Marley-Brothers-banner-3-1400-x-500-px.jpg-1.webp",
+    "https://image.toast.com/aaaaab/ticketlink/TKL_8/PC_TopBanner_%ED%8D%BC%EC%8A%A4%ED%8A%B8%EB%A7%A8.jpg",
+    "https://image.toast.com/aaaaab/ticketlink/TKL_8/PC_TopBanner_%EB%AE%A4%EC%A7%80%EC%BB%AC_%EC%8B%9C%EB%9D%BC%EB%85%B8_.jpg",
+    "https://image.toast.com/aaaaab/ticketlink/TKL_9/PC_TopBanner_%ED%95%B4%EC%A0%81.jpg",
+    "https://image.toast.com/aaaaab/ticketlink/TKL_3/PC_TopBanner_%ED%8B%B1%ED%8B%B1%EB%B6%90%EB%A1%9C%EA%B3%A0%EB%A7%8C.jpg",
+    "https://image.toast.com/aaaaab/ticketlink/TKL_2/PC_TopBanner_%EC%98%A4%EC%85%80%EB%A1%9C%EC%9D%98%EC%9E%AC%EC%8B%AC.jpg",
   ];
 
   // 자동 슬라이더 작동
   useEffect(() => {
     const interval = setInterval(() => {
       setSliderIndex((prevIndex) => (prevIndex + 1) % sliderImages.length);
-    }, 3000);
+    }, 3500);
     return () => clearInterval(interval);
   }, [sliderImages.length]);
 
@@ -132,16 +129,22 @@ const MainPage = () => {
                 <button onClick={handleLogout} style={{ marginLeft: "10px" }}>
                   로그아웃
                 </button>
-                <Link to="/mypage" className={style.atag}>
+                <Link
+                  to="/mypage"
+                  style={{ color: "black", paddingRight: "20px" }}
+                >
                   마이페이지
                 </Link>
               </>
             ) : (
               <>
-                <Link to="/login" className={style.atag}>
+                <Link
+                  to="/login"
+                  style={{ color: "black", paddingRight: "20px" }}
+                >
                   로그인
                 </Link>
-                <Link to="/signup" className={style.atag}>
+                <Link to="/signup" style={{ color: "black" }}>
                   회원가입
                 </Link>
               </>
@@ -201,8 +204,8 @@ const MainPage = () => {
                 className={style.slider_image}
               />
             </div>
+            <h2>랭킹</h2>
             <div>
-              <h2>랭킹</h2>
               <div className={style.concert_slider}>
                 {rank.slice(0, ITEMS_PER_SLIDE).map((item, index) => (
                   <div className={style.concert_card} key={item.seqPfjoinId}>
@@ -224,14 +227,15 @@ const MainPage = () => {
         )}
 
         {/* 공연 목록 */}
+        <h2>목록</h2>
         <div className={style.concert_container}>
           <div className={style.concert_slider}>
             {filteredConcerts.length > 0 ? (
               filteredConcerts
                 .slice(currentIndex, currentIndex + ITEMS_PER_SLIDE)
                 .map((concert) => (
-                  <div className="concert-card" key={concert.seqPfjoinId}>
-                    <h3 className="concert-title">{concert.ptitle}</h3>
+                  <div key={concert.seqPfjoinId}>
+                    <h3>{concert.ptitle}</h3>
                     <Link to={`/detail/${concert.seqPfjoinId}/view`}>
                       <img
                         src={concert.pposter}

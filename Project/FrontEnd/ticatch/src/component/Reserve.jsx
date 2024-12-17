@@ -10,6 +10,7 @@ export default function Reserve({ productData }) {
     const { seqpfjoinId } = useParams();
     const [selectDate, setSelectDate] = useState('');
     const [selectTime, setSelectTime] = useState('');
+    const [selectedTimeIndex, setSelectedTimeIndex] = useState(null);
 
     console.log("===========================");
     console.log("Reserve Date : " + selectDate);
@@ -30,7 +31,7 @@ export default function Reserve({ productData }) {
         state: {
             seqId: seqpfjoinId,
             selectedDay: selectDate,
-            selectedTime: selectTime,
+            selectedTime: selectedTimeIndex,
         },
         });
     };
@@ -74,6 +75,7 @@ export default function Reserve({ productData }) {
                                     time={time}
                                     setSelectTime={setSelectTime}
                                     selectDate={selectDate} // 날짜를 선택했는지 확인하기 위해 날짜값 전달
+                                    setSelectedTimeIndex={setSelectedTimeIndex}
                                 />
                             );
                         })}

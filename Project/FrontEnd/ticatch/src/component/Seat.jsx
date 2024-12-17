@@ -11,11 +11,28 @@ export default function Seat({ seqPfjoinId, selectDate, selectTime }) {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`http://localhost:9090/detail/seat/${seqPfjoinId}/${selectDate}/${selectTime}/view`);
-                setSeatData(response.data ?? null); // 조회 값이 없으면 null
+
+                // selectDate가 존재하면 하루 전 날짜로 변경
+                let adjustedDate = selectDate;
+                if (selectDate) {
+                    const dateObj = new Date(selectDate);
+                    dateObj.setDate(dateObj.getDate() - 1 + 1); // 하루 전으로 설정. 근데 -1만하면 -2씩 돼서 +1 붙여줌
+                    adjustedDate = dateObj.toISOString().split('T')[0]; // YYYY-MM-DD 형식으로 변환
+                }
+
+                console.log('수정된 날짜 : ' + adjustedDate);
+
+                // 서버에 수정된 날짜를 보내기
+                const response = await axios.get(`http://localhost:9090/detail/seat/${seqPfjoinId}/${adjustedDate}/${selectTime}/view`);
+                
+                if (response.data !== undefined && response.data !== null) {
+                    setSeatData(response.data);
+                } else {
+                    setSeatData(null);
+                }
                 setError(null);
             } catch (err) {
-                setSeatData(null); // 에러 발생 시 seatData 초기화
+                setSeatData(null);
                 setError("잔여 좌석을 불러오는데 실패했습니다.");
             } finally {
                 setLoading(false);

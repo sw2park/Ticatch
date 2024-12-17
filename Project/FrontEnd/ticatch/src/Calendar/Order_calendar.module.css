@@ -1,8 +1,8 @@
 /* 달력 전체 배경 */
-.react-datepicker {
+.react_datepicker {
   background-color: #ffffff;
   border: none;
-  box-shadow: 0 0 38px rgba(0, 0, 0, 0.1), 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: none !important;
 }
 
 /* 달력 헤더 스타일 변경 */
@@ -11,7 +11,7 @@
 }
 
 /* renderCustomHeader 속성 스타일 설정 */
-.custom-header {
+.custom_header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,12 +20,12 @@
   background-color: #ffffff;
 }
 
-.custom-header span {
+.custom_header_span {
   font-size: 18px;
   font-weight: 500;
 }
 
-.custom-header button:nth-child(1) {
+.custom_header_button:nth-child(1) {
   background: none;
   border: none;
   font-size: 15px;
@@ -34,7 +34,7 @@
 }
 
 /* 다음 달력 버튼 왜 nth-child(3)이지? */
-.custom-header button:nth-child(3) {
+.custom_header_button:nth-child(3) {
   background: none;
   border: none;
   font-size: 15px;
@@ -42,7 +42,7 @@
   margin-right: 16px;
 }
 
-.custom-header button:hover {
+.custom_header button:hover {
   color: #004d7c;
 }
 
@@ -117,7 +117,7 @@
 
 /* 이전 달의 선택된 날짜에 대한 스타일 수정 -> 안됨
 .react-datepicker__day--outside-month.react-datepicker__day--selected {
-    border-radius: 50% !important;
+  border-radius: 50% !important;
 }
 */
 
@@ -136,13 +136,14 @@
   padding: 5px;
 }
 
+/* 날짜 영역 배경색 
 .react-datepicker__month {
-  /* background-color: black; */
-  /* box-shadow: 0 10px 35px rgba(200, 200, 200, 1) !important; */
+  background-color: black;
 }
+*/
 
 /* 날짜 셀 배경색 
 .react-datepicker__day {
-    background-color: #004d7c;
+  background-color: #004d7c;
 }
 */

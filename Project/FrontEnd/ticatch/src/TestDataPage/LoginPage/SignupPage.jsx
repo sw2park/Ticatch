@@ -34,12 +34,15 @@ const SignupPage = () => {
           "Content-Type": "application/json",
         },
       });
+      // 아디이 중복이라는 스트링 값이 들어오면 아이디 중복임
+      if ("아이디 중복") {
+        alert("아이디 중복");
+      }
 
-      if (response.status === 200 || response.status === 201) {
+      // 아니면 아이디 중복이 아니니 가입 성공
+      if (!"아이디 중복") {
         alert("회원가입 성공!");
         navigate("/login"); // 로그인으로 이동
-      } else {
-        alert(`회원가입 실패: ${response.data.message}`);
       }
     } catch (error) {
       console.error("회원가입 오류:", error);

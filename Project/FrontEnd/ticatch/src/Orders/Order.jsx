@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Calendar from "../Calendar/Calendar";
+import Calendar from "../Calendar/Order_calendar.jsx";
 import axios from "axios";
 
 import style from "./Order.module.css";
@@ -249,7 +249,7 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
     <div>
       <ul>
         {fetchId.map((item) => (
-          <li key={item.seqPfjoinId}>
+          <li key={item.seqPfjoinId} className={style.title}>
             [ {item.pgenre} ]<h3>&lt;{item.ptitle}&gt;</h3>
           </li>
         ))}
