@@ -172,7 +172,7 @@ public class OrderService {
 	        userEntity.setEmail(userDTO.getEmail());
 	        userEntity.setPhone(userDTO.getPhone());
 	        userEntity.setLoginType("일반"); // 기본값 설정
-	        userEntity.setCreateDate(new java.util.Date());
+	        userEntity.setCreateDate(new Date());
 
 	        // 사용자 정보 저장
 	        userRepository.save(userEntity);
