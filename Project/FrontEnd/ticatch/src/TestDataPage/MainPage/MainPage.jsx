@@ -126,12 +126,15 @@ const MainPage = () => {
               <>
                 <span>{userId}님 환영합니다!</span>
                 {/* 로그아웃 테스트웃 테스트용 */}
-                <button onClick={handleLogout} style={{ marginLeft: "10px" }}>
+                <button
+                  onClick={handleLogout}
+                  style={{ marginLeft: "10px", cursor: "pointer" }}
+                >
                   로그아웃
                 </button>
                 <Link
                   to="/mypage"
-                  style={{ color: "black", paddingRight: "20px" }}
+                  style={{ color: "black", paddingLeft: "20px" }}
                 >
                   마이페이지
                 </Link>
