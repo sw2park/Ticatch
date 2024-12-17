@@ -117,7 +117,7 @@
 
 /* 이전 달의 선택된 날짜에 대한 스타일 수정 -> 안됨
 .react-datepicker__day--outside-month.react-datepicker__day--selected {
-    border-radius: 50% !important;
+  border-radius: 50% !important;
 }
 */
 
@@ -138,12 +138,12 @@
 
 /* 날짜 영역 배경색 
 .react-datepicker__month {
-    background-color: black;
+  background-color: black;
 }
 */
 
 /* 날짜 셀 배경색 
 .react-datepicker__day {
-    background-color: #004d7c;
+  background-color: #004d7c;
 }
 */

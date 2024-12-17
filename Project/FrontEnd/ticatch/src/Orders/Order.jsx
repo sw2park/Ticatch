@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import Calendar from "../Calendar/Calendar";
+import Calendar from "../Calendar/Order_calendar.jsx";
 import axios from "axios";
 
 import style from "./Order.module.css";
