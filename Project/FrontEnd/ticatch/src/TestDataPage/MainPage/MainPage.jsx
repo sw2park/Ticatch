@@ -128,7 +128,12 @@ const MainPage = () => {
                 {/* 로그아웃 테스트웃 테스트용 */}
                 <button
                   onClick={handleLogout}
-                  style={{ marginLeft: "10px", cursor: "pointer" }}
+                  style={{
+                    color: "red",
+                    marginLeft: "10px",
+                    cursor: "pointer",
+                    fontWeight: "bold",
+                  }}
                 >
                   로그아웃
                 </button>
