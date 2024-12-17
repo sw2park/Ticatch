@@ -34,18 +34,19 @@ const SignupPage = () => {
           "Content-Type": "application/json",
         },
       });
-      // 아디이 중복이라는 스트링 값이 들어오면 아이디 중복임
-      if ("아이디 중복") {
-        alert("아이디 중복");
-      }
 
-      // 아니면 아이디 중복이 아니니 가입 성공
-      if (!"아이디 중복") {
+      // 서버에서 반환된 응답을 확인
+      if (response.data === "아이디 중복") {
+        alert("아이디가 이미 존재합니다.");
+      } else if (response.data === "회원가입 성공") {
         alert("회원가입 성공!");
-        navigate("/login"); // 로그인으로 이동
+        navigate("/login"); // 로그인 페이지로 이동
+      } else {
+        alert("회원가입 중 알 수 없는 오류가 발생했습니다.");
       }
     } catch (error) {
       console.error("회원가입 오류:", error);
+      alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
     }
   };
 

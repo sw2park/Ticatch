@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -44,15 +45,15 @@ public class OrderService {
 		for (OrderDTO.SeatInfo seatInfo : orderListDTO.getSelectedSeatsInfo()) {
 			seatNumbers.append(seatInfo.getSeat()).append(", "); // 리액트에서 전달 받은 좌석 데이터를 , 로 붙임 (인덱스로 넘어옴)
 		}
-		
+
 		// 마지막에 ", " 저장되서 지우는거
 		if (seatNumbers.length() > 0) {
-		    seatNumbers.deleteCharAt(seatNumbers.length() - 1); // 마지막 공백 제거
-		    seatNumbers.deleteCharAt(seatNumbers.length() - 1); // 마지막 쉼표 제거
+			seatNumbers.deleteCharAt(seatNumbers.length() - 1); // 마지막 공백 제거
+			seatNumbers.deleteCharAt(seatNumbers.length() - 1); // 마지막 쉼표 제거
 		}
-		
+
 		String seatNums = seatNumbers.substring(0, seatNumbers.length());
-		
+
 		order.setSeatNum(seatNums); // 좌석 위치 저장 예) A1, B1
 
 		int seatCount = seatNums.split(", ").length;
@@ -107,7 +108,7 @@ public class OrderService {
 
 	// 날짜 및 회차 변경시 실행되는 로직
 	public String getSoldSeats(OrderDTO seatDTO) {
-		Long idAsLong = Long.valueOf(seatDTO.getSeqPfjoinIds().get(0).toString()); // id 를 long 값으로 변환 
+		Long idAsLong = Long.valueOf(seatDTO.getSeqPfjoinIds().get(0).toString()); // id 를 long 값으로 변환
 
 		String viewTime = seatDTO.getSelectedTime().replaceAll("[^0-9:]", ""); // 회차 숫자만 예) 수요일 18:00 -> 18:00 으로
 
@@ -129,61 +130,61 @@ public class OrderService {
 	// 시간 남으면
 	// 좌석 팔린 기준으로 많은것들이 랭킹 1위임 (해당 seqpfjoin 에 가장 좌석이 많이 팔린게 랭킹 1위)
 	public String findRank() {
-		
-		
+
 		return null;
 	}
-	
-	// 로그인 처리 로직 
+
+	// 로그인 처리 로직
 	public UserDTO login(UserDTO userDTO) {
-	    // Fetch the user from the database (returns a User entity)
-	    UserEntity user = userRepository.findByUserId(userDTO.getUserId());
+		// Fetch the user from the database (returns a User entity)
+		UserEntity user = userRepository.findByUserId(userDTO.getUserId());
 
-	    // Check if user exists
-	    if (user == null) {
-	        throw new RuntimeException("아이디 없음 / 틀렸음");
-	    }
+		// Check if user exists
+		if (user == null) {
+			throw new RuntimeException("아이디 없음 / 틀렸음");
+		}
 
-	    // Check if password matches
-	    if (!user.getPassword().equals(userDTO.getPassword())) {
-	        throw new RuntimeException("비밀번호가 없음 / 틀렸음");
-	    }
+		// Check if password matches
+		if (!user.getPassword().equals(userDTO.getPassword())) {
+			throw new RuntimeException("비밀번호가 없음 / 틀렸음");
+		}
 
-	    // Map User entity to UserDTO
-	    return new UserDTO();
+		// Map User entity to UserDTO
+		return new UserDTO();
 	}
 
 	// 회원 가입 로직
 	public ResponseEntity<String> saveUser(UserDTO userDTO) {
-		if (userRepository.findByUserId(userDTO.getUserId()) != null) {
-		    return ResponseEntity.ok("아이디 중복");
-		}
-		try {
-            System.out.println("회원가입 (회원 저장중)");
+	    try {
+	        // 아이디 중복 확인
+	        if (userRepository.findByUserId(userDTO.getUserId()) != null) {
+	        	System.out.println("아이디 중복");
+	            return ResponseEntity.ok("아이디 중복");
+	        }
 
-            // DTO -> Entity 변환
-            UserEntity userEntity = new UserEntity();
-            userEntity.setUserId(userDTO.getUserId());
-            userEntity.setPassword(userDTO.getPassword());
-            userEntity.setName(userDTO.getName());
-            userEntity.setEmail(userDTO.getEmail());
-            userEntity.setPhone(userDTO.getPhone());
-            userEntity.setLoginType(userDTO.getLoginType());
-            userEntity.setCreateDate(new java.util.Date());
-            userEntity.setLoginType("일반"); // 그냥 박았음 일반이라고 카카오나 네이버 같은거 사용해서 로그인하는거 시간이 없음
+	        System.out.println("회원가입 (회원 저장중)");
 
-            // 저장
-            userRepository.save(userEntity);
+	        // DTO -> Entity 변환
+	        UserEntity userEntity = new UserEntity();
+	        userEntity.setUserId(userDTO.getUserId());
+	        userEntity.setPassword(userDTO.getPassword());
+	        userEntity.setName(userDTO.getName());
+	        userEntity.setEmail(userDTO.getEmail());
+	        userEntity.setPhone(userDTO.getPhone());
+	        userEntity.setLoginType("일반"); // 기본값 설정
+	        userEntity.setCreateDate(new java.util.Date());
 
-            System.out.println("회원가입 성공");
-            return ResponseEntity.ok("회원가입 성공");
+	        // 사용자 정보 저장
+	        userRepository.save(userEntity);
 
-        } catch (Exception e) {
-            System.err.println("회원가입 오류 - " + e.getMessage());
-            return ResponseEntity.status(500).body("회원가입 오류");
-        }
+	        System.out.println("회원가입 성공");
+	        return ResponseEntity.ok("회원가입 성공");
+
+	    } catch (Exception e) {
+	        System.err.println("회원가입 오류 - " + e.getMessage());
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원가입 오류");
+	    }
 	}
 
-	
-	
+
 }
