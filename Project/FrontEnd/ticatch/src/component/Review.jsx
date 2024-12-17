@@ -61,9 +61,12 @@ export default function Review() {
         // 세션 저장
         sessionStorage.setItem('user_id', 'test2');
 
-        // 사용자의 세션 아이디를 가져오기
-        const userId = sessionStorage.getItem('user_id');
-        //console.log("Review sessionId : " + userId);
+        // 사용자의 세션 아이디를 가져오기 - 원래 사용하던거
+        // const userId = sessionStorage.getItem('user_id');
+
+        // 로그인 session
+        sessionStorage.getItem("userId");
+        const userId = sessionStorage.getItem("userId");
         
         if (!userId) {
             alert('로그인 후 작성해주세요.');
