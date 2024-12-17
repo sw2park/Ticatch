@@ -124,6 +124,12 @@ public class DetailController {
 		return "redirect:/";
 	}
 	
+	// 리뷰 삭제
+	@PostMapping("/detail/review/{reveiw_seq_id}/delete")
+	public String deleteReview(@PathVariable("review_seq_id") Long reviw_seq_id) {
+		return reviewService.deleteReview(review_seq_id);
+	}
+	
 	// 기대평 저장
 	@PostMapping("/detail/exp/new")
 	public String createExp(@RequestBody ExpectationDTO expDto) {

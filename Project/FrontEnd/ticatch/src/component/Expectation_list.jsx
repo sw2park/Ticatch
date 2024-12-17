@@ -59,9 +59,6 @@ export default function ExpectationList() {
                                         <span className={cssExpL.review_item_create_date}>
                                             {formatDate(exp.exp_date)}
                                         </span>
-                                        <span className={cssExpL.review_item_purchaser}>
-                                            관람자
-                                        </span>
                                     </div>
                                 </li>
                             ))
