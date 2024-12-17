@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import '../css/Main.css';
 import Description from './desc.jsx';
 import CancelInfo from './Cancel_info.jsx';
 import Review from './Review.jsx';
 import Expectation from './Expectation.jsx';
 import Location from './Location.jsx';
 import Info from './Info.jsx';
+import cssMain from '../css/Main.module.css'
 
 export default function DetailMain() {
     
@@ -28,21 +28,21 @@ export default function DetailMain() {
 
 
     return(
-        <div className='wrap'>
-            <div className="Detail_wrap">
+        <div className={cssMain.wrap}>
+            <div className={cssMain.Detail_wrap}>
 
                 <Info/>
 
-                <section className='section_tab_wrap'>
-                    <ul className='section_tab_ul'>
+                <section className={cssMain.section}>
+                    <ul className={cssMain.section_tab_ul}>
 
                     {Object.keys(tabContent).map((tab) => (
                         <li
                         key={tab}
-                        className={`section_tab_li ${activeTab === tab ? 'active' : ''}`} // 활성화된 탭에 스타일 추가
+                        className={`${cssMain.li} ${activeTab === tab ? 'active' : ''}`} // 활성화된 탭에 스타일 추가
                         >
-                        <button className="tab_btn" onClick={() => setActiveTab(tab)}>
-                            <span className="tab_title">{tab}</span>
+                        <button className={cssMain.tab_btn} onClick={() => setActiveTab(tab)}>
+                            <span className={cssMain.tab_title}>{tab}</span>
                         </button>
                         </li>
                     ))}
@@ -74,7 +74,7 @@ export default function DetailMain() {
                         </li>*/}
                     </ul>
                 </section>
-                <div className='section_content'>
+                <div className={cssMain.section_content}>
                     {tabContent[activeTab]}
                 </div>
 

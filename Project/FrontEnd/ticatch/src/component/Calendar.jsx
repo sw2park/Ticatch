@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/esm/locale';
 import { format } from 'date-fns';
-import '../css/Calendar.css';
+import cssCal from '../css/Calendar.module.css';
 
 export default function Calendar({ startDate, endDate, time, setSelectDate }) {
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -66,10 +65,10 @@ export default function Calendar({ startDate, endDate, time, setSelectDate }) {
                 dayClassName={getDayClassName} // 날짜별 클래스 동적 적용
                 filterDate={filterDates} // filterDate로 날짜 필터링
                 renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
-                    <div className="custom-header">
+                    <div className={cssCal.custom_header}>
                         <button onClick={decreaseMonth}>&lt;</button>
-                        <span>{`${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}`}</span>
-                        <button onClick={increaseMonth}>&gt;</button>
+                        <span className={cssCal.custom_header_span}>{`${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}`}</span>
+                        <button className={cssCal.custom_header_button} onClick={increaseMonth}>&gt;</button>
                     </div>
                 )}
             />

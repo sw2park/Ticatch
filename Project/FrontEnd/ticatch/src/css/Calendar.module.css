@@ -1,8 +1,10 @@
 /* 달력 전체 배경 */
-.react-datepicker {
+.react_datepicker {
     background-color: #ffffff;
     border: none;
+    box-shadow: none !important;
 }
+
 
 /* 달력 헤더 스타일 변경 */
 .react-datepicker__header {
@@ -10,7 +12,7 @@
 }
 
 /* renderCustomHeader 속성 스타일 설정 */
-.custom-header {
+.custom_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -19,12 +21,12 @@
     background-color: #ffffff;
 }
 
-.custom-header span {
+.custom_header_span {
     font-size: 18px;
     font-weight: 500;
 }
 
-.custom-header button:nth-child(1) {
+.custom_header_button:nth-child(1) {
     background: none;
     border: none;
     font-size: 15px;
@@ -33,7 +35,7 @@
 }
 
 /* 다음 달력 버튼 왜 nth-child(3)이지? */
-.custom-header button:nth-child(3) {
+.custom_header_button:nth-child(3) {
     background: none;
     border: none;
     font-size: 15px;
@@ -41,7 +43,7 @@
     margin-right: 16px;
 }
 
-.custom-header button:hover {
+.custom_header button:hover {
     color: #004d7c;
 }  
 

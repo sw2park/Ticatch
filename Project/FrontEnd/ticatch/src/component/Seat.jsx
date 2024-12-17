@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import cssSeat from '../css/Main.module.css';
 
 export default function Seat({ seqPfjoinId, selectDate, selectTime }) {
     const [seatData, setSeatData] = useState(null);
@@ -33,28 +34,28 @@ export default function Seat({ seqPfjoinId, selectDate, selectTime }) {
 
     return (
         <>
-            <div className='product_step'>
-                <div className='product_step_text'>잔여좌석</div>
-                <div className='product_title'>수량</div>
+            <div className={cssSeat.product_step}>
+                <div className={cssSeat.product_step_text}>잔여좌석</div>
+                <div className={cssSeat.product_title}>수량</div>
             </div>
-            <div className='product_seat_remain'>
-                <ul className='product_seat_remain_ul'>
+            <div className={cssSeat.product_seat_remain}>
+                <ul className={cssSeat.product_seat_remain_ul}>
                     {isDateOrTimeInvalid || loading ? (
-                        <li className='product_seat_remain_li'>
-                            <span className='product_seat_grade'>
+                        <li className={cssSeat.product_seat_remain_li}>
+                            <span className={cssSeat.product_seat_grade}>
                                 {isDateOrTimeInvalid
                                     ? '예매 날짜/회차를 선택해주세요'
                                     : '로딩 중...'}
                             </span>
                         </li>
                     ) : (
-                        <li className='product_seat_remain_li'>
-                            <span className='product_seat_grade'>잔여좌석</span>
-                            <div className='product_seat_counttext'>
-                                <span className='product_seat_count'>
+                        <li className={cssSeat.product_seat_remain_li}>
+                            <span className={cssSeat.product_seat_grade}>잔여좌석</span>
+                            <div className={cssSeat.product_seat_counttext}>
+                                <span className={cssSeat.product_seat_count}>
                                     {totalSeats}
                                 </span>
-                                <span className='product_Seat_text'>석</span>
+                                <span className={cssSeat.product_Seat_text}>석</span>
                             </div>
                         </li>
                     )}
