@@ -1,5 +1,5 @@
 /* Global container */
-.mypage-container {
+.mypage_container {
   display: flex;
   flex-direction: column;
   height: 100vh; /* Full viewport height */
@@ -11,19 +11,19 @@
   background-color: #f4f4f9;
 }
 
-.mypage-header {
+.mypage_header {
   text-align: center;
   margin-bottom: 10px;
   width: 100%;
 }
 
-.mypage-header h2 {
+.mypage_header h2 {
   font-size: 2.8rem;
   color: #333;
   background-color: gray;
 }
 
-.mypage-main {
+.mypage_main {
   flex: 1; /* This makes the main content area take up the available space */
   display: flex;
   flex-direction: column;
@@ -31,7 +31,7 @@
   padding: 0 20px;
 }
 
-.mypage-info {
+.mypage_info {
   text-align: center;
   padding: 20px;
   background-color: #ffffff;
@@ -40,26 +40,26 @@
   width: 550px;
 }
 
-.mypage-info h2 {
+.mypage_info h2 {
   font-size: 2rem;
   color: #333;
   margin-bottom: 10px;
 }
 
-.mypage-info p {
+.mypage_info p {
   font-size: 1.1rem;
   color: #555;
 }
 
-.mypage-sections {
+.mypage_sections {
   display: flex;
   gap: 30px;
   justify-content: space-between;
   padding-bottom: 10px;
 }
 
-.mypage-watched,
-.mypage-info {
+.mypage_watched,
+.mypage_info {
   flex: 1;
   padding: 20px;
   background-color: #ffffff;
@@ -68,23 +68,23 @@
   text-align: center;
 }
 
-.mypage-watched h3,
-.mypage-info h3 {
+.mypage_watched h3,
+.mypage_info h3 {
   font-size: 1.8rem;
   color: #333;
   margin-bottom: 15px;
 }
 
-.mypage-watched ul,
-.mypage-info ul {
+.mypage_watched ul,
+.mypage_info ul {
   list-style-type: none;
   padding-left: 0;
   font-size: 1.1rem;
   color: #555;
 }
 
-.mypage-watched li,
-.mypage-info li {
+.mypage_watched li,
+.mypage_info li {
   margin-bottom: 8px;
 }
 

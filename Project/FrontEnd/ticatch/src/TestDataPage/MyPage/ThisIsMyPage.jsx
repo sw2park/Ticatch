@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./ThisIsMyPage.css";
+import style from "./ThisIsMyPage.module.css";
 
 export default function ThisIsMyPage() {
   const navigate = useNavigate();
@@ -114,23 +114,25 @@ export default function ThisIsMyPage() {
   };
 
   return (
-    <div className="mypage-container">
-      <header className="mypage-header">
+    <div className={style.mypage_container}>
+      <header className={style.mypage_header}>
         <div>
-          <h2
-            style={{ cursor: "pointer" }}
-            onClick={() => {
-              navigate("/mainPage");
-            }}
-          >
-            <span style={{ color: "black" }}>다</span>
-            <span style={{ color: "red" }}>나오조</span>
+          <h2>
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                navigate("/mainPage");
+              }}
+            >
+              <span style={{ color: "black" }}>티</span>
+              <span style={{ color: "red" }}>캐치</span>
+            </span>
           </h2>
         </div>
       </header>
 
-      <main className="mypage-main">
-        <div className="mypage-info">
+      <main className={style.mypage_main}>
+        <div className={style.mypage_info}>
           <h2>어서오세요, {sessionStorage.getItem("userId")}</h2>
           {userInfo ? (
             <>
@@ -142,8 +144,8 @@ export default function ThisIsMyPage() {
           )}
         </div>
 
-        <div className="mypage-sections">
-          <section className="mypage-watched">
+        <div className={style.mypage_sections}>
+          <section className={style.mypage_watched}>
             <h3>주문 내역</h3>
             <ul>
               {Array.isArray(orderList) && orderList.length > 0 ? (
@@ -173,46 +175,46 @@ export default function ThisIsMyPage() {
             </ul>
           </section>
 
-          <section className="mypage-info">
+          <section className={style.mypage_info}>
             <h3>정보수정</h3>
             <ul>
               <input
-                className="input"
+                className={style.input}
                 type="password"
                 placeholder="비밀번호"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
               <input
-                className="input"
+                className={style.input}
                 type="password"
                 placeholder="비밀번호 확인"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
               <input
-                className="input"
+                className={style.input}
                 type="text"
                 placeholder="이름"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
               <input
-                className="input"
+                className={style.input}
                 type="email"
                 placeholder="이메일"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <input
-                className="input"
+                className={style.input}
                 type="text"
                 placeholder="전화번호"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
             </ul>
-            <button className="button" onClick={handleUpdate}>
+            <button className={style.button} onClick={handleUpdate}>
               수정하기
             </button>
           </section>
@@ -225,7 +227,7 @@ export default function ThisIsMyPage() {
         <h2>환불은 음...</h2>
       </main>
 
-      <footer className="mypage_footer">
+      <footer className={style.mypage_footer}>
         <p>&copy; {new Date().getFullYear()} 다나오조. All Rights Reserved.</p>
       </footer>
     </div>
