@@ -129,6 +129,22 @@ export default function ThisIsMyPage() {
             </span>
           </h2>
         </div>
+        <button
+          onClick={() => {
+            sessionStorage.removeItem("userToken");
+            sessionStorage.removeItem("userId");
+            setUserId("");
+            alert("로그아웃되었습니다.");
+          }}
+          style={{
+            color: "red",
+            marginLeft: "10px",
+            cursor: "pointer",
+            fontWeight: "bold",
+          }}
+        >
+          로그아웃
+        </button>
       </header>
 
       <main className={style.mypage_main}>
@@ -219,11 +235,10 @@ export default function ThisIsMyPage() {
             </button>
           </section>
         </div>
-        <h2>아이디도 못바꾼다 (걸려있는게 너무 많음)</h2>
         <h2>
           회원 탈퇴는 없다 (모든 테이블에서 찾아서 삭제해야되는데 시간 부족)
         </h2>
-        <h2>이페이지에서는 로그아웃도 없지</h2>
+        <h2>아이디도 못바꾼다 (걸려있는게 너무 많음)</h2>
         <h2>환불은 음...</h2>
       </main>
 
