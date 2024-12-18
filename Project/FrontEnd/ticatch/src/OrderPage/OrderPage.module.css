@@ -5,11 +5,40 @@
   margin: 20px auto;
   height: calc(100vh - 40px);
   background-color: white;
+  overflow: hidden;
+}
+
+.detail_return {
+  background-color: #ffffff;
+  width: 100%;
+  color: #004d7c;
+  font-weight: 800;
+  padding-left: 35.828px;
+  padding-top: 100px;
+}
+
+.detail_return_button {
+  cursor: pointer;
+  display: flex;
+}
+
+.detail_return_button:hover {
+  color: #97b1c2;
+}
+
+.detail_return_lt {
+  font-size: 29px;
+  line-height: 16px;
+}
+
+.detail_return_text {
+  font-size: 16px;
+  padding-left: 5px;
 }
 
 .left {
   flex: 2;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   background-color: #f7f7f7;

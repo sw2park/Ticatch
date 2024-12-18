@@ -250,7 +250,10 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
       <ul>
         {fetchId.map((item) => (
           <li key={item.seqPfjoinId} className={style.title}>
-            [ {item.pgenre} ]<h3>&lt;{item.ptitle}&gt;</h3>
+            <div className={style.order_title_genre}>{item.pgenre}</div>
+            <h3 className={style.order_title}>
+              {item.ptitle}
+            </h3>
           </li>
         ))}
       </ul>
@@ -266,8 +269,10 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
         <div>
           {seatInfo.map((info, index) => (
             <div key={index} className={style.time_selector}>
-              {info.grade} {info.price.toLocaleString("ko-KR")}원, 그룹:{" "}
-              {info.groupStart} ~ {info.groupEnd}
+              <span className={style.order_seat_price}>
+                {info.grade} {info.price.toLocaleString("ko-KR")}원, 그룹:{" "}
+                {info.groupStart} ~ {info.groupEnd}
+              </span>
             </div>
           ))}
         </div>
@@ -284,7 +289,7 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
         >
           &lt;
         </button>
-        <span>{currentPdTime[selectedTimeIndex]}</span>
+        <span className={style.order_time}>{currentPdTime[selectedTimeIndex]}</span>
         <button
           onClick={() =>
             setSelectedTimeIndex(
@@ -296,17 +301,34 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
           &gt;
         </button>
       </div>
+    <div className={style.order_reserve_content}>
+      <h3 className={style.time_selector}>
+        <div className={style.order_reserve_title}>
+          공연날
+        </div>
+        <div className={style.order_reserve_info}>
+          {selectedDate.toLocaleDateString().slice(0, -1)}
+        </div>
+      </h3>
 
       <h3 className={style.time_selector}>
-        공연날: {selectedDate.toLocaleDateString().slice(0, -1)}
+        <div className={style.order_reserve_title}>
+          선택된 좌석
+        </div>
+        <div className={style.order_reserve_info}>
+          {selectedSeats.join(", ") || "없음"}
+        </div>
       </h3>
-      <h3 className={style.padding}>
-        선택된 좌석: {selectedSeats.join(", ") || "없음"}
-      </h3>
-      <h2 className={style.padding}>
-        총액: {totalPrice.toLocaleString("ko-KR")}원
+
+      <h2 className={style.time_selector}>
+        <div className={style.order_reserve_title}>
+          총액
+        </div>
+        <div className={style.order_reserve_info}>
+          {totalPrice.toLocaleString("ko-KR")}원
+        </div>
       </h2>
-      <div className={style.padding_top}>
+    </div>
         <button
           className={style.reserve_button}
           onClick={() => {
@@ -317,7 +339,6 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
         >
           예매하기
         </button>
-      </div>
 
       {/* <button className="reserve-button" onClick={() => fetchDetailById(1)}>
         테스트 데이터 가져오기
