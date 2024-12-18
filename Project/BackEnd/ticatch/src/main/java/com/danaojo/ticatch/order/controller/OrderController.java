@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.danaojo.ticatch.order.Entity.OrderDTO;
 import com.danaojo.ticatch.order.Entity.OrderEntity;
 import com.danaojo.ticatch.order.Entity.PFJoinDTO;
+import com.danaojo.ticatch.order.Entity.SaveDTO;
+import com.danaojo.ticatch.order.Entity.SaveEntity;
 import com.danaojo.ticatch.order.Entity.UserDTO;
 import com.danaojo.ticatch.order.repository.OrderRepository;
 import com.danaojo.ticatch.order.repository.PFJoinRepository;
@@ -135,10 +136,17 @@ public class OrderController {
 	// 회원 정보 수정
 	@PostMapping("/updateUserInfo")
 	public ResponseEntity<?> UpdateUserInfo(@RequestBody UserDTO userDTO){
-		System.out.println(userDTO);
 		return orderService.updateUserInfo(userDTO);
 	}
 	
+	// 찜 내역 조회해서 정보 가지고 오기
+//	이거 오류 있음 고치기
+	@PostMapping("/getSaves")
+	public ResponseEntity<?> getOrderByUserId(@RequestBody SaveDTO saveDTO) {
+	    System.out.println(saveDTO);
+	    return orderService.getSaveDTO(saveDTO);
+	}
+
 	
 	
 }
