@@ -97,7 +97,8 @@ const MainPage = () => {
   };
 
   return (
-    <div className={style.main_content}>
+    <>
+    
       {/* 헤더 */}
       <header className={style.booking_header}>
         <div className={style.logo}>
@@ -201,6 +202,7 @@ const MainPage = () => {
         </span>
       </nav>
 
+      <div className={style.main_content}>
       {/* 메인 콘텐츠 */}
       <main className={style.main_content}>
         {!search && genreFilter === "All" && (
@@ -212,21 +214,30 @@ const MainPage = () => {
                 className={style.slider_image}
               />
             </div>
-            <h2>랭킹</h2>
+
+            <div className={style.nav_title_containar}>
+              <h2 className={style.nav_title_text}>랭킹</h2>
+            </div>
+
             <div>
               <div className={style.concert_slider}>
                 {rank.slice(0, ITEMS_PER_SLIDE).map((item, index) => (
                   <div className={style.concert_card} key={item.seqPfjoinId}>
-                    <h3>{item.ptitle}</h3>
                     <div className={style.image_container}>
                       <Link to={`/detail/${item.seqPfjoinId}/view`}>
                         <img
                           src={item.pposter}
                           className={style.concert_image}
-                        />
+                          />
                       </Link>
                       <span className={style.rank}>{index + 1}</span>
                     </div>
+                          <h2 className={style.item_title}>
+                            <span className={style.item_genre}>{item.pgenre}</span> <br/>
+                            {item.ptitle} <br/>
+{/* 공연 기간 출력 안됨 */}
+                            <span className={style.item_date}>{item.pStartDate} ~ {item.pEndDate}</span>
+                          </h2>
                   </div>
                 ))}
               </div>
@@ -235,23 +246,33 @@ const MainPage = () => {
         )}
 
         {/* 공연 목록 */}
-        <h2>목록</h2>
+        <div className={style.nav_title_containar}>
+          <h2 className={style.nav_title_text}>목록</h2>
+        </div>
         <div className={style.concert_container}>
           <div className={style.concert_slider}>
             {filteredConcerts.length > 0 ? (
               filteredConcerts
-                .slice(currentIndex, currentIndex + ITEMS_PER_SLIDE)
+                // .slice(currentIndex, currentIndex + ITEMS_PER_SLIDE)
                 .map((concert) => (
-                  <div key={concert.seqPfjoinId}>
-                    <h3>{concert.ptitle}</h3>
+                  <div key={concert.seqPfjoinId} className={style.image_container}>
                     <Link to={`/detail/${concert.seqPfjoinId}/view`}>
                       <img
                         src={concert.pposter}
                         className={style.concert_image}
-                      />
+                        />
                     </Link>
-                    <p>장르: {concert.pgenre}</p>
-                    <p>가격: {concert.pdSeatprice}</p>
+                    <div className={style.prd_list_content}>
+                      <h3>{concert.ptitle}</h3>
+                      <p>
+                        <span className={style.prd_title}>장르</span>
+                        <span className={style.prd_title_item}>{concert.pgenre}</span>
+                      </p>
+                      <p>
+                        <span className={style.prd_title}>가격</span>
+                        <span className={style.prd_title_item}>{concert.pdSeatprice}</span>
+                      </p>
+                    </div> 
                   </div>
                 ))
             ) : (
@@ -260,12 +281,13 @@ const MainPage = () => {
           </div>
         </div>
       </main>
-
+</div>
       {/* 푸터 */}
       <footer className={style.booking_footer}>
         <p>&copy; {new Date().getFullYear()} 다나오조. All Rights Reserved.</p>
       </footer>
-    </div>
+    
+    </>
   );
 };
 

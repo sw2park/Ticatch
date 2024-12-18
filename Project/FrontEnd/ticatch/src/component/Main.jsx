@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Description from './desc.jsx';
 import CancelInfo from './Cancel_info.jsx';
 import Review from './Review.jsx';
@@ -8,14 +9,6 @@ import Info from './Info.jsx';
 import cssMain from '../css/Main.module.css'
 
 export default function DetailMain() {
-    
-    // useEffect(() => {
-    //     // 개발 중 임의로 사용자 아이디 저장
-    //     localStorage.setItem("userId", "test1");
-    // }, []);
-
-    // const userId = localStorage.getItem("userId");
-    //console.log('임시 session값 저장 : ' + userId);
 
     const [activeTab, setActiveTab] = useState('상세정보');
     const tabContent = {
@@ -26,9 +19,95 @@ export default function DetailMain() {
         예매취소안내: <CancelInfo/>,
     };
 
+    // header
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userId, setUserId] = useState("");
+    const [search, setSearch] = useState("");
+
+    useEffect(() => {
+        const userToken = sessionStorage.getItem("userToken");
+        const storedUserId = sessionStorage.getItem("userId");
+
+        if (userToken && storedUserId) {
+            setIsLoggedIn(true);
+            setUserId(storedUserId);
+        } else {
+            setIsLoggedIn(false);
+            setUserId("");
+        }
+    }, []);
+
+     // 테스트 로그아웃용 버튼
+    const handleLogout = () => {
+        sessionStorage.removeItem("userToken");
+        sessionStorage.removeItem("userId");
+        setIsLoggedIn(false);
+        setUserId("");
+        alert("로그아웃되었습니다.");
+    };
 
     return(
         <div className={cssMain.wrap}>
+
+            <div className={cssMain.detail_header}>
+
+                <Link to="/MainPage" className={cssMain.detail_header_logo}>
+                    <span className={cssMain.header_logo}>
+                        티
+                    </span>
+                    <span className={cssMain.header_logo_color}>
+                        케치
+                    </span>
+                </Link>
+
+                <div className={cssMain.header_searchbar_containar}>
+                    <input
+                        type="text"
+                        placeholder="공연 제목으로 찾아보세요."
+                        className={cssMain.header_searchbar}
+                        // value={search}
+                        // onChange={handleSearchChange}
+                    />
+                </div>
+                <div className={cssMain.user_links}>
+                    {isLoggedIn ? (
+                    <>
+                        <span>{userId}님 환영합니다!</span>
+                        {/* 로그아웃 테스트웃 테스트용 */}
+                        <button
+                        onClick={handleLogout}
+                        style={{
+                            color: "red",
+                            marginLeft: "10px",
+                            cursor: "pointer",
+                            fontWeight: "bold",
+                        }}
+                        >
+                        로그아웃
+                        </button>
+                        <Link
+                        to="/mypage"
+                        style={{ color: "black", paddingLeft: "20px" }}
+                        >
+                        마이페이지
+                        </Link>
+                    </>
+                    ) : (
+                    <>
+                        <Link
+                        to="/login"
+                        style={{ color: "black", paddingRight: "20px" }}
+                        >
+                        로그인
+                        </Link>
+                        <Link to="/signup" style={{ color: "black" }}>
+                        회원가입
+                        </Link>
+                    </>
+                    )}
+                </div>
+            </div>
+
             <div className={cssMain.Detail_wrap}>
 
                 <Info/>
@@ -79,6 +158,10 @@ export default function DetailMain() {
                 </div>
 
             </div>
+
+            <footer className={cssMain.booking_footer}>
+                <p>&copy; {new Date().getFullYear()} 다나오조. All Rights Reserved.</p>
+            </footer>
         </div>
     );
 }
