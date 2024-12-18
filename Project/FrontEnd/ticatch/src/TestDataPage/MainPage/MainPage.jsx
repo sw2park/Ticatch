@@ -236,7 +236,7 @@ const MainPage = () => {
                             <span className={style.item_genre}>{item.pgenre}</span> <br/>
                             {item.ptitle} <br/>
 {/* 공연 기간 출력 안됨 */}
-                            <span className={style.item_date}>{item.pStartDate} ~ {item.pEndDate}</span>
+                            {/* <span className={style.item_date}>{item.pstartdate} ~ {item.pEndDate}</span> */}
                           </h2>
                   </div>
                 ))}

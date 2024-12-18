@@ -115,10 +115,8 @@
   display: flex;
   align-items: center;
   gap: 20px;
-} */
-
-/* 기존 css */
-/* .concert_slider {
+}
+.concert_slider {
   display: flex;
   gap: 20px;
   overflow: hidden;
@@ -128,27 +126,31 @@
   padding-top: 20px;
 } */
 
-.concert_container {
-  display: flex;
-  flex-wrap: wrap; /* 항목이 줄바꿈되어 여러 줄로 배치 */
-  gap: 21px; /* 항목 간 간격 */
-  justify-content: flex-start; /* 왼쪽 정렬로 배치 */
-}
 
 .image_container {
-  flex: 0 0 calc(25% - 16px); /* 25% 너비로 설정, 간격 포함 */
-  box-sizing: border-box; /* 패딩 포함 크기 계산 */
-  
+  flex: 0 0 calc(25% - 16px); /* 기본적으로 25%의 크기 */
+  box-sizing: border-box; /* 패딩과 테두리 포함 크기 계산 */
+  min-width: 300px; /* 최소 크기 지정 */
 }
+
+
+.concert_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 21px;
+  justify-content: flex-start;
+}
+
 
 .concert_slider {
   display: flex;
-  flex-wrap: wrap; /* 각 항목을 여러 줄로 나누기 위해 wrap 추가 */
-  gap: 16px; /* 항목 간 간격 */
-  justify-content: flex-start; /* 왼쪽 정렬 */
+  flex-wrap: wrap; 
+  gap: 16px; 
+  justify-content: flex-start; 
   padding-bottom: 20px;
   padding-top: 20px;
 }
+
 
 
 .image_container:hover {

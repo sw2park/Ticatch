@@ -24,7 +24,7 @@ export default function ReviewList() {
         };
 
         fetchData();
-    }, [seqpfjoinId]);
+    }, [productData]);
 
     // 2024-12-09 05:36 이런형식으로 출력
     const formatDate = (dateString) => {
