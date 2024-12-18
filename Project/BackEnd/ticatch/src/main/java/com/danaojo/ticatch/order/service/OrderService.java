@@ -1,8 +1,13 @@
 package com.danaojo.ticatch.order.service;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
@@ -16,7 +21,7 @@ import com.danaojo.ticatch.order.Entity.SeatEntity;
 import com.danaojo.ticatch.order.Entity.SeatId;
 import com.danaojo.ticatch.order.Entity.UserDTO;
 import com.danaojo.ticatch.order.Entity.UserEntity;
-import com.danaojo.ticatch.order.repository.OrderRepository;
+import com.danaojo.ticatch.order.repository.PFJoinRepository;
 import com.danaojo.ticatch.order.repository.SeatRepository;
 import com.danaojo.ticatch.order.repository.UserRepository;
 
@@ -26,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OrderService {
 
-	private final OrderRepository orderRepository;
+	private final PFJoinRepository orderRepository;
 	private final SeatRepository seatRepository;
 	private final UserRepository userRepository;
 
@@ -155,36 +160,94 @@ public class OrderService {
 
 	// 회원 가입 로직
 	public ResponseEntity<String> saveUser(UserDTO userDTO) {
+		try {
+			// 아이디 중복 확인
+			if (userRepository.findByUserId(userDTO.getUserId()) != null) {
+				System.out.println("아이디 중복");
+				return ResponseEntity.ok("아이디 중복");
+			}
+
+			System.out.println("회원가입 (회원 저장중)");
+
+			// DTO -> Entity 변환
+			UserEntity userEntity = new UserEntity();
+			userEntity.setUserId(userDTO.getUserId());
+			userEntity.setPassword(userDTO.getPassword());
+			userEntity.setName(userDTO.getName());
+			userEntity.setEmail(userDTO.getEmail());
+			userEntity.setPhone(userDTO.getPhone());
+			userEntity.setLoginType("일반"); // 기본값 설정
+			userEntity.setCreateDate(new Date());
+
+			// 사용자 정보 저장
+			userRepository.save(userEntity);
+
+			System.out.println("회원가입 성공");
+			return ResponseEntity.ok("회원가입 성공");
+
+		} catch (Exception e) {
+			System.err.println("회원가입 오류 - " + e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원가입 오류");
+		}
+	}
+
+	// 마이페이지 userInfo 넘기기
+	public ResponseEntity<Map<String, String>> userInfo(UserDTO userDTO) {
+		UserEntity userEntity = userRepository.findByUserId(userDTO.getUserId());
+
+		if (userEntity != null) {
+			Map<String, String> response = new HashMap<>();
+
+			response.put("seqId", String.valueOf(userEntity.getSeqUserId()));
+//	        response.put("userId", userEntity.getUserId()); 이건 그냥 새션에서 가지고올듯
+			response.put("password", userEntity.getPassword());
+			response.put("name", userEntity.getName());
+			response.put("email", userEntity.getEmail());
+			response.put("phone", userEntity.getPhone());
+
+			Date createDate = userEntity.getCreateDate();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			String formattedCreateDate = formatter.format(createDate);
+			response.put("createDate", formattedCreateDate); // 날짜가 Date 형식이러서 문자로 바꿈
+
+			// 초기값이 null 이니 null 아닐때만 데이터를 보냄
+			if (userEntity.getUpdateDate() != null) {
+				Date updateDate = userEntity.getCreateDate();
+				String formattedUpdateDate = formatter.format(updateDate);
+				response.put("updateDate", formattedUpdateDate);
+			}
+
+			return ResponseEntity.ok(response);
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.singletonMap("error", "User not found"));
+	}
+
+	// 마이페이지 정보 수정
+	public ResponseEntity<String> updateUserInfo(UserDTO userDTO) {
 	    try {
-	        // 아이디 중복 확인
+	    	
+	        UserEntity userEntity = userRepository.findByseqUserId(userDTO.getSeqUserId());
+	        // 아이디 중복 체크
+	        System.out.println(userEntity);
 	        if (userRepository.findByUserId(userDTO.getUserId()) != null) {
-	        	System.out.println("아이디 중복");
-	            return ResponseEntity.ok("아이디 중복");
-	        }
+				return ResponseEntity.ok("아이디 중복");
+			}
 
-	        System.out.println("회원가입 (회원 저장중)");
-
-	        // DTO -> Entity 변환
-	        UserEntity userEntity = new UserEntity();
-	        userEntity.setUserId(userDTO.getUserId());
 	        userEntity.setPassword(userDTO.getPassword());
 	        userEntity.setName(userDTO.getName());
 	        userEntity.setEmail(userDTO.getEmail());
 	        userEntity.setPhone(userDTO.getPhone());
-	        userEntity.setLoginType("일반"); // 기본값 설정
-	        userEntity.setCreateDate(new Date());
+	        userEntity.setUpdateDate(new Date());
 
-	        // 사용자 정보 저장
 	        userRepository.save(userEntity);
 
-	        System.out.println("회원가입 성공");
-	        return ResponseEntity.ok("회원가입 성공");
+	        return ResponseEntity.ok("User updated successfully");
 
 	    } catch (Exception e) {
-	        System.err.println("회원가입 오류 - " + e.getMessage());
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원가입 오류");
+	        System.err.println("Error updating user: " + e.getMessage());
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating user information");
 	    }
 	}
 
-
+		
 }

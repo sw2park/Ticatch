@@ -23,8 +23,16 @@ const SignupPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // 비밀번호 확인
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
+      alert("비밀번호가 일치하지 않습니다!");
+      return;
+    }
+
+    // 이메일 유효성 검사
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(formData.email)) {
+      alert("유효한 이메일 주소를 입력해주세요.");
       return;
     }
 
@@ -49,7 +57,6 @@ const SignupPage = () => {
       alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
     }
   };
-
   return (
     <div className={style.signup_page}>
       <h2

@@ -8,4 +8,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long>{
 
 	UserEntity findByUserId(String userId);
 
+	UserEntity findByseqUserId(Long seqUserId);
+
 }

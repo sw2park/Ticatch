@@ -139,7 +139,7 @@ const MainPage = () => {
                   로그아웃
                 </button>
                 <Link
-                  to="/mypage"
+                  to="/ThisIsMyPage"
                   style={{ color: "black", paddingLeft: "20px" }}
                 >
                   마이페이지
