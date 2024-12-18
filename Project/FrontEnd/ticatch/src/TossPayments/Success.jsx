@@ -71,7 +71,7 @@ export function SuccessPage() {
       {/* 지금은 그냥 예매페이지로 이동함 */}
       <button
         className={styles.mypage_btn}
-        onClick={() => navigate("/mainPage")}
+        onClick={() => navigate("/ThisIsMyPage")}
       >
         메인 페이지로 이동
       </button>

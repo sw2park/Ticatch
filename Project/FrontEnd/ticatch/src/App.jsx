@@ -10,9 +10,7 @@ import TestDatePage from "./TestDataPage/TestDataPage";
 import MainPage from "./TestDataPage/MainPage/MainPage";
 import LoginPage from "./TestDataPage/LoginPage/LoginPage";
 import SignupPage from "./TestDataPage/LoginPage/SignupPage";
-
-// main2.0
-import Main2 from "./TestDataPage/MainPage/Main2";
+import ThisIsMyPage from "./TestDataPage/MyPage/ThisIsMyPage";
 
 // detail
 import DetailMain from "./component/Main";
@@ -25,12 +23,12 @@ const App = () => {
         <Route path="/order" element={<OrderPage />} />
         <Route path="/order/checkout" element={<CheckoutPage />} />
         <Route path="/order/success" element={<SuccessPage />} />
-        {/* 이 아래로 order 테스트 페이지 */}
-        <Route path="/order/testDataPage" element={<TestDatePage />} />
         <Route path="/mainPage" element={<MainPage />} />
-        <Route path="main2" element={<Main2 />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        {/* 이 아래로 테스트 페이지 */}
+        <Route path="/order/testDataPage" element={<TestDatePage />} />
+        <Route path="/ThisIsMyPage" element={<ThisIsMyPage />} />
         {/* detail */}
         <Route path="/detail/:seqpfjoinId/view" element={<DetailMain />} />{" "}
       </Routes>

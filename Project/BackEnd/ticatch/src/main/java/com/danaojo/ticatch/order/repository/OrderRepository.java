@@ -5,12 +5,9 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.danaojo.ticatch.order.Entity.OrderEntity;
-import com.danaojo.ticatch.order.Entity.PFJoinDTO;
 
-public interface OrderRepository extends JpaRepository<PFJoinDTO, Long>{
+public interface OrderRepository extends JpaRepository<OrderEntity, Long>{
 
-	List<PFJoinDTO> findBySeqPfjoinId(Long seqPfjoinId);
-
-	OrderEntity save(OrderEntity order);
+	List<OrderEntity> findByUserId(String userId);
 
 }

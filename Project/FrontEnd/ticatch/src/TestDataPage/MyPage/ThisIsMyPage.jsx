@@ -1,0 +1,233 @@
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./ThisIsMyPage.css";
+
+export default function ThisIsMyPage() {
+  const navigate = useNavigate();
+  const [userInfo, setUserInfo] = useState([]);
+  const [orderList, setOrderList] = useState([]);
+
+  // state 추가: 입력 필드 관리
+  const [seqUserId, setseqUserId] = useState("");
+  const [userId, setUserId] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+
+  // sesstion 에서 가지고 오기
+  const requestData = {
+    userId: sessionStorage.getItem("userId"),
+  };
+
+  useEffect(() => {
+    axios
+      .post("/api/order/userInfo", requestData)
+      .then((response) => {
+        console.log("User Info:", response.data);
+        setUserInfo(response.data || []);
+        setseqUserId(response.data.seqId); // Set seqUserId here
+      })
+      .catch((error) => {
+        console.error("User info 불러오기 에러:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get("/api/order/orders", {
+        params: { userId: sessionStorage.getItem("userId") },
+      })
+      .then((response) => {
+        const data = response.data;
+
+        if (typeof data === "string") {
+          setOrderList([]); // 빈 배열로 설정
+        } else if (Array.isArray(data)) {
+          setOrderList(data); // 배열을 상태로 설정
+        } else {
+          setOrderList([]); // 예상 외의 형식일 경우 빈 배열로 설정
+        }
+      })
+      .catch((error) => {
+        console.error("주문내역 불러오기 에러:", error);
+        setOrderList([]); // 에러 발생 시 빈 배열로 설정
+      });
+  }, []);
+
+  // 수정 버튼
+  const handleUpdate = () => {
+    // Validate email format
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email)) {
+      alert("유효한 이메일을 입력해주세요.");
+      return;
+    }
+
+    // 비밀번호 확인
+    if (password !== confirmPassword) {
+      alert("비밀번호를 확인해주세요");
+      return;
+    }
+
+    // 서버에 데이터를 전송하는 로직
+    const updatedUserInfo = {
+      seqUserId,
+      password,
+      name,
+      email,
+      phone,
+    };
+
+    console.log("수정된 정보:", updatedUserInfo);
+    axios
+      .post("/api/order/updateUserInfo", updatedUserInfo, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        const data = response.data;
+        console.log("data that's here:", data);
+
+        if (data === "아이디 중복") {
+          alert("중복된 아이디 입니다.");
+        } else {
+          alert("정보가 수정되었습니다");
+        }
+      })
+      .catch((error) => {
+        console.error(
+          "Error updating user info:",
+          error.response ? error.response.data : error.message
+        );
+      });
+
+    // Reset form fields
+    setPassword("");
+    setConfirmPassword("");
+    setName("");
+    setEmail("");
+    setPhone("");
+  };
+
+  return (
+    <div className="mypage-container">
+      <header className="mypage-header">
+        <div>
+          <h2
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              navigate("/mainPage");
+            }}
+          >
+            <span style={{ color: "black" }}>다</span>
+            <span style={{ color: "red" }}>나오조</span>
+          </h2>
+        </div>
+      </header>
+
+      <main className="mypage-main">
+        <div className="mypage-info">
+          <h2>어서오세요, {sessionStorage.getItem("userId")}</h2>
+          {userInfo ? (
+            <>
+              <p>Email: {userInfo.email}</p>
+              <p>가입일: {userInfo.createDate}</p>
+            </>
+          ) : (
+            <p>로딩중...</p>
+          )}
+        </div>
+
+        <div className="mypage-sections">
+          <section className="mypage-watched">
+            <h3>주문 내역</h3>
+            <ul>
+              {Array.isArray(orderList) && orderList.length > 0 ? (
+                orderList.map((order, index) => (
+                  <li key={order.orderId || `${order.seqOrderId}-${index}`}>
+                    주문 번호 : {order.seqOrderId}
+                    <br />
+                    티켓 개수 : {order.totalTicket}
+                    <br />
+                    공연일 : {order.viewDate}
+                    <br />
+                    회차 : {order.viewTime}
+                    <br />
+                    좌석 : {order.seatNum}
+                    <br />
+                    장소 : {order.place}
+                    <br />
+                    구매일 : {order.buyDate}
+                    <br />
+                    가격 : {order.totalSum}원
+                    <hr />
+                  </li>
+                ))
+              ) : (
+                <li>주문 내역이 없습니다.</li>
+              )}
+            </ul>
+          </section>
+
+          <section className="mypage-info">
+            <h3>정보수정</h3>
+            <ul>
+              <input
+                className="input"
+                type="password"
+                placeholder="비밀번호"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <input
+                className="input"
+                type="password"
+                placeholder="비밀번호 확인"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              <input
+                className="input"
+                type="text"
+                placeholder="이름"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <input
+                className="input"
+                type="email"
+                placeholder="이메일"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                className="input"
+                type="text"
+                placeholder="전화번호"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </ul>
+            <button className="button" onClick={handleUpdate}>
+              수정하기
+            </button>
+          </section>
+        </div>
+        <h2>아이디도 못바꾼다 (걸려있는게 너무 많음)</h2>
+        <h2>
+          회원 탈퇴는 없다 (모든 테이블에서 찾아서 삭제해야되는데 시간 부족)
+        </h2>
+        <h2>이페이지에서는 로그아웃도 없지</h2>
+        <h2>환불은 음...</h2>
+      </main>
+
+      <footer className="mypage_footer">
+        <p>&copy; {new Date().getFullYear()} 다나오조. All Rights Reserved.</p>
+      </footer>
+    </div>
+  );
+}
