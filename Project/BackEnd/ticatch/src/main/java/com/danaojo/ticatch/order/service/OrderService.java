@@ -230,7 +230,6 @@ public class OrderService {
 	        // 아이디 중복 체크
 	        System.out.println(userEntity);
 	        if (userRepository.findByUserId(userDTO.getUserId()) != null) {
-				System.out.println("아이디 중복");
 				return ResponseEntity.ok("아이디 중복");
 			}
 

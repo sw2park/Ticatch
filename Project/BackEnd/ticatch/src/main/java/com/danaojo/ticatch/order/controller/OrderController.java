@@ -73,11 +73,10 @@ public class OrderController {
 	// 메인 페이지 매핑 (뒤에서부터 값 가지고옴 중에 좌석 팔린 순서로 랭킹 할거임)
 	@GetMapping("/rank")
 	public List<PFJoinDTO> Rank() {
-		// Sort by seqPfjoinId in descending order
 		Sort descSort = Sort.by(Sort.Direction.DESC, "seqPfjoinId");
 		List<PFJoinDTO> rank = pfjoinRepository.findAll(descSort);
 
-		// 이거 좌석 하려고 적었던거임 아무것도 없음
+		// 이거 좌석 하려고 적었던거임 아무것도 없음 (랭킹을 좌석 판매순으로 하고 싶었지만 시간 부족)
 //	    String result = orderService.findRank();
 
 		// 5개만 보낼거임
@@ -113,6 +112,9 @@ public class OrderController {
 	    return orderService.userInfo(userDTO);
 	}
 	
+//	ResponseEntity<?>는 Spring Boot에서 HTTP 응답을 나타내는 클래스입니다. 
+//	이 클래스는 응답 본문과 상태 코드뿐만 아니라 헤더를 포함하는 HTTP 응답을 표현하는 데 사용됩니다. 
+//	<?>는 응답 본문이 어떤 타입이든 상관없다는 의미로, 유연한 응답을 처리할 수 있도록 해줍니다.
 	// 마이페이지 주문 내역 보내는거
 	@GetMapping("/orders")
 //	ResponseEntity<?>는 자동으로 형변환을 해주지 않습니다. 
@@ -133,7 +135,6 @@ public class OrderController {
 	// 회원 정보 수정
 	@PostMapping("/updateUserInfo")
 	public ResponseEntity<?> UpdateUserInfo(@RequestBody UserDTO userDTO){
-		System.out.println("here");
 		System.out.println(userDTO);
 		return orderService.updateUserInfo(userDTO);
 	}

@@ -239,7 +239,7 @@ export default function ThisIsMyPage() {
           회원 탈퇴는 없다 (모든 테이블에서 찾아서 삭제해야되는데 시간 부족)
         </h2>
         <h2>아이디도 못바꾼다 (걸려있는게 너무 많음)</h2>
-        <h2>환불은 음...</h2>
+        <h2>환불은 내일 시간 있으면 해보고 안되면 없음</h2>
       </main>
 
       <footer className={style.mypage_footer}>
