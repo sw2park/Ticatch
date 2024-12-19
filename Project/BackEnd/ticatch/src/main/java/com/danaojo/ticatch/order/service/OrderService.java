@@ -146,32 +146,28 @@ public class OrderService {
 
 	// 로그인 처리 로직
 	public UserDTO login(UserDTO userDTO) {
-	    // Fetch the user from the database (returns a User entity)
 	    UserEntity user = userRepository.findByUserId(userDTO.getUserId());
 
-	    // Check if user exists
+	    // 아이디 있는지 확인
 	    if (user == null) {
 	        throw new RuntimeException("아이디 없음 / 틀렸음");
 	    }
 
-	    // Check if password matches
+	    // 비번이 맞는지 확인
 	    if (!user.getPassword().equals(userDTO.getPassword())) {
 	        throw new RuntimeException("비밀번호가 없음 / 틀렸음");
 	    }
 
-	    // Generate a simple token using UUID
+	    // UUID 로 token 만들기
 	    String token = UUID.randomUUID().toString();
 
-	    // Map User entity to UserDTO and include the token
 	    UserDTO responseDTO = new UserDTO();
 	    responseDTO.setUserId(user.getUserId());
-	    responseDTO.setToken(token); // Add token to the DTO
+	    responseDTO.setToken(token); 
 
-	    // Optionally store the token in the database or cache if needed
+	    // Optionally store the token in the database or cache if needed (라고 하네)
 	    return responseDTO;
 	}
-
-
 
 	// 회원 가입 로직
 	public ResponseEntity<String> saveUser(UserDTO userDTO) {
@@ -263,14 +259,14 @@ public class OrderService {
 	}
 
 	// 회원 찜 내역 가지고 가기
-	public ResponseEntity<SaveEntity> getSaveDTO(SaveDTO saveDTO) {
+	public ResponseEntity<?> getSaveDTO(SaveDTO saveDTO) {
 		SaveEntity saveEntity = orderSaveRepository.findByUserid(saveDTO.getUserid());
 	    System.out.println("saveEntity: " + saveEntity);
 		
 	    if (saveEntity != null) {
 	        return ResponseEntity.ok(saveEntity);
 	    } else {
-	        return ResponseEntity.notFound().build();
+	        return ResponseEntity.ok("찜 내역이 없습니다");
 	    }
 	}
 
