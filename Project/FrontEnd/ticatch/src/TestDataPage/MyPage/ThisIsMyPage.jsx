@@ -153,7 +153,7 @@ export default function ThisIsMyPage() {
               }}
             >
               <span style={{ color: "black" }}>티</span>
-              <span style={{ color: "red" }}>캐치</span>
+              <span style={{ color: "red" }}>케치</span>
             </span>
           </h2>
         </div>
@@ -280,12 +280,11 @@ export default function ThisIsMyPage() {
         <h2>
           회원 탈퇴는 없다 (모든 테이블에서 찾아서 삭제해야되는데 시간 부족)
         </h2>
-        <h2>아이디도 못바꾼다 (걸려있는게 너무 많음)</h2>
         <h2>환불은 내일 시간 있으면 해보고 안되면 없음</h2>
       </main>
 
       <footer className={style.mypage_footer}>
-        <p>&copy; {new Date().getFullYear()} 다나오조. All Rights Reserved.</p>
+        <p>&copy; {new Date().getFullYear()} 티케치. All Rights Reserved.</p>
       </footer>
     </div>
   );

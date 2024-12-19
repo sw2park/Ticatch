@@ -52,8 +52,8 @@ const LoginPage = () => {
           navigate("/mainPage");
         }}
       >
-        <span style={{ color: "black" }}>다</span>
-        <span style={{ color: "red" }}>나오조</span>
+        <span style={{ color: "black" }}>티</span>
+        <span style={{ color: "red" }}>케치</span>
       </h2>
       <div className={style.login_container}>
         <div className={style.login_form}>
