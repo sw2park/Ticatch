@@ -118,6 +118,7 @@ export default function ThisIsMyPage() {
     setPhone("");
   };
 
+  // 아렇게만 보내짐???
   const saveData = {
     userid: thisIsUserId,
   };
@@ -262,11 +263,11 @@ export default function ThisIsMyPage() {
               수정하기
             </button>
           </section>
-          <section className={style.mypage_info}>
+          <section className={style.mypage_save}>
             <h3>나의 찜 내역</h3>
             <ul>
               {Array.isArray(saveList) && saveList.length > 0 ? (
-                saveList.map((save) => (
+                saveList.map((save, index) => (
                   <li
                     key={save.seqpfjoinid}
                     onClick={() => {
@@ -274,7 +275,7 @@ export default function ThisIsMyPage() {
                     }}
                     style={{ cursor: "pointer" }}
                   >
-                    seqsaveid: {save.seqsaveid}, seqpfjoinid: {save.seqpfjoinid}
+                    {index + 1}) 공연 정보 - {save.seqpfjoinid}
                     <hr />
                   </li>
                 ))
@@ -288,6 +289,7 @@ export default function ThisIsMyPage() {
           회원 탈퇴는 없다 (모든 테이블에서 찾아서 삭제해야되는데 시간 부족)
         </h2>
         <h2>환불은 내일 시간 있으면 해보고 안되면 없음</h2>
+        <h2>찜 삭제는 다시 상세 페이지 가서 하고 와야됨</h2>
       </main>
 
       <footer className={style.mypage_footer}>
