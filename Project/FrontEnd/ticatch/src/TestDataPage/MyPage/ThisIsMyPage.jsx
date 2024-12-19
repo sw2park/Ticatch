@@ -18,23 +18,27 @@ export default function ThisIsMyPage() {
   const [phone, setPhone] = useState("");
 
   // sesstion 에서 가지고 오기
+  const thisIsUserId = sessionStorage.getItem("userId");
+  // console.log(thisIsUserId);
   const requestData = {
     userId: sessionStorage.getItem("userId"),
   };
 
+  // userId 로 user 데이터 가지고 오기
   useEffect(() => {
     axios
       .post("/api/order/userInfo", requestData)
       .then((response) => {
         console.log("User Info:", response.data);
         setUserInfo(response.data || []);
-        setseqUserId(response.data.seqId); // Set seqUserId here
+        setseqUserId(response.data.seqId);
       })
       .catch((error) => {
         console.error("User info 불러오기 에러:", error);
       });
   }, []);
 
+  // 주문 내역 가지고 오기
   useEffect(() => {
     axios
       .get("/api/order/orders", {
@@ -57,9 +61,9 @@ export default function ThisIsMyPage() {
       });
   }, []);
 
-  // 수정 버튼
+  // 회원 수정 버튼
   const handleUpdate = () => {
-    // Validate email format
+    // email @ 랑 .com 있는지 확인하는 정규표현식
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(email)) {
       alert("유효한 이메일을 입력해주세요.");
@@ -105,13 +109,29 @@ export default function ThisIsMyPage() {
         );
       });
 
-    // Reset form fields
+    // 버튼 눌르면 input box 비움
     setPassword("");
     setConfirmPassword("");
     setName("");
     setEmail("");
     setPhone("");
   };
+
+  const saveData = {
+    userid: thisIsUserId,
+  };
+
+  // 나의 찜 내역 가지고 오기
+  useEffect(() => {
+    axios
+      .post("/api/order/getSaves", saveData)
+      .then((response) => {
+        console.log("Save Info:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching save info:", error);
+      });
+  }, []);
 
   return (
     <div className={style.mypage_container}>
@@ -233,6 +253,10 @@ export default function ThisIsMyPage() {
             <button className={style.button} onClick={handleUpdate}>
               수정하기
             </button>
+          </section>
+          <section className={style.mypage_info}>
+            <h3>나의 찜 내역</h3>
+            <li>ddd</li>
           </section>
         </div>
         <h2>

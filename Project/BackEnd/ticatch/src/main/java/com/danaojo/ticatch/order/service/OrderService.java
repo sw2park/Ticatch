@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
@@ -17,11 +17,14 @@ import org.springframework.stereotype.Service;
 import com.danaojo.ticatch.order.Entity.OrderDTO;
 import com.danaojo.ticatch.order.Entity.OrderEntity;
 import com.danaojo.ticatch.order.Entity.PFJoinDTO;
+import com.danaojo.ticatch.order.Entity.SaveDTO;
+import com.danaojo.ticatch.order.Entity.SaveEntity;
 import com.danaojo.ticatch.order.Entity.SeatEntity;
 import com.danaojo.ticatch.order.Entity.SeatId;
 import com.danaojo.ticatch.order.Entity.UserDTO;
 import com.danaojo.ticatch.order.Entity.UserEntity;
 import com.danaojo.ticatch.order.repository.PFJoinRepository;
+import com.danaojo.ticatch.order.repository.OrderSaveRepository;
 import com.danaojo.ticatch.order.repository.SeatRepository;
 import com.danaojo.ticatch.order.repository.UserRepository;
 
@@ -34,6 +37,8 @@ public class OrderService {
 	private final PFJoinRepository orderRepository;
 	private final SeatRepository seatRepository;
 	private final UserRepository userRepository;
+	
+	private final OrderSaveRepository orderSaveRepository;
 
 	// 결제가 성공적으로 되면 작동되는 로직 (테이블에 데이터 저장)
 	public String createOrder(OrderDTO orderListDTO) {
@@ -141,22 +146,32 @@ public class OrderService {
 
 	// 로그인 처리 로직
 	public UserDTO login(UserDTO userDTO) {
-		// Fetch the user from the database (returns a User entity)
-		UserEntity user = userRepository.findByUserId(userDTO.getUserId());
+	    // Fetch the user from the database (returns a User entity)
+	    UserEntity user = userRepository.findByUserId(userDTO.getUserId());
 
-		// Check if user exists
-		if (user == null) {
-			throw new RuntimeException("아이디 없음 / 틀렸음");
-		}
+	    // Check if user exists
+	    if (user == null) {
+	        throw new RuntimeException("아이디 없음 / 틀렸음");
+	    }
 
-		// Check if password matches
-		if (!user.getPassword().equals(userDTO.getPassword())) {
-			throw new RuntimeException("비밀번호가 없음 / 틀렸음");
-		}
+	    // Check if password matches
+	    if (!user.getPassword().equals(userDTO.getPassword())) {
+	        throw new RuntimeException("비밀번호가 없음 / 틀렸음");
+	    }
 
-		// Map User entity to UserDTO
-		return new UserDTO();
+	    // Generate a simple token using UUID
+	    String token = UUID.randomUUID().toString();
+
+	    // Map User entity to UserDTO and include the token
+	    UserDTO responseDTO = new UserDTO();
+	    responseDTO.setUserId(user.getUserId());
+	    responseDTO.setToken(token); // Add token to the DTO
+
+	    // Optionally store the token in the database or cache if needed
+	    return responseDTO;
 	}
+
+
 
 	// 회원 가입 로직
 	public ResponseEntity<String> saveUser(UserDTO userDTO) {
@@ -225,10 +240,8 @@ public class OrderService {
 	// 마이페이지 정보 수정
 	public ResponseEntity<String> updateUserInfo(UserDTO userDTO) {
 	    try {
-	    	
 	        UserEntity userEntity = userRepository.findByseqUserId(userDTO.getSeqUserId());
 	        // 아이디 중복 체크
-	        System.out.println(userEntity);
 	        if (userRepository.findByUserId(userDTO.getUserId()) != null) {
 				return ResponseEntity.ok("아이디 중복");
 			}
@@ -246,6 +259,18 @@ public class OrderService {
 	    } catch (Exception e) {
 	        System.err.println("Error updating user: " + e.getMessage());
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating user information");
+	    }
+	}
+
+	// 회원 찜 내역 가지고 가기
+	public ResponseEntity<SaveEntity> getSaveDTO(SaveDTO saveDTO) {
+		SaveEntity saveEntity = orderSaveRepository.findByUserid(saveDTO.getUserid());
+	    System.out.println("saveEntity: " + saveEntity);
+		
+	    if (saveEntity != null) {
+	        return ResponseEntity.ok(saveEntity);
+	    } else {
+	        return ResponseEntity.notFound().build();
 	    }
 	}
 
