@@ -4,7 +4,7 @@ import axios from "axios";
 
 export default function ReviewModify({ seq_review_id }) {
 
-    const handleDelete = async () => {
+    const handleModify = async () => {
         const reviewData = {
             seq_review_id: seq_review_id,
             review_content: reviewContent,
@@ -26,7 +26,7 @@ export default function ReviewModify({ seq_review_id }) {
     return(
         <button 
             className={cssReviewL.review_edit_btn}
-            onClick={handleDelete}
+            onClick={handleModify}
         >
             수정
         </button>
