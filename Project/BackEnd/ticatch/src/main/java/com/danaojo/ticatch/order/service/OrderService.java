@@ -51,22 +51,22 @@ public class OrderService {
 		order.setUserId(orderListDTO.getUserId()); // userid set
 
 		// 좌석 정보 처리
-		StringBuilder seatNumbers = new StringBuilder();
+		StringBuilder seatName = new StringBuilder();
 		for (OrderDTO.SeatInfo seatInfo : orderListDTO.getSelectedSeatsInfo()) {
-			seatNumbers.append(seatInfo.getSeat()).append(", "); // 리액트에서 전달 받은 좌석 데이터를 , 로 붙임 (인덱스로 넘어옴)
+			seatName.append(seatInfo.getSeat()).append(", "); // 리액트에서 전달 받은 좌석 데이터를 , 로 붙임 (인덱스로 넘어옴)
 		}
 
 		// 마지막에 ", " 저장되서 지우는거
-		if (seatNumbers.length() > 0) {
-			seatNumbers.deleteCharAt(seatNumbers.length() - 1); // 마지막 공백 제거
-			seatNumbers.deleteCharAt(seatNumbers.length() - 1); // 마지막 쉼표 제거
+		if (seatName.length() > 0) {
+			seatName.deleteCharAt(seatName.length() - 1); // 마지막 공백 제거
+			seatName.deleteCharAt(seatName.length() - 1); // 마지막 쉼표 제거
 		}
 
-		String seatNums = seatNumbers.substring(0, seatNumbers.length());
+		String seatNameForSeatTable = seatName.substring(0, seatName.length());
 
-		order.setSeatNum(seatNums); // 좌석 위치 저장 예) A1, B1
+		order.setSeatNum(seatNameForSeatTable); // 좌석 위치 저장 예) A1, B1
 
-		int seatCount = seatNums.split(", ").length;
+		int seatCount = seatNameForSeatTable.split(", ").length;
 		order.setTotalTicket(String.valueOf(seatCount)); // 구매한 티켓 개수의 총합 set
 
 		// 구매 날짜 설정
@@ -79,8 +79,7 @@ public class OrderService {
 		List<String> matchingFdaddrList = orderRepository.findAll().stream()
 				.filter(dto -> dto.getSeqPfjoinId().equals(idAsLong)).map(PFJoinDTO::getFdAddr)
 				.collect(Collectors.toList());
-		order.setPlace(String.join(", ", matchingFdaddrList)); // 받은 id 값이랑 일치하는 걸 pfjoin 테이블에서 가지고와서 그 장소만 order 테이블에
-																// set
+		order.setPlace(String.join(", ", matchingFdaddrList)); // 받은 id 값이랑 일치하는 걸 pfjoin 테이블에서 가지고와서 그 장소만 order 테이블에 set
 
 		// OrderEntity 저장
 		OrderEntity savedOrder = orderRepository.save(order); // 위 set 된 모든 값 테이블에 저장
@@ -101,14 +100,14 @@ public class OrderService {
 			seat.setSelectDate(orderListDTO.getSelectedDate()); // 공연날짜 set
 			seat.setSelectTime(viewTime); // 회차 set
 			seat.setTotal(160 - seatCount); // 160 인 고정된 전체 좌석 개수에서 판매된 티켓 만큼 빼고 저장 (상세페이지에서 구매가능한 티켓 개수 보고 싶어서 그럼)
-											// (등급별로는 안됬지만 이거라도...)
-			seat.setSoldSeat(seatNums); // 판매된 좌석 예) A1, B1 을 set (만약 여기에 값이 있다면 구매 못하게 막았음)
+			seat.setSoldSeat(seatNameForSeatTable); // 판매된 좌석 예) A1, B1 을 set (만약 여기에 값이 있다면 구매 못하게 막았음)
+			
 			SeatEntity seatnullsaved = seatRepository.save(seat); // 저장
 			System.out.println("seatnullsaved: " + seatnullsaved);
 		} else { // 있으면 그냥 그 행에 판매된 좌석만 추가
 			seat.setTotal(seat.getTotal() - seatCount); // 해당 행이 있다면 저장되있는 좌석 총 개수에서 구매한 티켓 개수 만큼 빼서 set
 			String seats = seat.getSoldSeat();
-			seat.setSoldSeat(seats + ", " + seatNums); // 판매된 좌석 정보를 , 로 붙여서 set
+			seat.setSoldSeat(seats + ", " + seatNameForSeatTable); // 판매된 좌석 정보를 , 로 붙여서 set
 			SeatEntity seatsaved = seatRepository.save(seat); // 저장
 			System.out.println("seatsaved: " + seatsaved);
 		}
