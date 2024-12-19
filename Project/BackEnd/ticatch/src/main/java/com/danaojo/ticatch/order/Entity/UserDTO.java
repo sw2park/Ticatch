@@ -19,11 +19,12 @@ public class UserDTO {
     private String loginType;
     private Date createDate;
     private Date updateDate;
+    private String token;
 
     public UserDTO() {}
 
 	public UserDTO(Long seqUserId, String userId, String password, String name, String email, String phone,
-			String loginType, Date createDate, Date updateDate) {
+			String loginType, Date createDate, Date updateDate, String token) {
 		super();
 		this.seqUserId = seqUserId;
 		this.userId = userId;
@@ -34,6 +35,8 @@ public class UserDTO {
 		this.loginType = loginType;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
+		this.token = token;
 	}
+
 
 }

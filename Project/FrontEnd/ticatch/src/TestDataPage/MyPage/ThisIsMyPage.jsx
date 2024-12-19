@@ -117,10 +117,8 @@ export default function ThisIsMyPage() {
     setPhone("");
   };
 
-  // 찜 기능 오류 해결하기
-
   const saveData = {
-    user_id: sessionStorage.getItem("userId"),
+    userid: thisIsUserId,
   };
 
   // 나의 찜 내역 가지고 오기

@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
@@ -145,22 +146,32 @@ public class OrderService {
 
 	// 로그인 처리 로직
 	public UserDTO login(UserDTO userDTO) {
-		// Fetch the user from the database (returns a User entity)
-		UserEntity user = userRepository.findByUserId(userDTO.getUserId());
+	    // Fetch the user from the database (returns a User entity)
+	    UserEntity user = userRepository.findByUserId(userDTO.getUserId());
 
-		// Check if user exists
-		if (user == null) {
-			throw new RuntimeException("아이디 없음 / 틀렸음");
-		}
+	    // Check if user exists
+	    if (user == null) {
+	        throw new RuntimeException("아이디 없음 / 틀렸음");
+	    }
 
-		// Check if password matches
-		if (!user.getPassword().equals(userDTO.getPassword())) {
-			throw new RuntimeException("비밀번호가 없음 / 틀렸음");
-		}
+	    // Check if password matches
+	    if (!user.getPassword().equals(userDTO.getPassword())) {
+	        throw new RuntimeException("비밀번호가 없음 / 틀렸음");
+	    }
 
-		// Map User entity to UserDTO
-		return new UserDTO();
+	    // Generate a simple token using UUID
+	    String token = UUID.randomUUID().toString();
+
+	    // Map User entity to UserDTO and include the token
+	    UserDTO responseDTO = new UserDTO();
+	    responseDTO.setUserId(user.getUserId());
+	    responseDTO.setToken(token); // Add token to the DTO
+
+	    // Optionally store the token in the database or cache if needed
+	    return responseDTO;
 	}
+
+
 
 	// 회원 가입 로직
 	public ResponseEntity<String> saveUser(UserDTO userDTO) {
@@ -254,7 +265,8 @@ public class OrderService {
 	// 회원 찜 내역 가지고 가기
 	public ResponseEntity<SaveEntity> getSaveDTO(SaveDTO saveDTO) {
 		SaveEntity saveEntity = orderSaveRepository.findByUserid(saveDTO.getUserid());
-	    
+	    System.out.println("saveEntity: " + saveEntity);
+		
 	    if (saveEntity != null) {
 	        return ResponseEntity.ok(saveEntity);
 	    } else {
