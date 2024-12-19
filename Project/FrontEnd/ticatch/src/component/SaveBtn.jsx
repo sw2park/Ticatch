@@ -9,9 +9,9 @@ export default function SaveBtn() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // 사용자의 세션 아이디를 가져오기
-    const userId = sessionStorage.getItem("user_id");
-    console.log("Review sessionId : " + userId);
+    // 로그인 session
+    sessionStorage.getItem("userId");
+    const userId = sessionStorage.getItem("userId");
 
     if (!userId) {
       alert("로그인 후 이용가능합니다.");
