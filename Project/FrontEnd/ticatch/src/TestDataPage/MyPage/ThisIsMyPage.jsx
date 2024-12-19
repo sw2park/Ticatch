@@ -210,7 +210,8 @@ export default function ThisIsMyPage() {
                     <br />
                     구매일 : {order.buyDate}
                     <br />
-                    가격 : {order.totalSum}원
+                    {/* 숫자로 바꾸고 toLocaleString 하면 , 알아서 붙여주네 */}
+                    가격 : {Number(order.totalSum).toLocaleString()}원
                     <hr />
                   </li>
                 ))

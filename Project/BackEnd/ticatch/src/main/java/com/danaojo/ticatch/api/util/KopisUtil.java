@@ -1,5 +1,7 @@
 package com.danaojo.ticatch.api.util;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +9,36 @@ import com.danaojo.ticatch.api.kopis.dto.PFJoinDTO;
 import com.danaojo.ticatch.api.repository.PFJoin;
 
 public class KopisUtil {
+	// 오늘 날짜 구해서 +31일 한 후 yyyyMMdd 형태로 반환 메소드
+	// 근데 이 API 는 같은 년도에서만 된다 예) stdate=20241219&eddate=20240119 이건 시작날과 끝나는 날을 잘 가지고옴 
+	// stdate=20241219&eddate=20250119 이렇게 하면 eddate가 시작날로 고정이됨
+	// 왜 이러는지 모르겠지만 그냥 버그 있는듯 
+	// 잘됨
+	//https://kopis.or.kr/openApi/restful/pblprfr?service=59d9d3d10bfb4d81865cb695b2cca643&stdate=20241219&eddate=20240119&cpage=1&rows=1
+	// 안됨
+	// http://kopis.or.kr/openApi/restful/pblprfr?service=59d9d3d10bfb4d81865cb695b2cca643&stdate=20241219&eddate=20250119&cpage=1&rows=1
+	
+	public String returnAfterday() {
+	    LocalDate nowDate = LocalDate.now();
+	    LocalDate afterDate = nowDate.plusDays(31);
+	    LocalDate minusOneYear = afterDate.minusYears(1); // 1년을 빼서 해결했음
+	    
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+	    
+//	    return afterDate.format(formatter);
+	    return minusOneYear.format(formatter);
+	}
+	
+	// 오늘 날짜 구해서 yyyyMMdd 형태로 반환 메소드
+	public String returnNowToday() { 
+		LocalDate now = LocalDate.now();
+		DateTimeFormatter form = DateTimeFormatter.ofPattern("yyyyMMdd");
+		String formNow = now.format(form);
+		
+		return formNow;
+	}
+	
 	// PFJOIN DB 저장용 변환 메소드
-
 	public List<PFJoin> returnPFJoinList(List<PFJoinDTO> list){
 		List<PFJoin> result = new ArrayList<>();
 		
@@ -45,5 +75,18 @@ public class KopisUtil {
 		}
 		return result;
 	}
-
+	
+	// PFJoinDB 상세이미지 저장용
+	public String concatDetailImage(List<String> list) {
+		String result = "";
+		
+		for(String str : list) {
+			if(str.equals(" ")) {
+				continue;
+			} else {
+				result += str + "|";
+			}
+		}
+		return result;
+	}
 }
