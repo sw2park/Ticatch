@@ -84,10 +84,13 @@ public class ReviewRepository {
 	             .setParameter("seq_review_id", seq_review_id)
 	             .executeUpdate();
 	}
-	
-	// 리뷰 수정
-	
 
+	// 리뷰 하나 조회
+	public Review findOne(Long seq_review_id) {
+		return em.find(Review.class, seq_review_id);
+	}
+	
+	
 	// 리뷰 작성자가 관람자인지 Orders 테이블에서 조회
 //	public List<OrderEntity> viewUser(Long seq_review_id) {
 //		return em.createQuery(

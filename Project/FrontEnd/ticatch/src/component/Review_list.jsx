@@ -29,9 +29,8 @@ export default function ReviewList() {
         };
 
         fetchData();
-    }, [seqpfjoinId]);
+    }, [productData]);
 // productData를 넣어놔야 redirect가 되는데 이렇게 넣으면 서버가 계속 새로고침됨(?)
-// [productData]
 
     // 2024-12-09 05:36 이런형식으로 출력
     const formatDate = (dateString) => {

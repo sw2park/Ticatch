@@ -131,10 +131,11 @@ public class DetailController {
 	}
 	
 	// 리뷰 수정
-//	@PostMapping("detail/review/{seq_review_id}/modify")
-//	public Long modifReview(@PathVariable("seq_review_id") Long seq_review_id) {
-//		return reviewService.modifReview(seq_review_id);
-//	}
+	@PostMapping("/detail/review/{seq_review_id}/modify")
+	public String modifyReview(@PathVariable("seq_review_id") @RequestBody ReviewDTO reviewDto, Long seq_review_id) {
+		reviewService.modifyReview(seq_review_id, reviewDto.getReview_content(), reviewDto.getRating());
+		return "redirect:/";
+	}
 	
 	// 기대평 저장
 	@PostMapping("/detail/exp/new")
