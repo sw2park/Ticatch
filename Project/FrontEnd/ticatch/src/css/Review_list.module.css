@@ -20,7 +20,7 @@
 .review_list_item {
     position: relative;
     border-bottom: 1px solid #e8eaf1;
-    padding: 24px 100px 27px 0;
+    padding: 24px 5px 27px 0;
 }
 
 .review_item_star {
@@ -68,4 +68,23 @@
     line-height: 17px;
     border: 1px solid #004d7c;
     border-radius: 16px;
+}
+
+.review_btn_wrap {
+    margin-right: 0;
+}
+
+.review_edit_btn {
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid #bababa;
+    border-radius: 6px;
+    padding: 0px 12px;
+    margin-left: 10px;
+    letter-spacing: 1px;
+}
+
+.review_edit_btn:hover {
+    border: 1px solid rgb(205, 205, 205);
+    background-color: #f1f1f1;
 }

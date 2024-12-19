@@ -78,6 +78,16 @@ public class ReviewRepository {
 		em.persist(review);
 	}
 
+	// 리뷰 삭제
+	public int deleteReview(Long seq_review_id) {
+	    return em.createQuery("DELETE FROM Review r WHERE r.seq_review_id = :seq_review_id")
+	             .setParameter("seq_review_id", seq_review_id)
+	             .executeUpdate();
+	}
+	
+	// 리뷰 수정
+	
+
 	// 리뷰 작성자가 관람자인지 Orders 테이블에서 조회
 //	public List<OrderEntity> viewUser(Long seq_review_id) {
 //		return em.createQuery(
