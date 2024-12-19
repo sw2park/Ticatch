@@ -260,15 +260,15 @@ public class OrderService {
 
 	// 회원 찜 내역 가지고 가기
 	public ResponseEntity<?> getSaveDTO(SaveDTO saveDTO) {
-		SaveEntity saveEntity = orderSaveRepository.findByUserid(saveDTO.getUserid());
-	    System.out.println("saveEntity: " + saveEntity);
-		
-	    if (saveEntity != null) {
-	        return ResponseEntity.ok(saveEntity);
-	    } else {
-	        return ResponseEntity.ok("찜 내역이 없습니다");
-	    }
-	}
+        List<SaveEntity> saveEntities = orderSaveRepository.findByUserid(saveDTO.getUserid());
+        System.out.println("saveEntities: " + saveEntities);
+
+        if (saveEntities.isEmpty()) {
+            return ResponseEntity.ok("찜 내역이 없습니다");
+        } else {
+            return ResponseEntity.ok(saveEntities);
+        }
+    }
 
 		
 }

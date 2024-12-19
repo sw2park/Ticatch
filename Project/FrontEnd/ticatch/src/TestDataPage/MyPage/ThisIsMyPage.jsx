@@ -267,8 +267,15 @@ export default function ThisIsMyPage() {
             <ul>
               {Array.isArray(saveList) && saveList.length > 0 ? (
                 saveList.map((save) => (
-                  <li key={save.seqpfjoinid}>
+                  <li
+                    key={save.seqpfjoinid}
+                    onClick={() => {
+                      navigate(`/detail/${save.seqpfjoinid}/view`);
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
                     seqsaveid: {save.seqsaveid}, seqpfjoinid: {save.seqpfjoinid}
+                    <hr />
                   </li>
                 ))
               ) : (
