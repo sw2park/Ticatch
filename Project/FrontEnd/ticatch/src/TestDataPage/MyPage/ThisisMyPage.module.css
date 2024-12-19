@@ -59,7 +59,8 @@
 }
 
 .mypage_watched,
-.mypage_info {
+.mypage_info,
+.mypage_save {
   flex: 1;
   padding: 20px;
   background-color: #ffffff;
@@ -69,14 +70,16 @@
 }
 
 .mypage_watched h3,
-.mypage_info h3 {
+.mypage_info h3,
+.mypage_save h3 {
   font-size: 1.8rem;
   color: #333;
   margin-bottom: 15px;
 }
 
 .mypage_watched ul,
-.mypage_info ul {
+.mypage_info ul,
+.mypage_save ul {
   list-style-type: none;
   padding-left: 0;
   font-size: 1.1rem;
@@ -84,7 +87,8 @@
 }
 
 .mypage_watched li,
-.mypage_info li {
+.mypage_info li,
+.mypage_save li {
   margin-bottom: 8px;
 }
 

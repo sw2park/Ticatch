@@ -80,7 +80,7 @@ public class OrderController {
 		// 이거 좌석 하려고 적었던거임 아무것도 없음 (랭킹을 좌석 판매순으로 하고 싶었지만 시간 부족)
 //	    String result = orderService.findRank();
 
-		// 5개만 보낼거임
+		// 5개만 보낼거임 (화면 깨짐;;)
 		if (rank.size() > 5) {
 			return rank.subList(0, 5);
 		}
@@ -113,11 +113,11 @@ public class OrderController {
 	    return orderService.userInfo(userDTO);
 	}
 	
+	// 마이페이지 주문 내역 보내는거
+	@GetMapping("/orders")
 //	ResponseEntity<?>는 Spring Boot에서 HTTP 응답을 나타내는 클래스입니다. 
 //	이 클래스는 응답 본문과 상태 코드뿐만 아니라 헤더를 포함하는 HTTP 응답을 표현하는 데 사용됩니다. 
 //	<?>는 응답 본문이 어떤 타입이든 상관없다는 의미로, 유연한 응답을 처리할 수 있도록 해줍니다.
-	// 마이페이지 주문 내역 보내는거
-	@GetMapping("/orders")
 //	ResponseEntity<?>는 자동으로 형변환을 해주지 않습니다. 
 //	<?>는 단지 해당 응답 본문의 타입이 무엇이든 될 수 있음을 의미하는 제네릭 타입입니다. 
 //	즉, ResponseEntity<?>는 응답 본문의 타입을 지정하지 않거나, 
