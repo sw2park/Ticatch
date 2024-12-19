@@ -1,34 +1,61 @@
-import { useState } from "react";
+import { useState } from 'react';
+import axios from 'axios';
 import cssReviewL from '../css/Review_list.module.css';
-import axios from "axios";
 
-export default function ReviewModify({ seq_review_id }) {
+export default function ReviewModify({ seq_review_id, initialReviewContent }) {
+    const [isEditing, setIsEditing] = useState(false); // 수정 상태 관리
+    const [reviewContent, setReviewContent] = useState(initialReviewContent); // 리뷰 내용 상태 관리
+    const [selectedValue, setSelectedValue] = useState(0); // 별점 상태 관리
 
-    const handleModify = async () => {
-        const reviewData = {
-            seq_review_id: seq_review_id,
+    const handleEditToggle = () => {
+        setIsEditing(!isEditing); // 수정 상태 토글
+    };
+
+    const handleContentChange = (e) => {
+        setReviewContent(e.target.value); // textarea의 내용 변경
+    };
+
+    const handleSave = async () => {
+        const updatedReview = {
+            seq_review_id,
             review_content: reviewContent,
             rating: selectedValue,
-          };
-          
+        };
+
         try {
-            const response = await axios.post(`http://localhost:9090/detail/review/${seq_review_id}/modify`, reviewData);
-            setError(null); // 에러 초기화
-        } catch (err) {
-            console.error(err);
-            setError("리뷰 수정 실패");
-            alert("리뷰 수정 중 오류가 발생했습니다.");
-        } finally {
-            alert("리뷰가 수정 되었습니다.");
+            await axios.post(`http://localhost:9090/detail/review/${seq_review_id}/modify`, updatedReview);
+            setIsEditing(false); // 수정 완료 후 수정 상태 종료
+            alert('리뷰가 수정되었습니다!');
+        } catch (error) {
+            console.error(error);
+            alert('수정에 실패했습니다.');
         }
     };
 
-    return(
-        <button 
-            className={cssReviewL.review_edit_btn}
-            onClick={handleModify}
-        >
-            수정
-        </button>
+    return (
+        <div>
+            {isEditing ? (
+                <div>
+                    <textarea
+                        className={cssReviewL.review_item_content_edit}
+                        value={reviewContent}
+                        onChange={handleContentChange}
+                    />
+                    <button
+                        className={cssReviewL.review_edit_btn}
+                        onClick={handleSave}
+                    >
+                        수정 완료
+                    </button>
+                </div>
+            ) : (
+                <button
+                    className={cssReviewL.review_edit_btn}
+                    onClick={handleEditToggle}
+                >
+                    수정
+                </button>
+            )}
+        </div>
     );
 }

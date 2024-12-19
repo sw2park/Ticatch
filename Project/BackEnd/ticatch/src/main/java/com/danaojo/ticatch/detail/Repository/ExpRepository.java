@@ -46,4 +46,17 @@ public class ExpRepository {
 		em.persist(expectation);
 	}
 
+	// 기대평 삭제
+	public int deleteExp(Long seq_exp_id) {
+		return em.createQuery("DELETE FROM Expectation e WHERE e.seq_exp_id = :seq_exp_id")
+				.setParameter("seq_exp_id", seq_exp_id)
+				.executeUpdate();
+	}
+	
+	// 기대평 하나 조회
+	public Expectation findOne(Long seq_exp_id) {
+		return em.find(Expectation.class, seq_exp_id);
+	}
+
 }
+

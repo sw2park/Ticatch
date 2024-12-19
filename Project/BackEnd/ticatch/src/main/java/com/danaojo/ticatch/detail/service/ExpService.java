@@ -35,4 +35,10 @@ public class ExpService {
 		expRepository.save(expectation);
 	}
 
+	// 기대평 삭제
+	@Transactional
+	public Long deleteExp(Long seq_exp_id) {
+		return (long) expRepository.deleteExp(seq_exp_id);
+	}
+
 }

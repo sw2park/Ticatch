@@ -151,6 +151,19 @@ public class DetailController {
 		return "redirect:/";
 	}
 	
+	// 기대평 삭제
+	@PostMapping("/detail/exp/{seq_exp_id}/delete")
+	public Long deleteExp(@PathVariable("seq_exp_id") Long seq_exp_id) {
+		return expService.deleteExp(seq_exp_id);
+	}
+	
+	// 기대평 수정
+//	@PostMapping("/detail/exp/{seq_exp_id}/modify")
+//	public String modifyReview(@PathVariable("seq_exp_id") @RequestBody ReviewDTO reviewDto, Long seq_exp_id) {
+//		reviewService.modifyReview(seq_review_id, reviewDto.getReview_content(), reviewDto.getRating());
+//		return "redirect:/";
+//	}
+	
 	// 찜하기
 //	@PostMapping("/detail/save")
 //	public String performSave(@RequestBody SaveDTO saveDto) {

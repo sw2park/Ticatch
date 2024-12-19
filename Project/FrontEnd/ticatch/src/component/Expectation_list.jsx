@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import ExpModify from './Exp_modify';
+import ExpDelete from './Exp_delete';
 import cssExpL from '../css/Review_list.module.css';
 
 export default function ExpectationList() {
@@ -8,6 +10,9 @@ export default function ExpectationList() {
     const [productData, setProductData] = useState(null);
     const [loading, setLoading] = useState(true); // 로딩 상태 관리
     const [error, setError] = useState(null); // 에러 상태 관리
+
+    sessionStorage.getItem("userId");
+    const userId = sessionStorage.getItem("userId");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -59,6 +64,14 @@ export default function ExpectationList() {
                                         <span className={cssExpL.review_item_create_date}>
                                             {formatDate(exp.exp_date)}
                                         </span>
+                                        <div className={cssExpL.review_btn_wrap}>
+                                            {exp.user_id === userId && (
+                                                <ExpModify seq_exp_id={exp.seq_exp_id} exp_content={exp.exp_content} />
+                                            )}
+                                            {exp.user_id === userId && (
+                                                <ExpDelete seq_exp_id={exp.seq_exp_id} />
+                                            )}
+                                        </div>
                                     </div>
                                 </li>
                             ))

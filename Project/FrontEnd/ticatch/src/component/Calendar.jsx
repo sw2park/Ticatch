@@ -76,7 +76,7 @@ export default function Calendar({ startDate, endDate, time, setSelectDate }) {
         filterDate={filterDates} // filterDate로 날짜 필터링
         renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
           <div className={cssCal.custom_header}>
-            <button onClick={decreaseMonth}>&lt;</button>
+            <button className={cssCal.custom_header_button} onClick={decreaseMonth}>&lt;</button>
             <span
               className={cssCal.custom_header_span}
             >{`${date.getFullYear()}.${String(date.getMonth() + 1).padStart(
