@@ -7,6 +7,7 @@ export default function ThisIsMyPage() {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState([]);
   const [orderList, setOrderList] = useState([]);
+  const [saveList, setSaveList] = useState([]);
 
   // state 추가: 입력 필드 관리
   const [seqUserId, setseqUserId] = useState("");
@@ -127,6 +128,13 @@ export default function ThisIsMyPage() {
       .post("/api/order/getSaves", saveData)
       .then((response) => {
         console.log("Save Info:", response.data);
+        if (response.data === "찜 내역이 없습니다") {
+          setSaveList([]); // 빈 배열로 설정
+        } else if (Array.isArray(response.data)) {
+          setSaveList(response.data); // 응답이 배열인 경우 그대로 설정
+        } else {
+          setSaveList([response.data]); // 단일 객체를 배열로 변환
+        }
       })
       .catch((error) => {
         console.error("Error fetching save info:", error);
@@ -256,7 +264,17 @@ export default function ThisIsMyPage() {
           </section>
           <section className={style.mypage_info}>
             <h3>나의 찜 내역</h3>
-            <li>ddd</li>
+            <ul>
+              {Array.isArray(saveList) && saveList.length > 0 ? (
+                saveList.map((save) => (
+                  <li key={save.seqpfjoinid}>
+                    seqsaveid: {save.seqsaveid}, seqpfjoinid: {save.seqpfjoinid}
+                  </li>
+                ))
+              ) : (
+                <li>찜 내역이 없습니다.</li>
+              )}
+            </ul>
           </section>
         </div>
         <h2>

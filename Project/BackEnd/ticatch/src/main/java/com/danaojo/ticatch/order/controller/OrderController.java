@@ -143,7 +143,6 @@ public class OrderController {
 //	이거 오류 있음 고치기
 	@PostMapping("/getSaves")
 	public ResponseEntity<?> getOrderByUserId(@RequestBody SaveDTO saveDTO) {
-	    System.out.println(saveDTO);
 	    return orderService.getSaveDTO(saveDTO);
 	}
 
