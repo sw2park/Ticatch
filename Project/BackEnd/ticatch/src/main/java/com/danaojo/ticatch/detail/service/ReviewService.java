@@ -64,4 +64,10 @@ public class ReviewService {
 		reviewRepository.save(review);
 	}
 
+	// 리뷰 삭제
+	@Transactional
+	public Long deleteReview(Long seq_review_id) {
+		return (long) reviewRepository.deleteReview(seq_review_id);
+	}
+
 }

@@ -125,9 +125,15 @@ public class DetailController {
 	}
 	
 	// 리뷰 삭제
-//	@PostMapping("/detail/review/{reveiw_seq_id}/delete")
-//	public String deleteReview(@PathVariable("review_seq_id") Long reviw_seq_id) {
-//		return reviewService.deleteReview(review_seq_id);
+	@PostMapping("/detail/review/{seq_review_id}/delete")
+	public Long deleteReview(@PathVariable("seq_review_id") Long seq_review_id) {
+		return reviewService.deleteReview(seq_review_id);
+	}
+	
+	// 리뷰 수정
+//	@PostMapping("detail/review/{seq_review_id}/modify")
+//	public Long modifReview(@PathVariable("seq_review_id") Long seq_review_id) {
+//		return reviewService.modifReview(seq_review_id);
 //	}
 	
 	// 기대평 저장
