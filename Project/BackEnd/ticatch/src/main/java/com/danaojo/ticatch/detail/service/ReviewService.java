@@ -70,4 +70,14 @@ public class ReviewService {
 		return (long) reviewRepository.deleteReview(seq_review_id);
 	}
 
+	// 리뷰 수정
+	@Transactional
+	public void modifyReview(Long seq_review_id, String review_content, int rating) {
+		Review review = reviewRepository.findOne(seq_review_id);
+		review.setReview_content(review_content);
+		review.setRating(rating);
+	}
+
+	
+
 }
