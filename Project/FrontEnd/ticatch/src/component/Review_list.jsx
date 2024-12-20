@@ -1,146 +1,89 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import cssReviewL from '../css/Review_list.module.css';
-import ReviewDelete from './Review_delete';
-import ReviewModify from './Review_modify';
+import React, { useState } from "react";
+import axios from "axios";
+import cssReviewL from "../css/Review_list.module.css";
 
-export default function ReviewList() {
-    const { seqpfjoinId } = useParams();
-    const [productData, setProductData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [editedReview, setEditedReview] = useState({}); // 수정된 리뷰 내용을 저장하는 상태
+export default function ReviewList({ reviews }) {
+  const [editMode, setEditMode] = useState(null); // 수정 중인 리뷰 ID
+  const [updatedContent, setUpdatedContent] = useState(""); // 수정된 리뷰 내용
+  const [updatedRating, setUpdatedRating] = useState(0); // 수정된 별점
 
-    sessionStorage.getItem("userId");
-    const userId = sessionStorage.getItem("userId");
+  const handleEditClick = (review) => {
+    setEditMode(review.seq_review_id);
+    setUpdatedContent(review.review_content);
+    setUpdatedRating(review.rating);
+  };
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setLoading(true);
-                const response = await axios.get(`http://localhost:9090/detail/${seqpfjoinId}/review`);
-                setProductData(response.data);
-                setError(null);
-            } catch (err) {
-                setError("리뷰 리스트를 불러오는 데 실패했습니다.");
-            } finally {
-                setLoading(false);
-            }
-        };
+  const handleContentChange = (e) => {
+    setUpdatedContent(e.target.value);
+  };
 
-        fetchData();
-    }, [seqpfjoinId]);
+  const handleRatingClick = (rating) => {
+    setUpdatedRating(rating);
+  };
 
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        const hours = String(date.getHours()).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
-        return `${year}-${month}-${day} ${hours}:${minutes}`;
+  const handleSave = async (seq_review_id) => {
+    const updatedReview = {
+      seq_review_id,
+      review_content: updatedContent,
+      rating: updatedRating,
     };
 
-    const handleReviewEdit = (seq_review_id, newContent) => {
-        setEditedReview({
-            ...editedReview,
-            [seq_review_id]: newContent,
-        });
-    };
+    try {
+      await axios.post(`http://localhost:9090/detail/review/${seq_review_id}/modify`, updatedReview);
+      alert("리뷰가 수정되었습니다!");
+      setEditMode(null); // 수정 모드 종료
+    } catch (error) {
+      console.error("리뷰 수정 실패:", error);
+      alert("수정에 실패했습니다.");
+    }
+  };
 
-    const handleSaveReview = async (seq_review_id) => {
-        try {
-            const updatedReview = {
-                seq_review_id,
-                review_content: editedReview[seq_review_id],
-            };
-            await axios.post(`http://localhost:9090/detail/review/${seq_review_id}/modify`, updatedReview);
-            alert('리뷰가 수정되었습니다!');
-        } catch (error) {
-            console.error(error);
-            alert('수정에 실패했습니다.');
-        }
-    };
+  const renderStars = (rating) => {
+    return [...Array(5)].map((_, index) => (
+      <li
+        key={index}
+        className={`${cssReviewL.star_icon} ${index < rating ? cssReviewL.filled : ""}`}
+      >
+        ★
+      </li>
+    ));
+  };
 
-    if (loading) return <div>로딩 중...</div>;
-    if (error) return <div>{error}</div>;
+  const renderEditableStars = () => {
+    return [...Array(5)].map((_, index) => (
+      <li
+        key={index}
+        className={`${cssReviewL.star_icon} ${index < updatedRating ? cssReviewL.filled : ""}`}
+        onClick={() => handleRatingClick(index + 1)}
+      >
+        ★
+      </li>
+    ));
+  };
 
-    return (
-        <div className={cssReviewL.wrap}>
-            <div className={cssReviewL.review_list_wrap}>
-                <ul className={cssReviewL.review_list}>
-                    {Array.isArray(productData) ? (
-                        productData.length > 0 ? (
-                            productData.map((review, index) => (
-                                <li className={cssReviewL.review_list_item} key={index}>
-                                    <div className={cssReviewL.review_item_star}>
-                                        <span className={cssReviewL.review_item_start_icon}>★</span>{review.rating}.0
-                                    </div>
-                                    
-                                    {/* 리뷰 내용 출력 및 수정 */}
-                                    <span className={cssReviewL.review_item_content}>
-                                        {review.review_content === editedReview[review.seq_review_id] ? (
-                                            <textarea 
-                                                className={cssReviewL.review_item_content_edit}
-                                                value={editedReview[review.seq_review_id]}
-                                                onChange={(e) => handleReviewEdit(review.seq_review_id, e.target.value)}
-                                            />
-                                        ) : (
-                                            review.review_content
-                                        )}
-                                    </span>
-                                    
-                                    <div className={cssReviewL.review_item_writer_info}>
-                                        <span className={cssReviewL.review_writer_id}>
-                                            {review.user_id}
-                                        </span>
-                                        <span className={cssReviewL.review_item_create_date}>
-                                            {formatDate(review.review_date)}
-                                        </span>
-                                        <span className={cssReviewL.review_item_purchaser}>
-                                            관람자
-                                        </span>
-                                        <div className={cssReviewL.review_btn_wrap}>
-                                            {review.user_id === userId && !editedReview[review.seq_review_id] && (
-                                                <button
-                                                    className={cssReviewL.review_edit_btn}
-                                                    onClick={() => handleReviewEdit(review.seq_review_id, review.review_content)}
-                                                >
-                                                    수정
-                                                </button>
-                                            )}
-                                            {review.user_id === userId && editedReview[review.seq_review_id] && (
-                                                <>
-                                                    <button
-                                                        className={cssReviewL.review_edit_submit_btn}
-                                                        onClick={() => handleSaveReview(review.seq_review_id)}
-                                                    >
-                                                        수정
-                                                    </button>
-                                                    <button
-                                                        className={cssReviewL.review_edit_btn}
-                                                        onClick={() => handleSaveReview(review.seq_review_id)}
-                                                    >
-                                                        수정 취소
-                                                    </button>
-                                                </>
-                                            )}
-                                            {review.user_id === userId && (
-                                                <ReviewDelete seq_review_id={review.seq_review_id} />
-                                            )}
-                                        </div>
-                                    </div>
-                                </li>
-                            ))
-                        ) : (
-                            <h4 className={cssReviewL.h4}>가장 먼저 리뷰를 남겨보세요!</h4>
-                        )
-                    ) : (
-                        <p className={cssReviewL.p}>아마도 뭔가 잘못 불러오는 중임</p>
-                    )}
-                </ul>
-            </div>
+  return (
+    <div>
+      {reviews.map((review) => (
+        <div key={review.seq_review_id} className={cssReviewL.review_item}>
+          {editMode === review.seq_review_id ? (
+            <>
+              <ul className={cssReviewL.star_edit_list}>{renderEditableStars()}</ul>
+              <textarea
+                value={updatedContent}
+                onChange={handleContentChange}
+                className={cssReviewL.textarea_edit}
+              />
+              <button onClick={() => handleSave(review.seq_review_id)}>저장</button>
+            </>
+          ) : (
+            <>
+              <ul className={cssReviewL.star_list}>{renderStars(review.rating)}</ul>
+              <div>{review.review_content}</div>
+              <button onClick={() => handleEditClick(review)}>수정</button>
+            </>
+          )}
         </div>
-    );
+      ))}
+    </div>
+  );
 }
