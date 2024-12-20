@@ -41,7 +41,7 @@ public class ExpRepository {
 				.getResultList();
 	}
 
-	// 리뷰 저장
+	// 기대평 저장
 	public void save(Expectation expectation) {
 		em.persist(expectation);
 	}

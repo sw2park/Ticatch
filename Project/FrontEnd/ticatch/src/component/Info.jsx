@@ -52,7 +52,7 @@ export default function Info() {
               <div className={cssInfo.simple_info_container}>
                 <div className={cssInfo.simple_info_header}>
                   <h1 className={cssInfo.perform_title}>{product.p_title}</h1>
-                  <SaveBtn />
+                  <SaveBtn p_poster={product.p_poster}/>
                 </div>
 
                 <ul className={cssInfo.simple_info_ul}>

@@ -19,5 +19,6 @@ public class Save {
 	
 	private String user_id;
 	private Long seq_pfjoin_id;
+	private String p_poster;
 	
 }

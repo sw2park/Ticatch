@@ -89,6 +89,10 @@
     background-color: #f1f1f1;
 }
 
+.review_modifymode_wrap{
+    text-align: right;
+}
+
 .review_edit_submit_btn {
     background-color: #004d7c;
     color: #ffffff;
