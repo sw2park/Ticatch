@@ -71,8 +71,7 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
 
   // 결제 페이지로 값 옮기기 (checkout)
   const handleReservation = () => {
-    // @@@
-    // 세션이 비여있음 로그인으로 보냄 (테스트 안해봄)
+    // 세션이 비여있음 로그인으로 보냄 (상세 페이지에서 먼저 확인하는데 혹시 모르니)
     if (sessionStorage.getItem("userId") === null || undefined) {
       navigate("/login");
       return;

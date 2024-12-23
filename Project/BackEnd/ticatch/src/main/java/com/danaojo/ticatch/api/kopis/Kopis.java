@@ -68,7 +68,13 @@ public class Kopis extends KopisApiController {
 	                        	resultStr.setPf_child(pfDetail.getPd_child());
 
 	                        	// 임시로 null처리
-	                        	resultStr.setPf_img(null);
+//	                        	resultStr.setPf_img(null);
+	                        	List<String> imageUrls = pfDetail.getPd_img(); // 여러 이미지 URL을 리스트로 가져온다고 가정
+	                        		if (imageUrls != null && !imageUrls.isEmpty()) {
+	                        			// 첫번째 이미지 URL만 저장
+	                        			resultStr.setPf_img(imageUrls.get(0)); // 첫번쨰 이미지인 0번쨰 인덱스만 저장함
+	                        			// for 문으로 있는거 다 가지고와서 , 로 붙이고 front 에서 map 으로 사용하면 되겠지만 시간이 없음
+	                        		}
 
 	                        	resultStr.setPf_time(pfDetail.getPd_time());
 	                        	resultStr.setPf_location_sido(facility.getFl_sidonm());
