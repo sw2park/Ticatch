@@ -352,7 +352,7 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
         <h3 className={style.time_selector}>
           <div className={style.order_reserve_title}>공연날</div>
           <div className={style.order_reserve_info}>
-            {selectedDate.toLocaleDateString().slice(0, -1)}
+            {selectedDate.toLocaleDateString()}
           </div>
         </h3>
 
