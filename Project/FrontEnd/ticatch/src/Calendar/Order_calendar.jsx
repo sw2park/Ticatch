@@ -23,9 +23,19 @@ export default function Calendar({
   };
 
   const filterDate = (date) => {
-    const dayNames = ["일", "월", "화", "수", "목", "금", "토"];
+    const dayNames = [
+      "일요일",
+      "월요일",
+      "화요일",
+      "수요일",
+      "목요일",
+      "금요일",
+      "토요일",
+    ];
     return availableDays.includes(dayNames[date.getDay()]);
   };
+
+  console.log("availableDays: " + availableDays);
 
   return (
     // <div className={style.calendar_main}>

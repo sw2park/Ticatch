@@ -71,7 +71,7 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
 
   // 결제 페이지로 값 옮기기 (checkout)
   const handleReservation = () => {
-    // 세션이 비여있음 로그인으로 보냄 (상세 페이지에서 먼저 확인하는데 혹시 모르니)
+    // 세션이 비여있음 로그인으로 보냄
     if (sessionStorage.getItem("userId") === null || undefined) {
       navigate("/login");
       return;
@@ -169,11 +169,58 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
 
   // 공연 시간을 포맷팅
   const formatPdTime = useCallback((pdTime) => {
+    // console.log("pdTime: " + pdTime);
     try {
-      const day = pdTime.match(/^[가-힣]+/)[0];
-      const times = pdTime.match(/\((.*?)\)/)[1].split(",");
-      return times.map((time) => `${day}(${time})`);
-    } catch {
+      // pdTime이 제대로 전달되었는지 확인
+      if (!pdTime) {
+        throw new Error("pdTime이 존재하지 않습니다.");
+      }
+
+      // "목요일 ~ 금요일(20:00)" 형태의 범위도 처리할 수 있도록 개선된 정규식
+      const dayTimePairs = [];
+
+      // 범위 형식이나 단일 요일과 시간을 처리할 수 있는 정규식을 사용하여 파싱
+      const pattern =
+        /([가-힣]+)\s?~\s?([가-힣]+)\(([^)]+)\)|([가-힣]+)\(([^)]+)\)/g;
+      let match;
+
+      // 정규식을 사용하여 pdTime에서 모든 요일과 시간을 추출
+      while ((match = pattern.exec(pdTime)) !== null) {
+        if (match[1] && match[2] && match[3]) {
+          // 범위 형식: "목요일 ~ 금요일(20:00)"
+          const startDay = match[1];
+          const endDay = match[2];
+          const timeStr = match[3];
+
+          // 범위에 포함된 요일을 처리
+          const days = [startDay, endDay];
+          const times = timeStr.split(/\s*,\s*/); // 시간을 쉼표로 분리
+
+          days.forEach((day) => {
+            times.forEach((time) => {
+              dayTimePairs.push(`${day.trim()}(${time.trim()})`);
+            });
+          });
+        } else if (match[4] && match[5]) {
+          // 단일 요일과 시간: "화요일(20:00)"
+          const day = match[4];
+          const timeStr = match[5];
+
+          const times = timeStr.split(/\s*,\s*/); // 시간을 쉼표로 분리
+          times.forEach((time) => {
+            dayTimePairs.push(`${day.trim()}(${time.trim()})`);
+          });
+        }
+      }
+
+      if (dayTimePairs.length === 0) {
+        throw new Error("시간 정보가 누락되었습니다.");
+      }
+
+      // console.log(dayTimePairs);
+      return dayTimePairs;
+    } catch (e) {
+      console.error(e.message);
       return ["형식 오류"];
     }
   }, []);
@@ -250,9 +297,7 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
         {fetchId.map((item) => (
           <li key={item.seqPfjoinId} className={style.title}>
             <div className={style.order_title_genre}>{item.pgenre}</div>
-            <h3 className={style.order_title}>
-              {item.ptitle}
-            </h3>
+            <h3 className={style.order_title}>{item.ptitle}</h3>
           </li>
         ))}
       </ul>
@@ -260,7 +305,8 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
       <Calendar
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
-        availableDays={fetchId.length > 0 ? [fetchId[0].pdTime[0]] : []}
+        // 이거 한개만 보내짐 배열인데 왜 한개만 보내지냐?
+        availableDays={fetchId.length > 0 ? fetchId[0].pdTime : []}
         maxSelectableDate={maxSelectableDate}
       />
 
@@ -288,7 +334,9 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
         >
           &lt;
         </button>
-        <span className={style.order_time}>{currentPdTime[selectedTimeIndex]}</span>
+        <span className={style.order_time}>
+          {currentPdTime[selectedTimeIndex]}
+        </span>
         <button
           onClick={() =>
             setSelectedTimeIndex(
@@ -300,44 +348,38 @@ const Performance = ({ selectedSeats = [], setNoSeatInfo }) => {
           &gt;
         </button>
       </div>
-    <div className={style.order_reserve_content}>
-      <h3 className={style.time_selector}>
-        <div className={style.order_reserve_title}>
-          공연날
-        </div>
-        <div className={style.order_reserve_info}>
-          {selectedDate.toLocaleDateString().slice(0, -1)}
-        </div>
-      </h3>
+      <div className={style.order_reserve_content}>
+        <h3 className={style.time_selector}>
+          <div className={style.order_reserve_title}>공연날</div>
+          <div className={style.order_reserve_info}>
+            {selectedDate.toLocaleDateString().slice(0, -1)}
+          </div>
+        </h3>
 
-      <h3 className={style.time_selector}>
-        <div className={style.order_reserve_title}>
-          선택된 좌석
-        </div>
-        <div className={style.order_reserve_info}>
-          {selectedSeats.join(", ") || "없음"}
-        </div>
-      </h3>
+        <h3 className={style.time_selector}>
+          <div className={style.order_reserve_title}>선택된 좌석</div>
+          <div className={style.order_reserve_info}>
+            {selectedSeats.join(", ") || "없음"}
+          </div>
+        </h3>
 
-      <h2 className={style.time_selector}>
-        <div className={style.order_reserve_title}>
-          총액
-        </div>
-        <div className={style.order_reserve_info}>
-          {totalPrice.toLocaleString("ko-KR")}원
-        </div>
-      </h2>
-    </div>
-        <button
-          className={style.reserve_button}
-          onClick={() => {
-            selectedSeats.length != 0
-              ? handleReservation()
-              : alert("좌석을 선택해주세요");
-          }}
-        >
-          예매하기
-        </button>
+        <h2 className={style.time_selector}>
+          <div className={style.order_reserve_title}>총액</div>
+          <div className={style.order_reserve_info}>
+            {totalPrice.toLocaleString("ko-KR")}원
+          </div>
+        </h2>
+      </div>
+      <button
+        className={style.reserve_button}
+        onClick={() => {
+          selectedSeats.length != 0
+            ? handleReservation()
+            : alert("좌석을 선택해주세요");
+        }}
+      >
+        예매하기
+      </button>
 
       {/* <button className="reserve-button" onClick={() => fetchDetailById(1)}>
         테스트 데이터 가져오기
