@@ -26,7 +26,7 @@ button {
     background-color: #f8f8f8;
     width: 100%;
     height: 40px;
-    padding: 20px 30px;
+    padding: 20px 0;
     display: flex;
     margin: 0;
     border-bottom: 1px solid #f8f8f8;
@@ -34,7 +34,7 @@ button {
 
 .detail_header_logo {
     width: 180px;
-    margin-left: 70px;
+    margin-left: 103.625px;
     margin-top: 2px;
     cursor: pointer;
 }
@@ -79,6 +79,7 @@ button {
     width: 72.92%; 
     margin-top: 20px;
     margin-bottom: 64px;
+    overflow: hidden;
 }
 
 /* simple 상세정보 */
@@ -398,9 +399,9 @@ button {
 /* Footer */
 .booking_footer {
     text-align: center;
-    padding: 15px;
+    padding: 15px 0;
+    margin-left: 0;
     background-color: #222;
-    margin-top: auto; /* Pushes the footer to the bottom */
     color: white;
     width: 100%;
     margin-right: 0;
