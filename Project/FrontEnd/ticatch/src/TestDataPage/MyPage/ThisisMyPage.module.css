@@ -9,6 +9,18 @@
   font-size: 2.8rem;
   color: #333;
 }
+.mypage_logo {
+  width: 180px;
+  margin-left: 103.625px;
+  margin-top: 2px;
+  cursor: pointer;
+  
+}
+
+.mypage_logo h2{
+  font-size: 1.5em;
+  font-weight: bold;
+}
 
 /* mypage main content wrap */
 .mypage_container {
@@ -123,7 +135,7 @@
 }
 
 .reserve_table_theader {
-  background-color: #6ca8cd;
+  background-color: #004d7c;
   color: #ffffff;
 }
 
@@ -156,6 +168,11 @@
   border-radius: 5px;
   border: 1px solid #e4e4e4;
   margin-bottom: 13px;
+}
+
+.logout_btn {
+  margin-right: 103.625px;
+  padding-top: 5px;
 }
 
 .button {

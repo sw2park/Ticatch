@@ -53,15 +53,6 @@ export default function DetailMain() {
           <span className={cssMain.header_logo_color}>케치</span>
         </Link>
 
-        <div className={cssMain.header_searchbar_containar}>
-          <input
-            type="text"
-            placeholder="공연 제목으로 찾아보세요."
-            className={cssMain.header_searchbar}
-            // value={search}
-            // onChange={handleSearchChange}
-          />
-        </div>
         <div className={cssMain.user_links}>
           {isLoggedIn ? (
             <>

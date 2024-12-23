@@ -195,7 +195,7 @@ export default function ThisIsMyPage() {
               <p className={style.nav_user_info_title}>이메일: {userInfo.email}</p>
               <p className={style.nav_user_info_title}>전화번호: {userInfo.phone}</p>
               <p className={style.nav_user_info_title}>가입일: {userInfo.createDate}</p>
-              <p className={style.nav_user_info_title}>마지막 정보 수정일: {userInfo.createDate}</p>
+              <p className={style.nav_user_info_title}>마지막 정보 수정일: {userInfo.updateDate}</p>
             </>
             ) : (
             <p>로딩중...</p>
