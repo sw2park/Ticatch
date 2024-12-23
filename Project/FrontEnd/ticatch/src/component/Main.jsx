@@ -36,7 +36,7 @@ export default function DetailMain() {
     }
   }, []);
 
-  // 테스트 로그아웃용 버튼
+  // 로그아웃 버튼
   const handleLogout = () => {
     sessionStorage.removeItem("userToken");
     sessionStorage.removeItem("userId");

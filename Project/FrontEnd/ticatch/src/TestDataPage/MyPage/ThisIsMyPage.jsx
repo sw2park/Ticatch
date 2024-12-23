@@ -165,6 +165,7 @@ export default function ThisIsMyPage() {
             sessionStorage.removeItem("userId");
             setUserId("");
             alert("로그아웃되었습니다.");
+            navigate("/mainPage")
           }}
           style={{
             color: "red",
