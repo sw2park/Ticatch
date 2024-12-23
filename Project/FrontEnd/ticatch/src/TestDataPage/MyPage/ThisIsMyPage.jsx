@@ -319,8 +319,8 @@ export default function ThisIsMyPage() {
                     navigate(`/detail/${save.seqpfjoinid}/view`);
                   }}
                     className={style.mypage_save_img}
-              >
-                <img src={save.pposter} alt={save.seqpfjoinid}/>
+                    >
+                    <img src={save.pposter} alt={save.seqpfjoinid}/>
               </div>
               ))
               ) : (

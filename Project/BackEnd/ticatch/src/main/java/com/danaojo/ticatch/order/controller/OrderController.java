@@ -49,7 +49,8 @@ public class OrderController {
 
 	// seqPfjoinId 로 동일한 값만 조회
 	@GetMapping("/{seqPfjoinId}")
-	public List<PFJoinDTO> getOrderById(@PathVariable Long seqPfjoinId) {
+	public List<PFJoinDTO> getOrderById(@PathVariable("seqPfjoinId") Long seqPfjoinId) {
+		System.out.println("here" + seqPfjoinId);
 		List<PFJoinDTO> findBySeqPfJoinId = pfjoinRepository.findBySeqPfjoinId(seqPfjoinId);
 
 		return findBySeqPfJoinId;
@@ -122,7 +123,7 @@ public class OrderController {
 //	<?>는 단지 해당 응답 본문의 타입이 무엇이든 될 수 있음을 의미하는 제네릭 타입입니다. 
 //	즉, ResponseEntity<?>는 응답 본문의 타입을 지정하지 않거나, 
 //	여러 타입을 처리할 수 있도록 해주는 용도로 사용됩니다.
-	public ResponseEntity<?> OrderList(@RequestParam String userId) {
+	public ResponseEntity<?> OrderList(@RequestParam("userId") String userId) {
 	    List<OrderEntity> orderList = orderRepository.findByUserId(userId);
 	    
 	    if (orderList.isEmpty()) {
