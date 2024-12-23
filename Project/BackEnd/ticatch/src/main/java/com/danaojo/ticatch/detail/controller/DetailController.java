@@ -83,7 +83,6 @@ public class DetailController {
 	// Tab 리뷰 조회
 	@GetMapping("/detail/{seq_pfjoin_id}/review")
 	public List<Review> findReview(@PathVariable("seq_pfjoin_id") Long seq_pfjoin_id) {
-//		System.out.println("리뷰 조회 controller");
 		return reviewService.findReviews(seq_pfjoin_id);
 	}
 	
@@ -182,7 +181,6 @@ public class DetailController {
 
 	    String result = saveService.performSave(save);
 
-	    // 반환값에 따라 알림 메시지 다르게 설정
 	    return ResponseEntity.ok(result);
 	}
 
