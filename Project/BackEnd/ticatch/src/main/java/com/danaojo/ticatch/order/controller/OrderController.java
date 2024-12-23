@@ -50,7 +50,6 @@ public class OrderController {
 	// seqPfjoinId 로 동일한 값만 조회
 	@GetMapping("/{seqPfjoinId}")
 	public List<PFJoinDTO> getOrderById(@PathVariable("seqPfjoinId") Long seqPfjoinId) {
-		System.out.println("here" + seqPfjoinId);
 		List<PFJoinDTO> findBySeqPfJoinId = pfjoinRepository.findBySeqPfjoinId(seqPfjoinId);
 
 		return findBySeqPfJoinId;
@@ -141,7 +140,6 @@ public class OrderController {
 	}
 	
 	// 찜 내역 조회해서 정보 가지고 오기
-//	이거 오류 있음 고치기
 	@PostMapping("/getSaves")
 	public ResponseEntity<?> getOrderByUserId(@RequestBody SaveDTO saveDTO) {
         return orderService.getSaveDTO(saveDTO);
