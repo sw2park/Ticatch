@@ -79,7 +79,7 @@ button {
     width: 72.92%; 
     margin-top: 20px;
     margin-bottom: 64px;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 /* simple 상세정보 */
@@ -361,14 +361,15 @@ button {
 .section_tab_ul {
     display: flex;
     margin-left: 0px;
-    overflow: visible;
+    width: 100%;
 }
 
 .tab_btn {
     text-align: center;
     display: block;
     position: relative;
-    width: 281px;
+    max-width: 281px;
+    width: 281px;;
     height: auto;
     padding: 12px 10px 13px 10px;
     border: 1px solid #ecedf2;

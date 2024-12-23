@@ -110,9 +110,6 @@ public class DetailController {
 	// 리뷰 저장
 	@PostMapping("/detail/review/new")
 	public String createReview(@RequestBody ReviewDTO reviewDto) {
-		
-//		System.out.println("리뷰 저장 controller");
-		
 		Review review = new Review();		
 		review.setUser_id(reviewDto.getUser_id());
 		review.setSeq_pfjoin_id(reviewDto.getSeq_pfjoin_id());
