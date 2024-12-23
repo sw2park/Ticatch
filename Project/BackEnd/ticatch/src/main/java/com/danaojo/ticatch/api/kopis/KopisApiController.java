@@ -22,10 +22,11 @@ public class KopisApiController {
 			
 			// 처음 받을때는 .yml 을 create 로 바꿔서 하는게 좋을듯 그리고 
 			// 위 2개랑 아래 2개 주석하고 이거 해보면 더 가지고 와짐 (안되면 key 바꾸기) (날짜를 31일이 최대라서 하고 20250119 끝나고 20250220 을 시작으로 20250220까지 불러옴) 
-			// 하면 데이터가 77개 정도 됨
+			// 하면 데이터가 75개 정도 됨
 			
-//			apiUrl += "&stdate=20250120";
-//			apiUrl += "&eddate=20250220";
+			// 이건 오늘 기준 32일 부터 그날의 31일 이후를 저장하기
+//			apiUrl += "&stdate=20250124";
+//			apiUrl += "&eddate=20250224";
 			
 			apiUrl += "&eddate=";
 			apiUrl += util.returnAfterday();

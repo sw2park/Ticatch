@@ -4,9 +4,9 @@ spring:
   thymeleaf:
     cache: false
   datasource:
-    url: jdbc:oracle:thin:@localhost:1521:xe
+    url: jdbc:oracle:thin:@localhost:1521:SYSTEM
     driver-class-name: oracle.jdbc.OracleDriver	
-    username: danaojo
+    username: C##danaojo
     password: danaojo
   jpa:
     hibernate:
@@ -26,7 +26,7 @@ server:
       force: true	
 
 logging:
-  level:
+  level: 
     org:
       hibernate:
         SQL: debug
