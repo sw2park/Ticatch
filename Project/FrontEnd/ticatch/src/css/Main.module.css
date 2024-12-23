@@ -70,6 +70,7 @@ button {
     align-items: center;
     margin-right: 103.625px;
 }
+
 .user_links a:hover {
     text-decoration: underline;
 }
@@ -194,6 +195,15 @@ button {
 .simple_info_desc {
     flex-grow: 1;   /* 설명 영역이 남는 공간을 채우도록 설정 */
     height: 100%;   /* 맨 위에 딱 붙게 */
+}
+
+.desc_text_container{
+    width: 1000px;
+}
+
+.desc_wrap {
+    max-width: 1000px;
+    margin: 0;
 }
 
 /* 예매 정보 선택 */
@@ -359,18 +369,18 @@ button {
 
 .section_tab_ul {
     display: flex;
-    margin-left: 0px;
-    width: 100%;
+    margin: 0px;
+   width: 100%;
 }
 
 .tab_btn {
     text-align: center;
     display: block;
     position: relative;
-    max-width: 281px;
-    width: 281px;;
+    min-width: 200px;
+    width: auto;
     height: auto;
-    padding: 12px 10px 13px 10px;
+    padding: 12px 103px 13px 103px;
     border: 1px solid #ecedf2;
     font-size: 16px;
     line-height: 1.5;
