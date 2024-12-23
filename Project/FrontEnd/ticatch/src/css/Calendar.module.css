@@ -18,7 +18,7 @@
   padding: 0.5em;
   padding-bottom: 12px;
   background-color: #ffffff;
-  margin-left: 16px;
+  margin-left: 10px;
 }
 
 .custom_header_span {
@@ -35,7 +35,6 @@
   border: none;
   font-size: 15px;
   cursor: pointer;
-  margin-left: 16px;
 }
 
 /* 다음 달력 버튼 왜 nth-child(3)이지? */
@@ -44,7 +43,7 @@
   border: none;
   font-size: 15px;
   cursor: pointer;
-  margin-right: 16px;
+  margin-right: 10px;
 }
 
 .custom_header button:hover {

@@ -27,14 +27,17 @@ public class SaveEntity {
 	private String userid;
 	@Column(name = "seq_pfjoin_id")
 	private Long seqpfjoinid;
+	@Column(name = "p_poster")
+	private String pposter;
 	
 	public SaveEntity() {}
 
-	public SaveEntity(int seqsaveid, String userid, Long seqpfjoinid) {
+	public SaveEntity(int seqsaveid, String userid, Long seqpfjoinid, String pposter) {
 		super();
 		this.seqsaveid = seqsaveid;
 		this.userid = userid;
 		this.seqpfjoinid = seqpfjoinid;
+		this.pposter = pposter;
 	}
 	
 }

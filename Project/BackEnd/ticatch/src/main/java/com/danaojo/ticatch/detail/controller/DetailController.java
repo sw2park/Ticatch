@@ -2,6 +2,7 @@ package com.danaojo.ticatch.detail.controller;
 
 import java.util.List;
 
+import org.hibernate.dialect.SybaseSqmToSqlAstConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -82,12 +83,10 @@ public class DetailController {
 	// Tab 리뷰 조회
 	@GetMapping("/detail/{seq_pfjoin_id}/review")
 	public List<Review> findReview(@PathVariable("seq_pfjoin_id") Long seq_pfjoin_id) {
+//		System.out.println("리뷰 조회 controller");
 		return reviewService.findReviews(seq_pfjoin_id);
 	}
-//	@GetMapping("detail/{seq_pfjoin_id}/review")
-//    public List<ReviewOrderDTO> findReviewsOrders(@PathVariable("seq_pfjoin_id") Long seqPfjoinId) {
-//        return reviewService.findReviewsOrders(seqPfjoinId);
-//    }
+	
 	
 	// Tab 리뷰 리스트에 관람자 표시
 //	@GetMapping("/detail/{seq_review_id}/review")
@@ -97,10 +96,10 @@ public class DetailController {
 	
 	
 	// Tab 기대평 갯수 조회
-		@GetMapping("/detail/{seq_pfjoin_id}/exp/count")
-		public Long countExps(@PathVariable("seq_pfjoin_id") Long seq_pfjoin_id) {
-			return expService.countExps(seq_pfjoin_id);
-		}
+	@GetMapping("/detail/{seq_pfjoin_id}/exp/count")
+	public Long countExps(@PathVariable("seq_pfjoin_id") Long seq_pfjoin_id) {
+		return expService.countExps(seq_pfjoin_id);
+	}
 	
 	// Tab 기대평 조회
 	@GetMapping("/detail/{seq_pfjoin_id}/exp")
@@ -112,6 +111,9 @@ public class DetailController {
 	// 리뷰 저장
 	@PostMapping("/detail/review/new")
 	public String createReview(@RequestBody ReviewDTO reviewDto) {
+		
+//		System.out.println("리뷰 저장 controller");
+		
 		Review review = new Review();		
 		review.setUser_id(reviewDto.getUser_id());
 		review.setSeq_pfjoin_id(reviewDto.getSeq_pfjoin_id());
@@ -132,8 +134,8 @@ public class DetailController {
 	
 	// 리뷰 수정
 	@PostMapping("/detail/review/{seq_review_id}/modify")
-	public String modifyReview(@PathVariable("seq_review_id") @RequestBody ReviewDTO reviewDto, Long seq_review_id) {
-		reviewService.modifyReview(seq_review_id, reviewDto.getReview_content(), reviewDto.getRating());
+	public String modifyReview(@PathVariable("seq_review_id") Long seq_review_id, @RequestBody ReviewDTO reviewDto) {
+		reviewService.modifyReview(seq_review_id, reviewDto.getReview_content());
 		return "redirect:/";
 	}
 	
@@ -151,17 +153,24 @@ public class DetailController {
 		return "redirect:/";
 	}
 	
-	// 찜하기
-//	@PostMapping("/detail/save")
-//	public String performSave(@RequestBody SaveDTO saveDto) {
-//		Save save = new Save();
-//		save.setUser_id(saveDto.getUser_id());
-//		save.setSeq_pfjoin_id(saveDto.getSeq_pfjoin_id());
-//		
-//		saveService.performSave(save);
-//		
+	// 기대평 삭제
+	@PostMapping("/detail/exp/{seq_exp_id}/delete")
+	public Long deleteExp(@PathVariable("seq_exp_id") Long seq_exp_id) {
+		return expService.deleteExp(seq_exp_id);
+	}
+	
+//	@PostMapping("/detail/review/{seq_review_id}/modify")
+//	public String modifyReview(@PathVariable("seq_review_id") Long seq_review_id, @RequestBody ReviewDTO reviewDto) {
+//		reviewService.modifyReview(seq_review_id, reviewDto.getReview_content());
 //		return "redirect:/";
 //	}
+	
+	// 기대평 수정
+	@PostMapping("/detail/exp/{seq_exp_id}/modify")
+	public String modifyReview(@PathVariable("seq_exp_id") Long seq_exp_id, @RequestBody ExpectationDTO expDto) {
+		reviewService.modifyExp(seq_exp_id, expDto.getExp_content());
+		return "redirect:/";
+	}
 	
 	// 찜하기, 찜하기 취소 동작
 	@PostMapping("/detail/save")
@@ -169,6 +178,7 @@ public class DetailController {
 	    Save save = new Save();
 	    save.setUser_id(saveDto.getUser_id());
 	    save.setSeq_pfjoin_id(saveDto.getSeq_pfjoin_id());
+	    save.setP_poster(saveDto.getP_poster());
 
 	    String result = saveService.performSave(save);
 

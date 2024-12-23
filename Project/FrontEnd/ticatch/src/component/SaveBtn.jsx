@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import cssSave from "../css/Main.module.css";
 
-export default function SaveBtn() {
+export default function SaveBtn({ p_poster }) {
   const { seqpfjoinId } = useParams();
 
   // 찜하기
@@ -22,6 +22,7 @@ export default function SaveBtn() {
     const saveData = {
       user_id: userId,
       seq_pfjoin_id: seqpfjoinId,
+      p_poster: p_poster,
     };
 
     try {

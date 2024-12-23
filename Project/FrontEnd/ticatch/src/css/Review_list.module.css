@@ -88,3 +88,39 @@
     border: 1px solid rgb(205, 205, 205);
     background-color: #f1f1f1;
 }
+
+.review_modifymode_wrap{
+    text-align: right;
+}
+
+.review_edit_submit_btn {
+    background-color: #004d7c;
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid #004d7c;
+    border-radius: 6px;
+    padding: 0px 12px;
+    margin-left: 10px;
+    letter-spacing: 1px;
+}
+
+.review_edit_submit_btn:hover {
+    background-color: #397194;
+}
+
+/* 리뷰 수정 textarea css */
+.review_item_content_edit {
+    font-family: "Notosans", -apple-system, BlinkMacSystemFont, Apple SD Gothic Neo, "Malgun Gothic", Arial, sans-serif;
+    scrollbar-width: thin;
+    scrollbar-color: #cccccc;
+    font-size: 15px;
+    box-sizing: border-box;
+    width: 100%;
+    resize: none;
+    outline: none;
+    border: 1px solid #f1f1f1;
+    border-radius: 6px;
+    padding: 10px 0 15px 10px;
+    caret-color: #049fff;   /* 작성할때 커서 위치 색상 */
+}
