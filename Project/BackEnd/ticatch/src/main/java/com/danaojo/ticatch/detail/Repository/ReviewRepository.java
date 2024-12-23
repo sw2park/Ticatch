@@ -21,11 +21,6 @@ public class ReviewRepository {
 	
 	@Autowired
 	private final EntityManager em;
-//	EntityManagerFactory emf
-//	= Persistence.createEntityManagerFactory("ticatch");
-//	EntityManager em = emf.createEntityManager();
-//	EntityTransaction tx = em.getTransaction();
-//	JPAQueryFactory queryFactory = new JPAQueryFactory(em);
 	
 	// 공연 리뷰 갯수 count
 	public Long countReviews(Long seq_pfjoin_id) {
@@ -45,13 +40,6 @@ public class ReviewRepository {
 	            .setParameter("seq_pfjoin_id", seq_pfjoin_id)
 	            .getSingleResult();
 	}
-//	public Double avgRate(Long seq_pfjoin_id) {
-//		return em.createQuery(
-//				"SELECT AVG(r.rating) FROM Review r WHERE r.seq_pfjoin_id = :seq_pfjoin_id",
-//				Double.class)
-//				.setParameter("seq_pfjoin_id", seq_pfjoin_id)
-//				.getSingleResult();
-//	}
 	
 	// 리뷰 조회
 	public List<Review> findReviews(Long seq_pfjoin_id) {
@@ -61,6 +49,7 @@ public class ReviewRepository {
 				.setParameter("seq_pfjoin_id", seq_pfjoin_id)
 				.getResultList();
 	}
+	
 	// 관람자 표시를 위한 리뷰 조회
 	public List<ReviewOrderDTO> findReviewsOrders(Long seqPfjoinId) {
 		 return em.createQuery(

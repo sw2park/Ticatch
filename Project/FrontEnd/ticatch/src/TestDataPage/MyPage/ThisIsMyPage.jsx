@@ -37,7 +37,7 @@ export default function ThisIsMyPage() {
       .catch((error) => {
         console.error("User info 불러오기 에러:", error);
       });
-  }, []);
+  }, [password]);
 
   // 주문 내역 가지고 오기
   useEffect(() => {
@@ -143,9 +143,9 @@ export default function ThisIsMyPage() {
   }, []);
 
   return (
-    <div className={style.mypage_container}>
-      <header className={style.mypage_header}>
-        <div>
+    <>
+    <header className={style.mypage_header}>
+        <div className={style.mypage_logo}>
           <h2>
             <span
               style={{ cursor: "pointer" }}
@@ -158,6 +158,7 @@ export default function ThisIsMyPage() {
             </span>
           </h2>
         </div>
+        <div className={style.logout_btn}>
         <button
           onClick={() => {
             sessionStorage.removeItem("userToken");
@@ -174,128 +175,175 @@ export default function ThisIsMyPage() {
         >
           로그아웃
         </button>
+        </div>
       </header>
-
+    
+    <div className={style.mypage_container}>
       <main className={style.mypage_main}>
-        <div className={style.mypage_info}>
-          <h2>어서오세요, {sessionStorage.getItem("userId")}</h2>
-          {userInfo ? (
+        
+        <div className={style.mypage_user_info}>
+          <div className={style.mypage_user_info_id}>
+            <span className={style.mypage_userId_color}>
+              {sessionStorage.getItem("userId")}님 &nbsp;
+            </span>
+            마이페이지
+          </div>
+          <div className={style.user_infos}>
+            {userInfo ? (
             <>
-              <p>Email: {userInfo.email}</p>
-              <p>가입일: {userInfo.createDate}</p>
+              <p className={style.nav_user_info_title}>이름: {userInfo.name}</p>
+              <p className={style.nav_user_info_title}>이메일: {userInfo.email}</p>
+              <p className={style.nav_user_info_title}>전화번호: {userInfo.phone}</p>
+              <p className={style.nav_user_info_title}>가입일: {userInfo.createDate}</p>
+              <p className={style.nav_user_info_title}>마지막 정보 수정일: {userInfo.createDate}</p>
             </>
-          ) : (
+            ) : (
             <p>로딩중...</p>
-          )}
+            )}
+          </div>
         </div>
 
-        <div className={style.mypage_sections}>
-          <section className={style.mypage_watched}>
-            <h3>주문 내역</h3>
-            <ul>
-              {Array.isArray(orderList) && orderList.length > 0 ? (
-                orderList.map((order, index) => (
-                  <li key={order.orderId || `${order.seqOrderId}-${index}`}>
-                    주문 번호 : {order.seqOrderId}
-                    <br />
-                    티켓 개수 : {order.totalTicket}
-                    <br />
-                    공연일 : {order.viewDate}
-                    <br />
-                    회차 : {order.viewTime}
-                    <br />
-                    좌석 : {order.seatNum}
-                    <br />
-                    장소 : {order.place}
-                    <br />
-                    구매일 : {order.buyDate}
-                    <br />
-                    {/* 숫자로 바꾸고 toLocaleString 하면 , 알아서 붙여주네 */}
-                    가격 : {Number(order.totalSum).toLocaleString()}원
-                    <hr />
-                  </li>
-                ))
-              ) : (
-                <li>주문 내역이 없습니다.</li>
-              )}
-            </ul>
+        <div className={style.mypage_sections_wrap}>
+        <section className={style.mypage_section_container}>
+            <div className={style.mypage_title}>
+              <h3>회원 정보 수정</h3>
+            </div>
+            <div className={style.user_info_modif_wrap}>
+              <div className={style.user_info_modif_title}>
+                <ul className={style.user_info_modify_title_ul}>
+                  <li>비밀번호</li>
+                  <li>비밀번호 확인</li>
+                  <li>이름</li>
+                  <li>이메일</li>
+                  <li>전화번호</li>
+                </ul>
+              </div>
+              <ul className={style.user_info_modif}>
+                <input
+                  className={style.input}
+                  type="password"
+                  placeholder="비밀번호"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <input
+                  className={style.input}
+                  type="password"
+                  placeholder="비밀번호 확인"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+                <input
+                  className={style.input}
+                  type="text"
+                  placeholder="이름"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <input
+                  className={style.input}
+                  type="email"
+                  placeholder="이메일"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                  className={style.input}
+                  type="text"
+                  placeholder="전화번호"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+              </ul>
+            </div>
+            <div className={style.user_modif_btn_wrap}>
+              <button className={style.button} onClick={handleUpdate}>
+                수정하기
+              </button>
+            </div>
           </section>
 
-          <section className={style.mypage_info}>
-            <h3>정보수정</h3>
-            <ul>
-              <input
-                className={style.input}
-                type="password"
-                placeholder="비밀번호"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <input
-                className={style.input}
-                type="password"
-                placeholder="비밀번호 확인"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-              <input
-                className={style.input}
-                type="text"
-                placeholder="이름"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <input
-                className={style.input}
-                type="email"
-                placeholder="이메일"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <input
-                className={style.input}
-                type="text"
-                placeholder="전화번호"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-            </ul>
-            <button className={style.button} onClick={handleUpdate}>
-              수정하기
-            </button>
+          <section className={style.mypage_section_container}>
+            <div className={style.mypage_title}>
+              <h3>예매 내역</h3>
+            </div>
+            <table className={style.reserve_table}>
+              <tr className={style.reserve_table_theader}>
+                <td>예매번호</td>
+                <td>공연아이디</td>
+                <td>공연일</td>
+                <td>공연회차</td>
+                <td>좌석번호</td>
+                <td>장소</td>
+                <td>예매인원</td>
+                <td>결제일</td>
+              </tr>
+              {Array.isArray(orderList) && orderList.length > 0 ? (
+              orderList.map((order, index) => (
+                <tr key={order.orderId || `${order.seqOrderId}-${index}`}
+                    className={style.reserve_table_content}
+                >
+                  <td>{order.seqOrderId}</td>
+                  <td
+                      key={order}
+                      onClick={() => {
+                      navigate(`/detail/${order.seqPfjoinId}/view`);
+                    }}
+                  >
+                    <p className={style.reserve_seqpfjoinId}>{order.seqPfjoinId}</p>
+                  </td>
+                  <td>{order.viewDate}</td>
+                  <td>{order.viewTime}</td>
+                  <td>{order.seatNum}</td>
+                  <td>{order.place}</td>
+                  <td>{order.totalTicket}</td>
+                  <td>{order.buyDate}</td>
+                </tr>
+              ))
+              ) : (
+                <td>예매 내역이 없습니다.</td>
+              )}
+            </table>
           </section>
-          <section className={style.mypage_save}>
-            <h3>나의 찜 내역</h3>
-            <ul>
+
+          <section className={style.mypage_section_container}>
+            <div className={style.mypage_title}>
+              <h3>찜 내역</h3>
+            </div>
+
+            <div className={style.mypage_save_container}>
               {Array.isArray(saveList) && saveList.length > 0 ? (
                 saveList.map((save, index) => (
-                  <li
-                    key={save.seqpfjoinid}
+              <div  key={save}
                     onClick={() => {
-                      navigate(`/detail/${save.seqpfjoinid}/view`);
-                    }}
-                    style={{ cursor: "pointer" }}
-                  >
-                    {index + 1}) 공연 정보 - {save.seqpfjoinid}
-                    <hr />
-                  </li>
-                ))
+                    navigate(`/detail/${save.seqpfjoinid}/view`);
+                  }}
+                    className={style.mypage_save_img}
+              >
+                <img src={save.pposter} alt={save.seqpfjoinid}/>
+              </div>
+              ))
               ) : (
-                <li>찜 내역이 없습니다.</li>
+                <li>보고싶은 공연을 찜해보세요!</li>
               )}
-            </ul>
+            </div>
           </section>
         </div>
-        <h2>
-          회원 탈퇴는 없다 (모든 테이블에서 찾아서 삭제해야되는데 시간 부족)
-        </h2>
-        <h2>환불은 내일 시간 있으면 해보고 안되면 없음</h2>
-        <h2>찜 삭제는 다시 상세 페이지 가서 하고 와야됨</h2>
+
+        <div className={style.mypage_develop_memo}>
+          <h2>
+            회원 탈퇴는 없다 (모든 테이블에서 찾아서 삭제해야되는데 시간 부족)
+          </h2>
+          <h2>환불은 내일 시간 있으면 해보고 안되면 없음</h2>
+          <h2>찜 삭제는 다시 상세 페이지 가서 하고 와야됨</h2>
+        </div>
+
       </main>
 
       <footer className={style.mypage_footer}>
         <p>&copy; {new Date().getFullYear()} 티케치. All Rights Reserved.</p>
       </footer>
     </div>
+    </>
   );
 }

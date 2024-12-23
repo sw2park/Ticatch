@@ -1,5 +1,6 @@
 package com.danaojo.ticatch.detail.service;
 
+import java.rmi.server.ExportException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.danaojo.ticatch.detail.Repository.ExpRepository;
 import com.danaojo.ticatch.detail.Repository.ReviewRepository;
+import com.danaojo.ticatch.detail.domain.Expectation;
 import com.danaojo.ticatch.detail.domain.Review;
 import com.danaojo.ticatch.detail.dto.ReviewOrderDTO;
 
@@ -19,6 +22,7 @@ public class ReviewService {
 	
 	@Autowired
 	private final ReviewRepository reviewRepository;
+	private final ExpRepository expRepository;
 	
 	// 리뷰 갯수 카운트
 	public Long countReviews(Long seq_pfjoin_id) {
@@ -72,10 +76,15 @@ public class ReviewService {
 
 	// 리뷰 수정
 	@Transactional
-	public void modifyReview(Long seq_review_id, String review_content, int rating) {
+	public void modifyReview(Long seq_review_id, String review_content) {
 		Review review = reviewRepository.findOne(seq_review_id);
 		review.setReview_content(review_content);
-		review.setRating(rating);
+	}
+	// 기대평 수정
+	@Transactional
+	public void modifyExp(Long seq_exp_id, String exp_content) {
+		Expectation exp = expRepository.findOne(seq_exp_id);
+		exp.setExp_content(exp_content);
 	}
 
 	
