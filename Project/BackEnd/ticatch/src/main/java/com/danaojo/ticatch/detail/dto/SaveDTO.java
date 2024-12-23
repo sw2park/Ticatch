@@ -8,5 +8,5 @@ public class SaveDTO {
 	private int seq_save_id;
 	private String user_id;
 	private Long seq_pfjoin_id;
-	private String p_poster;
+	private String p_poster;	
 }
