@@ -331,13 +331,13 @@ export default function ThisIsMyPage() {
           </section>
         </div>
 
-        <div className={style.mypage_develop_memo}>
+        {/* <div className={style.mypage_develop_memo}>
           <h2>
             회원 탈퇴는 없다 (모든 테이블에서 찾아서 삭제해야되는데 시간 부족)
           </h2>
           <h2>환불은 내일 시간 있으면 해보고 안되면 없음</h2>
           <h2>찜 삭제는 다시 상세 페이지 가서 하고 와야됨</h2>
-        </div>
+        </div> */}
 
       </main>
 
