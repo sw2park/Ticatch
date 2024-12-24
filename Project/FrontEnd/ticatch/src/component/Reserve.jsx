@@ -24,6 +24,7 @@ export default function Reserve({ productData }) {
     const handleReserve = () => {
         if (sessionStorage.getItem("userId") === null || undefined) {
             alert('로그인 후 예매 가능합니다.');
+            navigate("/login")
             return;
         } else if (!selectDate || !selectTime) {
             alert('예매 정보를 모두 선택해주세요.');
